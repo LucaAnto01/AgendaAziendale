@@ -36,6 +36,7 @@
             this.pctbxLogo = new System.Windows.Forms.PictureBox();
             this.panelCentro = new System.Windows.Forms.Panel();
             this.btAccedi = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelSinistra.SuspendLayout();
             this.panelSinistraTop.SuspendLayout();
@@ -49,8 +50,9 @@
             this.panelTop.Controls.Add(this.btChiudi);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(1000, 40);
+            this.panelTop.Size = new System.Drawing.Size(2000, 77);
             this.panelTop.TabIndex = 2;
             // 
             // btChiudi
@@ -58,9 +60,10 @@
             this.btChiudi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btChiudi.BackColor = System.Drawing.Color.Transparent;
-            this.btChiudi.Location = new System.Drawing.Point(913, 8);
+            this.btChiudi.Location = new System.Drawing.Point(1826, 15);
+            this.btChiudi.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btChiudi.Name = "btChiudi";
-            this.btChiudi.Size = new System.Drawing.Size(75, 23);
+            this.btChiudi.Size = new System.Drawing.Size(150, 44);
             this.btChiudi.TabIndex = 3;
             this.btChiudi.Text = "Chiudi";
             this.btChiudi.UseVisualStyleBackColor = false;
@@ -72,9 +75,10 @@
             this.panelSinistra.Controls.Add(this.lbIntestazioneSinistra);
             this.panelSinistra.Controls.Add(this.panelSinistraTop);
             this.panelSinistra.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelSinistra.Location = new System.Drawing.Point(0, 40);
+            this.panelSinistra.Location = new System.Drawing.Point(0, 77);
+            this.panelSinistra.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panelSinistra.Name = "panelSinistra";
-            this.panelSinistra.Size = new System.Drawing.Size(350, 610);
+            this.panelSinistra.Size = new System.Drawing.Size(700, 1173);
             this.panelSinistra.TabIndex = 3;
             // 
             // lbIntestazioneSinistra
@@ -82,9 +86,10 @@
             this.lbIntestazioneSinistra.AutoSize = true;
             this.lbIntestazioneSinistra.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbIntestazioneSinistra.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.lbIntestazioneSinistra.Location = new System.Drawing.Point(66, 270);
+            this.lbIntestazioneSinistra.Location = new System.Drawing.Point(132, 519);
+            this.lbIntestazioneSinistra.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbIntestazioneSinistra.Name = "lbIntestazioneSinistra";
-            this.lbIntestazioneSinistra.Size = new System.Drawing.Size(213, 66);
+            this.lbIntestazioneSinistra.Size = new System.Drawing.Size(425, 132);
             this.lbIntestazioneSinistra.TabIndex = 1;
             this.lbIntestazioneSinistra.Text = "Effettua l\'accesso \r\nalla piattaforma";
             this.lbIntestazioneSinistra.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -94,47 +99,62 @@
             this.panelSinistraTop.Controls.Add(this.pctbxLogo);
             this.panelSinistraTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSinistraTop.Location = new System.Drawing.Point(0, 0);
+            this.panelSinistraTop.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panelSinistraTop.Name = "panelSinistraTop";
-            this.panelSinistraTop.Size = new System.Drawing.Size(350, 200);
+            this.panelSinistraTop.Size = new System.Drawing.Size(700, 385);
             this.panelSinistraTop.TabIndex = 2;
             // 
             // pctbxLogo
             // 
-            this.pctbxLogo.Location = new System.Drawing.Point(72, 29);
+            this.pctbxLogo.Location = new System.Drawing.Point(144, 56);
+            this.pctbxLogo.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.pctbxLogo.Name = "pctbxLogo";
-            this.pctbxLogo.Size = new System.Drawing.Size(200, 145);
+            this.pctbxLogo.Size = new System.Drawing.Size(400, 279);
             this.pctbxLogo.TabIndex = 0;
             this.pctbxLogo.TabStop = false;
             // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.button1);
             this.panelCentro.Controls.Add(this.btAccedi);
             this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCentro.Location = new System.Drawing.Point(350, 40);
+            this.panelCentro.Location = new System.Drawing.Point(700, 77);
+            this.panelCentro.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panelCentro.Name = "panelCentro";
-            this.panelCentro.Size = new System.Drawing.Size(650, 610);
+            this.panelCentro.Size = new System.Drawing.Size(1300, 1173);
             this.panelCentro.TabIndex = 4;
             // 
             // btAccedi
             // 
-            this.btAccedi.Location = new System.Drawing.Point(292, 451);
+            this.btAccedi.Location = new System.Drawing.Point(584, 867);
+            this.btAccedi.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btAccedi.Name = "btAccedi";
-            this.btAccedi.Size = new System.Drawing.Size(75, 23);
+            this.btAccedi.Size = new System.Drawing.Size(150, 44);
             this.btAccedi.TabIndex = 0;
             this.btAccedi.Text = "Accedi";
             this.btAccedi.UseVisualStyleBackColor = true;
             this.btAccedi.Click += new System.EventHandler(this.btAccedi_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(532, 361);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // FormLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1000, 650);
+            this.ClientSize = new System.Drawing.Size(2000, 1250);
             this.Controls.Add(this.panelCentro);
             this.Controls.Add(this.panelSinistra);
             this.Controls.Add(this.panelTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "FormLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormLogin";
@@ -159,6 +179,7 @@
         private System.Windows.Forms.PictureBox pctbxLogo;
         private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.Button btAccedi;
+        private System.Windows.Forms.Button button1;
     }
 }
 
