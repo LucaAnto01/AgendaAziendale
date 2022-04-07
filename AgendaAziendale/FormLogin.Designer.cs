@@ -50,7 +50,7 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(970, 40);
+            this.panelTop.Size = new System.Drawing.Size(1000, 40);
             this.panelTop.TabIndex = 2;
             // 
             // btChiudi
@@ -58,7 +58,7 @@
             this.btChiudi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btChiudi.BackColor = System.Drawing.Color.Transparent;
-            this.btChiudi.Location = new System.Drawing.Point(883, 8);
+            this.btChiudi.Location = new System.Drawing.Point(913, 8);
             this.btChiudi.Name = "btChiudi";
             this.btChiudi.Size = new System.Drawing.Size(75, 23);
             this.btChiudi.TabIndex = 3;
@@ -74,7 +74,7 @@
             this.panelSinistra.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSinistra.Location = new System.Drawing.Point(0, 40);
             this.panelSinistra.Name = "panelSinistra";
-            this.panelSinistra.Size = new System.Drawing.Size(350, 532);
+            this.panelSinistra.Size = new System.Drawing.Size(300, 610);
             this.panelSinistra.TabIndex = 3;
             // 
             // lbIntestazioneSinistra
@@ -82,7 +82,7 @@
             this.lbIntestazioneSinistra.AutoSize = true;
             this.lbIntestazioneSinistra.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbIntestazioneSinistra.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.lbIntestazioneSinistra.Location = new System.Drawing.Point(66, 270);
+            this.lbIntestazioneSinistra.Location = new System.Drawing.Point(44, 275);
             this.lbIntestazioneSinistra.Name = "lbIntestazioneSinistra";
             this.lbIntestazioneSinistra.Size = new System.Drawing.Size(213, 66);
             this.lbIntestazioneSinistra.TabIndex = 1;
@@ -95,12 +95,12 @@
             this.panelSinistraTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSinistraTop.Location = new System.Drawing.Point(0, 0);
             this.panelSinistraTop.Name = "panelSinistraTop";
-            this.panelSinistraTop.Size = new System.Drawing.Size(350, 200);
+            this.panelSinistraTop.Size = new System.Drawing.Size(300, 200);
             this.panelSinistraTop.TabIndex = 2;
             // 
             // pctbxLogo
             // 
-            this.pctbxLogo.Location = new System.Drawing.Point(72, 29);
+            this.pctbxLogo.Location = new System.Drawing.Point(50, 28);
             this.pctbxLogo.Name = "pctbxLogo";
             this.pctbxLogo.Size = new System.Drawing.Size(200, 145);
             this.pctbxLogo.TabIndex = 0;
@@ -110,14 +110,14 @@
             // 
             this.panelCentro.Controls.Add(this.btAccedi);
             this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCentro.Location = new System.Drawing.Point(350, 40);
+            this.panelCentro.Location = new System.Drawing.Point(300, 40);
             this.panelCentro.Name = "panelCentro";
-            this.panelCentro.Size = new System.Drawing.Size(620, 532);
+            this.panelCentro.Size = new System.Drawing.Size(700, 610);
             this.panelCentro.TabIndex = 4;
             // 
             // btAccedi
             // 
-            this.btAccedi.Location = new System.Drawing.Point(292, 451);
+            this.btAccedi.Location = new System.Drawing.Point(318, 478);
             this.btAccedi.Name = "btAccedi";
             this.btAccedi.Size = new System.Drawing.Size(75, 23);
             this.btAccedi.TabIndex = 0;
@@ -130,7 +130,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(970, 572);
+            this.ClientSize = new System.Drawing.Size(1000, 650);
             this.Controls.Add(this.panelCentro);
             this.Controls.Add(this.panelSinistra);
             this.Controls.Add(this.panelTop);

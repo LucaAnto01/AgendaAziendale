@@ -21,7 +21,8 @@ namespace AgendaAziendale
         }
 
         /// <summary>
-        /// Metodo richiamato al caricamento dell'interfaccia --> settaggio gerarchie interfaccia
+        /// Metodo richiamato al caricamento dell'interfaccia 
+        /// --> settaggio gerarchie interfaccia
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -45,7 +46,8 @@ namespace AgendaAziendale
         }
 
         /// <summary>
-        /// Ascoltatore evento click sul bottone di chiusura --> chiusura applicazione
+        /// Ascoltatore evento click sul bottone di chiusura 
+        /// --> chiusura applicazione
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -55,7 +57,8 @@ namespace AgendaAziendale
         }
 
         /// <summary>
-        /// Ascoltatore evento click sul bottone di login --> avvio procedura autenticazione
+        /// Ascoltatore evento click sul bottone di login 
+        /// --> avvio procedura autenticazione
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
