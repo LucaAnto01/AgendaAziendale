@@ -34,6 +34,7 @@
             this.btLogout = new System.Windows.Forms.Button();
             this.btGestioneUtenti = new System.Windows.Forms.Button();
             this.panelCentro = new System.Windows.Forms.Panel();
+            this.btGestioneAttivita = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelSinistra.SuspendLayout();
             this.SuspendLayout();
@@ -65,6 +66,7 @@
             // panelSinistra
             // 
             this.panelSinistra.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelSinistra.Controls.Add(this.btGestioneAttivita);
             this.panelSinistra.Controls.Add(this.btLogout);
             this.panelSinistra.Controls.Add(this.btGestioneUtenti);
             this.panelSinistra.Dock = System.Windows.Forms.DockStyle.Left;
@@ -110,6 +112,20 @@
             this.panelCentro.Size = new System.Drawing.Size(700, 610);
             this.panelCentro.TabIndex = 5;
             // 
+            // btGestioneAttivita
+            // 
+            this.btGestioneAttivita.BackColor = System.Drawing.Color.DarkGray;
+            this.btGestioneAttivita.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btGestioneAttivita.ForeColor = System.Drawing.Color.White;
+            this.btGestioneAttivita.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btGestioneAttivita.Location = new System.Drawing.Point(50, 222);
+            this.btGestioneAttivita.Name = "btGestioneAttivita";
+            this.btGestioneAttivita.Size = new System.Drawing.Size(200, 35);
+            this.btGestioneAttivita.TabIndex = 3;
+            this.btGestioneAttivita.Text = "Gestione attività";
+            this.btGestioneAttivita.UseVisualStyleBackColor = false;
+            this.btGestioneAttivita.Click += new System.EventHandler(this.BtGestioneAttivita_Click);
+            // 
             // FormAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -138,5 +154,6 @@
         private System.Windows.Forms.Button btGestioneUtenti;
         private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.Button btLogout;
+        private System.Windows.Forms.Button btGestioneAttivita;
     }
 }

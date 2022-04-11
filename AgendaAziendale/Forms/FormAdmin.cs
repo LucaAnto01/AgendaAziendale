@@ -39,6 +39,7 @@ namespace AgendaAziendale
             btChiudi.Parent = panelTop;
             ///Figli del pannello di sinistra
             btGestioneUtenti.Parent = panelSinistra;
+            btGestioneAttivita.Parent = panelSinistra;
             btLogout.Parent = panelSinistra;
         }
 
@@ -55,13 +56,24 @@ namespace AgendaAziendale
 
         /// <summary>
         /// Ascoltatore evento click sul bottone di gestione per utenti
-        /// --> visualizzazione UserControl di gestione per gli utenti
+        /// --> visualizzazione Form di gestione per gli utenti
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void BtGestioneUtenti_Click(object sender, EventArgs e)
         {
             CaricaForm(new FormGestioneUtenti());
+        }
+
+        /// <summary>
+        /// Ascoltatore evento click sul bottone di gestione delle attività
+        /// --> visualizzazione Form di gestione delle attivita
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtGestioneAttivita_Click(object sender, EventArgs e)
+        {
+            //TODO: apri il form relativo alla gestione dell'interfaccia
         }
 
         /// <summary>
@@ -97,8 +109,10 @@ namespace AgendaAziendale
             panelCentro.Tag = f;
             f.Show();
         }
+
+
         #endregion
 
-
+        
     }
 }
