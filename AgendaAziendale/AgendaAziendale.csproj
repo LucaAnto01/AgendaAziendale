@@ -52,6 +52,18 @@
     <Compile Include="Forms\FormAdmin.Designer.cs">
       <DependentUpon>FormAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormAggiungiLavoratore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAggiungiLavoratore.Designer.cs">
+      <DependentUpon>FormAggiungiLavoratore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormGestioneUtenti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormGestioneUtenti.Designer.cs">
+      <DependentUpon>FormGestioneUtenti.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +74,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FormAdmin.resx">
       <DependentUpon>FormAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAggiungiLavoratore.resx">
+      <DependentUpon>FormAggiungiLavoratore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormGestioneUtenti.resx">
+      <DependentUpon>FormGestioneUtenti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
@@ -89,8 +107,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="Img\Icone\GestioneUtenti.png" />
+    <Content Include="Img\Icone\Chiudi.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

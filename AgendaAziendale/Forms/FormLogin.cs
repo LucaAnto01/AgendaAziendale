@@ -20,6 +20,7 @@ namespace AgendaAziendale
             InitializeComponent();
         }
 
+        #region Ascoltatori eventi
         /// <summary>
         /// Metodo richiamato al caricamento dell'interfaccia 
         /// --> settaggio gerarchie interfaccia
@@ -67,10 +68,11 @@ namespace AgendaAziendale
             //TODO: avvia procedura di login
 
             //DA RIMUOVERE SUCCESSIVAMENTE
-            FormAdmin pippo = new FormAdmin(this);
+            FormAdmin pippo = new FormAdmin();
             pippo.Show();
             this.Hide();
             //Close();
         }
+        #endregion
     }
 }

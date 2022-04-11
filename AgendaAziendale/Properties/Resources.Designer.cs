@@ -63,9 +63,9 @@ namespace AgendaAziendale.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap GestioneUtenti {
+        internal static System.Drawing.Bitmap Chiudi {
             get {
-                object obj = ResourceManager.GetObject("GestioneUtenti", resourceCulture);
+                object obj = ResourceManager.GetObject("Chiudi", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
