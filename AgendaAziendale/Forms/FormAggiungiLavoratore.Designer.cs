@@ -35,6 +35,9 @@
             this.tbCognome = new System.Windows.Forms.TextBox();
             this.lbCognome = new System.Windows.Forms.Label();
             this.panelCentro = new System.Windows.Forms.Panel();
+            this.lbCategoria = new System.Windows.Forms.Label();
+            this.cbCategoria = new System.Windows.Forms.ComboBox();
+            this.btAggiungi = new System.Windows.Forms.Button();
             this.mcDataNascita = new System.Windows.Forms.MonthCalendar();
             this.tbDataNascita = new System.Windows.Forms.TextBox();
             this.lbDataNascita = new System.Windows.Forms.Label();
@@ -44,9 +47,6 @@
             this.lbPassword = new System.Windows.Forms.Label();
             this.tbUsername = new System.Windows.Forms.TextBox();
             this.lbUsername = new System.Windows.Forms.Label();
-            this.btAggiungi = new System.Windows.Forms.Button();
-            this.cbTipologia = new System.Windows.Forms.ComboBox();
-            this.lbTipologia = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -115,8 +115,8 @@
             // 
             // panelCentro
             // 
-            this.panelCentro.Controls.Add(this.lbTipologia);
-            this.panelCentro.Controls.Add(this.cbTipologia);
+            this.panelCentro.Controls.Add(this.lbCategoria);
+            this.panelCentro.Controls.Add(this.cbCategoria);
             this.panelCentro.Controls.Add(this.btAggiungi);
             this.panelCentro.Controls.Add(this.mcDataNascita);
             this.panelCentro.Controls.Add(this.tbDataNascita);
@@ -132,6 +132,38 @@
             this.panelCentro.Name = "panelCentro";
             this.panelCentro.Size = new System.Drawing.Size(750, 525);
             this.panelCentro.TabIndex = 9;
+            // 
+            // lbCategoria
+            // 
+            this.lbCategoria.AutoSize = true;
+            this.lbCategoria.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCategoria.Location = new System.Drawing.Point(12, 370);
+            this.lbCategoria.Name = "lbCategoria";
+            this.lbCategoria.Size = new System.Drawing.Size(77, 18);
+            this.lbCategoria.TabIndex = 19;
+            this.lbCategoria.Text = "Categoria";
+            // 
+            // cbCategoria
+            // 
+            this.cbCategoria.FormattingEnabled = true;
+            this.cbCategoria.Items.AddRange(new object[] {
+            "Project Manager",
+            "Sviluppatore",
+            "Segretario"});
+            this.cbCategoria.Location = new System.Drawing.Point(119, 370);
+            this.cbCategoria.Name = "cbCategoria";
+            this.cbCategoria.Size = new System.Drawing.Size(110, 21);
+            this.cbCategoria.TabIndex = 18;
+            // 
+            // btAggiungi
+            // 
+            this.btAggiungi.Location = new System.Drawing.Point(67, 437);
+            this.btAggiungi.Name = "btAggiungi";
+            this.btAggiungi.Size = new System.Drawing.Size(75, 23);
+            this.btAggiungi.TabIndex = 17;
+            this.btAggiungi.Text = "Aggiungi";
+            this.btAggiungi.UseVisualStyleBackColor = true;
+            this.btAggiungi.Click += new System.EventHandler(this.BtAggiungi_Click);
             // 
             // mcDataNascita
             // 
@@ -219,38 +251,6 @@
             this.lbUsername.TabIndex = 10;
             this.lbUsername.Text = "Username";
             // 
-            // btAggiungi
-            // 
-            this.btAggiungi.Location = new System.Drawing.Point(67, 437);
-            this.btAggiungi.Name = "btAggiungi";
-            this.btAggiungi.Size = new System.Drawing.Size(75, 23);
-            this.btAggiungi.TabIndex = 17;
-            this.btAggiungi.Text = "Aggiungi";
-            this.btAggiungi.UseVisualStyleBackColor = true;
-            this.btAggiungi.Click += new System.EventHandler(this.BtAggiungi_Click);
-            // 
-            // cbTipologia
-            // 
-            this.cbTipologia.FormattingEnabled = true;
-            this.cbTipologia.Items.AddRange(new object[] {
-            "Project Manager",
-            "Sviluppatore",
-            "Segretario"});
-            this.cbTipologia.Location = new System.Drawing.Point(119, 370);
-            this.cbTipologia.Name = "cbTipologia";
-            this.cbTipologia.Size = new System.Drawing.Size(110, 21);
-            this.cbTipologia.TabIndex = 18;
-            // 
-            // lbTipologia
-            // 
-            this.lbTipologia.AutoSize = true;
-            this.lbTipologia.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTipologia.Location = new System.Drawing.Point(12, 370);
-            this.lbTipologia.Name = "lbTipologia";
-            this.lbTipologia.Size = new System.Drawing.Size(74, 18);
-            this.lbTipologia.TabIndex = 19;
-            this.lbTipologia.Text = "Tipologia";
-            // 
             // FormAggiungiLavoratore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -266,6 +266,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormAggiungiLavoratore";
             this.Text = "FormAggiungiUtente";
+            this.Load += new System.EventHandler(this.FormAggiungiLavoratore_Load);
             this.panelTop.ResumeLayout(false);
             this.panelCentro.ResumeLayout(false);
             this.panelCentro.PerformLayout();
@@ -293,7 +294,7 @@
         private System.Windows.Forms.TextBox tbResidenza;
         private System.Windows.Forms.Label lbResidenza;
         private System.Windows.Forms.Button btAggiungi;
-        private System.Windows.Forms.Label lbTipologia;
-        private System.Windows.Forms.ComboBox cbTipologia;
+        private System.Windows.Forms.Label lbCategoria;
+        private System.Windows.Forms.ComboBox cbCategoria;
     }
 }

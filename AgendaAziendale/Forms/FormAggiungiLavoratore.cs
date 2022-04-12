@@ -22,6 +22,37 @@ namespace AgendaAziendale.Forms
 
         #region Ascoltatori eventi
         /// <summary>
+        /// Metodo richiamato al caricamento dell'interfaccia
+        ///  --> settaggio gerarchie interfaccia
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormAggiungiLavoratore_Load(object sender, EventArgs e)
+        {
+            ///Figli del form
+            panelTop.Parent = this;
+            panelCentro.Parent = this;
+            ///Figli del pannello top
+            btChiudi.Parent = panelTop;
+            ///Figli del pannello centrale
+            lbUsername.Parent = panelCentro;
+            lbPassword.Parent = panelCentro;
+            lbNome.Parent = panelCentro;
+            lbCognome.Parent = panelCentro;
+            lbResidenza.Parent = panelCentro;
+            lbDataNascita.Parent = panelCentro;
+            lbCategoria.Parent = panelCentro;
+            tbUsername.Parent = panelCentro;
+            tbPassword.Parent = panelCentro;
+            tbNome.Parent = panelCentro;
+            tbCognome.Parent = panelCentro;
+            tbResidenza.Parent = panelCentro;
+            tbDataNascita.Parent = panelCentro;
+            cbCategoria.Parent = panelCentro;
+            mcDataNascita.Parent = panelCentro;
+        }
+
+        /// <summary>
         /// Ascoltatore evento click sul bottone di chiusura 
         /// --> chiusura form
         /// </summary>
@@ -59,12 +90,16 @@ namespace AgendaAziendale.Forms
             tbDataNascita.Text = mcDataNascita.SelectionRange.Start.ToShortDateString();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtAggiungi_Click(object sender, EventArgs e)
         {
             //TODO: implementa funzione per aggiungere un lavoratore
         }
+
         #endregion
-
-
     }
 }
