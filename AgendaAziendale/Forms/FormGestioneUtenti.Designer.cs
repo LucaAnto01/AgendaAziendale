@@ -40,7 +40,7 @@
             this.btAggiungiUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btAggiungiUtente.ForeColor = System.Drawing.Color.White;
             this.btAggiungiUtente.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btAggiungiUtente.Location = new System.Drawing.Point(225, 129);
+            this.btAggiungiUtente.Location = new System.Drawing.Point(215, 129);
             this.btAggiungiUtente.Name = "btAggiungiUtente";
             this.btAggiungiUtente.Size = new System.Drawing.Size(265, 57);
             this.btAggiungiUtente.TabIndex = 1;
@@ -55,7 +55,7 @@
             this.btModificaUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btModificaUtente.ForeColor = System.Drawing.Color.White;
             this.btModificaUtente.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btModificaUtente.Location = new System.Drawing.Point(225, 272);
+            this.btModificaUtente.Location = new System.Drawing.Point(215, 272);
             this.btModificaUtente.Name = "btModificaUtente";
             this.btModificaUtente.Size = new System.Drawing.Size(265, 57);
             this.btModificaUtente.TabIndex = 2;
@@ -70,7 +70,7 @@
             this.btEliminaUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btEliminaUtente.ForeColor = System.Drawing.Color.White;
             this.btEliminaUtente.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btEliminaUtente.Location = new System.Drawing.Point(225, 415);
+            this.btEliminaUtente.Location = new System.Drawing.Point(215, 415);
             this.btEliminaUtente.Name = "btEliminaUtente";
             this.btEliminaUtente.Size = new System.Drawing.Size(265, 57);
             this.btEliminaUtente.TabIndex = 3;

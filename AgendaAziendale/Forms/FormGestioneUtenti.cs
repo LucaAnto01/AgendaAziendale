@@ -32,6 +32,7 @@ namespace AgendaAziendale.Forms
             ///Figli del Form
             btAggiungiUtente.Parent = this;
             btModificaUtente.Parent = this; 
+            btEliminaUtente.Parent = this;
         }
 
         /// <summary>
