@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AgendaAziendale.Modelli
 {
-    internal abstract class Lavoratore
+    public abstract class Lavoratore
     {
         #region Attributi
         private string username;
