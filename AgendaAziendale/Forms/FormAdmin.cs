@@ -73,7 +73,7 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtGestioneAttivita_Click(object sender, EventArgs e)
         {
-            //TODO: apri il form relativo alla gestione dell'interfaccia
+            //CaricaForm(new FormGestioneAttivita()); -->TODO: per farlo devi prima creare le sottoclassi di lavoratore in modo da poter richimare il metodo
         }
 
         /// <summary>
