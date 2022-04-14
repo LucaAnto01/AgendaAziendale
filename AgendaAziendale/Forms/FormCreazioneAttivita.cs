@@ -10,17 +10,35 @@ using System.Windows.Forms;
 
 namespace AgendaAziendale.Forms
 {
-    public partial class FormCreazioneEvento : Form
+    public partial class FormCreazioneAttivita : Form
     {
-        public FormCreazioneEvento()
+        #region Attributi
+        private string tipologia;
+        #endregion
+
+        #region Getters & Setters
+        public string Tipologia { get => tipologia; set => tipologia = value; }
+        #endregion
+
+        /// <summary>
+        /// Metodo costruttore del FormCreazioneAttivita
+        /// --> permette la creazione di eventi o progetti
+        /// --> a seconda dell'attività che creo evento o progetto carico dinamicamente
+        ///     la combobox con l'elenco di segretari o PM e durante l'azione di load assegno un nome diverso
+        ///     alla label relativa al luogo o cliente
+        /// </summary>
+        /// <param name="tipologia"></param>
+        public FormCreazioneAttivita(string tipologia)
         {
             InitializeComponent();
+            Tipologia = tipologia;
         }
 
         #region Ascoltatori eventi
         /// <summary>
         /// Metodo richiamato al caricamento dell'interfaccia
         ///  --> settaggio gerarchie interfaccia
+        ///  --> settaggio valore lbLuogoCliente
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -38,16 +56,28 @@ namespace AgendaAziendale.Forms
             lbDescrizione.Parent = panelCentro;
             lbDataInizio.Parent = panelCentro;
             lbDataFine.Parent = panelCentro;
-            lbLuogo.Parent = panelCentro;
+            lbLuogoCliente.Parent = panelCentro;
             tbCodice.Parent = panelCentro;
             cbReferente.Parent = panelCentro;
             tbNome.Parent = panelCentro;
             tbDescrizione.Parent = panelCentro;
             tbDataInizio.Parent = panelCentro;
             tbDataFine.Parent = panelCentro;
-            tbLuogo.Parent = panelCentro;
+            tbLuogoCliente.Parent = panelCentro;
             mcDataInizio.Parent = panelCentro;
             mcDataFine.Parent = panelCentro;
+
+            if (Tipologia.Equals("evento") || Tipologia.Equals("Evento"))
+                lbLuogoCliente.Text = "Luogo";
+
+            else if (Tipologia.Equals("progetto") || Tipologia.Equals("Progetto"))
+                lbLuogoCliente.Text = "Cliente";
+
+            else
+            {
+                MessageBox.Show("ERRORE valore FormCreazioneAttivita:tipologia --> controllare stack chiamate!");
+                Application.Exit();
+            }
         }
 
         /// <summary>

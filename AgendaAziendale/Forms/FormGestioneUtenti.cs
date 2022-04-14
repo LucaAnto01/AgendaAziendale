@@ -43,7 +43,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiungiUtente_Click(object sender, EventArgs e)
         {
-            FormAggiungiLavoratore formAggiungi = new FormAggiungiLavoratore();
+            FormCreazioneLavoratore formAggiungi = new FormCreazioneLavoratore();
             formAggiungi.Show();
         }
 

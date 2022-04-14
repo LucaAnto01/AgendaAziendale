@@ -1,6 +1,6 @@
 ﻿namespace AgendaAziendale.Forms
 {
-    partial class FormCreazioneEvento
+    partial class FormCreazioneAttivita
     {
         /// <summary>
         /// Required designer variable.
@@ -42,8 +42,8 @@
             this.tbDataFine = new System.Windows.Forms.TextBox();
             this.lbDataFine = new System.Windows.Forms.Label();
             this.mcDataFine = new System.Windows.Forms.MonthCalendar();
-            this.tbLuogo = new System.Windows.Forms.TextBox();
-            this.lbLuogo = new System.Windows.Forms.Label();
+            this.tbLuogoCliente = new System.Windows.Forms.TextBox();
+            this.lbLuogoCliente = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
             this.btChiudi = new System.Windows.Forms.Button();
             this.btAggiungi = new System.Windows.Forms.Button();
@@ -185,25 +185,25 @@
             this.mcDataFine.Visible = false;
             this.mcDataFine.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.McDataFine_DateSelected);
             // 
-            // tbLuogo
+            // tbLuogoCliente
             // 
-            this.tbLuogo.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbLuogo.Location = new System.Drawing.Point(119, 335);
-            this.tbLuogo.MaxLength = 50;
-            this.tbLuogo.Name = "tbLuogo";
-            this.tbLuogo.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.tbLuogo.Size = new System.Drawing.Size(181, 21);
-            this.tbLuogo.TabIndex = 35;
+            this.tbLuogoCliente.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbLuogoCliente.Location = new System.Drawing.Point(119, 335);
+            this.tbLuogoCliente.MaxLength = 50;
+            this.tbLuogoCliente.Name = "tbLuogoCliente";
+            this.tbLuogoCliente.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.tbLuogoCliente.Size = new System.Drawing.Size(181, 21);
+            this.tbLuogoCliente.TabIndex = 35;
             // 
-            // lbLuogo
+            // lbLuogoCliente
             // 
-            this.lbLuogo.AutoSize = true;
-            this.lbLuogo.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbLuogo.Location = new System.Drawing.Point(12, 335);
-            this.lbLuogo.Name = "lbLuogo";
-            this.lbLuogo.Size = new System.Drawing.Size(53, 18);
-            this.lbLuogo.TabIndex = 34;
-            this.lbLuogo.Text = "Luogo";
+            this.lbLuogoCliente.AutoSize = true;
+            this.lbLuogoCliente.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLuogoCliente.Location = new System.Drawing.Point(12, 335);
+            this.lbLuogoCliente.Name = "lbLuogoCliente";
+            this.lbLuogoCliente.Size = new System.Drawing.Size(104, 18);
+            this.lbLuogoCliente.TabIndex = 34;
+            this.lbLuogoCliente.Text = "LuogoCliente";
             // 
             // panelTop
             // 
@@ -255,8 +255,8 @@
             this.ClientSize = new System.Drawing.Size(589, 484);
             this.Controls.Add(this.btAggiungi);
             this.Controls.Add(this.panelTop);
-            this.Controls.Add(this.tbLuogo);
-            this.Controls.Add(this.lbLuogo);
+            this.Controls.Add(this.tbLuogoCliente);
+            this.Controls.Add(this.lbLuogoCliente);
             this.Controls.Add(this.mcDataFine);
             this.Controls.Add(this.tbDataFine);
             this.Controls.Add(this.lbDataFine);
@@ -299,8 +299,8 @@
         private System.Windows.Forms.TextBox tbDataFine;
         private System.Windows.Forms.Label lbDataFine;
         private System.Windows.Forms.MonthCalendar mcDataFine;
-        private System.Windows.Forms.TextBox tbLuogo;
-        private System.Windows.Forms.Label lbLuogo;
+        private System.Windows.Forms.TextBox tbLuogoCliente;
+        private System.Windows.Forms.Label lbLuogoCliente;
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Button btChiudi;
         private System.Windows.Forms.Button btAggiungi;

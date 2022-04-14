@@ -13,8 +13,9 @@ namespace AgendaAziendale.Forms
 {
     public partial class FormGestioneAttivita : Form
     {
-
+        #region Attributi
         private Lavoratore lavoratore;
+        #endregion
 
         #region Getters & Setters
         public Lavoratore Lavoratore { get => lavoratore; set => lavoratore = value; }
@@ -51,7 +52,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtCreaEvento_Click(object sender, EventArgs e)
         {
-            FormCreazioneEvento formCreaEvento = new FormCreazioneEvento();
+            FormCreazioneAttivita formCreaEvento = new FormCreazioneAttivita("Evento");
             formCreaEvento.Show();
         }
 
