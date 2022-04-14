@@ -52,17 +52,17 @@
     <Compile Include="Forms\FormAdmin.Designer.cs">
       <DependentUpon>FormAdmin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormAggiungiLavoratore.cs">
+    <Compile Include="Forms\FormCreazioneLavoratore.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormAggiungiLavoratore.Designer.cs">
-      <DependentUpon>FormAggiungiLavoratore.cs</DependentUpon>
+    <Compile Include="Forms\FormCreazioneLavoratore.Designer.cs">
+      <DependentUpon>FormCreazioneLavoratore.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormCreazioneEvento.cs">
+    <Compile Include="Forms\FormCreazioneAttivita.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormCreazioneEvento.Designer.cs">
-      <DependentUpon>FormCreazioneEvento.cs</DependentUpon>
+    <Compile Include="Forms\FormCreazioneAttivita.Designer.cs">
+      <DependentUpon>FormCreazioneAttivita.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormGestioneAttivita.cs">
       <SubType>Form</SubType>
@@ -92,11 +92,11 @@
     <EmbeddedResource Include="Forms\FormAdmin.resx">
       <DependentUpon>FormAdmin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormAggiungiLavoratore.resx">
-      <DependentUpon>FormAggiungiLavoratore.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormCreazioneLavoratore.resx">
+      <DependentUpon>FormCreazioneLavoratore.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormCreazioneEvento.resx">
-      <DependentUpon>FormCreazioneEvento.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormCreazioneAttivita.resx">
+      <DependentUpon>FormCreazioneAttivita.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormGestioneAttivita.resx">
       <DependentUpon>FormGestioneAttivita.cs</DependentUpon>
