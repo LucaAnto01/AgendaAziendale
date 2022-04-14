@@ -23,9 +23,9 @@ namespace AgendaAziendale.Forms
         /// <summary>
         /// Metodo costruttore del FormCreazioneAttivita
         /// --> permette la creazione di eventi o progetti
-        /// --> a seconda dell'attività che creo evento o progetto carico dinamicamente
-        ///     la combobox con l'elenco di segretari o PM e durante l'azione di load assegno un nome diverso
-        ///     alla label relativa al luogo o cliente
+        /// --> a seconda dell'attività che si desidera creare: evento o progetto, viene caricata dinamicamente
+        ///     la combobox con l'elenco di segretari o PM e durante l'azione di load viene assegnato un contenuto
+        ///     testuale diverso alla label relativa al luogo o cliente
         /// </summary>
         /// <param name="tipologia"></param>
         public FormCreazioneAttivita(string tipologia)

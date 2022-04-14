@@ -64,7 +64,8 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtCreaProgetto_Click(object sender, EventArgs e)
         {
-            //TODO: crea form per creazione progetto
+            FormCreazioneAttivita formCreaProgetto = new FormCreazioneAttivita("Progetto");
+            formCreaProgetto.Show();
         }
 
         /// <summary>
@@ -75,7 +76,8 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtModificaEvento_Click(object sender, EventArgs e)
         {
-            //TODO: crea form per modifica evento
+            FormModificaAttivita formModificaEvento = new FormModificaAttivita("Evento");
+            formModificaEvento.Show();
         }
 
         /// <summary>
@@ -86,7 +88,8 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtModificaProgetto_Click(object sender, EventArgs e)
         {
-            //TODO: crea form per modifica progetto
+            FormModificaAttivita formModificaProgetto = new FormModificaAttivita("Progetto");
+            formModificaProgetto.Show();
         }
 
         /// <summary>

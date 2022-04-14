@@ -49,6 +49,7 @@
             this.btAggiungi = new System.Windows.Forms.Button();
             this.panelCentro = new System.Windows.Forms.Panel();
             this.panelTop.SuspendLayout();
+            this.panelCentro.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbNome
@@ -151,7 +152,7 @@
             // 
             // mcDataInizio
             // 
-            this.mcDataInizio.Location = new System.Drawing.Point(330, 240);
+            this.mcDataInizio.Location = new System.Drawing.Point(330, 251);
             this.mcDataInizio.Name = "mcDataInizio";
             this.mcDataInizio.TabIndex = 30;
             this.mcDataInizio.Visible = false;
@@ -179,7 +180,7 @@
             // 
             // mcDataFine
             // 
-            this.mcDataFine.Location = new System.Drawing.Point(330, 240);
+            this.mcDataFine.Location = new System.Drawing.Point(330, 251);
             this.mcDataFine.Name = "mcDataFine";
             this.mcDataFine.TabIndex = 33;
             this.mcDataFine.Visible = false;
@@ -241,13 +242,15 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.mcDataFine);
+            this.panelCentro.Controls.Add(this.mcDataInizio);
             this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCentro.Location = new System.Drawing.Point(0, 0);
             this.panelCentro.Name = "panelCentro";
             this.panelCentro.Size = new System.Drawing.Size(589, 484);
             this.panelCentro.TabIndex = 37;
             // 
-            // FormCreazioneEvento
+            // FormCreazioneAttivita
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -257,10 +260,8 @@
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.tbLuogoCliente);
             this.Controls.Add(this.lbLuogoCliente);
-            this.Controls.Add(this.mcDataFine);
             this.Controls.Add(this.tbDataFine);
             this.Controls.Add(this.lbDataFine);
-            this.Controls.Add(this.mcDataInizio);
             this.Controls.Add(this.tbDataInizio);
             this.Controls.Add(this.lbDataInizio);
             this.Controls.Add(this.tbDescrizione);
@@ -273,11 +274,12 @@
             this.Controls.Add(this.cbReferente);
             this.Controls.Add(this.panelCentro);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormCreazioneEvento";
+            this.Name = "FormCreazioneAttivita";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormCreazioneEvento";
             this.Load += new System.EventHandler(this.FormCreazioneEvento_Load);
             this.panelTop.ResumeLayout(false);
+            this.panelCentro.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
