@@ -1,6 +1,6 @@
 ﻿namespace AgendaAziendale.Forms
 {
-    partial class FormAggiungiLavoratore
+    partial class FormCreazioneLavoratore
     {
         /// <summary>
         /// Required designer variable.

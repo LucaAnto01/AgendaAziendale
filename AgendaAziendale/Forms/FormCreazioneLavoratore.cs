@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace AgendaAziendale.Forms
 {
-    public partial class FormAggiungiLavoratore : Form
+    public partial class FormCreazioneLavoratore : Form
     {
         /// <summary>
         /// Metodo costruttore FormAggiungiLavoratore
         /// </summary>
-        public FormAggiungiLavoratore()
+        public FormCreazioneLavoratore()
         {
             InitializeComponent();
         }
