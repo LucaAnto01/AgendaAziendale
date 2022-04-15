@@ -76,7 +76,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtModificaEvento_Click(object sender, EventArgs e)
         {
-            FormModificaAttivita formModificaEvento = new FormModificaAttivita("Evento");
+            FormModifica formModificaEvento = new FormModifica("Evento");
             formModificaEvento.Show();
         }
 
@@ -88,7 +88,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtModificaProgetto_Click(object sender, EventArgs e)
         {
-            FormModificaAttivita formModificaProgetto = new FormModificaAttivita("Progetto");
+            FormModifica formModificaProgetto = new FormModifica("Progetto");
             formModificaProgetto.Show();
         }
 

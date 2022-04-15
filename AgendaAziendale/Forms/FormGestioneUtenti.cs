@@ -55,7 +55,8 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtModificaUtente_Click(object sender, EventArgs e)
         {
-            //TODO: apri il form per la modifcia di un utente
+            FormModifica formModifica = new FormModifica("Lavoratore");
+            formModifica.Show();
         }
 
         /// <summary>
