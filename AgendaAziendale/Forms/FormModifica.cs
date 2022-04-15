@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace AgendaAziendale.Forms
 {
-    public partial class FormModificaAttivita : Form
+    public partial class FormModifica : Form
     {
         #region Attributi
         private string tipologia;
@@ -22,11 +22,11 @@ namespace AgendaAziendale.Forms
 
         /// <summary>
         /// Metodo costruttore del FormModificaAttivita
-        /// --> permette la modifica di eventi o progetti
-        /// --> a seconda della tipologia passata come parametro vengono popolate le combobox relative ai campi di modifica ed elenchi di eventi/progetti
+        /// --> permette la modifica di eventi, progetti o lavoratori
+        /// --> a seconda della tipologia passata come parametro vengono popolate le combobox relative ai campi di modifica ed elenchi di eventi/progetti/lavoratori
         /// </summary>
         /// <param name="tipologia"></param>
-        public FormModificaAttivita(string tipologia)
+        public FormModifica(string tipologia)
         {
             InitializeComponent();
             Tipologia = tipologia;

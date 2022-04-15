@@ -1,6 +1,6 @@
 ﻿namespace AgendaAziendale.Forms
 {
-    partial class FormModificaAttivita
+    partial class FormModifica
     {
         /// <summary>
         /// Required designer variable.
