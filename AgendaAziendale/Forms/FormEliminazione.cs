@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace AgendaAziendale.Forms
 {
-    public partial class FormEliminazioneAttivita : Form
+    public partial class FormEliminazione : Form
     {
         #region Attributi
         private string tipologia;
@@ -20,7 +20,7 @@ namespace AgendaAziendale.Forms
         public string Tipologia { get => tipologia; set => tipologia = value; }
         #endregion
 
-        public FormEliminazioneAttivita(string tipologia)
+        public FormEliminazione(string tipologia)
         {
             InitializeComponent();
             Tipologia = tipologia;
@@ -31,7 +31,7 @@ namespace AgendaAziendale.Forms
         /// Metodo richiamato al caricamento dell'interfaccia
         ///  --> settaggio gerarchie interfaccia
         ///  --> settaggio valore lbEventoProgetto
-        ///  --> caricamento personalizzato della combobox sulla base della tipologia di attività
+        ///  --> caricamento personalizzato della combobox sulla base della tipologia di attività o per i lavoratori
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -43,15 +43,18 @@ namespace AgendaAziendale.Forms
             ///Figli del pannello top
             btChiudi.Parent = panelTop;
             ///Figli del pannello centrale
-            lbEventoProgetto.Parent = panelCentro;
-            cbEventoProgetto.Parent = panelCentro;
+            lbCampoEliminazione.Parent = panelCentro;
+            cbCampoEliminazione.Parent = panelCentro;
             btElimina.Parent = panelCentro;
             
             if (Tipologia.Equals("evento") || Tipologia.Equals("Evento"))
-                lbEventoProgetto.Text = "Evento";
+                lbCampoEliminazione.Text = "Evento";
 
             else if (Tipologia.Equals("progetto") || Tipologia.Equals("Progetto"))
-                lbEventoProgetto.Text = "Progetto";
+                lbCampoEliminazione.Text = "Progetto";
+
+            else if (Tipologia.Equals("lavoratore") || Tipologia.Equals("Lavoratore"))
+                lbCampoEliminazione.Text = "Lavoratore";
 
             else
             {

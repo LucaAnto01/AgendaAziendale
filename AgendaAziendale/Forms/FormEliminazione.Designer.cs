@@ -1,6 +1,6 @@
 ﻿namespace AgendaAziendale.Forms
 {
-    partial class FormEliminazioneAttivita
+    partial class FormEliminazione
     {
         /// <summary>
         /// Required designer variable.
@@ -31,9 +31,9 @@
             this.panelTop = new System.Windows.Forms.Panel();
             this.btChiudi = new System.Windows.Forms.Button();
             this.panelCentro = new System.Windows.Forms.Panel();
-            this.lbEventoProgetto = new System.Windows.Forms.Label();
-            this.cbEventoProgetto = new System.Windows.Forms.ComboBox();
             this.btElimina = new System.Windows.Forms.Button();
+            this.cbCampoEliminazione = new System.Windows.Forms.ComboBox();
+            this.lbCampoEliminazione = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -65,31 +65,13 @@
             // panelCentro
             // 
             this.panelCentro.Controls.Add(this.btElimina);
-            this.panelCentro.Controls.Add(this.cbEventoProgetto);
-            this.panelCentro.Controls.Add(this.lbEventoProgetto);
+            this.panelCentro.Controls.Add(this.cbCampoEliminazione);
+            this.panelCentro.Controls.Add(this.lbCampoEliminazione);
             this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCentro.Location = new System.Drawing.Point(0, 40);
             this.panelCentro.Name = "panelCentro";
             this.panelCentro.Size = new System.Drawing.Size(683, 502);
             this.panelCentro.TabIndex = 38;
-            // 
-            // lbEventoProgetto
-            // 
-            this.lbEventoProgetto.AutoSize = true;
-            this.lbEventoProgetto.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbEventoProgetto.Location = new System.Drawing.Point(12, 41);
-            this.lbEventoProgetto.Name = "lbEventoProgetto";
-            this.lbEventoProgetto.Size = new System.Drawing.Size(121, 18);
-            this.lbEventoProgetto.TabIndex = 39;
-            this.lbEventoProgetto.Text = "EventoProgetto";
-            // 
-            // cbEventoProgetto
-            // 
-            this.cbEventoProgetto.FormattingEnabled = true;
-            this.cbEventoProgetto.Location = new System.Drawing.Point(157, 41);
-            this.cbEventoProgetto.Name = "cbEventoProgetto";
-            this.cbEventoProgetto.Size = new System.Drawing.Size(177, 21);
-            this.cbEventoProgetto.TabIndex = 40;
             // 
             // btElimina
             // 
@@ -100,6 +82,24 @@
             this.btElimina.Text = "Elimina";
             this.btElimina.UseVisualStyleBackColor = true;
             this.btElimina.Click += new System.EventHandler(this.BtElimina_Click);
+            // 
+            // cbCampoEliminazione
+            // 
+            this.cbCampoEliminazione.FormattingEnabled = true;
+            this.cbCampoEliminazione.Location = new System.Drawing.Point(171, 41);
+            this.cbCampoEliminazione.Name = "cbCampoEliminazione";
+            this.cbCampoEliminazione.Size = new System.Drawing.Size(177, 21);
+            this.cbCampoEliminazione.TabIndex = 40;
+            // 
+            // lbCampoEliminazione
+            // 
+            this.lbCampoEliminazione.AutoSize = true;
+            this.lbCampoEliminazione.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCampoEliminazione.Location = new System.Drawing.Point(12, 41);
+            this.lbCampoEliminazione.Name = "lbCampoEliminazione";
+            this.lbCampoEliminazione.Size = new System.Drawing.Size(147, 18);
+            this.lbCampoEliminazione.TabIndex = 39;
+            this.lbCampoEliminazione.Text = "CampoEliminazione";
             // 
             // FormEliminazioneAttivita
             // 
@@ -125,8 +125,8 @@
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Button btChiudi;
         private System.Windows.Forms.Panel panelCentro;
-        private System.Windows.Forms.ComboBox cbEventoProgetto;
-        private System.Windows.Forms.Label lbEventoProgetto;
+        private System.Windows.Forms.ComboBox cbCampoEliminazione;
+        private System.Windows.Forms.Label lbCampoEliminazione;
         private System.Windows.Forms.Button btElimina;
     }
 }
