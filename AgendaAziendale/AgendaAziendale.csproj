@@ -64,11 +64,11 @@
     <Compile Include="Forms\FormCreazioneAttivita.Designer.cs">
       <DependentUpon>FormCreazioneAttivita.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormEliminazioneAttivita.cs">
+    <Compile Include="Forms\FormEliminazione.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormEliminazioneAttivita.Designer.cs">
-      <DependentUpon>FormEliminazioneAttivita.cs</DependentUpon>
+    <Compile Include="Forms\FormEliminazione.Designer.cs">
+      <DependentUpon>FormEliminazione.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormGestioneAttivita.cs">
       <SubType>Form</SubType>
@@ -110,8 +110,8 @@
     <EmbeddedResource Include="Forms\FormCreazioneAttivita.resx">
       <DependentUpon>FormCreazioneAttivita.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormEliminazioneAttivita.resx">
-      <DependentUpon>FormEliminazioneAttivita.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormEliminazione.resx">
+      <DependentUpon>FormEliminazione.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormGestioneAttivita.resx">
       <DependentUpon>FormGestioneAttivita.cs</DependentUpon>
