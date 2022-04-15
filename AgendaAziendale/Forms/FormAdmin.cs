@@ -62,7 +62,7 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtGestioneUtenti_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormGestioneUtenti());
+            CaricaForm(new FormGestioneLavoratori());
         }
 
         /// <summary>

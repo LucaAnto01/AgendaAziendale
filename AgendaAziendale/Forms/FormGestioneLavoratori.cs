@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace AgendaAziendale.Forms
 {
-    public partial class FormGestioneUtenti : Form
+    public partial class FormGestioneLavoratori : Form
     {
         /// <summary>
         /// Metodo costruttore del FormGestioneUtenti
         /// </summary>
-        public FormGestioneUtenti()
+        public FormGestioneLavoratori()
         {
             InitializeComponent();
         }
@@ -30,42 +30,42 @@ namespace AgendaAziendale.Forms
         private void FormGestioneUtenti_Load(object sender, EventArgs e)
         {
             ///Figli del Form
-            btAggiungiUtente.Parent = this;
-            btModificaUtente.Parent = this; 
-            btEliminaUtente.Parent = this;
+            btAggiungiLavoratore.Parent = this;
+            btModificaLavoratore.Parent = this; 
+            btEliminaLavoratore.Parent = this;
         }
 
         /// <summary>
-        /// Ascoltatore click sul bottone di aggiunta di un utente
-        /// --> apertura form specifico per creazione nuovo utente
+        /// Ascoltatore click sul bottone di aggiunta di un lavoratore
+        /// --> apertura form specifico per creazione nuovo lavoratore
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtAggiungiUtente_Click(object sender, EventArgs e)
+        private void BtAggiungiLavoratore_Click(object sender, EventArgs e)
         {
             FormCreazioneLavoratore formAggiungi = new FormCreazioneLavoratore();
             formAggiungi.Show();
         }
 
         /// <summary>
-        /// Ascoltatore click sul bottone di modifica di un utente
-        /// --> apertura form specifico per modifica utente
+        /// Ascoltatore click sul bottone di modifica di un lavoratore
+        /// --> apertura form specifico per modifica lavoratore
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtModificaUtente_Click(object sender, EventArgs e)
+        private void BtModificaLavoratore_Click(object sender, EventArgs e)
         {
             FormModifica formModifica = new FormModifica("Lavoratore");
             formModifica.Show();
         }
 
         /// <summary>
-        /// Ascoltatore click sul bottone di eliminazione di un utente
-        /// --> apertura form specifico per eliminazione utente
+        /// Ascoltatore click sul bottone di eliminazione di un lavoratore
+        /// --> apertura form specifico per eliminazione lavoratore
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtEliminaUtente_Click(object sender, EventArgs e)
+        private void BtEliminaLavoratore_Click(object sender, EventArgs e)
         {
             //TODO: apri il form per l'eliminazione di un utente
         }
