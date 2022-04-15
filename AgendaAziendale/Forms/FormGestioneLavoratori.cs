@@ -67,7 +67,8 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtEliminaLavoratore_Click(object sender, EventArgs e)
         {
-            //TODO: apri il form per l'eliminazione di un utente
+            FormEliminazione formELiminazione = new FormEliminazione("Lavoratore");
+            formELiminazione.Show();
         }
         #endregion
     }
