@@ -100,7 +100,8 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtEliminaEvento_Click(object sender, EventArgs e)
         {
-            //TODO: crea form per eliminazione evento
+            FormEliminazioneAttivita formEliminaEvento = new FormEliminazioneAttivita("Evento");
+            formEliminaEvento.Show();
         }
 
         /// <summary>
@@ -111,7 +112,8 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtEliminaProgetto_Click(object sender, EventArgs e)
         {
-            //TODO: crea form per eliminazione progetto
+            FormEliminazioneAttivita formEliminaEvento = new FormEliminazioneAttivita("Progetto");
+            formEliminaEvento.Show();
         }
         #endregion
     }
