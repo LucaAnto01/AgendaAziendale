@@ -33,6 +33,27 @@ namespace AgendaAziendale.Modelli
             Cliente = cliente;
             Obiettivi = obiettivi;
         }
+
+        /// <summary>
+        /// Metodo costruttore della classe Progetto
+        /// </summary>
+        /// <param name="codice"></param>
+        /// <param name="referente"></param>
+        /// <param name="partecipanti"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="id"></param>
+        /// <param name="cliente"></param>
+        /// <param name="obiettivi"></param>
+        public Progetto(string codice, Lavoratore referente, List<Lavoratore> partecipanti, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, int id, string cliente, List<Obiettivo> obiettivi) : base(codice, referente, partecipanti, nome, descrizione, dataInizio, dataFine)
+        {
+            Id = id;
+            Cliente = cliente;
+            Obiettivi = obiettivi;
+        }
+
         /// <summary>
         /// Metodo costruttore della classe Progetto
         /// </summary>
@@ -45,6 +66,25 @@ namespace AgendaAziendale.Modelli
         /// <param name="id"></param>
         /// <param name="cliente"></param>
         public Progetto(string codice, Lavoratore referente, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, int id, string cliente) : base(codice, referente, nome, descrizione, dataInizio, dataFine)
+        {
+            Id = id;
+            Cliente = cliente;
+            obiettivi = new List<Obiettivo>();
+        }
+
+        /// <summary>
+        /// Metodo costruttore della classe Progetto
+        /// </summary>
+        /// <param name="codice"></param>
+        /// <param name="referente"></param>
+        /// <param name="partecipanti"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="id"></param>
+        /// <param name="cliente"></param>
+        public Progetto(string codice, Lavoratore referente, List<Lavoratore> partecipanti, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, int id, string cliente) : base(codice, referente, partecipanti, nome, descrizione, dataInizio, dataFine)
         {
             Id = id;
             Cliente = cliente;
