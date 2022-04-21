@@ -83,7 +83,7 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtVisualizzaStorico_Click(object sender, EventArgs e)
         {
-
+            //TODO: visualizza lo storico
         }
 
         /// <summary>
