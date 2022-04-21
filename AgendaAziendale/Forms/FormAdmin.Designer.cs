@@ -31,10 +31,11 @@
             this.panelTop = new System.Windows.Forms.Panel();
             this.btChiudi = new System.Windows.Forms.Button();
             this.panelSinistra = new System.Windows.Forms.Panel();
+            this.btGestioneAttivita = new System.Windows.Forms.Button();
             this.btLogout = new System.Windows.Forms.Button();
             this.btGestioneUtenti = new System.Windows.Forms.Button();
             this.panelCentro = new System.Windows.Forms.Panel();
-            this.btGestioneAttivita = new System.Windows.Forms.Button();
+            this.btVisualizzaStorico = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelSinistra.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +67,7 @@
             // panelSinistra
             // 
             this.panelSinistra.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelSinistra.Controls.Add(this.btVisualizzaStorico);
             this.panelSinistra.Controls.Add(this.btGestioneAttivita);
             this.panelSinistra.Controls.Add(this.btLogout);
             this.panelSinistra.Controls.Add(this.btGestioneUtenti);
@@ -74,6 +76,20 @@
             this.panelSinistra.Name = "panelSinistra";
             this.panelSinistra.Size = new System.Drawing.Size(300, 610);
             this.panelSinistra.TabIndex = 4;
+            // 
+            // btGestioneAttivita
+            // 
+            this.btGestioneAttivita.BackColor = System.Drawing.Color.DarkGray;
+            this.btGestioneAttivita.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btGestioneAttivita.ForeColor = System.Drawing.Color.White;
+            this.btGestioneAttivita.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btGestioneAttivita.Location = new System.Drawing.Point(50, 220);
+            this.btGestioneAttivita.Name = "btGestioneAttivita";
+            this.btGestioneAttivita.Size = new System.Drawing.Size(200, 35);
+            this.btGestioneAttivita.TabIndex = 3;
+            this.btGestioneAttivita.Text = "Gestione attività";
+            this.btGestioneAttivita.UseVisualStyleBackColor = false;
+            this.btGestioneAttivita.Click += new System.EventHandler(this.BtGestioneAttivita_Click);
             // 
             // btLogout
             // 
@@ -112,19 +128,19 @@
             this.panelCentro.Size = new System.Drawing.Size(700, 610);
             this.panelCentro.TabIndex = 5;
             // 
-            // btGestioneAttivita
+            // btVisualizzaStorico
             // 
-            this.btGestioneAttivita.BackColor = System.Drawing.Color.DarkGray;
-            this.btGestioneAttivita.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btGestioneAttivita.ForeColor = System.Drawing.Color.White;
-            this.btGestioneAttivita.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btGestioneAttivita.Location = new System.Drawing.Point(50, 222);
-            this.btGestioneAttivita.Name = "btGestioneAttivita";
-            this.btGestioneAttivita.Size = new System.Drawing.Size(200, 35);
-            this.btGestioneAttivita.TabIndex = 3;
-            this.btGestioneAttivita.Text = "Gestione attività";
-            this.btGestioneAttivita.UseVisualStyleBackColor = false;
-            this.btGestioneAttivita.Click += new System.EventHandler(this.BtGestioneAttivita_Click);
+            this.btVisualizzaStorico.BackColor = System.Drawing.Color.DarkGray;
+            this.btVisualizzaStorico.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btVisualizzaStorico.ForeColor = System.Drawing.Color.White;
+            this.btVisualizzaStorico.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btVisualizzaStorico.Location = new System.Drawing.Point(50, 355);
+            this.btVisualizzaStorico.Name = "btVisualizzaStorico";
+            this.btVisualizzaStorico.Size = new System.Drawing.Size(200, 35);
+            this.btVisualizzaStorico.TabIndex = 6;
+            this.btVisualizzaStorico.Text = "Storico";
+            this.btVisualizzaStorico.UseVisualStyleBackColor = false;
+            this.btVisualizzaStorico.Click += new System.EventHandler(this.btVisualizzaStorico_Click);
             // 
             // FormAdmin
             // 
@@ -155,5 +171,6 @@
         private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.Button btLogout;
         private System.Windows.Forms.Button btGestioneAttivita;
+        private System.Windows.Forms.Button btVisualizzaStorico;
     }
 }

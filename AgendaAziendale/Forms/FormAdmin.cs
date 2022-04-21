@@ -77,6 +77,16 @@ namespace AgendaAziendale
         }
 
         /// <summary>
+        /// Ascoltatore evento click sul bottone per visualizzare lo storico di eventi e progetti
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtVisualizzaStorico_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
         /// Ascoltatore evento click sul bottone di logout
         /// --> effettua il logout, riporta alla schermata di login
         /// </summary>
@@ -110,7 +120,5 @@ namespace AgendaAziendale
             f.Show();
         }
         #endregion
-
-        
     }
 }
