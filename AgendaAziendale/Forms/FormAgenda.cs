@@ -32,6 +32,12 @@ namespace AgendaAziendale.Forms
         }
 
         #region Ascoltatori eventi
+        /// <summary>
+        /// Metodo richiamato al caricamento dell'interfaccia
+        ///  --> settaggio gerarchie interfaccia
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormAgenda_Load(object sender, EventArgs e)
         {
             ///Figli del form
@@ -42,7 +48,12 @@ namespace AgendaAziendale.Forms
             btChiudi.Parent = panelTop;
             ///Figli del pannello di sinistra
             btVisualizzaAgenda.Parent = panelSinistra;
+            btProgettiEventi.Parent = panelSinistra;
+            btGestione.Parent = panelSinistra;
+            btVisualizzaStorico.Parent = panelSinistra;
             btLogout.Parent = panelSinistra;
+
+            //SETTA IL TESTO DEL btProgettiEventi e gestisci la visibilità del btGestione
         }
 
         /// <summary>
@@ -68,7 +79,7 @@ namespace AgendaAziendale.Forms
         }
 
         /// <summary>
-        /// Ascoltatore evento click sul bottone per operare su evnti o progetti, per segnarne la fine o gli step
+        /// Ascoltatore evento click sul bottone per operare su eventi o progetti, per segnarne la fine o gli step
         ///  --> a seconda della tipologia di account loggato si opera su eventi (segretario) e progetti (PM, sviluppatore)
         /// </summary>
         /// <param name="sender"></param>
@@ -76,6 +87,17 @@ namespace AgendaAziendale.Forms
         private void BtProgettiEventi_Click(object sender, EventArgs e)
         {
             //TODO: fai vedere il tutto
+        }
+
+        /// <summary>
+        /// Ascoltatore vento click sul bottone per creare e gestire eventi o progetti
+        /// --> visibile SOLO se account loggato è segretario o PM
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtGestione_Click(object sender, EventArgs e)
+        {
+            //CaricaForm(new FormGestioneAttivita()); -->TODO: per farlo devi prima creare le sottoclassi di lavoratore in modo da poter richimare il metodo
         }
 
         /// <summary>
@@ -100,6 +122,27 @@ namespace AgendaAziendale.Forms
             FormLogin formLogin = new FormLogin();
             formLogin.Show();
             Close(); //Chiudo questo form
+        }
+        #endregion
+
+        #region Metodi
+        /// <summary>
+        /// Metodo adibito al caricamento dinamico dell'interfaccia d'azione nel pannello centrale
+        /// sulla base della selezione dell'utente
+        /// </summary>
+        /// <param name="formIn"></param>
+        public void CaricaForm(object formIn)
+        {
+
+            if (panelCentro.Controls.Count > 0) //Controllo che non ci siano altri form già all'interno dell'interfaccia
+                panelCentro.Controls.RemoveAt(0); //Elimino i controlli relativi al form precedentemente inserito nell'interfaccia
+
+            Form f = formIn as Form;
+            f.TopLevel = false;
+            f.Dock = DockStyle.Fill; //Mi assicuro che occupi tutto lo spazio disponibile, se fosse troppo grande lo ridimensionerebbe
+            panelCentro.Controls.Add(f); //Asssegno i controlli al form "dinamico" creato
+            panelCentro.Tag = f;
+            f.Show();
         }
         #endregion
     }

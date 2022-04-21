@@ -36,6 +36,7 @@
             this.btVisualizzaAgenda = new System.Windows.Forms.Button();
             this.btLogout = new System.Windows.Forms.Button();
             this.btVisualizzaStorico = new System.Windows.Forms.Button();
+            this.btGestione = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelSinistra.SuspendLayout();
             this.SuspendLayout();
@@ -75,6 +76,7 @@
             // panelSinistra
             // 
             this.panelSinistra.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelSinistra.Controls.Add(this.btGestione);
             this.panelSinistra.Controls.Add(this.btVisualizzaStorico);
             this.panelSinistra.Controls.Add(this.btProgettiEventi);
             this.panelSinistra.Controls.Add(this.btVisualizzaAgenda);
@@ -91,7 +93,7 @@
             this.btProgettiEventi.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btProgettiEventi.ForeColor = System.Drawing.Color.White;
             this.btProgettiEventi.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btProgettiEventi.Location = new System.Drawing.Point(50, 222);
+            this.btProgettiEventi.Location = new System.Drawing.Point(50, 176);
             this.btProgettiEventi.Name = "btProgettiEventi";
             this.btProgettiEventi.Size = new System.Drawing.Size(200, 35);
             this.btProgettiEventi.TabIndex = 4;
@@ -134,13 +136,28 @@
             this.btVisualizzaStorico.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btVisualizzaStorico.ForeColor = System.Drawing.Color.White;
             this.btVisualizzaStorico.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btVisualizzaStorico.Location = new System.Drawing.Point(50, 359);
+            this.btVisualizzaStorico.Location = new System.Drawing.Point(50, 358);
             this.btVisualizzaStorico.Name = "btVisualizzaStorico";
             this.btVisualizzaStorico.Size = new System.Drawing.Size(200, 35);
             this.btVisualizzaStorico.TabIndex = 5;
             this.btVisualizzaStorico.Text = "Storico";
             this.btVisualizzaStorico.UseVisualStyleBackColor = false;
             this.btVisualizzaStorico.Click += new System.EventHandler(this.BtVisualizzaStorico_Click);
+            // 
+            // btGestione
+            // 
+            this.btGestione.BackColor = System.Drawing.Color.DarkGray;
+            this.btGestione.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btGestione.ForeColor = System.Drawing.Color.White;
+            this.btGestione.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btGestione.Location = new System.Drawing.Point(50, 267);
+            this.btGestione.Name = "btGestione";
+            this.btGestione.Size = new System.Drawing.Size(200, 35);
+            this.btGestione.TabIndex = 6;
+            this.btGestione.Text = "Gestione EvProgetti";
+            this.btGestione.UseVisualStyleBackColor = false;
+            this.btGestione.Visible = false;
+            this.btGestione.Click += new System.EventHandler(this.BtGestione_Click);
             // 
             // FormAgenda
             // 
@@ -171,5 +188,6 @@
         private System.Windows.Forms.Button btVisualizzaAgenda;
         private System.Windows.Forms.Button btProgettiEventi;
         private System.Windows.Forms.Button btVisualizzaStorico;
+        private System.Windows.Forms.Button btGestione;
     }
 }
