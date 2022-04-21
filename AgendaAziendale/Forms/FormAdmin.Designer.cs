@@ -140,7 +140,7 @@
             this.btVisualizzaStorico.TabIndex = 6;
             this.btVisualizzaStorico.Text = "Storico";
             this.btVisualizzaStorico.UseVisualStyleBackColor = false;
-            this.btVisualizzaStorico.Click += new System.EventHandler(this.btVisualizzaStorico_Click);
+            this.btVisualizzaStorico.Click += new System.EventHandler(this.BtVisualizzaStorico_Click);
             // 
             // FormAdmin
             // 
