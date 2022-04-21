@@ -109,8 +109,6 @@ namespace AgendaAziendale
             panelCentro.Tag = f;
             f.Show();
         }
-
-
         #endregion
 
         
