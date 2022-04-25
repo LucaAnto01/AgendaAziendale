@@ -88,7 +88,7 @@ namespace AgendaAziendale.Modelli
         {
             Id = id;
             Cliente = cliente;
-            obiettivi = new List<Obiettivo>();
+            Obiettivi = new List<Obiettivo>();
         }
 
         /// <summary>
@@ -102,7 +102,16 @@ namespace AgendaAziendale.Modelli
         /// <param name="obiettivo"></param>
         public void AggiungiObiettivo(Obiettivo obiettivo)
         {
-            obiettivi.Add(obiettivo);
+            Obiettivi.Add(obiettivo);
+        }
+
+        /// <summary>
+        /// Metodo per contrassegnare un obiettivo come completato
+        /// </summary>
+        /// <param name="obiettivo"></param>
+        public void ObiettivoCompletato(Obiettivo obiettivo)
+        {
+            Obiettivi.FirstOrDefault(i => i.Id == obiettivo.Id).Completato = true;
         }
         #endregion
 

@@ -71,16 +71,9 @@ namespace AgendaAziendale.Modelli
         /// false --> errore, partecipante non aggiunto
         /// </summary>
         /// <param name="partecipante"></param>
-        /// <returns>bool</returns>
-        public bool AggiugniPartecipante(Lavoratore partecipante)
+        public void AggiugniPartecipante(Lavoratore partecipante)
         {
-            if(!Partecipanti.Contains(partecipante))
-            {
-                Partecipanti.Add(partecipante);
-                return true;
-            }
-                
-            return false;
+            Partecipanti.Add(partecipante);
         }
 
         /// <summary>
