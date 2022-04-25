@@ -69,6 +69,7 @@
             this.pbProgetto.Name = "pbProgetto";
             this.pbProgetto.Size = new System.Drawing.Size(246, 23);
             this.pbProgetto.TabIndex = 4;
+            this.pbProgetto.Visible = false;
             // 
             // lbDataInizioFine
             // 

@@ -102,6 +102,7 @@ namespace AgendaAziendale.Forms.UserControls
                 lbClienteLuogo.Text = progetto.Cliente;
                 lbDataInizioFineInt.Text = "Consegna";
                 lbDataInizioFine.Text = progetto.DataFine.ToString("dd-MM-yyyy");
+                pbProgetto.Visible = true;
             }
         }
         #endregion
