@@ -45,7 +45,9 @@ namespace AgendaAziendale.Forms.UserControls
             panelCentro.Parent = this;
             ///Figli del panelCentro
             lbTitolo.Parent = panelCentro;
-            lbClienteLuogo.Parent = panelCentro;    
+            lbClienteLuogoInt.Parent = panelCentro;
+            lbClienteLuogo.Parent = panelCentro;  
+            lbDataInizioFineInt.Parent = panelCentro;
             lbDataInizioFine.Parent = panelCentro; 
             pbProgetto.Parent = panelCentro;
 
@@ -72,6 +74,35 @@ namespace AgendaAziendale.Forms.UserControls
         private void UCAttivita_MouseLeave(object sender, EventArgs e)
         {
             panelCentro.BackColor = Color.WhiteSmoke;
+        }
+        #endregion
+
+        #region Metodi
+        /// <summary>
+        /// Metodo richiamato durante il load dell'user control
+        /// --> settaggio testi dell'user control
+        /// </summary>
+        private void SetTesti()
+        {
+            lbTitolo.Text = Attivita.Nome;
+            
+            if(Attivita is Evento)
+            {
+                Evento evento = (Evento)Attivita;
+                lbClienteLuogoInt.Text = "Luogo";
+                lbClienteLuogo.Text = evento.Luogo;
+                lbDataInizioFineInt.Text = "Inizio - Fine";
+                lbDataInizioFine.Text = evento.DataInizio.ToString("dd-MM-yyyy") + " - " + evento.DataFine.ToString("dd-MM-yyyy");
+            }
+
+            else if(Attivita is Progetto)
+            {
+                Progetto progetto = (Progetto)Attivita;
+                lbClienteLuogoInt.Text = "Cliente";
+                lbClienteLuogo.Text = progetto.Cliente;
+                lbDataInizioFineInt.Text = "Consegna";
+                lbDataInizioFine.Text = progetto.DataFine.ToString("dd-MM-yyyy");
+            }
         }
         #endregion
     }
