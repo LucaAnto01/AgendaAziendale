@@ -51,7 +51,7 @@ namespace AgendaAziendale.Forms.UserControls
             lbDataInizioFine.Parent = panelCentro; 
             pbProgetto.Parent = panelCentro;
 
-            //TODO: SETTA I TESTI --> FAI UN METODO
+            SetTesti();
         }
 
         /// <summary>
