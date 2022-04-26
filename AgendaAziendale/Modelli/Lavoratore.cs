@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AgendaAziendale.Modelli
 {
-    public abstract class Lavoratore
+    public class Lavoratore
     {
         #region Attributi
         private string username;
@@ -29,9 +29,8 @@ namespace AgendaAziendale.Modelli
         /// <param name="cognome"></param>
         /// <param name="residenza"></param>
         /// <param name="dataNascita"></param>
-        /// <param name="email"></param>
         /// <param name="categoria"></param>
-        public Lavoratore(string username, string password, string nome, string cognome, string residenza, DateTime dataNascita, string email, string categoria)
+        public Lavoratore(string username, string password, string nome, string cognome, string residenza, DateTime dataNascita, string categoria)
         {
             this.username = username;
             this.password = password;
@@ -39,7 +38,7 @@ namespace AgendaAziendale.Modelli
             this.cognome = cognome;
             this.residenza = residenza;
             this.dataNascita = dataNascita;
-            this.email = email;
+            GeneraEmail(username, cognome);
             this.categoria = categoria;
         }
 
@@ -59,7 +58,7 @@ namespace AgendaAziendale.Modelli
         /// <param name="residenza"></param>
         /// <param name="dataNascita"></param>
         /// <param name="categoria"></param>
-        /*public static void GeneraLavoratore(string username, string password, string nome, string cognome, string residenza, DateTime dataNascita, string categoria)
+        public static void GeneraLavoratore(string username, string password, string nome, string cognome, string residenza, DateTime dataNascita, string categoria)
         {
             //GeneraEmail(username, cognome);
             //TODO: inserisci nel DB un nuovo lavoratore
@@ -74,7 +73,7 @@ namespace AgendaAziendale.Modelli
         private string GeneraEmail(string username, string cognome)
         {
             return username.ToLower() + "." + cognome.ToLower() + "@agendaaziendale.it";
-        }*/
+        }
         #endregion
 
         #region Getters & Setters
