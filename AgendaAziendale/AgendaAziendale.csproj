@@ -100,6 +100,12 @@
     <Compile Include="Forms\FormModifica.Designer.cs">
       <DependentUpon>FormModifica.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormVisualizzazioneAttivita.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormVisualizzazioneAttivita.Designer.cs">
+      <DependentUpon>FormVisualizzazioneAttivita.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserControls\UCAttivita.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -139,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormModifica.resx">
       <DependentUpon>FormModifica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormVisualizzazioneAttivita.resx">
+      <DependentUpon>FormVisualizzazioneAttivita.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserControls\UCAttivita.resx">
       <DependentUpon>UCAttivita.cs</DependentUpon>
