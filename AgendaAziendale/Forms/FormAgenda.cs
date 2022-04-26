@@ -75,7 +75,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtVisualizzaAgenda_Click(object sender, EventArgs e)
         {
-            //TODO: fai vedere il tutto
+            CaricaForm(new FormVisualizzazioneAttivita(Lavoratore));
         }
 
         /// <summary>

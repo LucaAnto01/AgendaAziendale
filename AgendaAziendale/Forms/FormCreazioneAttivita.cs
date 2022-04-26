@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AgendaAziendale.Modelli;
 
 namespace AgendaAziendale.Forms
 {
@@ -146,13 +147,56 @@ namespace AgendaAziendale.Forms
         }
 
         /// <summary>
-        /// 
+        /// Ascoltatore click sul bottone di creazione di una nuova attività
+        /// --> avvio procedura creazione nuova attività
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void BtAggiungi_Click(object sender, EventArgs e)
         {
-            //TODO: implementa funzione per aggiungere un evento
+            if (Tipologia.Equals("evento") || Tipologia.Equals("Evento"))
+                CreaEvento();
+
+            else if (Tipologia.Equals("progetto") || Tipologia.Equals("Progetto"))
+                CreaProgetto();
+
+            else
+            {
+                MessageBox.Show("ERRORE valore FormCreazioneAttivita:tipologia --> controllare stack chiamate!");
+                Application.Exit();
+            }
+        }
+        #endregion
+
+        #region Metodi
+        /// <summary>
+        /// Metodo adibito alla creazione di un evento
+        /// </summary>
+        private void CreaEvento()
+        {
+            string codice = tbCodice.Text;
+            //Lavoratore referente = cbReferente.Text; --> ottieni il referente dal DB o vedi come fare, bisogna passare un Referente
+            string descrizione = tbDescrizione.Text;
+            DateTime dataInizio = mcDataInizio.SelectionRange.Start;
+            DateTime dataFine = mcDataFine.SelectionRange.Start;    
+            string luogo = tbLuogoCliente.Text;
+            //Evento evento = new Evento(codice, referente, dataInizio, dataFine, luogo);
+            //TODO: inserisci nel DB
+        }
+
+        /// <summary>
+        /// Metodo adibito alla creazione di un progetto
+        /// </summary>
+        private void CreaProgetto()
+        {
+            string codice = tbCodice.Text;
+            //Lavoratore referente = cbReferente.Text; --> ottieni il referente dal DB o vedi come fare, bisogna passare un Referente
+            string descrizione = tbDescrizione.Text;
+            DateTime dataInizio = mcDataInizio.SelectionRange.Start;
+            DateTime dataFine = mcDataFine.SelectionRange.Start;
+            string cliente = tbLuogoCliente.Text;
+            //Progetto progetto = new Progetto(codice, referente, dataInizio, dataFine, cliente);
+            //TODO: inserisci nel DB
         }
         #endregion
     }

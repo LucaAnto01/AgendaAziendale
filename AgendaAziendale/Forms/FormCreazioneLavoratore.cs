@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AgendaAziendale.Modelli;
 
 namespace AgendaAziendale.Forms
 {
@@ -91,15 +92,34 @@ namespace AgendaAziendale.Forms
         }
 
         /// <summary>
-        /// 
+        /// Ascoltatore click sul bottone adibito alla creazione di un lavoratore
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void BtAggiungi_Click(object sender, EventArgs e)
         {
-            //TODO: implementa funzione per aggiungere un lavoratore
+            CreaLavoratore();
         }
+        #endregion
 
+        #region Metodi
+        /// <summary>
+        /// Metodo adibito alla creazione di un lavoratore
+        /// </summary>
+        private void CreaLavoratore()
+        {
+            string username = tbUsername.Text;
+            string password = tbPassword.Text;
+            string nome = tbNome.Text;
+            string cognome = tbCognome.Text;
+            string residenza = tbResidenza.Text;
+            DateTime dataNascita = mcDataNascita.SelectionRange.Start;
+            string categoria = cbCategoria.Text;
+
+            Lavoratore lavoratore = new Lavoratore(username, password, nome, cognome, residenza, dataNascita, categoria);
+
+            //TODO: inseriscilo nel DB
+        }
         #endregion
     }
 }
