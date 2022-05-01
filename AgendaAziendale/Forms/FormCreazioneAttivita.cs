@@ -76,7 +76,7 @@ namespace AgendaAziendale.Forms
 
             else
             {
-                MessageBox.Show("ERRORE valore FormCreazioneAttivita:tipologia --> controllare stack chiamate!");
+                MessageBox.Show("ERRORE! Valore FormCreazioneAttivita:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
         }
@@ -154,17 +154,23 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiungi_Click(object sender, EventArgs e)
         {
-            if (Tipologia.Equals("evento") || Tipologia.Equals("Evento"))
-                CreaEvento();
+            if ((tbCodice.Text != null) && (cbReferente.Text != null) && (tbNome.Text != null) && (tbDescrizione.Text != null) && (tbDataInizio.Text != null) && (tbDataFine.Text != null) && (tbLuogoCliente.Text != null))
+            {
+                if (Tipologia.Equals("evento") || Tipologia.Equals("Evento"))
+                    CreaEvento();
 
-            else if (Tipologia.Equals("progetto") || Tipologia.Equals("Progetto"))
-                CreaProgetto();
+                else if (Tipologia.Equals("progetto") || Tipologia.Equals("Progetto"))
+                    CreaProgetto();
+
+                else
+                {
+                    MessageBox.Show("ERRORE! Valore FormCreazioneAttivita:tipologia --> controllare stack chiamate!", "Stack chiamate", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
+            }
 
             else
-            {
-                MessageBox.Show("ERRORE valore FormCreazioneAttivita:tipologia --> controllare stack chiamate!");
-                Application.Exit();
-            }
+                MessageBox.Show("ERRORE! Compila tutti i campi", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         #endregion
 
@@ -181,7 +187,7 @@ namespace AgendaAziendale.Forms
             DateTime dataFine = mcDataFine.SelectionRange.Start;    
             string luogo = tbLuogoCliente.Text;
             //Evento evento = new Evento(codice, referente, dataInizio, dataFine, luogo);
-            //TODO: inserisci nel DB
+            //TODO: inserisci nel DB e controlla che non esista già
         }
 
         /// <summary>
@@ -196,7 +202,7 @@ namespace AgendaAziendale.Forms
             DateTime dataFine = mcDataFine.SelectionRange.Start;
             string cliente = tbLuogoCliente.Text;
             //Progetto progetto = new Progetto(codice, referente, dataInizio, dataFine, cliente);
-            //TODO: inserisci nel DB
+            //TODO: inserisci nel DB e controlla che non esista già
         }
         #endregion
     }

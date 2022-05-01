@@ -98,7 +98,11 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiungi_Click(object sender, EventArgs e)
         {
-            CreaLavoratore();
+            if((tbNome.Text != null) && (tbCognome.Text != null) && (tbResidenza.Text != null) && (tbDataNascita.Text != null) && (tbUsername.Text != null) && (tbPassword.Text != null) && (cbCategoria.Text != null))
+                CreaLavoratore();
+
+            else
+                MessageBox.Show("ERRORE! Compila tutti i campi", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         #endregion
 
@@ -118,7 +122,7 @@ namespace AgendaAziendale.Forms
 
             Lavoratore lavoratore = new Lavoratore(username, password, nome, cognome, residenza, dataNascita, categoria);
 
-            //TODO: inseriscilo nel DB
+            //TODO: inseriscilo nel DB e controlla che non esista già
         }
         #endregion
     }

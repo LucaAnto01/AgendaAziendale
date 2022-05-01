@@ -79,17 +79,6 @@ namespace AgendaAziendale.Forms
         }
 
         /// <summary>
-        /// Ascoltatore click sul bottone di modifica 
-        /// --> effettua la modifica
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtModifica_Click(object sender, EventArgs e)
-        {
-            //TODO: avvia la procedura di modifica
-        }
-
-        /// <summary>
         /// Ascoltatore selezione data calendario
         /// --> chiusura calendario, settaggio della data e visualizzazione nella text box
         /// --> riabilitazione possibilità di input text box relativa all'inserimento della data
@@ -102,8 +91,24 @@ namespace AgendaAziendale.Forms
             tbValore.Enabled = true;
             tbValore.Text = mcModifica.SelectionRange.Start.ToShortDateString();
         }
+
+        /// <summary>
+        /// Ascoltatore click sul bottone di modifica 
+        /// --> effettua la modifica
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtModifica_Click(object sender, EventArgs e)
+        {
+            //TODO: avvia la procedura di modifica
+        }
         #endregion
 
-
+        #region Metodi
+        private void Modifica()
+        {
+            //TODO: collegati al DB a seconda della tipologia modifica quel che devi
+        }
+        #endregion
     }
 }

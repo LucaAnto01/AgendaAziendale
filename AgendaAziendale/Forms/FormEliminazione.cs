@@ -81,9 +81,18 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtElimina_Click(object sender, EventArgs e)
         {
-            //TODO: fai cose
+            if (cbCampoEliminazione.Text != null)
+                Elimina();
+            else
+                MessageBox.Show("ERRORE! Compila il campo", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         #endregion
 
+        #region Metodi
+        private void Elimina()
+        {
+            //A seconda della tipologia elimina o un attività o un lavoratore
+        }
+        #endregion
     }
 }
