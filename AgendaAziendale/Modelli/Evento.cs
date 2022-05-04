@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AgendaAziendale.Modelli
 {
-    internal class Evento : Attivita
+    public class Evento : Attivita
     {
         #region Attributi
         private int id;
