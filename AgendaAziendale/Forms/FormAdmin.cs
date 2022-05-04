@@ -1,5 +1,4 @@
-﻿using AgendaAziendale.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,18 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AgendaAziendale.Forms;
+using AgendaAziendale.Modelli;
 
 namespace AgendaAziendale
 {
     public partial class FormAdmin : Form
     {
+        #region Attributi
+        private Lavoratore lavoratoreAdmin;
+        #endregion
+
+        #region Getters & Setters
+        public Lavoratore LavoratoreAdmin { get => lavoratoreAdmin; set => lavoratoreAdmin = value; }
+        #endregion
 
         /// <summary>
         /// Metodo costruttore del FormLogin
         /// </summary>
-        public FormAdmin()
+        public FormAdmin(/*Lavoratore lavoratoreAdmin*/)
         {
             InitializeComponent();
+            //LavoratoreAdmin = lavoratoreAdmin;
         }
 
         #region Ascoltatori eventi
@@ -38,8 +47,8 @@ namespace AgendaAziendale
             ///Figli del pannello top
             btChiudi.Parent = panelTop;
             ///Figli del pannello di sinistra
-            btGestioneUtenti.Parent = panelSinistra;
-            btGestioneAttivita.Parent = panelSinistra;
+            btGestioneLavoratori.Parent = panelSinistra;
+            btGestioneEventi.Parent = panelSinistra;
             btLogout.Parent = panelSinistra;
         }
 
@@ -55,25 +64,34 @@ namespace AgendaAziendale
         }
 
         /// <summary>
-        /// Ascoltatore evento click sul bottone di gestione per utenti
-        /// --> visualizzazione Form di gestione per gli utenti
+        /// Ascoltatore evento click sul bottone di gestione per lavoratori
+        /// --> visualizzazione Form di gestione per gli lavoratori
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtGestioneUtenti_Click(object sender, EventArgs e)
+        private void BtGestioneLavoratori_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormGestioneLavoratori());
+            CaricaForm(new FormGestione("lavoratore"));
         }
 
         /// <summary>
-        /// Ascoltatore evento click sul bottone di gestione delle attività
-        /// --> visualizzazione Form di gestione delle attivita
-        /// </summary>
+        /// Ascoltatore evento click sul bottone di gestione degli eventi
+        /// --> visualizzazione Form di gestione degli eventi
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtGestioneAttivita_Click(object sender, EventArgs e)
+        private void BtGestioneEventi_Click(object sender, EventArgs e)
         {
-            //CaricaForm(new FormGestioneAttivita()); -->TODO: per farlo devi prima creare le sottoclassi di lavoratore in modo da poter richimare il metodo
+            CaricaForm(new FormGestione("evento"));
+        }
+
+        /// <summary>
+        /// Ascoltatore evento click sul bottone di gestione dei progetti
+        /// --> visualizzazione Form di gestione dei progetti
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtGestioneProgetti_Click(object sender, EventArgs e)
+        {
+            CaricaForm(new FormGestione("progetto"));
         }
 
         /// <summary>

@@ -8,42 +8,56 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AgendaAziendale.Modelli;
+using AgendaAziendale.Forms.UserControls;
 
 namespace AgendaAziendale.Forms
 {
-    public partial class FormCreazioneAttivita : Form
+    public partial class FormEvento : Form
     {
         #region Attributi
-        private string tipologia;
+        private readonly UCEventi ucPadre;
+        private readonly Evento evento;
+        private readonly string azione;
         #endregion
 
-        #region Getters & Setters
-        public string Tipologia { get => tipologia; set => tipologia = value; }
-        #endregion
-
+        #region Metodi costruttori
         /// <summary>
-        /// Metodo costruttore del FormCreazioneAttivita
-        /// --> permette la creazione di eventi o progetti
-        /// --> a seconda dell'attività che si desidera creare: evento o progetto, viene caricata dinamicamente
-        ///     la combobox con l'elenco di segretari o PM e durante l'azione di load viene assegnato un contenuto
-        ///     testuale diverso alla label relativa al luogo o cliente
+        /// Metodo costruttore del FormEvento
         /// </summary>
-        /// <param name="tipologia"></param>
-        public FormCreazioneAttivita(string tipologia)
+        /// <param name="ucPadre"></param>
+        /// <param name="evento"></param>
+        /// <param name="azione"></param>
+        public FormEvento(UCEventi ucPadre, Evento evento, string azione)
         {
             InitializeComponent();
-            Tipologia = tipologia;
+            this.ucPadre = ucPadre;
+            this.evento = evento;
+            this.azione = azione;
         }
+
+        /// <summary>
+        /// Metodo costruttore del FormEvento
+        /// </summary>
+        /// <param name="ucPadre"></param>
+        /// <param name="azione"></param>
+        public FormEvento(UCEventi ucPadre,string azione)
+        {
+            InitializeComponent();
+            this.ucPadre = ucPadre;
+            this.evento = null;
+            this.azione = azione;
+        }
+        #endregion
 
         #region Ascoltatori eventi
         /// <summary>
         /// Metodo richiamato al caricamento dell'interfaccia
         ///  --> settaggio gerarchie interfaccia
-        ///  --> settaggio valore lbLuogoCliente
+        ///  --> settaggio testi
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FormCreazioneEvento_Load(object sender, EventArgs e)
+        private void FormEvento_Load(object sender, EventArgs e)
         {
             ///Figli del Form
             panelTop.Parent = this;
@@ -51,32 +65,43 @@ namespace AgendaAziendale.Forms
             ///Figli del pannello top
             btChiudi.Parent = panelTop;
             ///Figli del pannello centrale
-            lbCodice.Parent = panelCentro;
             lbReferente.Parent = panelCentro;
             lbNome.Parent = panelCentro;
             lbDescrizione.Parent = panelCentro;
             lbDataInizio.Parent = panelCentro;
             lbDataFine.Parent = panelCentro;
-            lbLuogoCliente.Parent = panelCentro;
-            tbCodice.Parent = panelCentro;
+            lbLuogo.Parent = panelCentro;
             cbReferente.Parent = panelCentro;
             tbNome.Parent = panelCentro;
             tbDescrizione.Parent = panelCentro;
             tbDataInizio.Parent = panelCentro;
             tbDataFine.Parent = panelCentro;
-            tbLuogoCliente.Parent = panelCentro;
+            tbLuogo.Parent = panelCentro;
             mcDataInizio.Parent = panelCentro;
             mcDataFine.Parent = panelCentro;
+            btAggiungiAggiorna.Parent = panelCentro;
 
-            if (Tipologia.Equals("evento") || Tipologia.Equals("Evento"))
-                lbLuogoCliente.Text = "Luogo";
+            cbReferente.DropDownStyle = ComboBoxStyle.DropDownList; ///Possibilità di selezionare solo elementi della cb, senza poter scrivere manaulmente, al fine di evitare errori
 
-            else if (Tipologia.Equals("progetto") || Tipologia.Equals("Progetto"))
-                lbLuogoCliente.Text = "Cliente";
+            if (evento != null) ///Se ho un evento da modificare
+            {
+                cbReferente.Text = evento.Referente.Username;
+                tbNome.Text = evento.Nome;
+                tbDescrizione.Text = evento.Descrizione;
+                tbDataInizio.Text = evento.DataInizio.ToShortDateString();
+                tbDataFine.Text = evento.DataFine.ToShortDateString();
+                tbLuogo.Text = evento.Luogo;
+            }
+
+            if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                btAggiungiAggiorna.Text = "Aggiungi";
+
+            else if ((azione == "Aggiorna") || (azione == "aggiorna"))
+                btAggiungiAggiorna.Text = "Aggiorna";
 
             else
             {
-                MessageBox.Show("ERRORE! Valore FormCreazioneAttivita:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ERRORE! Valore FormEvento:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
         }
@@ -115,7 +140,7 @@ namespace AgendaAziendale.Forms
         private void McDataInizio_DateSelected(object sender, DateRangeEventArgs e)
         {
             mcDataInizio.Hide();
-            tbDataInizio.Enabled = true;    
+            tbDataInizio.Enabled = true;
             tbDataInizio.Text = mcDataInizio.SelectionRange.Start.ToShortDateString();
         }
 
@@ -147,62 +172,22 @@ namespace AgendaAziendale.Forms
         }
 
         /// <summary>
-        /// Ascoltatore click sul bottone di creazione di una nuova attività
-        /// --> avvio procedura creazione nuova attività
+        /// Ascoltatore click sul bottone adibito alla creazione o all'aggiornamento di un evento
+        /// --> effettuo l'azione di aggiunta o modifica
+        /// --> aggiorno la dgv contenente i dati
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtAggiungi_Click(object sender, EventArgs e)
+        private void BtAggiungiAggiorna_Click(object sender, EventArgs e)
         {
-            if ((tbCodice.Text != null) && (cbReferente.Text != null) && (tbNome.Text != null) && (tbDescrizione.Text != null) && (tbDataInizio.Text != null) && (tbDataFine.Text != null) && (tbLuogoCliente.Text != null))
-            {
-                if (Tipologia.Equals("evento") || Tipologia.Equals("Evento"))
-                    CreaEvento();
+            if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                //Richiama funzione aggiungi
 
-                else if (Tipologia.Equals("progetto") || Tipologia.Equals("Progetto"))
-                    CreaProgetto();
+            if ((azione == "Aggiorna") || (azione == "aggiorna"))
+                //Richiama funzione aggiorna
 
-                else
-                {
-                    MessageBox.Show("ERRORE! Valore FormCreazioneAttivita:tipologia --> controllare stack chiamate!", "Stack chiamate", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Application.Exit();
-                }
-            }
-
-            else
-                MessageBox.Show("ERRORE! Compila tutti i campi", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        #endregion
-
-        #region Metodi
-        /// <summary>
-        /// Metodo adibito alla creazione di un evento
-        /// </summary>
-        private void CreaEvento()
-        {
-            string codice = tbCodice.Text;
-            //Lavoratore referente = cbReferente.Text; --> ottieni il referente dal DB o vedi come fare, bisogna passare un Referente
-            string descrizione = tbDescrizione.Text;
-            DateTime dataInizio = mcDataInizio.SelectionRange.Start;
-            DateTime dataFine = mcDataFine.SelectionRange.Start;    
-            string luogo = tbLuogoCliente.Text;
-            //Evento evento = new Evento(codice, referente, dataInizio, dataFine, luogo);
-            //TODO: inserisci nel DB e controlla che non esista già
-        }
-
-        /// <summary>
-        /// Metodo adibito alla creazione di un progetto
-        /// </summary>
-        private void CreaProgetto()
-        {
-            string codice = tbCodice.Text;
-            //Lavoratore referente = cbReferente.Text; --> ottieni il referente dal DB o vedi come fare, bisogna passare un Referente
-            string descrizione = tbDescrizione.Text;
-            DateTime dataInizio = mcDataInizio.SelectionRange.Start;
-            DateTime dataFine = mcDataFine.SelectionRange.Start;
-            string cliente = tbLuogoCliente.Text;
-            //Progetto progetto = new Progetto(codice, referente, dataInizio, dataFine, cliente);
-            //TODO: inserisci nel DB e controlla che non esista già
+            if(ucPadre != null)
+                ucPadre.AggiornadgvEventi();
         }
         #endregion
     }

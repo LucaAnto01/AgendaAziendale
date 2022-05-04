@@ -24,7 +24,7 @@
 
         /// <summary>
         /// Metodo necessario per il supporto della finestra di progettazione. Non modificare
-        /// il contenuto del metodo con l'editor di codice.
+        /// il contenuto del metodo con l'editor di id.
         /// </summary>
         private void InitializeComponent()
         {

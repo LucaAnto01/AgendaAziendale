@@ -1,6 +1,6 @@
 ﻿namespace AgendaAziendale.Forms
 {
-    partial class FormCreazioneLavoratore
+    partial class FormLavoratore
     {
         /// <summary>
         /// Required designer variable.
@@ -28,17 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelTop = new System.Windows.Forms.Panel();
             this.btChiudi = new System.Windows.Forms.Button();
-            this.lbNome = new System.Windows.Forms.Label();
-            this.tbNome = new System.Windows.Forms.TextBox();
-            this.tbCognome = new System.Windows.Forms.TextBox();
-            this.lbCognome = new System.Windows.Forms.Label();
-            this.panelCentro = new System.Windows.Forms.Panel();
             this.lbCategoria = new System.Windows.Forms.Label();
             this.cbCategoria = new System.Windows.Forms.ComboBox();
-            this.btAggiungi = new System.Windows.Forms.Button();
+            this.btAAggiornaAggiungi = new System.Windows.Forms.Button();
+            this.lbCognome = new System.Windows.Forms.Label();
             this.mcDataNascita = new System.Windows.Forms.MonthCalendar();
+            this.tbNome = new System.Windows.Forms.TextBox();
+            this.lbNome = new System.Windows.Forms.Label();
+            this.panelTop = new System.Windows.Forms.Panel();
             this.tbDataNascita = new System.Windows.Forms.TextBox();
             this.lbDataNascita = new System.Windows.Forms.Label();
             this.tbResidenza = new System.Windows.Forms.TextBox();
@@ -47,19 +45,11 @@
             this.lbPassword = new System.Windows.Forms.Label();
             this.tbUsername = new System.Windows.Forms.TextBox();
             this.lbUsername = new System.Windows.Forms.Label();
+            this.tbCognome = new System.Windows.Forms.TextBox();
+            this.panelCentro = new System.Windows.Forms.Panel();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panelTop
-            // 
-            this.panelTop.BackColor = System.Drawing.Color.Gainsboro;
-            this.panelTop.Controls.Add(this.btChiudi);
-            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(750, 40);
-            this.panelTop.TabIndex = 4;
             // 
             // btChiudi
             // 
@@ -75,64 +65,6 @@
             this.btChiudi.UseVisualStyleBackColor = false;
             this.btChiudi.Click += new System.EventHandler(this.BtChiudi_Click);
             // 
-            // lbNome
-            // 
-            this.lbNome.AutoSize = true;
-            this.lbNome.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNome.Location = new System.Drawing.Point(12, 85);
-            this.lbNome.Name = "lbNome";
-            this.lbNome.Size = new System.Drawing.Size(49, 18);
-            this.lbNome.TabIndex = 5;
-            this.lbNome.Text = "Nome";
-            // 
-            // tbNome
-            // 
-            this.tbNome.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNome.Location = new System.Drawing.Point(119, 85);
-            this.tbNome.MaxLength = 50;
-            this.tbNome.Name = "tbNome";
-            this.tbNome.Size = new System.Drawing.Size(110, 21);
-            this.tbNome.TabIndex = 6;
-            // 
-            // tbCognome
-            // 
-            this.tbCognome.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbCognome.Location = new System.Drawing.Point(119, 129);
-            this.tbCognome.MaxLength = 50;
-            this.tbCognome.Name = "tbCognome";
-            this.tbCognome.Size = new System.Drawing.Size(110, 21);
-            this.tbCognome.TabIndex = 8;
-            // 
-            // lbCognome
-            // 
-            this.lbCognome.AutoSize = true;
-            this.lbCognome.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCognome.Location = new System.Drawing.Point(12, 129);
-            this.lbCognome.Name = "lbCognome";
-            this.lbCognome.Size = new System.Drawing.Size(76, 18);
-            this.lbCognome.TabIndex = 7;
-            this.lbCognome.Text = "Cognome";
-            // 
-            // panelCentro
-            // 
-            this.panelCentro.Controls.Add(this.lbCategoria);
-            this.panelCentro.Controls.Add(this.cbCategoria);
-            this.panelCentro.Controls.Add(this.btAggiungi);
-            this.panelCentro.Controls.Add(this.mcDataNascita);
-            this.panelCentro.Controls.Add(this.tbDataNascita);
-            this.panelCentro.Controls.Add(this.lbDataNascita);
-            this.panelCentro.Controls.Add(this.tbResidenza);
-            this.panelCentro.Controls.Add(this.tbPassword);
-            this.panelCentro.Controls.Add(this.lbResidenza);
-            this.panelCentro.Controls.Add(this.lbPassword);
-            this.panelCentro.Controls.Add(this.tbUsername);
-            this.panelCentro.Controls.Add(this.lbUsername);
-            this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCentro.Location = new System.Drawing.Point(0, 0);
-            this.panelCentro.Name = "panelCentro";
-            this.panelCentro.Size = new System.Drawing.Size(750, 525);
-            this.panelCentro.TabIndex = 9;
-            // 
             // lbCategoria
             // 
             this.lbCategoria.AutoSize = true;
@@ -145,6 +77,7 @@
             // 
             // cbCategoria
             // 
+            this.cbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCategoria.FormattingEnabled = true;
             this.cbCategoria.Items.AddRange(new object[] {
             "Project Manager",
@@ -155,15 +88,25 @@
             this.cbCategoria.Size = new System.Drawing.Size(110, 21);
             this.cbCategoria.TabIndex = 18;
             // 
-            // btAggiungi
+            // btAAggiornaAggiungi
             // 
-            this.btAggiungi.Location = new System.Drawing.Point(67, 437);
-            this.btAggiungi.Name = "btAggiungi";
-            this.btAggiungi.Size = new System.Drawing.Size(75, 23);
-            this.btAggiungi.TabIndex = 17;
-            this.btAggiungi.Text = "Aggiungi";
-            this.btAggiungi.UseVisualStyleBackColor = true;
-            this.btAggiungi.Click += new System.EventHandler(this.BtAggiungi_Click);
+            this.btAAggiornaAggiungi.Location = new System.Drawing.Point(15, 436);
+            this.btAAggiornaAggiungi.Name = "btAAggiornaAggiungi";
+            this.btAAggiornaAggiungi.Size = new System.Drawing.Size(75, 23);
+            this.btAAggiornaAggiungi.TabIndex = 17;
+            this.btAAggiornaAggiungi.Text = "Agg";
+            this.btAAggiornaAggiungi.UseVisualStyleBackColor = true;
+            this.btAAggiornaAggiungi.Click += new System.EventHandler(this.BtAAggiornaAggiungi_Click);
+            // 
+            // lbCognome
+            // 
+            this.lbCognome.AutoSize = true;
+            this.lbCognome.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCognome.Location = new System.Drawing.Point(12, 129);
+            this.lbCognome.Name = "lbCognome";
+            this.lbCognome.Size = new System.Drawing.Size(76, 18);
+            this.lbCognome.TabIndex = 13;
+            this.lbCognome.Text = "Cognome";
             // 
             // mcDataNascita
             // 
@@ -172,6 +115,35 @@
             this.mcDataNascita.TabIndex = 16;
             this.mcDataNascita.Visible = false;
             this.mcDataNascita.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.McDataNascita_DateSelected);
+            // 
+            // tbNome
+            // 
+            this.tbNome.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbNome.Location = new System.Drawing.Point(119, 85);
+            this.tbNome.MaxLength = 50;
+            this.tbNome.Name = "tbNome";
+            this.tbNome.Size = new System.Drawing.Size(110, 21);
+            this.tbNome.TabIndex = 12;
+            // 
+            // lbNome
+            // 
+            this.lbNome.AutoSize = true;
+            this.lbNome.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNome.Location = new System.Drawing.Point(12, 85);
+            this.lbNome.Name = "lbNome";
+            this.lbNome.Size = new System.Drawing.Size(49, 18);
+            this.lbNome.TabIndex = 11;
+            this.lbNome.Text = "Nome";
+            // 
+            // panelTop
+            // 
+            this.panelTop.BackColor = System.Drawing.Color.Gainsboro;
+            this.panelTop.Controls.Add(this.btChiudi);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(750, 40);
+            this.panelTop.TabIndex = 10;
             // 
             // tbDataNascita
             // 
@@ -251,22 +223,52 @@
             this.lbUsername.TabIndex = 10;
             this.lbUsername.Text = "Username";
             // 
-            // FormAggiungiLavoratore
+            // tbCognome
+            // 
+            this.tbCognome.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbCognome.Location = new System.Drawing.Point(119, 129);
+            this.tbCognome.MaxLength = 50;
+            this.tbCognome.Name = "tbCognome";
+            this.tbCognome.Size = new System.Drawing.Size(110, 21);
+            this.tbCognome.TabIndex = 14;
+            // 
+            // panelCentro
+            // 
+            this.panelCentro.Controls.Add(this.lbCategoria);
+            this.panelCentro.Controls.Add(this.cbCategoria);
+            this.panelCentro.Controls.Add(this.btAAggiornaAggiungi);
+            this.panelCentro.Controls.Add(this.mcDataNascita);
+            this.panelCentro.Controls.Add(this.tbDataNascita);
+            this.panelCentro.Controls.Add(this.lbDataNascita);
+            this.panelCentro.Controls.Add(this.tbResidenza);
+            this.panelCentro.Controls.Add(this.tbPassword);
+            this.panelCentro.Controls.Add(this.lbResidenza);
+            this.panelCentro.Controls.Add(this.lbPassword);
+            this.panelCentro.Controls.Add(this.tbUsername);
+            this.panelCentro.Controls.Add(this.lbUsername);
+            this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCentro.Location = new System.Drawing.Point(0, 0);
+            this.panelCentro.Name = "panelCentro";
+            this.panelCentro.Size = new System.Drawing.Size(750, 525);
+            this.panelCentro.TabIndex = 15;
+            // 
+            // FormLavoratore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(750, 525);
-            this.Controls.Add(this.tbCognome);
             this.Controls.Add(this.lbCognome);
             this.Controls.Add(this.tbNome);
             this.Controls.Add(this.lbNome);
             this.Controls.Add(this.panelTop);
+            this.Controls.Add(this.tbCognome);
             this.Controls.Add(this.panelCentro);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormAggiungiLavoratore";
-            this.Text = "FormAggiungiUtente";
-            this.Load += new System.EventHandler(this.FormAggiungiLavoratore_Load);
+            this.Name = "FormLavoratore";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "FormModificaLavoratore";
+            this.Load += new System.EventHandler(this.FormModificaLavoratore_Load);
             this.panelTop.ResumeLayout(false);
             this.panelCentro.ResumeLayout(false);
             this.panelCentro.PerformLayout();
@@ -277,24 +279,24 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Button btChiudi;
-        private System.Windows.Forms.Label lbNome;
-        private System.Windows.Forms.TextBox tbNome;
-        private System.Windows.Forms.TextBox tbCognome;
+        private System.Windows.Forms.Label lbCategoria;
+        private System.Windows.Forms.ComboBox cbCategoria;
+        private System.Windows.Forms.Button btAAggiornaAggiungi;
         private System.Windows.Forms.Label lbCognome;
-        private System.Windows.Forms.Panel panelCentro;
-        private System.Windows.Forms.TextBox tbUsername;
-        private System.Windows.Forms.Label lbUsername;
-        private System.Windows.Forms.TextBox tbPassword;
-        private System.Windows.Forms.Label lbPassword;
         private System.Windows.Forms.MonthCalendar mcDataNascita;
+        private System.Windows.Forms.TextBox tbNome;
+        private System.Windows.Forms.Label lbNome;
+        private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.TextBox tbDataNascita;
         private System.Windows.Forms.Label lbDataNascita;
         private System.Windows.Forms.TextBox tbResidenza;
+        private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Label lbResidenza;
-        private System.Windows.Forms.Button btAggiungi;
-        private System.Windows.Forms.Label lbCategoria;
-        private System.Windows.Forms.ComboBox cbCategoria;
+        private System.Windows.Forms.Label lbPassword;
+        private System.Windows.Forms.TextBox tbUsername;
+        private System.Windows.Forms.Label lbUsername;
+        private System.Windows.Forms.TextBox tbCognome;
+        private System.Windows.Forms.Panel panelCentro;
     }
 }
