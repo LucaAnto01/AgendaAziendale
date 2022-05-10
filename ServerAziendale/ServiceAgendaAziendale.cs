@@ -12,6 +12,7 @@ namespace ServerAziendale
     {
         public void DoWork()
         {
+            Console.WriteLine("Ciao! Sono il server");
         }
     }
 }
