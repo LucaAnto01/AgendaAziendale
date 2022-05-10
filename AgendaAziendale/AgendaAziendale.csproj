@@ -82,12 +82,6 @@
     <Compile Include="Forms\FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormModifica.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormModifica.Designer.cs">
-      <DependentUpon>FormModifica.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormLavoratore.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,9 +148,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormModifica.resx">
-      <DependentUpon>FormModifica.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLavoratore.resx">
       <DependentUpon>FormLavoratore.cs</DependentUpon>
