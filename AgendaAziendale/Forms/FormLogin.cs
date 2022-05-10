@@ -20,8 +20,10 @@ namespace AgendaAziendale
             InitializeComponent();
         }
 
+        #region Ascoltatori eventi
         /// <summary>
-        /// Metodo richiamato al caricamento dell'interfaccia --> settaggio gerarchie interfaccia
+        /// Metodo richiamato al caricamento dell'interfaccia 
+        /// --> settaggio gerarchie interfaccia
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -45,23 +47,32 @@ namespace AgendaAziendale
         }
 
         /// <summary>
-        /// Ascoltatore evento click sul bottone di chiusura --> chiusura applicazione
+        /// Ascoltatore evento click sul bottone di chiusura 
+        /// --> chiusura applicazione
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btChiudi_Click(object sender, EventArgs e)
+        private void BtChiudi_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
         /// <summary>
-        /// Ascoltatore evento click sul bottone di login --> avvio procedura autenticazione
+        /// Ascoltatore evento click sul bottone di login 
+        /// --> avvio procedura autenticazione
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btAccedi_Click(object sender, EventArgs e)
+        private void BtAccedi_Click(object sender, EventArgs e)
         {
             //TODO: avvia procedura di login
+
+            //DA RIMUOVERE SUCCESSIVAMENTE
+            FormAdmin pippo = new FormAdmin();
+            pippo.Show();
+            this.Hide();
+            //Close();
         }
+        #endregion
     }
 }
