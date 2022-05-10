@@ -79,6 +79,9 @@ namespace AgendaAziendale.Forms
             cbCategoria.Parent = panelCentro;
             mcDataNascita.Parent = panelCentro;
             btAAggiornaAggiungi.Parent = panelCentro;
+            lbErrore.Parent = panelCentro;
+
+            cbCategoria.SelectedIndex = 0;
 
             if(lavoratore != null) ///Se ho un lavoratore da modificare
             {
@@ -151,14 +154,90 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAAggiornaAggiungi_Click(object sender, EventArgs e)
         {
-            if ((azione == "Aggiungi") || (azione == "aggiungi"))
-                //Richiama funzione aggiungi
+            if (CheckCampi())
+            {
+                lbErrore.Visible = false;
 
-            if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                //Richiama funzione aggiorna
+                if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                    //Richiama funzione aggiungi
 
-            ucPadre.AggiornadgvLavoratori();
+                if ((azione == "Aggiorna") || (azione == "aggiorna"))
+                    //Richiama funzione aggiorna
+
+                    ucPadre.AggiornadgvLavoratori();
+            }
+
+            else
+                lbErrore.Visible = true;
         }
-        #endregion       
+
+        /// <summary>
+        /// Ascoltatore evento click text box
+        /// --> settaggio background color --> white
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TbEnter_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).BackColor = Color.White; 
+        }
+        #endregion
+
+        #region Metodi
+        /// <summary>
+        /// Funzione adibita al controllo del completamento dei campi d'inserimento
+        /// </summary>
+        /// <returns>bool</returns>
+        private bool CheckCampi()
+        {
+            bool check = true; ///True, tutti i campi compilati
+
+            if(tbNome.Text == "")
+            {
+                tbNome.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbCognome.Text == "")
+            {
+                tbCognome.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbResidenza.Text == "")
+            {
+                tbResidenza.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbDataNascita.Text == "")
+            {
+                tbDataNascita.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbUsername.Text == "")
+            {
+                tbUsername.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbPassword.Text == "")
+            {
+                tbPassword.BackColor = Color.Red;
+                check = false;
+            }
+
+            /*if (cbCategoria.Text == "")
+            {
+                cbCategoria.BackColor = Color.Red;
+                check = false;
+            }*/
+
+            return check;
+
+            //TODO: AGGIUNGI LABEL ERRORE COMPILAZIONE CAMPI
+        }
+        #endregion
     }
 }

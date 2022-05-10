@@ -47,6 +47,7 @@
             this.lbUsername = new System.Windows.Forms.Label();
             this.tbCognome = new System.Windows.Forms.TextBox();
             this.panelCentro = new System.Windows.Forms.Panel();
+            this.lbErrore = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -124,6 +125,7 @@
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(110, 21);
             this.tbNome.TabIndex = 12;
+            this.tbNome.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbNome
             // 
@@ -153,7 +155,7 @@
             this.tbDataNascita.Name = "tbDataNascita";
             this.tbDataNascita.Size = new System.Drawing.Size(110, 21);
             this.tbDataNascita.TabIndex = 15;
-            this.tbDataNascita.Enter += new System.EventHandler(this.TbDataNascita_Enter);
+            this.tbDataNascita.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbDataNascita
             // 
@@ -173,6 +175,7 @@
             this.tbResidenza.Name = "tbResidenza";
             this.tbResidenza.Size = new System.Drawing.Size(110, 21);
             this.tbResidenza.TabIndex = 11;
+            this.tbResidenza.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // tbPassword
             // 
@@ -183,6 +186,7 @@
             this.tbPassword.Size = new System.Drawing.Size(110, 21);
             this.tbPassword.TabIndex = 13;
             this.tbPassword.UseSystemPasswordChar = true;
+            this.tbPassword.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbResidenza
             // 
@@ -212,6 +216,7 @@
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(110, 21);
             this.tbUsername.TabIndex = 11;
+            this.tbUsername.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbUsername
             // 
@@ -231,9 +236,11 @@
             this.tbCognome.Name = "tbCognome";
             this.tbCognome.Size = new System.Drawing.Size(110, 21);
             this.tbCognome.TabIndex = 14;
+            this.tbCognome.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.lbErrore);
             this.panelCentro.Controls.Add(this.lbCategoria);
             this.panelCentro.Controls.Add(this.cbCategoria);
             this.panelCentro.Controls.Add(this.btAAggiornaAggiungi);
@@ -251,6 +258,18 @@
             this.panelCentro.Name = "panelCentro";
             this.panelCentro.Size = new System.Drawing.Size(750, 525);
             this.panelCentro.TabIndex = 15;
+            // 
+            // lbErrore
+            // 
+            this.lbErrore.AutoSize = true;
+            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrore.ForeColor = System.Drawing.Color.Red;
+            this.lbErrore.Location = new System.Drawing.Point(289, 370);
+            this.lbErrore.Name = "lbErrore";
+            this.lbErrore.Size = new System.Drawing.Size(172, 24);
+            this.lbErrore.TabIndex = 20;
+            this.lbErrore.Text = "Compila tutti i campi!";
+            this.lbErrore.Visible = false;
             // 
             // FormLavoratore
             // 
@@ -298,5 +317,6 @@
         private System.Windows.Forms.Label lbUsername;
         private System.Windows.Forms.TextBox tbCognome;
         private System.Windows.Forms.Panel panelCentro;
+        private System.Windows.Forms.Label lbErrore;
     }
 }
