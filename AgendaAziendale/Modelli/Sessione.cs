@@ -12,7 +12,14 @@ namespace AgendaAziendale.Modelli
     /// </summary>
     public static class Sessione
     {
-        public static string username;
-        public static string password;
+        #region Attributi
+        private static string username;
+        private static string password;
+        #endregion
+
+        #region Getters & Setters
+        public static string Username { get => username; set => username = value; }
+        public static string Password { get => password; set => password = value; }
+        #endregion
     }
 }
