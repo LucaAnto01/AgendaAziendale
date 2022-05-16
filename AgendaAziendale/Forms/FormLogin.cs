@@ -65,7 +65,7 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtAccedi_Click(object sender, EventArgs e)
         {
-            //TODO: avvia procedura di login
+            //TODO: avvia procedura di login --> memorizza i dati in sessione
 
             //DA RIMUOVERE SUCCESSIVAMENTE
             FormAdmin pippo = new FormAdmin();
