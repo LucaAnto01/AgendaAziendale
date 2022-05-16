@@ -134,6 +134,7 @@
     <Compile Include="Modelli\Attivita.cs" />
     <Compile Include="Modelli\Evento.cs" />
     <Compile Include="Modelli\Lavoratore.cs" />
+    <Compile Include="Modelli\Sessione.cs" />
     <Compile Include="Modelli\Obiettivo.cs" />
     <Compile Include="Modelli\Progetto.cs" />
     <Compile Include="Program.cs" />
