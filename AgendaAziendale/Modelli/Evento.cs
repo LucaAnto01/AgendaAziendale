@@ -18,32 +18,13 @@ namespace AgendaAziendale.Modelli
         /// Metodo costruttore della classe Evento
         /// </summary>
         /// <param name="codice"></param>
-        /// <param name="referente"></param>
         /// <param name="nome"></param>
         /// <param name="descrizione"></param>
         /// <param name="dataInizio"></param>
         /// <param name="dataFine"></param>
         /// <param name="id"></param>
         /// <param name="luogo"></param>
-        public Evento(string codice, Lavoratore referente, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, int id, string luogo) : base(codice, referente, nome, descrizione, dataInizio, dataFine)
-        {
-            Id = id;
-            Luogo = luogo;
-        }
-
-        /// <summary>
-        /// Metodo costruttore della classe Evento
-        /// </summary>
-        /// <param name="codice"></param>
-        /// <param name="referente"></param>
-        /// <param name="partecipanti"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="id"></param>
-        /// <param name="luogo"></param>
-        public Evento(string codice, Lavoratore referente, List<Lavoratore> partecipanti, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, int id, string luogo) : base(codice, referente, partecipanti, nome, descrizione, dataInizio, dataFine)
+        public Evento(string codice, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, int id, string luogo) : base(codice, nome, descrizione, dataInizio, dataFine)
         {
             Id = id;
             Luogo = luogo;

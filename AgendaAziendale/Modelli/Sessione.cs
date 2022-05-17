@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgendaAziendale.SRAgendaAziendale;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,11 +16,13 @@ namespace AgendaAziendale.Modelli
         #region Attributi
         private static string username;
         private static string password;
+        private static ServiceAgendaAziendaleClient serverAziendale;
         #endregion
 
         #region Getters & Setters
         public static string Username { get => username; set => username = value; }
         public static string Password { get => password; set => password = value; }
+        public static ServiceAgendaAziendaleClient ServerAziendale { get => serverAziendale; set => serverAziendale = value; }
         #endregion
     }
 }
