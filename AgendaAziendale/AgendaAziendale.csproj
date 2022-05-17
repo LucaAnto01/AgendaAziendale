@@ -71,12 +71,6 @@
     <Compile Include="Forms\FormEvento.Designer.cs">
       <DependentUpon>FormEvento.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormEliminazione.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormEliminazione.Designer.cs">
-      <DependentUpon>FormEliminazione.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormGestione.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +88,12 @@
     </Compile>
     <Compile Include="Forms\FormLavoratore.Designer.cs">
       <DependentUpon>FormLavoratore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormObiettivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormObiettivo.Designer.cs">
+      <DependentUpon>FormObiettivo.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormProgetto.cs">
       <SubType>Form</SubType>
@@ -148,9 +148,6 @@
     <EmbeddedResource Include="Forms\FormEvento.resx">
       <DependentUpon>FormEvento.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormEliminazione.resx">
-      <DependentUpon>FormEliminazione.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormGestione.resx">
       <DependentUpon>FormGestione.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLavoratore.resx">
       <DependentUpon>FormLavoratore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormObiettivo.resx">
+      <DependentUpon>FormObiettivo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormProgetto.resx">
       <DependentUpon>FormProgetto.cs</DependentUpon>

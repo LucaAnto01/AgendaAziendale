@@ -155,7 +155,7 @@
             this.tbDataNascita.Name = "tbDataNascita";
             this.tbDataNascita.Size = new System.Drawing.Size(110, 21);
             this.tbDataNascita.TabIndex = 15;
-            this.tbDataNascita.Enter += new System.EventHandler(this.TbEnter_Click);
+            this.tbDataNascita.Enter += new System.EventHandler(this.TbDataNascita_Enter);
             // 
             // lbDataNascita
             // 

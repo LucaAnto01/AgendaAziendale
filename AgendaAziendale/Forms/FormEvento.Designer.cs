@@ -46,6 +46,7 @@
             this.lbReferente = new System.Windows.Forms.Label();
             this.cbReferente = new System.Windows.Forms.ComboBox();
             this.panelCentro = new System.Windows.Forms.Panel();
+            this.lbErrore = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +84,7 @@
             this.tbLuogo.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.tbLuogo.Size = new System.Drawing.Size(181, 21);
             this.tbLuogo.TabIndex = 52;
+            this.tbLuogo.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbLuogo
             // 
@@ -171,6 +173,7 @@
             this.tbDescrizione.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbDescrizione.Size = new System.Drawing.Size(246, 46);
             this.tbDescrizione.TabIndex = 46;
+            this.tbDescrizione.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbDescrizione
             // 
@@ -190,6 +193,7 @@
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(110, 21);
             this.tbNome.TabIndex = 40;
+            this.tbNome.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbNome
             // 
@@ -213,6 +217,7 @@
             // 
             // cbReferente
             // 
+            this.cbReferente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbReferente.FormattingEnabled = true;
             this.cbReferente.Location = new System.Drawing.Point(119, 84);
             this.cbReferente.Name = "cbReferente";
@@ -221,6 +226,7 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.lbErrore);
             this.panelCentro.Controls.Add(this.mcDataFine);
             this.panelCentro.Controls.Add(this.mcDataInizio);
             this.panelCentro.Controls.Add(this.tbDataInizio);
@@ -229,6 +235,18 @@
             this.panelCentro.Name = "panelCentro";
             this.panelCentro.Size = new System.Drawing.Size(750, 525);
             this.panelCentro.TabIndex = 54;
+            // 
+            // lbErrore
+            // 
+            this.lbErrore.AutoSize = true;
+            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrore.ForeColor = System.Drawing.Color.Red;
+            this.lbErrore.Location = new System.Drawing.Point(451, 179);
+            this.lbErrore.Name = "lbErrore";
+            this.lbErrore.Size = new System.Drawing.Size(172, 24);
+            this.lbErrore.TabIndex = 70;
+            this.lbErrore.Text = "Compila tutti i campi!";
+            this.lbErrore.Visible = false;
             // 
             // FormEvento
             // 
@@ -283,5 +301,6 @@
         private System.Windows.Forms.Label lbReferente;
         private System.Windows.Forms.ComboBox cbReferente;
         private System.Windows.Forms.Panel panelCentro;
+        private System.Windows.Forms.Label lbErrore;
     }
 }

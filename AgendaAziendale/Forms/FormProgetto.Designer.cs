@@ -46,6 +46,7 @@
             this.mcDataFine = new System.Windows.Forms.MonthCalendar();
             this.mcDataInizio = new System.Windows.Forms.MonthCalendar();
             this.tbDataInizio = new System.Windows.Forms.TextBox();
+            this.lbErrore = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +84,7 @@
             this.tbCliente.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.tbCliente.Size = new System.Drawing.Size(181, 21);
             this.tbCliente.TabIndex = 66;
+            this.tbCliente.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbCliente
             // 
@@ -145,6 +147,7 @@
             this.tbDescrizione.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbDescrizione.Size = new System.Drawing.Size(246, 46);
             this.tbDescrizione.TabIndex = 61;
+            this.tbDescrizione.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbDescrizione
             // 
@@ -164,6 +167,7 @@
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(110, 21);
             this.tbNome.TabIndex = 57;
+            this.tbNome.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbNome
             // 
@@ -187,6 +191,7 @@
             // 
             // cbReferente
             // 
+            this.cbReferente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbReferente.FormattingEnabled = true;
             this.cbReferente.Location = new System.Drawing.Point(119, 84);
             this.cbReferente.Name = "cbReferente";
@@ -195,6 +200,7 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.lbErrore);
             this.panelCentro.Controls.Add(this.mcDataFine);
             this.panelCentro.Controls.Add(this.mcDataInizio);
             this.panelCentro.Controls.Add(this.tbDataInizio);
@@ -229,6 +235,18 @@
             this.tbDataInizio.Size = new System.Drawing.Size(110, 21);
             this.tbDataInizio.TabIndex = 48;
             this.tbDataInizio.Enter += new System.EventHandler(this.TbDataInizio_Enter);
+            // 
+            // lbErrore
+            // 
+            this.lbErrore.AutoSize = true;
+            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrore.ForeColor = System.Drawing.Color.Red;
+            this.lbErrore.Location = new System.Drawing.Point(451, 168);
+            this.lbErrore.Name = "lbErrore";
+            this.lbErrore.Size = new System.Drawing.Size(172, 24);
+            this.lbErrore.TabIndex = 69;
+            this.lbErrore.Text = "Compila tutti i campi!";
+            this.lbErrore.Visible = false;
             // 
             // FormProgetto
             // 
@@ -282,5 +300,6 @@
         private System.Windows.Forms.MonthCalendar mcDataFine;
         private System.Windows.Forms.MonthCalendar mcDataInizio;
         private System.Windows.Forms.TextBox tbDataInizio;
+        private System.Windows.Forms.Label lbErrore;
     }
 }

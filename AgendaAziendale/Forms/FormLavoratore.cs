@@ -141,8 +141,20 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbDataNascita_Enter(object sender, EventArgs e)
         {
+            ((TextBox)sender).BackColor = Color.White;
             mcDataNascita.Show();
             tbDataNascita.Enabled = false;
+        }
+
+        /// <summary>
+        /// Ascoltatore evento click text box
+        /// --> settaggio background color --> white
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TbEnter_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).BackColor = Color.White;
         }
 
         /// <summary>
@@ -169,17 +181,6 @@ namespace AgendaAziendale.Forms
 
             else
                 lbErrore.Visible = true;
-        }
-
-        /// <summary>
-        /// Ascoltatore evento click text box
-        /// --> settaggio background color --> white
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TbEnter_Click(object sender, EventArgs e)
-        {
-            ((TextBox)sender).BackColor = Color.White; 
         }
         #endregion
 
@@ -235,8 +236,6 @@ namespace AgendaAziendale.Forms
             }*/
 
             return check;
-
-            //TODO: AGGIUNGI LABEL ERRORE COMPILAZIONE CAMPI
         }
         #endregion
     }

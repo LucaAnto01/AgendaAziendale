@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AgendaAziendale.Modelli;
 
 namespace AgendaAziendale
 {
@@ -65,13 +66,23 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtAccedi_Click(object sender, EventArgs e)
         {
-            //TODO: avvia procedura di login --> memorizza i dati in sessione
+            //TODO: avvia procedura di login --> setta i dati in sessione
+
+            try
+            {
+                Sessione.ServerAziendale = new SRAgendaAziendale.ServiceAgendaAziendaleClient();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERRORE! Istanziamento ServerAziendale da FormLogin", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             //DA RIMUOVERE SUCCESSIVAMENTE
             FormAdmin pippo = new FormAdmin();
-            pippo.Show();
-            this.Hide();
-            //Close();
+            pippo.ShowDialog();
+            //this.Hide();
+            Close();
         }
         #endregion
     }

@@ -85,7 +85,7 @@ namespace AgendaAziendale.Forms
 
             if (progetto != null) ///Se ho un evento da modificare
             {
-                cbReferente.Text = progetto.Referente.Username;
+                cbReferente.Text = ""; //OTTIENI DAL DB
                 tbNome.Text = progetto.Nome;
                 tbDescrizione.Text = progetto.Descrizione;
                 tbDataInizio.Text = progetto.DataInizio.ToShortDateString();
@@ -126,6 +126,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbDataInizio_Enter(object sender, EventArgs e)
         {
+            ((TextBox)sender).BackColor = Color.White;
             mcDataInizio.Show();
             tbDataInizio.Enabled = false;
         }
@@ -153,6 +154,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbDataFine_Enter(object sender, EventArgs e)
         {
+            ((TextBox)sender).BackColor = Color.White;
             mcDataFine.Show();
             tbDataFine.Enabled = false;
         }
@@ -172,6 +174,17 @@ namespace AgendaAziendale.Forms
         }
 
         /// <summary>
+        /// Ascoltatore evento click text box
+        /// --> settaggio background color --> white
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TbEnter_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).BackColor = Color.White;
+        }
+
+        /// <summary>
         /// Ascoltatore click sul bottone adibito alla creazione o all'aggiornamento di un progetto
         /// --> effettuo l'azione di aggiunta o modifica
         /// --> aggiorno la dgv contenente i dati
@@ -180,14 +193,69 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiungiAggiorna_Click(object sender, EventArgs e)
         {
-            if ((azione == "Aggiungi") || (azione == "aggiungi"))
-                //Richiama funzione aggiungi
+            if (CheckCampi())
+            {
+                if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                    //Richiama funzione aggiungi
 
                 if ((azione == "Aggiorna") || (azione == "aggiorna"))
                     //Richiama funzione aggiorna
 
-                    if (ucPadre != null)
-                        ucPadre.AggiornadgvProgetti();
+                if (ucPadre != null)
+                    ucPadre.AggiornadgvProgetti();
+            }
+
+            else
+                lbErrore.Visible = true;
+        }
+        #endregion
+
+        #region Metodi
+        /// <summary>
+        /// Funzione adibita al controllo del completamento dei campi d'inserimento
+        /// </summary>
+        /// <returns>bool</returns>
+        private bool CheckCampi()
+        {
+            bool check = true; ///True, tutti i campi compilati
+
+            if (tbNome.Text == "")
+            {
+                tbNome.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbDescrizione.Text == "")
+            {
+                tbDescrizione.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbDataInizio.Text == "")
+            {
+                tbDataInizio.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbDataFine.Text == "")
+            {
+                tbDataFine.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbCliente.Text == "")
+            {
+                tbCliente.BackColor = Color.Red;
+                check = false;
+            }
+
+            /*if (cbReferente.Text == "")
+            {
+                cbCategoria.BackColor = Color.Red;
+                check = false;
+            }*/
+
+            return check;
         }
         #endregion
     }
