@@ -25,7 +25,7 @@ namespace ServerAziendale
 
             catch (Exception ex)
             {
-                Console.WriteLine("Errore: " + ex.Message);
+                Console.WriteLine("ERRORE! Apertura ServerAziendale:" + ex.Message);
                 Console.ReadLine();
             }
         }

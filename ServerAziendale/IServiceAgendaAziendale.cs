@@ -12,6 +12,6 @@ namespace ServerAziendale
     public interface IServiceAgendaAziendale
     {
         [OperationContract]
-        void DoWork();
+        string GetElencoLavoratori(string username, string password);
     }
 }

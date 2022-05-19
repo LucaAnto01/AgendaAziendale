@@ -10,9 +10,15 @@ namespace ServerAziendale
     // NOTA: è possibile utilizzare il comando "Rinomina" del menu "Refactoring" per modificare il nome di classe "ServiceAgendaAziendale" nel codice e nel file di configurazione contemporaneamente.
     public class ServiceAgendaAziendale : IServiceAgendaAziendale
     {
-        public void DoWork()
+        /// <summary>
+        /// Funzione che restituisce l'elenco dei lavoratori presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public string GetElencoLavoratori(string username, string password)
         {
-            Console.WriteLine("Ciao! Sono il server");
+            return "";
         }
     }
 }
