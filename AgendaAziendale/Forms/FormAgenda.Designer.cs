@@ -32,11 +32,12 @@
             this.btChiudi = new System.Windows.Forms.Button();
             this.panelCentro = new System.Windows.Forms.Panel();
             this.panelSinistra = new System.Windows.Forms.Panel();
+            this.btVisualizzaStoricoEvento = new System.Windows.Forms.Button();
             this.btGestione = new System.Windows.Forms.Button();
-            this.btVisualizzaStorico = new System.Windows.Forms.Button();
             this.btProgettiEventi = new System.Windows.Forms.Button();
             this.btVisualizzaAgenda = new System.Windows.Forms.Button();
             this.btLogout = new System.Windows.Forms.Button();
+            this.btStoricoProgetti = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelSinistra.SuspendLayout();
             this.SuspendLayout();
@@ -76,8 +77,9 @@
             // panelSinistra
             // 
             this.panelSinistra.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelSinistra.Controls.Add(this.btStoricoProgetti);
+            this.panelSinistra.Controls.Add(this.btVisualizzaStoricoEvento);
             this.panelSinistra.Controls.Add(this.btGestione);
-            this.panelSinistra.Controls.Add(this.btVisualizzaStorico);
             this.panelSinistra.Controls.Add(this.btProgettiEventi);
             this.panelSinistra.Controls.Add(this.btVisualizzaAgenda);
             this.panelSinistra.Controls.Add(this.btLogout);
@@ -87,13 +89,27 @@
             this.panelSinistra.Size = new System.Drawing.Size(300, 610);
             this.panelSinistra.TabIndex = 6;
             // 
+            // btVisualizzaStoricoEvento
+            // 
+            this.btVisualizzaStoricoEvento.BackColor = System.Drawing.Color.DarkGray;
+            this.btVisualizzaStoricoEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btVisualizzaStoricoEvento.ForeColor = System.Drawing.Color.White;
+            this.btVisualizzaStoricoEvento.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btVisualizzaStoricoEvento.Location = new System.Drawing.Point(50, 312);
+            this.btVisualizzaStoricoEvento.Name = "btVisualizzaStoricoEvento";
+            this.btVisualizzaStoricoEvento.Size = new System.Drawing.Size(200, 35);
+            this.btVisualizzaStoricoEvento.TabIndex = 7;
+            this.btVisualizzaStoricoEvento.Text = "Storico eventi";
+            this.btVisualizzaStoricoEvento.UseVisualStyleBackColor = false;
+            this.btVisualizzaStoricoEvento.Click += new System.EventHandler(this.BtVisualizzaStoricoEvento_Click);
+            // 
             // btGestione
             // 
             this.btGestione.BackColor = System.Drawing.Color.DarkGray;
             this.btGestione.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btGestione.ForeColor = System.Drawing.Color.White;
             this.btGestione.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btGestione.Location = new System.Drawing.Point(50, 267);
+            this.btGestione.Location = new System.Drawing.Point(50, 234);
             this.btGestione.Name = "btGestione";
             this.btGestione.Size = new System.Drawing.Size(200, 35);
             this.btGestione.TabIndex = 6;
@@ -102,27 +118,13 @@
             this.btGestione.Visible = false;
             this.btGestione.Click += new System.EventHandler(this.BtGestione_Click);
             // 
-            // btVisualizzaStorico
-            // 
-            this.btVisualizzaStorico.BackColor = System.Drawing.Color.DarkGray;
-            this.btVisualizzaStorico.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btVisualizzaStorico.ForeColor = System.Drawing.Color.White;
-            this.btVisualizzaStorico.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btVisualizzaStorico.Location = new System.Drawing.Point(50, 358);
-            this.btVisualizzaStorico.Name = "btVisualizzaStorico";
-            this.btVisualizzaStorico.Size = new System.Drawing.Size(200, 35);
-            this.btVisualizzaStorico.TabIndex = 5;
-            this.btVisualizzaStorico.Text = "Storico";
-            this.btVisualizzaStorico.UseVisualStyleBackColor = false;
-            this.btVisualizzaStorico.Click += new System.EventHandler(this.BtVisualizzaStorico_Click);
-            // 
             // btProgettiEventi
             // 
             this.btProgettiEventi.BackColor = System.Drawing.Color.DarkGray;
             this.btProgettiEventi.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btProgettiEventi.ForeColor = System.Drawing.Color.White;
             this.btProgettiEventi.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btProgettiEventi.Location = new System.Drawing.Point(50, 176);
+            this.btProgettiEventi.Location = new System.Drawing.Point(50, 156);
             this.btProgettiEventi.Name = "btProgettiEventi";
             this.btProgettiEventi.Size = new System.Drawing.Size(200, 35);
             this.btProgettiEventi.TabIndex = 4;
@@ -136,7 +138,7 @@
             this.btVisualizzaAgenda.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btVisualizzaAgenda.ForeColor = System.Drawing.Color.White;
             this.btVisualizzaAgenda.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btVisualizzaAgenda.Location = new System.Drawing.Point(50, 85);
+            this.btVisualizzaAgenda.Location = new System.Drawing.Point(50, 78);
             this.btVisualizzaAgenda.Name = "btVisualizzaAgenda";
             this.btVisualizzaAgenda.Size = new System.Drawing.Size(200, 35);
             this.btVisualizzaAgenda.TabIndex = 3;
@@ -158,6 +160,20 @@
             this.btLogout.Text = "Logout";
             this.btLogout.UseVisualStyleBackColor = false;
             this.btLogout.Click += new System.EventHandler(this.BtLogout_Click);
+            // 
+            // btStoricoProgetti
+            // 
+            this.btStoricoProgetti.BackColor = System.Drawing.Color.DarkGray;
+            this.btStoricoProgetti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btStoricoProgetti.ForeColor = System.Drawing.Color.White;
+            this.btStoricoProgetti.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btStoricoProgetti.Location = new System.Drawing.Point(50, 390);
+            this.btStoricoProgetti.Name = "btStoricoProgetti";
+            this.btStoricoProgetti.Size = new System.Drawing.Size(200, 35);
+            this.btStoricoProgetti.TabIndex = 9;
+            this.btStoricoProgetti.Text = "Storico progetti";
+            this.btStoricoProgetti.UseVisualStyleBackColor = false;
+            this.btStoricoProgetti.Click += new System.EventHandler(this.BtStoricoProgetti_Click);
             // 
             // FormAgenda
             // 
@@ -187,7 +203,8 @@
         private System.Windows.Forms.Button btLogout;
         private System.Windows.Forms.Button btVisualizzaAgenda;
         private System.Windows.Forms.Button btProgettiEventi;
-        private System.Windows.Forms.Button btVisualizzaStorico;
         private System.Windows.Forms.Button btGestione;
+        private System.Windows.Forms.Button btVisualizzaStoricoEvento;
+        private System.Windows.Forms.Button btStoricoProgetti;
     }
 }

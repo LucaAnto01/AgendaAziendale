@@ -109,7 +109,7 @@ namespace AgendaAziendale
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtStoricoEventi_Click(object sender, EventArgs e)
+        private void BtStoricoProgetti_Click(object sender, EventArgs e)
         {
             CaricaForm(new FormStorico("progetti"));
         }

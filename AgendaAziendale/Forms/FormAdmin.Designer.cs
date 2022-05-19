@@ -31,13 +31,13 @@
             this.panelTop = new System.Windows.Forms.Panel();
             this.btChiudi = new System.Windows.Forms.Button();
             this.panelSinistra = new System.Windows.Forms.Panel();
+            this.btStoricoProgetti = new System.Windows.Forms.Button();
             this.btGestioneProgetti = new System.Windows.Forms.Button();
             this.btVisualizzaStoricoEvento = new System.Windows.Forms.Button();
             this.btGestioneEventi = new System.Windows.Forms.Button();
             this.btLogout = new System.Windows.Forms.Button();
             this.btGestioneLavoratori = new System.Windows.Forms.Button();
             this.panelCentro = new System.Windows.Forms.Panel();
-            this.btStoricoEventi = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelSinistra.SuspendLayout();
             this.SuspendLayout();
@@ -69,7 +69,7 @@
             // panelSinistra
             // 
             this.panelSinistra.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelSinistra.Controls.Add(this.btStoricoEventi);
+            this.panelSinistra.Controls.Add(this.btStoricoProgetti);
             this.panelSinistra.Controls.Add(this.btGestioneProgetti);
             this.panelSinistra.Controls.Add(this.btVisualizzaStoricoEvento);
             this.panelSinistra.Controls.Add(this.btGestioneEventi);
@@ -80,6 +80,20 @@
             this.panelSinistra.Name = "panelSinistra";
             this.panelSinistra.Size = new System.Drawing.Size(300, 610);
             this.panelSinistra.TabIndex = 4;
+            // 
+            // btStoricoProgetti
+            // 
+            this.btStoricoProgetti.BackColor = System.Drawing.Color.DarkGray;
+            this.btStoricoProgetti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btStoricoProgetti.ForeColor = System.Drawing.Color.White;
+            this.btStoricoProgetti.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btStoricoProgetti.Location = new System.Drawing.Point(50, 397);
+            this.btStoricoProgetti.Name = "btStoricoProgetti";
+            this.btStoricoProgetti.Size = new System.Drawing.Size(200, 35);
+            this.btStoricoProgetti.TabIndex = 8;
+            this.btStoricoProgetti.Text = "Storico progetti";
+            this.btStoricoProgetti.UseVisualStyleBackColor = false;
+            this.btStoricoProgetti.Click += new System.EventHandler(this.BtStoricoProgetti_Click);
             // 
             // btGestioneProgetti
             // 
@@ -160,20 +174,6 @@
             this.panelCentro.Size = new System.Drawing.Size(700, 610);
             this.panelCentro.TabIndex = 5;
             // 
-            // btStoricoEventi
-            // 
-            this.btStoricoEventi.BackColor = System.Drawing.Color.DarkGray;
-            this.btStoricoEventi.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btStoricoEventi.ForeColor = System.Drawing.Color.White;
-            this.btStoricoEventi.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btStoricoEventi.Location = new System.Drawing.Point(50, 397);
-            this.btStoricoEventi.Name = "btStoricoEventi";
-            this.btStoricoEventi.Size = new System.Drawing.Size(200, 35);
-            this.btStoricoEventi.TabIndex = 8;
-            this.btStoricoEventi.Text = "Storico eventi";
-            this.btStoricoEventi.UseVisualStyleBackColor = false;
-            this.btStoricoEventi.Click += new System.EventHandler(this.BtStoricoEventi_Click);
-            // 
             // FormAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -205,6 +205,6 @@
         private System.Windows.Forms.Button btGestioneEventi;
         private System.Windows.Forms.Button btVisualizzaStoricoEvento;
         private System.Windows.Forms.Button btGestioneProgetti;
-        private System.Windows.Forms.Button btStoricoEventi;
+        private System.Windows.Forms.Button btStoricoProgetti;
     }
 }
