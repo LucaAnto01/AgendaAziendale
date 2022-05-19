@@ -101,6 +101,12 @@
     <Compile Include="Forms\FormProgetto.Designer.cs">
       <DependentUpon>FormProgetto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormStorico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormStorico.Designer.cs">
+      <DependentUpon>FormStorico.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormVisualizzazioneAttivita.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,18 @@
     </Compile>
     <Compile Include="Forms\UserControls\UCProgetti.Designer.cs">
       <DependentUpon>UCProgetti.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\UCStoricoEventi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\UCStoricoEventi.Designer.cs">
+      <DependentUpon>UCStoricoEventi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\UCStoricoProgetti.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\UCStoricoProgetti.Designer.cs">
+      <DependentUpon>UCStoricoProgetti.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelli\Attivita.cs" />
     <Compile Include="Modelli\Evento.cs" />
@@ -163,6 +181,9 @@
     <EmbeddedResource Include="Forms\FormProgetto.resx">
       <DependentUpon>FormProgetto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormStorico.resx">
+      <DependentUpon>FormStorico.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormVisualizzazioneAttivita.resx">
       <DependentUpon>FormVisualizzazioneAttivita.cs</DependentUpon>
     </EmbeddedResource>
@@ -177,6 +198,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserControls\UCProgetti.resx">
       <DependentUpon>UCProgetti.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserControls\UCStoricoEventi.resx">
+      <DependentUpon>UCStoricoEventi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserControls\UCStoricoProgetti.resx">
+      <DependentUpon>UCStoricoProgetti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

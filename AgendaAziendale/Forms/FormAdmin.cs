@@ -95,13 +95,23 @@ namespace AgendaAziendale
         }
 
         /// <summary>
-        /// Ascoltatore evento click sul bottone per visualizzare lo storico di eventi e progetti
+        /// Ascoltatore evento click sul bottone per visualizzare lo storico di eventi
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtVisualizzaStorico_Click(object sender, EventArgs e)
+        private void BtVisualizzaStoricoEventi_Click(object sender, EventArgs e)
         {
-            //TODO: visualizza lo storico
+            CaricaForm(new FormStorico("eventi"));
+        }
+
+        /// <summary>
+        /// Ascoltatore evento click sul bottone per visualizzare lo storico dei progetti
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtStoricoEventi_Click(object sender, EventArgs e)
+        {
+            CaricaForm(new FormStorico("progetti"));
         }
 
         /// <summary>
@@ -113,7 +123,7 @@ namespace AgendaAziendale
         private void BtLogout_Click(object sender, EventArgs e)
         {
             FormLogin formLogin = new FormLogin();
-            formLogin.Show();
+            formLogin.ShowDialog();
             Close(); //Chiudo questo form
         }
         #endregion

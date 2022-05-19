@@ -22,6 +22,10 @@ namespace AgendaAziendale.Forms
         public UserControl UcContenitore { get => ucContenitore; set => ucContenitore = value; }
         #endregion
 
+        /// <summary>
+        /// Metodo costruttore del FormGestione
+        /// </summary>
+        /// <param name="tipologia"></param>
         public FormGestione(string tipologia)
         {
             InitializeComponent();
