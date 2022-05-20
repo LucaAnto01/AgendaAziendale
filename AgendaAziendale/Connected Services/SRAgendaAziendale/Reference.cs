@@ -15,11 +15,11 @@ namespace AgendaAziendale.SRAgendaAziendale {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SRAgendaAziendale.IServiceAgendaAziendale")]
     public interface IServiceAgendaAziendale {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/DoWork", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/DoWorkResponse")]
-        void DoWork();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratori", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratoriResponse")]
+        string GetElencoLavoratori(string username, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/DoWork", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/DoWorkResponse")]
-        System.Threading.Tasks.Task DoWorkAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratori", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratoriResponse")]
+        System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,12 +49,12 @@ namespace AgendaAziendale.SRAgendaAziendale {
                 base(binding, remoteAddress) {
         }
         
-        public void DoWork() {
-            base.Channel.DoWork();
+        public string GetElencoLavoratori(string username, string password) {
+            return base.Channel.GetElencoLavoratori(username, password);
         }
         
-        public System.Threading.Tasks.Task DoWorkAsync() {
-            return base.Channel.DoWorkAsync();
+        public System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username, string password) {
+            return base.Channel.GetElencoLavoratoriAsync(username, password);
         }
     }
 }

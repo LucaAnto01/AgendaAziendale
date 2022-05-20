@@ -18,6 +18,7 @@ namespace ServerAziendale
         /// <returns></returns>
         public string GetElencoLavoratori(string username, string password)
         {
+            Console.WriteLine("Funzeca");
             return "";
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AgendaAziendale.Forms;
+using AgendaAziendale.Modelli;
 
 namespace AgendaAziendale
 {
@@ -15,6 +16,8 @@ namespace AgendaAziendale
         [STAThread]
         static void Main()
         {
+            Sessione.ServerAziendale = new SRAgendaAziendale.ServiceAgendaAziendaleClient(); //Istanziazione client per comunicazione con ServerAziendale
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormLogin());
