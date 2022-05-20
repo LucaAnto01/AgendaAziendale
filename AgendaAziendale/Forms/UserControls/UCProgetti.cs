@@ -12,12 +12,22 @@ namespace AgendaAziendale.Forms.UserControls
 {
     public partial class UCProgetti : UserControl
     {
+        #region Attributi
+        private Form formPadre;
+        #endregion
+
+        #region Getters & Setters
+        public Form FormPadre { get => formPadre; set => formPadre = value; }
+        #endregion
+
         /// <summary>
         /// Metodo costruttore dell'user control UCProgetti
         /// </summary>
-        public UCProgetti()
+        /// <param name="formPadre"></param>
+        public UCProgetti(Form formPadre)
         {
             InitializeComponent();
+            FormPadre = formPadre;
         }
 
         #region Meotdi ascoltatori
@@ -43,11 +53,17 @@ namespace AgendaAziendale.Forms.UserControls
             if (e.ColumnIndex == 0)
             {
                 FormProgetto formModificaProgetto = new FormProgetto(this, null, "aggiorna"); //TODO: invece che null genera il progetto e passalo come parametro
-                formModificaProgetto.Show();
+                formModificaProgetto.ShowDialog();
+            }
+
+            if (e.ColumnIndex == 1)
+            {
+                FormPartecipanti formPartecipanti = new FormPartecipanti(FormPadre, this, null, "progetto"); //TODO: invece che null genera il progetto e passalo come parametro
+                formPartecipanti.ShowDialog();
             }
 
             //Click sulla colonna con i button d'eliminazione
-            if (e.ColumnIndex == 1)
+            if (e.ColumnIndex == 2)
             {
                 if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione dell'evento selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
                     "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)

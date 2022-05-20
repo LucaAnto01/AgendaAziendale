@@ -39,6 +39,7 @@
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.luogo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modifica = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.gestione_lavoratori = new System.Windows.Forms.DataGridViewButtonColumn();
             this.elimina = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panelCentro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
@@ -71,6 +72,7 @@
             this.id,
             this.luogo,
             this.modifica,
+            this.gestione_lavoratori,
             this.elimina});
             this.dgvEventi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEventi.GridColor = System.Drawing.Color.White;
@@ -138,6 +140,13 @@
             this.modifica.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.modifica.UseColumnTextForButtonValue = true;
             // 
+            // gestione_lavoratori
+            // 
+            this.gestione_lavoratori.HeaderText = "";
+            this.gestione_lavoratori.Name = "gestione_lavoratori";
+            this.gestione_lavoratori.ReadOnly = true;
+            this.gestione_lavoratori.UseColumnTextForButtonValue = true;
+            // 
             // elimina
             // 
             this.elimina.HeaderText = "";
@@ -175,6 +184,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn luogo;
         private System.Windows.Forms.DataGridViewButtonColumn modifica;
+        private System.Windows.Forms.DataGridViewButtonColumn gestione_lavoratori;
         private System.Windows.Forms.DataGridViewButtonColumn elimina;
     }
 }

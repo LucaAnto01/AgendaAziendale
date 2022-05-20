@@ -100,7 +100,7 @@ namespace AgendaAziendale.Forms
                 Application.Exit();
             }
 
-            FormPadre.Hide();
+            FormPadre.Hide(); //Nascondo il FormPadre
         }
 
         /// <summary>

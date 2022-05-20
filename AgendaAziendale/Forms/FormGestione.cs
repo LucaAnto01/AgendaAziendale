@@ -57,13 +57,13 @@ namespace AgendaAziendale.Forms
             else if ((tipologia == "Evento") || (tipologia == "evento"))
             {
                 btAggiungi.Text = "Aggiungi evento";
-                UcContenitore = new UCEventi();
+                UcContenitore = new UCEventi(this);
             }
 
             else if ((tipologia == "Progetto") || (tipologia == "progetto"))
             {
                 btAggiungi.Text = "Aggiungi progetto";
-                UcContenitore = new UCProgetti();
+                UcContenitore = new UCProgetti(this);
             }
 
             else

@@ -43,10 +43,11 @@
             this.lbReferente = new System.Windows.Forms.Label();
             this.cbReferente = new System.Windows.Forms.ComboBox();
             this.panelCentro = new System.Windows.Forms.Panel();
+            this.lbErrore = new System.Windows.Forms.Label();
             this.mcDataFine = new System.Windows.Forms.MonthCalendar();
             this.mcDataInizio = new System.Windows.Forms.MonthCalendar();
             this.tbDataInizio = new System.Windows.Forms.TextBox();
-            this.lbErrore = new System.Windows.Forms.Label();
+            this.btAggiungiPartecipante = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -200,6 +201,7 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.btAggiungiPartecipante);
             this.panelCentro.Controls.Add(this.lbErrore);
             this.panelCentro.Controls.Add(this.mcDataFine);
             this.panelCentro.Controls.Add(this.mcDataInizio);
@@ -209,6 +211,18 @@
             this.panelCentro.Name = "panelCentro";
             this.panelCentro.Size = new System.Drawing.Size(750, 525);
             this.panelCentro.TabIndex = 68;
+            // 
+            // lbErrore
+            // 
+            this.lbErrore.AutoSize = true;
+            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrore.ForeColor = System.Drawing.Color.Red;
+            this.lbErrore.Location = new System.Drawing.Point(451, 168);
+            this.lbErrore.Name = "lbErrore";
+            this.lbErrore.Size = new System.Drawing.Size(172, 24);
+            this.lbErrore.TabIndex = 69;
+            this.lbErrore.Text = "Compila tutti i campi!";
+            this.lbErrore.Visible = false;
             // 
             // mcDataFine
             // 
@@ -236,17 +250,14 @@
             this.tbDataInizio.TabIndex = 48;
             this.tbDataInizio.Enter += new System.EventHandler(this.TbDataInizio_Enter);
             // 
-            // lbErrore
+            // btAggiungiPartecipante
             // 
-            this.lbErrore.AutoSize = true;
-            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbErrore.ForeColor = System.Drawing.Color.Red;
-            this.lbErrore.Location = new System.Drawing.Point(451, 168);
-            this.lbErrore.Name = "lbErrore";
-            this.lbErrore.Size = new System.Drawing.Size(172, 24);
-            this.lbErrore.TabIndex = 69;
-            this.lbErrore.Text = "Compila tutti i campi!";
-            this.lbErrore.Visible = false;
+            this.btAggiungiPartecipante.Location = new System.Drawing.Point(15, 460);
+            this.btAggiungiPartecipante.Name = "btAggiungiPartecipante";
+            this.btAggiungiPartecipante.Size = new System.Drawing.Size(143, 23);
+            this.btAggiungiPartecipante.TabIndex = 69;
+            this.btAggiungiPartecipante.Text = "Aggiungi partecipante";
+            this.btAggiungiPartecipante.UseVisualStyleBackColor = true;
             // 
             // FormProgetto
             // 
@@ -301,5 +312,6 @@
         private System.Windows.Forms.MonthCalendar mcDataInizio;
         private System.Windows.Forms.TextBox tbDataInizio;
         private System.Windows.Forms.Label lbErrore;
+        private System.Windows.Forms.Button btAggiungiPartecipante;
     }
 }

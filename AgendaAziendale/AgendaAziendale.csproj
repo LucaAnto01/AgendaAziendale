@@ -95,6 +95,12 @@
     <Compile Include="Forms\FormObiettivo.Designer.cs">
       <DependentUpon>FormObiettivo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormPartecipanti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPartecipanti.Designer.cs">
+      <DependentUpon>FormPartecipanti.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormProgetto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormObiettivo.resx">
       <DependentUpon>FormObiettivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPartecipanti.resx">
+      <DependentUpon>FormPartecipanti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormProgetto.resx">
       <DependentUpon>FormProgetto.cs</DependentUpon>

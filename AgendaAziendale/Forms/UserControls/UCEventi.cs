@@ -12,12 +12,22 @@ namespace AgendaAziendale.Forms.UserControls
 {
     public partial class UCEventi : UserControl
     {
+        #region Attributi
+        private Form formPadre;
+        #endregion
+
+        #region Getters & Setters
+        public Form FormPadre { get => formPadre; set => formPadre = value; }
+        #endregion
+
         /// <summary>
         /// Metodo costruttore dell'user control UCEventi
         /// </summary>
-        public UCEventi()
+        /// <param name="formPadre"></param>
+        public UCEventi(Form formPadre)
         {
             InitializeComponent();
+            FormPadre = formPadre;
         }
 
         #region Meotdi ascoltatori
@@ -51,8 +61,14 @@ namespace AgendaAziendale.Forms.UserControls
                 formModificaEvento.Show();
             }
 
-            //Click sulla colonna con i button d'eliminazione
             if (e.ColumnIndex == 1)
+            {
+                FormPartecipanti formPartecipanti = new FormPartecipanti(FormPadre, this, null, "evento"); //TODO: invece che null genera l'evento e passalo come parametro
+                formPartecipanti.ShowDialog();
+            }
+
+            //Click sulla colonna con i button d'eliminazione
+            if (e.ColumnIndex == 2)
             {
                 if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione dell'evento selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
                     "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
