@@ -43,6 +43,8 @@ namespace AgendaAziendale
             ///Figli del pannello di sinistra top
             pctbxLogo.Parent = panelSinistraTop;
             ///Figli del pannello centrale
+            tbUsername.Parent = panelCentro;
+            tbPassword.Parent = panelCentro;
             btAccedi.Parent = panelCentro;
             
         }
@@ -56,6 +58,31 @@ namespace AgendaAziendale
         private void BtChiudi_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        /// <summary>
+        /// Ascoltatore click sulla text box adibita all'inserimento dell'username
+        /// --> rimozione testo segnaposto e settaggio colore testo a nero
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TbUsername_Enter(object sender, EventArgs e)
+        {
+            tbUsername.Text = "";
+            tbUsername.ForeColor = Color.Black;
+        }
+
+        /// <summary>
+        /// Ascoltatore click sulla text box adibita all'inserimento della password
+        /// --> rimozione testo segnaposto, settaggio colore testo a nero e input di tipo password
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TbPassword_Enter(object sender, EventArgs e)
+        {
+            tbPassword.Text = "";
+            tbPassword.ForeColor = Color.Black;
+            tbPassword.UseSystemPasswordChar = true;
         }
 
         /// <summary>
