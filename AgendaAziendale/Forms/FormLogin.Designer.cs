@@ -38,6 +38,7 @@
             this.btAccedi = new System.Windows.Forms.Button();
             this.tbUsername = new System.Windows.Forms.TextBox();
             this.tbPassword = new System.Windows.Forms.TextBox();
+            this.lbErrore = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelSinistra.SuspendLayout();
             this.panelSinistraTop.SuspendLayout();
@@ -111,6 +112,7 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.lbErrore);
             this.panelCentro.Controls.Add(this.tbPassword);
             this.panelCentro.Controls.Add(this.tbUsername);
             this.panelCentro.Controls.Add(this.btAccedi);
@@ -156,6 +158,18 @@
             this.tbPassword.Text = "Password";
             this.tbPassword.Enter += new System.EventHandler(this.TbPassword_Enter);
             // 
+            // lbErrore
+            // 
+            this.lbErrore.AutoSize = true;
+            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrore.ForeColor = System.Drawing.Color.Red;
+            this.lbErrore.Location = new System.Drawing.Point(272, 394);
+            this.lbErrore.Name = "lbErrore";
+            this.lbErrore.Size = new System.Drawing.Size(172, 24);
+            this.lbErrore.TabIndex = 70;
+            this.lbErrore.Text = "Compila tutti i campi!";
+            this.lbErrore.Visible = false;
+            // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -193,6 +207,7 @@
         private System.Windows.Forms.Button btChiudi;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.TextBox tbUsername;
+        private System.Windows.Forms.Label lbErrore;
     }
 }
 

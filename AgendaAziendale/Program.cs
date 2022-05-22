@@ -16,7 +16,15 @@ namespace AgendaAziendale
         [STAThread]
         static void Main()
         {
-            Sessione.ServerAziendale = new SRAgendaAziendale.ServiceAgendaAziendaleClient(); //Istanziazione client per comunicazione con ServerAziendale
+            try
+            {
+                Sessione.ServerAziendale = new SRAgendaAziendale.ServiceAgendaAziendaleClient(); //Istanziazione client per comunicazione con ServerAziendale
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERRORE! Istanziamento ServerAziendale da Main", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

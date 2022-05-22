@@ -45,8 +45,8 @@ namespace AgendaAziendale
             ///Figli del pannello centrale
             tbUsername.Parent = panelCentro;
             tbPassword.Parent = panelCentro;
-            btAccedi.Parent = panelCentro;
-            
+            lbErrore.Parent = panelCentro;
+            btAccedi.Parent = panelCentro;         
         }
 
         /// <summary>
@@ -70,6 +70,7 @@ namespace AgendaAziendale
         {
             tbUsername.Text = "";
             tbUsername.ForeColor = Color.Black;
+            tbUsername.BackColor = Color.White;
         }
 
         /// <summary>
@@ -82,6 +83,7 @@ namespace AgendaAziendale
         {
             tbPassword.Text = "";
             tbPassword.ForeColor = Color.Black;
+            tbPassword.BackColor = Color.White;
             tbPassword.UseSystemPasswordChar = true;
         }
 
@@ -95,21 +97,42 @@ namespace AgendaAziendale
         {
             //TODO: avvia procedura di login --> setta i dati in sessione
 
-            try
+            if (CheckCampi())
             {
-                Sessione.ServerAziendale = new SRAgendaAziendale.ServiceAgendaAziendaleClient();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("ERRORE! Istanziamento ServerAziendale da FormLogin", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
+                //DA RIMUOVERE SUCCESSIVAMENTE
+                FormAdmin pippo = new FormAdmin();
+                pippo.ShowDialog();
+                //this.Hide();
+                Close();
             }
 
-            //DA RIMUOVERE SUCCESSIVAMENTE
-            FormAdmin pippo = new FormAdmin();
-            pippo.ShowDialog();
-            //this.Hide();
-            Close();
+            else
+                lbErrore.Visible = true;
+        }
+        #endregion
+
+        #region Metodi
+        /// <summary>
+        /// Funzione adibita al controllo del completamento dei campi d'inserimento
+        /// </summary>
+        /// <returns>bool</returns>
+        private bool CheckCampi()
+        {
+            bool check = true; ///True, tutti i campi compilati
+
+            if ((tbUsername.Text == "") || (tbUsername.Text == "Username"))
+            {
+                tbUsername.BackColor = Color.Red;
+                check = false;
+            }
+
+            if ((tbPassword.Text == "") || (tbPassword.Text == "Password"))
+            {
+                tbPassword.BackColor = Color.Red;
+                check = false;
+            }
+
+            return check;
         }
         #endregion
     }
