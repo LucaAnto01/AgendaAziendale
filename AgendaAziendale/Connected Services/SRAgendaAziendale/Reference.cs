@@ -15,11 +15,23 @@ namespace AgendaAziendale.SRAgendaAziendale {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SRAgendaAziendale.IServiceAgendaAziendale")]
     public interface IServiceAgendaAziendale {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratori", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratoriResponse")]
-        string GetElencoLavoratori(string username, string password);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/TestConnessione", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/TestConnessioneResponse")]
+        void TestConnessione();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/TestConnessione", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/TestConnessioneResponse")]
+        System.Threading.Tasks.Task TestConnessioneAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/Login", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/LoginResponse")]
+        bool Login(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/Login", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/LoginResponse")]
+        System.Threading.Tasks.Task<bool> LoginAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratori", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratoriResponse")]
-        System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username, string password);
+        string GetElencoLavoratori(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratori", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratoriResponse")]
+        System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,12 +61,28 @@ namespace AgendaAziendale.SRAgendaAziendale {
                 base(binding, remoteAddress) {
         }
         
-        public string GetElencoLavoratori(string username, string password) {
-            return base.Channel.GetElencoLavoratori(username, password);
+        public void TestConnessione() {
+            base.Channel.TestConnessione();
         }
         
-        public System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username, string password) {
-            return base.Channel.GetElencoLavoratoriAsync(username, password);
+        public System.Threading.Tasks.Task TestConnessioneAsync() {
+            return base.Channel.TestConnessioneAsync();
+        }
+        
+        public bool Login(string username, string password) {
+            return base.Channel.Login(username, password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> LoginAsync(string username, string password) {
+            return base.Channel.LoginAsync(username, password);
+        }
+        
+        public string GetElencoLavoratori(string username) {
+            return base.Channel.GetElencoLavoratori(username);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username) {
+            return base.Channel.GetElencoLavoratoriAsync(username);
         }
     }
 }

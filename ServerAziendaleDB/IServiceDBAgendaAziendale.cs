@@ -11,7 +11,29 @@ namespace ServerAziendaleDB
     [ServiceContract]
     public interface IServiceDBAgendaAziendale
     {
+        #region Servizi
+        /// <summary>
+        /// Servizio per testare la connessione client-server
+        /// </summary>
         [OperationContract]
-        void DoWork();
+        void TestConnessione();
+
+        /// <summary>
+        /// Servizio adibito all'effetuazione del login
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool Login(string username, string password);
+
+        /// <summary>
+        /// Servizio che restituisce l'elenco dei lavoratori presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        [OperationContract]
+        string GetElencoLavoratori(string username);
+        #endregion
     }
 }

@@ -19,9 +19,10 @@ namespace ServerAziendale
 
                 Console.WriteLine("Servizio aperto. Premere un tasto per interrompere...");
 
-                Sessione.ServerAziendale = new SRDBAgendaAziendale.ServiceDBAgendaAziendaleClient(); //Istanziazione client per i servizi esposti dal ServerAziendaleDB                
+                Sessione.ServerAziendaleDB = new SRDBAgendaAziendale.ServiceDBAgendaAziendaleClient(); //Istanziazione client per i servizi esposti dal ServerAziendaleDB
+                Sessione.ServerAziendaleDB.TestConnessione(); //Test connessione al server DB al fine di verificarne il funzionamento                                                                                  
 
-                Console.WriteLine("Istanzazione client ServerAziendaleDB effettuata");
+                Console.WriteLine("Istanzazione client ServerAziendaleDB e test connessione a ServerAziendaleDB effettuata");
                 Console.ReadLine();
 
                 svcHost.Close();

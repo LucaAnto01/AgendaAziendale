@@ -62,6 +62,9 @@
     <None Include="Connected Services\SRDBAgendaAziendale\item.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\SRDBAgendaAziendale\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\SRDBAgendaAziendale\ServiceDBAgendaAziendale.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -72,7 +75,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Log\log.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ServerAziendaleDB\ServerAziendaleDB.csproj">

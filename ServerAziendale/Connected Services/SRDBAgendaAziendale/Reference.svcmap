@@ -22,6 +22,7 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/ServerAziendaleDB/ServiceDBAgendaAziendale/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="bd87e386-2e3d-419c-814e-843b6335c88d" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ServerAziendaleDB/ServiceDBAgendaAziendale/?xsd=xsd1" />
     <MetadataFile FileName="item.disco" MetadataType="Disco" ID="fa28c14b-c0ea-44a8-a463-c83a80d7a0e9" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ServerAziendaleDB/ServiceDBAgendaAziendale/?disco" />
     <MetadataFile FileName="ServiceDBAgendaAziendale.wsdl" MetadataType="Wsdl" ID="98c3f81a-db1d-47f0-87a3-90bb9094f8d3" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ServerAziendaleDB/ServiceDBAgendaAziendale/?wsdl" />
     <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="d3c67777-22d5-498a-8459-a5b6e73a341d" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/ServerAziendaleDB/ServiceDBAgendaAziendale/?xsd=xsd0" />

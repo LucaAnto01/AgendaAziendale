@@ -11,11 +11,11 @@ namespace ServerAziendale.Modelli
     public static class Sessione
     {
         #region Attributi
-        private static ServiceDBAgendaAziendaleClient serverAziendale;
+        private static ServiceDBAgendaAziendaleClient serverAziendaleDB;
         #endregion
 
         #region Getters & Setters
-        public static ServiceDBAgendaAziendaleClient ServerAziendale { get => serverAziendale; set => serverAziendale = value; }
+        public static ServiceDBAgendaAziendaleClient ServerAziendaleDB { get => serverAziendaleDB; set => serverAziendaleDB = value; }
         #endregion
 
     }

@@ -19,16 +19,18 @@ namespace AgendaAziendale
             try
             {
                 Sessione.ServerAziendale = new SRAgendaAziendale.ServiceAgendaAziendaleClient(); //Istanziazione client per comunicazione con ServerAziendale
+                Sessione.ServerAziendale.TestConnessione(); //Test connessione al server al fine di verificarne il funzionamento
+
+                ///Avvio software
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new FormLogin());
             }
             catch (Exception ex)
             {
-                MessageBox.Show("ERRORE! Istanziamento ServerAziendale da Main", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ERRORE! ServerAziendale: " + ex.Message, "ServerAziendale da funzione Main", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
-            
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormLogin());
         }
     }
 }
