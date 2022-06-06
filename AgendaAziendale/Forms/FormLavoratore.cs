@@ -15,6 +15,7 @@ namespace AgendaAziendale.Forms
     public partial class FormLavoratore : Form
     {
         #region Attributi
+        private readonly Form formPadre;
         private readonly UCLavoratori ucPadre;
         private readonly Lavoratore lavoratore;
         private readonly string azione;
@@ -23,12 +24,14 @@ namespace AgendaAziendale.Forms
         /// <summary>
         /// Metodo costruttore del FormLavoratore
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="ucPadre"></param>
         /// <param name="lavoratore"></param>
-        /// <param name="azione"></param> aggiungi | modifica
-        public FormLavoratore(UCLavoratori ucPadre, Lavoratore lavoratore, string azione)
+        /// <param name="azione"></param>
+        public FormLavoratore(Form formPadre, UCLavoratori ucPadre, Lavoratore lavoratore, string azione)
         {
             InitializeComponent();
+            this.formPadre = formPadre;
             this.ucPadre = ucPadre;
             this.lavoratore = lavoratore;
             this.azione = azione;
@@ -37,11 +40,13 @@ namespace AgendaAziendale.Forms
         /// <summary>
         /// Metodo costruttore del FormLavoratore
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="ucPadre"></param>
         /// <param name="azione"></param>
-        public FormLavoratore(UCLavoratori ucPadre, string azione)
+        public FormLavoratore(Form formPadre, UCLavoratori ucPadre, string azione)
         {
             InitializeComponent();
+            this.formPadre = formPadre;
             this.ucPadre = ucPadre;
             this.lavoratore = null;
             this.azione = azione;
@@ -83,6 +88,8 @@ namespace AgendaAziendale.Forms
 
             cbCategoria.SelectedIndex = 0;
 
+            formPadre.Hide(); ///Nascondo il form padre
+
             if(lavoratore != null) ///Se ho un lavoratore da modificare
             {
                 tbNome.Text = lavoratore.Nome;
@@ -115,6 +122,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
+            formPadre.Show(); ///Mostro il form padre
             Close();
         }
 
@@ -171,6 +179,14 @@ namespace AgendaAziendale.Forms
                 lbErrore.Visible = false;
 
                 if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                {
+
+                    if (Controller.InserisciLavoratore(tbUsername.Text, tbPassword.Text, tbNome.Text, tbCognome.Text, tbResidenza.Text, tbDataNascita.Text, cbCategoria.Text)) ///Inserisco l'utente nel db
+                        MessageBox.Show("Inserimento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    else
+                        MessageBox.Show("Lavoratore " + tbUsername.Text + " già presente! Inserimento impossibile.", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                     //Richiama funzione aggiungi
 
                 if ((azione == "Aggiorna") || (azione == "aggiorna"))

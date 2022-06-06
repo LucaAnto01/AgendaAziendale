@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using ServerAziendale.Modelli;
 
 namespace ServerAziendale
 {
@@ -28,10 +29,97 @@ namespace ServerAziendale
         /// <returns>bool</returns>
         public bool Login(string username, string password)
         {
-            //TODO: richiama funzione DB per login
+            try
+            {
+                if (Sessione.ServerAziendaleDB.Login(username, password))
+                    return true;
 
-            WriteLog(username, "Login()"); ///Scrittura log
-    
+                else
+                    return false;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione Login() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "Login()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento delle informazioni di uno specifico lavoratore
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_cercato"></param>
+        /// <returns></returns>
+        public string GetInfoLavoratore(string username, string username_cercato)
+        {
+            try
+            {
+                string result = Sessione.ServerAziendaleDB.GetInfoLavoratore(username, username_cercato);
+
+                if (result != "")
+                    return result;
+
+                else
+                    return "";
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione GetInfoLavoratore() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetInfoLavoratore()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// Servizio adibito all'inserimento di un Lavoratore nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="password"></param>
+        /// <param name="nome"></param>
+        /// <param name="cognome"></param>
+        /// <param name="residenza"></param>
+        /// <param name="dataNascita"></param>
+        /// <param name="email"></param>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
+        public bool InserisciLavoratore(string username, string username_in, string password, string nome, string cognome, string residenza, DateTime dataNascita, string email, string categoria)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.InserisciLavoratore(username, username_in, password, nome, cognome, residenza, dataNascita.ToString("yyyy-MM-dd"), email, categoria))
+                    return true;
+
+                else
+                    return false;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione AggiungiLavoratore() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "AggiungiLavoratore()"); ///Scrittura log
+            }
+
             return false;
         }
 
@@ -78,15 +166,24 @@ namespace ServerAziendale
         /// </summary>
         private void CheckLogDirFile()
         {
-            string cartella = "LogServerAziendale";
-            string file = @"LogServerAziendale\log_srv_aziendale.txt";
+            try
+            {
+                string cartella = "LogServerAziendale";
+                string file = @"LogServerAziendale\log_srv_aziendale.txt";
 
-            if (!Directory.Exists(cartella)) ///Controllo che esista la cartella di log
-                Directory.CreateDirectory(cartella); ///Creo la cartella di log
+                if (!Directory.Exists(cartella)) ///Controllo che esista la cartella di log
+                    Directory.CreateDirectory(cartella); ///Creo la cartella di log
 
 
-            if (!File.Exists(file)) ///Controllo che esista il file di log
-                File.Create(file); ///Creo il file di log
+                if (!File.Exists(file)) ///Controllo che esista il file di log
+                    File.Create(file); ///Creo il file di log
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Creazione file e/o directory per log di ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
         }
         #endregion
     }

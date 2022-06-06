@@ -13,22 +13,13 @@ namespace AgendaAziendale.Forms
 {
     public partial class FormAgenda : Form
     {
-        #region Attributi
-        private Lavoratore lavoratore; ///Lavoratore che ha effettuato il login
-        #endregion
-
-        #region Getters & Setters
-        public Lavoratore Lavoratore { get => lavoratore; set => lavoratore = value; }
-        #endregion
         
         /// <summary>
         /// Metodo costruttore del FormAgenda
         /// </summary>
-        /// <param name="lavoratore"></param>
-        public FormAgenda(Lavoratore lavoratore)
+        public FormAgenda()
         {
             InitializeComponent();
-            Lavoratore = lavoratore;
         }
 
         #region Ascoltatori eventi
@@ -76,7 +67,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtVisualizzaAgenda_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormVisualizzazioneAttivita(Lavoratore));
+            CaricaForm(new FormVisualizzazioneAttivita(Sessione.Lavoratore));
         }
 
         /// <summary>

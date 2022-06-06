@@ -28,6 +28,31 @@ namespace ServerAziendaleDB
         bool Login(string username, string password);
 
         /// <summary>
+        /// Servizio adibito all'ottenimento delle informazioni di uno specifico lavoratore
+        /// </summary>
+        /// <param name="username">Chi richiama il WS</param>
+        /// <param name="username_cercato"></param>
+        /// <returns></returns>
+        [OperationContract]
+        string GetInfoLavoratore(string username, string username_cercato);
+
+        /// <summary>
+        /// Servizio adibito all'inserimento di un Lavoratore nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="password"></param>
+        /// <param name="nome"></param>
+        /// <param name="cognome"></param>
+        /// <param name="residenza"></param>
+        /// <param name="dataNascita"></param>
+        /// <param name="email"></param>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool InserisciLavoratore(string username, string username_in, string password, string nome, string cognome, string residenza, string dataNascita, string email, string categoria);
+
+        /// <summary>
         /// Servizio che restituisce l'elenco dei lavoratori presenti nel DB
         /// </summary>
         /// <param name="username"></param>

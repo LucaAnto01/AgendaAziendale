@@ -18,6 +18,18 @@
   <wsdl:message name="IServiceAgendaAziendale_Login_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceAgendaAziendale_GetInfoLavoratore_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInfoLavoratore" />
+  </wsdl:message>
+  <wsdl:message name="IServiceAgendaAziendale_GetInfoLavoratore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInfoLavoratoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceAgendaAziendale_InserisciLavoratore_InputMessage">
+    <wsdl:part name="parameters" element="tns:InserisciLavoratore" />
+  </wsdl:message>
+  <wsdl:message name="IServiceAgendaAziendale_InserisciLavoratore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InserisciLavoratoreResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceAgendaAziendale_GetElencoLavoratori_InputMessage">
     <wsdl:part name="parameters" element="tns:GetElencoLavoratori" />
   </wsdl:message>
@@ -32,6 +44,14 @@
     <wsdl:operation name="Login">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceAgendaAziendale/Login" message="tns:IServiceAgendaAziendale_Login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceAgendaAziendale/LoginResponse" message="tns:IServiceAgendaAziendale_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoLavoratore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceAgendaAziendale/GetInfoLavoratore" message="tns:IServiceAgendaAziendale_GetInfoLavoratore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceAgendaAziendale/GetInfoLavoratoreResponse" message="tns:IServiceAgendaAziendale_GetInfoLavoratore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InserisciLavoratore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceAgendaAziendale/InserisciLavoratore" message="tns:IServiceAgendaAziendale_InserisciLavoratore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceAgendaAziendale/InserisciLavoratoreResponse" message="tns:IServiceAgendaAziendale_InserisciLavoratore_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetElencoLavoratori">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratori" message="tns:IServiceAgendaAziendale_GetElencoLavoratori_InputMessage" />
@@ -51,6 +71,24 @@
     </wsdl:operation>
     <wsdl:operation name="Login">
       <soap:operation soapAction="http://tempuri.org/IServiceAgendaAziendale/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfoLavoratore">
+      <soap:operation soapAction="http://tempuri.org/IServiceAgendaAziendale/GetInfoLavoratore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InserisciLavoratore">
+      <soap:operation soapAction="http://tempuri.org/IServiceAgendaAziendale/InserisciLavoratore" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

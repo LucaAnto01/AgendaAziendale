@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AgendaAziendale.Forms;
 using AgendaAziendale.Modelli;
 
 namespace AgendaAziendale
@@ -99,11 +101,28 @@ namespace AgendaAziendale
 
             if (CheckCampi())
             {
+                string username = tbUsername.Text;
+                string password = tbPassword.Text;
+
+                if (Controller.EffettuaLogin(username, password)) ///Effettuo il login
+                {
+                    Lavoratore lavoratore = Controller.GetInfoLavoratore(username, username);
+
+                    if (lavoratore != null)
+                        Sessione.Lavoratore = lavoratore;
+
+                    CheckLavoraotre();
+                }
+
+                else
+                    MessageBox.Show("Username o password non validi", "Errore compilazione campi",  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+
                 //DA RIMUOVERE SUCCESSIVAMENTE
-                FormAdmin pippo = new FormAdmin();
+                /*FormAdmin pippo = new FormAdmin();
                 pippo.ShowDialog();
                 //this.Hide();
-                Close();
+                Close();*/
             }
 
             else
@@ -113,7 +132,7 @@ namespace AgendaAziendale
 
         #region Metodi
         /// <summary>
-        /// Funzione adibita al controllo del completamento dei campi d'inserimento
+        /// Metodo adibito al controllo del completamento dei campi d'inserimento
         /// </summary>
         /// <returns>bool</returns>
         private bool CheckCampi()
@@ -133,6 +152,35 @@ namespace AgendaAziendale
             }
 
             return check;
+        }
+
+        /// <summary>
+        /// Metodo adibito all'apertura del form in base alla categoria dell'account: se admin o normale
+        /// </summary>
+        private void CheckLavoraotre()
+        {
+            Form form;
+
+            try
+            {
+                if (Sessione.Lavoratore.Categoria == "Admin") ///Se ha effettuato il login un Admin
+                    form = new FormAdmin();
+
+                else
+                    form = new FormAgenda();
+
+                this.Hide(); ///Nascondo questo form
+                //Close(); ///Chiudo questo fomr
+                form.ShowDialog(); ///Mostro il form creato a seguito del login
+                
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERRORE! FormLogin: " + ex.Message, "FormLogin da funzione CheckLavoraotre()", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+
         }
         #endregion
     }

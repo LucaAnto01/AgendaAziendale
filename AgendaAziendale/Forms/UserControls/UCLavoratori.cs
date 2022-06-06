@@ -12,11 +12,17 @@ namespace AgendaAziendale.Forms.UserControls
 {
     public partial class UCLavoratori : UserControl
     {
+        #region Attributi
+        private readonly Form formPadre;
+        #endregion
+
         /// <summary>
         /// Metodo costruttore dell'user control UCLavoratori
         /// </summary>
-        public UCLavoratori()
+        /// <param name="formPadre"></param>
+        public UCLavoratori(Form formPadre)
         {
+            this.formPadre = formPadre;
             InitializeComponent();
         }
 
@@ -49,7 +55,7 @@ namespace AgendaAziendale.Forms.UserControls
             //Click sulla colonna con i button di modifica
             if (e.ColumnIndex == 0)
             {
-                FormLavoratore formModificaLavoratore = new FormLavoratore(this, null, "aggiorna"); //TODO: metti poi l'evento selezionando la riga
+                FormLavoratore formModificaLavoratore = new FormLavoratore(formPadre, this, null, "aggiorna"); //TODO: metti poi l'evento selezionando la riga
                 formModificaLavoratore.Show();
             }
 

@@ -32,12 +32,12 @@
             this.btChiudi = new System.Windows.Forms.Button();
             this.panelCentro = new System.Windows.Forms.Panel();
             this.panelSinistra = new System.Windows.Forms.Panel();
+            this.btStoricoProgetti = new System.Windows.Forms.Button();
             this.btVisualizzaStoricoEvento = new System.Windows.Forms.Button();
             this.btGestione = new System.Windows.Forms.Button();
             this.btProgettiEventi = new System.Windows.Forms.Button();
             this.btVisualizzaAgenda = new System.Windows.Forms.Button();
             this.btLogout = new System.Windows.Forms.Button();
-            this.btStoricoProgetti = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelSinistra.SuspendLayout();
             this.SuspendLayout();
@@ -88,6 +88,20 @@
             this.panelSinistra.Name = "panelSinistra";
             this.panelSinistra.Size = new System.Drawing.Size(300, 610);
             this.panelSinistra.TabIndex = 6;
+            // 
+            // btStoricoProgetti
+            // 
+            this.btStoricoProgetti.BackColor = System.Drawing.Color.DarkGray;
+            this.btStoricoProgetti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btStoricoProgetti.ForeColor = System.Drawing.Color.White;
+            this.btStoricoProgetti.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btStoricoProgetti.Location = new System.Drawing.Point(50, 390);
+            this.btStoricoProgetti.Name = "btStoricoProgetti";
+            this.btStoricoProgetti.Size = new System.Drawing.Size(200, 35);
+            this.btStoricoProgetti.TabIndex = 9;
+            this.btStoricoProgetti.Text = "Storico progetti";
+            this.btStoricoProgetti.UseVisualStyleBackColor = false;
+            this.btStoricoProgetti.Click += new System.EventHandler(this.BtStoricoProgetti_Click);
             // 
             // btVisualizzaStoricoEvento
             // 
@@ -161,20 +175,6 @@
             this.btLogout.UseVisualStyleBackColor = false;
             this.btLogout.Click += new System.EventHandler(this.BtLogout_Click);
             // 
-            // btStoricoProgetti
-            // 
-            this.btStoricoProgetti.BackColor = System.Drawing.Color.DarkGray;
-            this.btStoricoProgetti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btStoricoProgetti.ForeColor = System.Drawing.Color.White;
-            this.btStoricoProgetti.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btStoricoProgetti.Location = new System.Drawing.Point(50, 390);
-            this.btStoricoProgetti.Name = "btStoricoProgetti";
-            this.btStoricoProgetti.Size = new System.Drawing.Size(200, 35);
-            this.btStoricoProgetti.TabIndex = 9;
-            this.btStoricoProgetti.Text = "Storico progetti";
-            this.btStoricoProgetti.UseVisualStyleBackColor = false;
-            this.btStoricoProgetti.Click += new System.EventHandler(this.BtStoricoProgetti_Click);
-            // 
             // FormAgenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -186,6 +186,7 @@
             this.Controls.Add(this.panelTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormAgenda";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormAgenda";
             this.Load += new System.EventHandler(this.FormAgenda_Load);
             this.panelTop.ResumeLayout(false);

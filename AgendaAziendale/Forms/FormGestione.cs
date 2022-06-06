@@ -51,7 +51,7 @@ namespace AgendaAziendale.Forms
             if((tipologia == "Lavoratore") || (tipologia == "lavoratore"))
             {
                 btAggiungi.Text = "Aggiungi lavoratore";
-                UcContenitore = new UCLavoratori();
+                UcContenitore = new UCLavoratori(this);
             }
 
             else if ((tipologia == "Evento") || (tipologia == "evento"))
@@ -79,7 +79,7 @@ namespace AgendaAziendale.Forms
         {
             if ((tipologia == "Lavoratore") || (tipologia == "lavoratore"))
             {
-                FormLavoratore formAggiungi = new FormLavoratore((UCLavoratori)UcContenitore, "aggiungi");
+                FormLavoratore formAggiungi = new FormLavoratore(this, (UCLavoratori)UcContenitore, "aggiungi");
                 formAggiungi.Show();
             }
 

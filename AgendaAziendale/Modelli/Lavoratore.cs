@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,31 +50,66 @@ namespace AgendaAziendale.Modelli
         public Lavoratore() { }
 
         /// <summary>
-        /// Metodo adibito all'inserimento nel DB di un nuovo lavoratore
-        /// --> da includere in un try-catch
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="categoria"></param>
-        public static void GeneraLavoratore(string username, string password, string nome, string cognome, string residenza, DateTime dataNascita, string categoria)
-        {
-            //GeneraEmail(username, cognome);
-            //TODO: inserisci nel DB un nuovo lavoratore
-        }
-
-        /// <summary>
         /// Metodo per generare la mail personale di ciascun utente
+        /// --> si è già sicuri che non ci sia nel db essendo basata sull'username
         /// </summary>
         /// <param name="username"></param>
         /// <param name="cognome"></param>
         /// <returns></returns>
-        private string GeneraEmail(string username, string cognome)
+        public static string GeneraEmail(string username, string cognome)
         {
             return username.ToLower() + "." + cognome.ToLower() + "@agendaaziendale.it";
+        }
+
+        /// <summary>
+        /// Metodo adibido all'effetuazione dell'hashing della password
+        /// </summary>
+        /// <param name="passowrd"></param>
+        /// <returns></returns>
+        public static string PasswordHashing(string passowrd)
+        {
+            ///Effettuo l'hashing in SHA256 della password
+            /*var salt = Encoding.UTF8.GetBytes(Sessione.Salt); 
+            var password = Encoding.UTF8.GetBytes(passowrd); ///Converto la stringa in un array di byte
+
+            HMACMD5 hmacMD5 = new HMACMD5(salt); ///Chiave (+salt) in MD5
+            var saltedHash = hmacMD5.ComputeHash(password); ///Azione di hash sulla password*/
+
+            using (SHA256 sha256Hash = SHA256.Create())
+            {  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(passowrd)); ///Converto la stringa in un array di byte
+
+                ///Converto l'array di byte nella stringa hashata 
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2")); ///ToString("x2") --> solo caratteri (lettere minuscole + numeri)
+                }
+                return builder.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Metodo adibito alla creazione di un Lavoratore sulla base di una stringa formattata dato-dato-...
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns>Lavoratore</returns>
+        public static Lavoratore GeneraLavoratore(string info)
+        {
+            Lavoratore lavoratore = new Lavoratore();
+
+            List<string> informazioni = info.Split('-').ToList();
+
+            lavoratore.Username = informazioni.ElementAt(0);
+            lavoratore.Password = informazioni.ElementAt(1);
+            lavoratore.Nome = informazioni.ElementAt(2);
+            lavoratore.Cognome = informazioni.ElementAt(3);
+            lavoratore.Residenza = informazioni.ElementAt(4);
+            lavoratore.DataNascita = DateTime.Parse(informazioni.ElementAt(5));
+            lavoratore.Email = informazioni.ElementAt(6);
+            lavoratore.Categoria = informazioni.ElementAt(7);
+
+            return lavoratore;
         }
         #endregion
 

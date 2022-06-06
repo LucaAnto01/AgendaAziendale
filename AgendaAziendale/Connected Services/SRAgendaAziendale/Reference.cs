@@ -27,6 +27,18 @@ namespace AgendaAziendale.SRAgendaAziendale {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/Login", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/LoginResponse")]
         System.Threading.Tasks.Task<bool> LoginAsync(string username, string password);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetInfoLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetInfoLavoratoreResponse")]
+        string GetInfoLavoratore(string username, string username_cercato);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetInfoLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetInfoLavoratoreResponse")]
+        System.Threading.Tasks.Task<string> GetInfoLavoratoreAsync(string username, string username_cercato);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/InserisciLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/InserisciLavoratoreResponse")]
+        bool InserisciLavoratore(string username, string username_in, string password, string nome, string cognome, string residenza, System.DateTime dataNascita, string email, string categoria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/InserisciLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/InserisciLavoratoreResponse")]
+        System.Threading.Tasks.Task<bool> InserisciLavoratoreAsync(string username, string username_in, string password, string nome, string cognome, string residenza, System.DateTime dataNascita, string email, string categoria);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratori", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratoriResponse")]
         string GetElencoLavoratori(string username);
         
@@ -75,6 +87,22 @@ namespace AgendaAziendale.SRAgendaAziendale {
         
         public System.Threading.Tasks.Task<bool> LoginAsync(string username, string password) {
             return base.Channel.LoginAsync(username, password);
+        }
+        
+        public string GetInfoLavoratore(string username, string username_cercato) {
+            return base.Channel.GetInfoLavoratore(username, username_cercato);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetInfoLavoratoreAsync(string username, string username_cercato) {
+            return base.Channel.GetInfoLavoratoreAsync(username, username_cercato);
+        }
+        
+        public bool InserisciLavoratore(string username, string username_in, string password, string nome, string cognome, string residenza, System.DateTime dataNascita, string email, string categoria) {
+            return base.Channel.InserisciLavoratore(username, username_in, password, nome, cognome, residenza, dataNascita, email, categoria);
+        }
+        
+        public System.Threading.Tasks.Task<bool> InserisciLavoratoreAsync(string username, string username_in, string password, string nome, string cognome, string residenza, System.DateTime dataNascita, string email, string categoria) {
+            return base.Channel.InserisciLavoratoreAsync(username, username_in, password, nome, cognome, residenza, dataNascita, email, categoria);
         }
         
         public string GetElencoLavoratori(string username) {

@@ -14,14 +14,14 @@ namespace AgendaAziendale.Modelli
     public static class Sessione
     {
         #region Attributi
-        private static string username;
-        private static string password;
+        private static Lavoratore lavoratore;
+        private static readonly string salt = "unipr";
         private static ServiceAgendaAziendaleClient serverAziendale;
         #endregion
 
         #region Getters & Setters
-        public static string Username { get => username; set => username = value; }
-        public static string Password { get => password; set => password = value; }
+        public static Lavoratore Lavoratore { get => lavoratore; set => lavoratore = value; }
+        public static string Salt { get => salt; }
         public static ServiceAgendaAziendaleClient ServerAziendale { get => serverAziendale; set => serverAziendale = value; }
         #endregion
     }

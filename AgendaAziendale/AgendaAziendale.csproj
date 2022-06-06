@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
@@ -156,6 +157,7 @@
       <DependentUpon>UCStoricoProgetti.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelli\Attivita.cs" />
+    <Compile Include="Modelli\Controller.cs" />
     <Compile Include="Modelli\Evento.cs" />
     <Compile Include="Modelli\Lavoratore.cs" />
     <Compile Include="Modelli\Sessione.cs" />

@@ -83,7 +83,8 @@
             this.cbCategoria.Items.AddRange(new object[] {
             "Project Manager",
             "Sviluppatore",
-            "Segretario"});
+            "Segretario",
+            "Admin"});
             this.cbCategoria.Location = new System.Drawing.Point(119, 370);
             this.cbCategoria.Name = "cbCategoria";
             this.cbCategoria.Size = new System.Drawing.Size(110, 21);
