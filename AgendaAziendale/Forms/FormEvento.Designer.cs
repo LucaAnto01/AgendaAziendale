@@ -220,7 +220,7 @@
             this.lbErrore.AutoSize = true;
             this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbErrore.ForeColor = System.Drawing.Color.Red;
-            this.lbErrore.Location = new System.Drawing.Point(451, 123);
+            this.lbErrore.Location = new System.Drawing.Point(450, 125);
             this.lbErrore.Name = "lbErrore";
             this.lbErrore.Size = new System.Drawing.Size(172, 24);
             this.lbErrore.TabIndex = 70;
