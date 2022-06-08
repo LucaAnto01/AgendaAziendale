@@ -171,6 +171,41 @@ namespace ServerAziendale
 
             return false;
         }
+
+        /// <summary>
+        /// Servizio adibito all'inserimento di un Progetto nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
+        public bool CreaProgetto(string username, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.CreaProgetto(username, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), cliente))
+                    return true;
+
+                else
+                    return false;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione CreaProgetto() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "CreaProgetto()"); ///Scrittura log
+            }
+
+            return false;
+        }
         #endregion
 
         #region Metodi

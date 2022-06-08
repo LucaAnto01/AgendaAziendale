@@ -42,6 +42,12 @@
   <wsdl:message name="IServiceDBAgendaAziendale_CreaEvento_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreaEventoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_CreaProgetto_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreaProgetto" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_CreaProgetto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreaProgettoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceDBAgendaAziendale">
     <wsdl:operation name="TestConnessione">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/TestConnessione" message="tns:IServiceDBAgendaAziendale_TestConnessione_InputMessage" />
@@ -66,6 +72,10 @@
     <wsdl:operation name="CreaEvento">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaEvento" message="tns:IServiceDBAgendaAziendale_CreaEvento_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaEventoResponse" message="tns:IServiceDBAgendaAziendale_CreaEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreaProgetto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgetto" message="tns:IServiceDBAgendaAziendale_CreaProgetto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgettoResponse" message="tns:IServiceDBAgendaAziendale_CreaProgetto_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceDBAgendaAziendale" type="tns:IServiceDBAgendaAziendale">
@@ -117,6 +127,15 @@
     </wsdl:operation>
     <wsdl:operation name="CreaEvento">
       <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/CreaEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreaProgetto">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgetto" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

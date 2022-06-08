@@ -72,6 +72,19 @@ namespace ServerAziendaleDB
         /// <returns>bool</returns>
         [OperationContract]
         bool CreaEvento(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo);
+
+        /// <summary>
+        /// Servizio adibito all'inserimento di un Progetto nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool CreaProgetto(string username, string nome, string descrizione, string dataInizio, string dataFine, string cliente);
         #endregion
     }
 }

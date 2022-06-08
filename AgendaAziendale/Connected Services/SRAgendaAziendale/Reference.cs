@@ -50,6 +50,12 @@ namespace AgendaAziendale.SRAgendaAziendale {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/CreaEvento", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/CreaEventoResponse")]
         System.Threading.Tasks.Task<bool> CreaEventoAsync(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string luogo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/CreaProgetto", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/CreaProgettoResponse")]
+        bool CreaProgetto(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string cliente);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/CreaProgetto", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/CreaProgettoResponse")]
+        System.Threading.Tasks.Task<bool> CreaProgettoAsync(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string cliente);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -125,6 +131,14 @@ namespace AgendaAziendale.SRAgendaAziendale {
         
         public System.Threading.Tasks.Task<bool> CreaEventoAsync(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string luogo) {
             return base.Channel.CreaEventoAsync(username, nome, descrizione, dataInizio, dataFine, luogo);
+        }
+        
+        public bool CreaProgetto(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string cliente) {
+            return base.Channel.CreaProgetto(username, nome, descrizione, dataInizio, dataFine, cliente);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreaProgettoAsync(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string cliente) {
+            return base.Channel.CreaProgettoAsync(username, nome, descrizione, dataInizio, dataFine, cliente);
         }
     }
 }

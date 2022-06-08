@@ -86,5 +86,22 @@ namespace AgendaAziendale.Modelli
 
             return false;
         }
+
+        /// <summary>
+        /// Metodo adibito all'inserimento di un progetto nel DB
+        /// </summary>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
+        public static bool CreaProgetto(string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente)
+        {
+            if(Sessione.ServerAziendale.CreaProgetto(Sessione.Lavoratore.Username, nome, descrizione, dataInizio, dataFine, cliente))
+                return true;
+
+            return false;
+        }
     }
 }
