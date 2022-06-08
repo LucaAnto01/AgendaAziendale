@@ -65,13 +65,11 @@ namespace AgendaAziendale.Forms
             ///Figli del pannello top
             btChiudi.Parent = panelTop;
             ///Figli del pannello centrale
-            lbReferente.Parent = panelCentro;
             lbNome.Parent = panelCentro;
             lbDescrizione.Parent = panelCentro;
             lbDataInizio.Parent = panelCentro;
             lbDataFine.Parent = panelCentro;
             lbCliente.Parent = panelCentro;
-            cbReferente.Parent = panelCentro;
             tbNome.Parent = panelCentro;
             tbDescrizione.Parent = panelCentro;
             tbDataInizio.Parent = panelCentro;
@@ -81,11 +79,8 @@ namespace AgendaAziendale.Forms
             mcDataFine.Parent = panelCentro;
             btAggiungiAggiorna.Parent = panelCentro;
 
-            cbReferente.DropDownStyle = ComboBoxStyle.DropDownList; ///Possibilità di selezionare solo elementi della cb, senza poter scrivere manaulmente, al fine di evitare errori
-
             if (progetto != null) ///Se ho un evento da modificare
             {
-                cbReferente.Text = ""; //OTTIENI DAL DB
                 tbNome.Text = progetto.Nome;
                 tbDescrizione.Text = progetto.Descrizione;
                 tbDataInizio.Text = progetto.DataInizio.ToShortDateString();
@@ -170,7 +165,7 @@ namespace AgendaAziendale.Forms
         {
             mcDataFine.Hide();
             tbDataFine.Enabled = true;
-            tbDataFine.Text = mcDataInizio.SelectionRange.Start.ToShortDateString();
+            tbDataFine.Text = mcDataFine.SelectionRange.Start.ToShortDateString();
         }
 
         /// <summary>
@@ -196,7 +191,13 @@ namespace AgendaAziendale.Forms
             if (CheckCampi())
             {
                 if ((azione == "Aggiungi") || (azione == "aggiungi"))
-                    //Richiama funzione aggiungi
+                {
+                    if (Controller.CreaProgetto(tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbCliente.Text))
+                        MessageBox.Show("Inserimento progetto " + tbNome.Text + " avvenuto con successo!", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    else
+                        MessageBox.Show("Errore in fase d'inserimento.", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
                 if ((azione == "Aggiorna") || (azione == "aggiorna"))
                     //Richiama funzione aggiorna
@@ -248,12 +249,6 @@ namespace AgendaAziendale.Forms
                 tbCliente.BackColor = Color.Red;
                 check = false;
             }
-
-            /*if (cbReferente.Text == "")
-            {
-                cbCategoria.BackColor = Color.Red;
-                check = false;
-            }*/
 
             return check;
         }

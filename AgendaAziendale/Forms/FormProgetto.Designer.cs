@@ -40,14 +40,12 @@
             this.lbDescrizione = new System.Windows.Forms.Label();
             this.tbNome = new System.Windows.Forms.TextBox();
             this.lbNome = new System.Windows.Forms.Label();
-            this.lbReferente = new System.Windows.Forms.Label();
-            this.cbReferente = new System.Windows.Forms.ComboBox();
             this.panelCentro = new System.Windows.Forms.Panel();
+            this.btAggiungiPartecipante = new System.Windows.Forms.Button();
             this.lbErrore = new System.Windows.Forms.Label();
             this.mcDataFine = new System.Windows.Forms.MonthCalendar();
             this.mcDataInizio = new System.Windows.Forms.MonthCalendar();
             this.tbDataInizio = new System.Windows.Forms.TextBox();
-            this.btAggiungiPartecipante = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -79,7 +77,7 @@
             // tbCliente
             // 
             this.tbCliente.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbCliente.Location = new System.Drawing.Point(119, 321);
+            this.tbCliente.Location = new System.Drawing.Point(119, 265);
             this.tbCliente.MaxLength = 50;
             this.tbCliente.Name = "tbCliente";
             this.tbCliente.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
@@ -91,7 +89,7 @@
             // 
             this.lbCliente.AutoSize = true;
             this.lbCliente.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCliente.Location = new System.Drawing.Point(12, 321);
+            this.lbCliente.Location = new System.Drawing.Point(12, 265);
             this.lbCliente.Name = "lbCliente";
             this.lbCliente.Size = new System.Drawing.Size(59, 18);
             this.lbCliente.TabIndex = 65;
@@ -100,7 +98,7 @@
             // tbDataFine
             // 
             this.tbDataFine.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbDataFine.Location = new System.Drawing.Point(119, 280);
+            this.tbDataFine.Location = new System.Drawing.Point(119, 224);
             this.tbDataFine.MaxLength = 25;
             this.tbDataFine.Name = "tbDataFine";
             this.tbDataFine.Size = new System.Drawing.Size(110, 21);
@@ -111,7 +109,7 @@
             // 
             this.lbDataFine.AutoSize = true;
             this.lbDataFine.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDataFine.Location = new System.Drawing.Point(12, 280);
+            this.lbDataFine.Location = new System.Drawing.Point(12, 224);
             this.lbDataFine.Name = "lbDataFine";
             this.lbDataFine.Size = new System.Drawing.Size(71, 18);
             this.lbDataFine.TabIndex = 63;
@@ -119,7 +117,7 @@
             // 
             // btAggiungiAggiorna
             // 
-            this.btAggiungiAggiorna.Location = new System.Drawing.Point(15, 403);
+            this.btAggiungiAggiorna.Location = new System.Drawing.Point(15, 347);
             this.btAggiungiAggiorna.Name = "btAggiungiAggiorna";
             this.btAggiungiAggiorna.Size = new System.Drawing.Size(75, 23);
             this.btAggiungiAggiorna.TabIndex = 55;
@@ -131,7 +129,7 @@
             // 
             this.lbDataInizio.AutoSize = true;
             this.lbDataInizio.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDataInizio.Location = new System.Drawing.Point(12, 237);
+            this.lbDataInizio.Location = new System.Drawing.Point(12, 181);
             this.lbDataInizio.Name = "lbDataInizio";
             this.lbDataInizio.Size = new System.Drawing.Size(82, 18);
             this.lbDataInizio.TabIndex = 62;
@@ -141,7 +139,7 @@
             // 
             this.tbDescrizione.AcceptsReturn = true;
             this.tbDescrizione.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbDescrizione.Location = new System.Drawing.Point(119, 168);
+            this.tbDescrizione.Location = new System.Drawing.Point(119, 112);
             this.tbDescrizione.MaxLength = 500;
             this.tbDescrizione.Multiline = true;
             this.tbDescrizione.Name = "tbDescrizione";
@@ -154,7 +152,7 @@
             // 
             this.lbDescrizione.AutoSize = true;
             this.lbDescrizione.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDescrizione.Location = new System.Drawing.Point(12, 168);
+            this.lbDescrizione.Location = new System.Drawing.Point(12, 112);
             this.lbDescrizione.Name = "lbDescrizione";
             this.lbDescrizione.Size = new System.Drawing.Size(93, 18);
             this.lbDescrizione.TabIndex = 60;
@@ -163,7 +161,7 @@
             // tbNome
             // 
             this.tbNome.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNome.Location = new System.Drawing.Point(119, 125);
+            this.tbNome.Location = new System.Drawing.Point(119, 69);
             this.tbNome.MaxLength = 50;
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(110, 21);
@@ -174,30 +172,11 @@
             // 
             this.lbNome.AutoSize = true;
             this.lbNome.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNome.Location = new System.Drawing.Point(12, 125);
+            this.lbNome.Location = new System.Drawing.Point(12, 69);
             this.lbNome.Name = "lbNome";
             this.lbNome.Size = new System.Drawing.Size(49, 18);
             this.lbNome.TabIndex = 56;
             this.lbNome.Text = "Nome";
-            // 
-            // lbReferente
-            // 
-            this.lbReferente.AutoSize = true;
-            this.lbReferente.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbReferente.Location = new System.Drawing.Point(12, 85);
-            this.lbReferente.Name = "lbReferente";
-            this.lbReferente.Size = new System.Drawing.Size(80, 18);
-            this.lbReferente.TabIndex = 59;
-            this.lbReferente.Text = "Referente";
-            // 
-            // cbReferente
-            // 
-            this.cbReferente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbReferente.FormattingEnabled = true;
-            this.cbReferente.Location = new System.Drawing.Point(119, 84);
-            this.cbReferente.Name = "cbReferente";
-            this.cbReferente.Size = new System.Drawing.Size(110, 21);
-            this.cbReferente.TabIndex = 58;
             // 
             // panelCentro
             // 
@@ -212,12 +191,21 @@
             this.panelCentro.Size = new System.Drawing.Size(750, 525);
             this.panelCentro.TabIndex = 68;
             // 
+            // btAggiungiPartecipante
+            // 
+            this.btAggiungiPartecipante.Location = new System.Drawing.Point(15, 404);
+            this.btAggiungiPartecipante.Name = "btAggiungiPartecipante";
+            this.btAggiungiPartecipante.Size = new System.Drawing.Size(143, 23);
+            this.btAggiungiPartecipante.TabIndex = 69;
+            this.btAggiungiPartecipante.Text = "Aggiungi partecipante";
+            this.btAggiungiPartecipante.UseVisualStyleBackColor = true;
+            // 
             // lbErrore
             // 
             this.lbErrore.AutoSize = true;
             this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbErrore.ForeColor = System.Drawing.Color.Red;
-            this.lbErrore.Location = new System.Drawing.Point(451, 168);
+            this.lbErrore.Location = new System.Drawing.Point(450, 125);
             this.lbErrore.Name = "lbErrore";
             this.lbErrore.Size = new System.Drawing.Size(172, 24);
             this.lbErrore.TabIndex = 69;
@@ -226,7 +214,7 @@
             // 
             // mcDataFine
             // 
-            this.mcDataFine.Location = new System.Drawing.Point(451, 237);
+            this.mcDataFine.Location = new System.Drawing.Point(451, 181);
             this.mcDataFine.Name = "mcDataFine";
             this.mcDataFine.TabIndex = 33;
             this.mcDataFine.Visible = false;
@@ -234,7 +222,7 @@
             // 
             // mcDataInizio
             // 
-            this.mcDataInizio.Location = new System.Drawing.Point(451, 237);
+            this.mcDataInizio.Location = new System.Drawing.Point(451, 181);
             this.mcDataInizio.Name = "mcDataInizio";
             this.mcDataInizio.TabIndex = 30;
             this.mcDataInizio.Visible = false;
@@ -243,21 +231,12 @@
             // tbDataInizio
             // 
             this.tbDataInizio.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbDataInizio.Location = new System.Drawing.Point(119, 235);
+            this.tbDataInizio.Location = new System.Drawing.Point(119, 179);
             this.tbDataInizio.MaxLength = 25;
             this.tbDataInizio.Name = "tbDataInizio";
             this.tbDataInizio.Size = new System.Drawing.Size(110, 21);
             this.tbDataInizio.TabIndex = 48;
             this.tbDataInizio.Enter += new System.EventHandler(this.TbDataInizio_Enter);
-            // 
-            // btAggiungiPartecipante
-            // 
-            this.btAggiungiPartecipante.Location = new System.Drawing.Point(15, 460);
-            this.btAggiungiPartecipante.Name = "btAggiungiPartecipante";
-            this.btAggiungiPartecipante.Size = new System.Drawing.Size(143, 23);
-            this.btAggiungiPartecipante.TabIndex = 69;
-            this.btAggiungiPartecipante.Text = "Aggiungi partecipante";
-            this.btAggiungiPartecipante.UseVisualStyleBackColor = true;
             // 
             // FormProgetto
             // 
@@ -276,11 +255,10 @@
             this.Controls.Add(this.lbDescrizione);
             this.Controls.Add(this.tbNome);
             this.Controls.Add(this.lbNome);
-            this.Controls.Add(this.lbReferente);
-            this.Controls.Add(this.cbReferente);
             this.Controls.Add(this.panelCentro);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormProgetto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormProgetto";
             this.Load += new System.EventHandler(this.FormProgetto_Load);
             this.panelTop.ResumeLayout(false);
@@ -305,8 +283,6 @@
         private System.Windows.Forms.Label lbDescrizione;
         private System.Windows.Forms.TextBox tbNome;
         private System.Windows.Forms.Label lbNome;
-        private System.Windows.Forms.Label lbReferente;
-        private System.Windows.Forms.ComboBox cbReferente;
         private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.MonthCalendar mcDataFine;
         private System.Windows.Forms.MonthCalendar mcDataInizio;
