@@ -59,6 +59,19 @@ namespace ServerAziendaleDB
         /// <returns></returns>
         [OperationContract]
         string GetElencoLavoratori(string username);
+
+        /// <summary>
+        /// Servizio adibito all'inserimento di un Evento nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="luogo"></param>
+        /// <returns>bool</returns>
+        [OperationContract]
+        bool CreaEvento(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo);
         #endregion
     }
 }

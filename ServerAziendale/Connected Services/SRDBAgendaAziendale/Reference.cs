@@ -44,6 +44,12 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoLavoratori", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoLavoratoriResponse")]
         System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaEvento", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/CreaEventoResponse")]
+        bool CreaEvento(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaEvento", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/CreaEventoResponse")]
+        System.Threading.Tasks.Task<bool> CreaEventoAsync(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +117,14 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         
         public System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username) {
             return base.Channel.GetElencoLavoratoriAsync(username);
+        }
+        
+        public bool CreaEvento(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo) {
+            return base.Channel.CreaEvento(username, nome, descrizione, dataInizio, dataFine, luogo);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreaEventoAsync(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo) {
+            return base.Channel.CreaEventoAsync(username, nome, descrizione, dataInizio, dataFine, luogo);
         }
     }
 }

@@ -121,9 +121,13 @@ namespace ServerAziendaleDB
             string query = "INSERT INTO lavoratore (username, pswd, nome, cognome, residenza, data_nascita, email, categoria) VALUES " +
                            "('" + username_in + "','" + password + "','"+ nome +"','"+ cognome + "','" + residenza + "','" + 
                             dataNascita + "','" + email + "','" + categoria + "')";
+
+            List<string> queries = new List<string>();
+            queries.Add(query);
+
             try
             {
-                if (InterazioneDB.EseguiQueryInserimento(query))
+                if (InterazioneDB.EseguiQueryInserimento(queries))
                     return true;
                 else
                     return false;
@@ -155,6 +159,65 @@ namespace ServerAziendaleDB
             WriteLog(username, "GetElencoLavoratori()"); ///Scrittura log
 
             return "";
+        }
+
+        /// <summary>
+        /// Servizio adibito all'inserimento di un Evento nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="luogo"></param>
+        /// <returns>bool</returns>
+        public bool CreaEvento(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo)
+        {
+            string query_attivita = "INSERT INTO attivita(nome, descrizione, data_inizio, data_fine) " +
+                                    "VALUES('" + nome + "', '" + descrizione + "', '" + dataInizio + "', '" + dataFine + "')"; ///Creo una nuova attività
+            string query_evento = "INSERT INTO evento(luogo) VALUES ('" + luogo + "')"; ///Creo un nuovo evento
+
+            List<string> queries = new List<string>();
+            queries.Add(query_attivita);
+            queries.Add(query_evento);
+
+            try
+            {
+                if (InterazioneDB.EseguiQueryInserimento(queries))
+                {
+                    string query_codAttivita = "SELECT MAX(attivita.codice) as codice FROM attivita"; ///Ricavo l'ultima attività inserita nel DB
+                    string query_codEvento = "SELECT MAX(evento.id) as codice FROM evento"; ///Ricavo l'ultima attività inserita nel DB
+
+                    string[] codUltimaAttivita = InterazioneDB.EseguiQuery_GetInfo(query_codAttivita).Split('-');
+                    string[] codUltimoEvento = InterazioneDB.EseguiQuery_GetInfo(query_codEvento).Split('-');
+
+                    if ((codUltimaAttivita[0] != "") && (codUltimoEvento[0] != ""))
+                    {
+                        string query_spEvento = "INSERT INTO specifica_evento(fk_attivita, fk_evento) VALUES ('" + codUltimaAttivita[0] + "','" + codUltimoEvento[0] + "')";
+                        List<string> queries_sp = new List<string>();
+                        queries_sp.Add(query_spEvento);
+
+                        if (InterazioneDB.EseguiQueryInserimento(queries_sp))
+                            return true;           
+                    }
+                }
+                    
+                else
+                    return false;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query CreaEvento() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "CreaEvento()"); ///Scrittura log
+            }
+
+            return false;
         }
         #endregion
 

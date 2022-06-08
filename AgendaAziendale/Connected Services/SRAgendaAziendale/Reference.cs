@@ -44,6 +44,12 @@ namespace AgendaAziendale.SRAgendaAziendale {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratori", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratoriResponse")]
         System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/CreaEvento", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/CreaEventoResponse")]
+        bool CreaEvento(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string luogo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/CreaEvento", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/CreaEventoResponse")]
+        System.Threading.Tasks.Task<bool> CreaEventoAsync(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string luogo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +117,14 @@ namespace AgendaAziendale.SRAgendaAziendale {
         
         public System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username) {
             return base.Channel.GetElencoLavoratoriAsync(username);
+        }
+        
+        public bool CreaEvento(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string luogo) {
+            return base.Channel.CreaEvento(username, nome, descrizione, dataInizio, dataFine, luogo);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreaEventoAsync(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string luogo) {
+            return base.Channel.CreaEventoAsync(username, nome, descrizione, dataInizio, dataFine, luogo);
         }
     }
 }

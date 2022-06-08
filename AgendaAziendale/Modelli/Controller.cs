@@ -67,5 +67,24 @@ namespace AgendaAziendale.Modelli
             
             return false;
         }
+
+        /// <summary>
+        /// Metodo adibito all'inserimento di un evento nel DB
+        /// </summary>
+        /// <param name="codice"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="id"></param>
+        /// <param name="luogo"></param>
+        /// <returns></returns>
+        public static bool CreaEvento(string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo)
+        {
+            if (Sessione.ServerAziendale.CreaEvento(Sessione.Lavoratore.Username, nome, descrizione, dataInizio, dataFine, luogo))
+                return true;
+
+            return false;
+        }
     }
 }

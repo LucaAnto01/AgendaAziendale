@@ -111,11 +111,8 @@ namespace ServerAziendaleDB.Modelli
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public static bool EseguiQueryInserimento(string query)
+        public static bool EseguiQueryInserimento(List<string> queries)
         {
-            List<string> queries = new List<string>();
-            queries.Add(query);
-
             if (EseguiTransazione(queries))
                 return true;
 

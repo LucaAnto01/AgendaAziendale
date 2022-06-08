@@ -136,6 +136,41 @@ namespace ServerAziendale
 
             return "";
         }
+
+        /// <summary>
+        /// Servizio adibito all'inserimento di un Evento nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="luogo"></param>
+        /// <returns>bool</returns>
+        public bool CreaEvento(string username, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.CreaEvento(username, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), luogo))
+                    return true;
+
+                else
+                    return false;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione CreaEvento() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "CreaEvento()"); ///Scrittura log
+            }
+
+            return false;
+        }
         #endregion
 
         #region Metodi
