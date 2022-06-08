@@ -251,12 +251,6 @@ namespace AgendaAziendale.Forms
                 check = false;
             }
 
-            /*if (cbReferente.Text == "")
-            {
-                cbCategoria.BackColor = Color.Red;
-                check = false;
-            }*/
-
             return check;
         }
         #endregion
