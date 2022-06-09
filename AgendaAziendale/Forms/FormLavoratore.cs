@@ -99,6 +99,8 @@ namespace AgendaAziendale.Forms
                 tbUsername.Text = lavoratore.Username;
                 tbPassword.Text = lavoratore.Password;
                 cbCategoria.Text = lavoratore.Categoria;
+
+                tbUsername.Enabled = false; //Impedisco la modifica dell'username in quanto chiave primaria dei lavoratori --> garantisco l'integrità del DB
             }
             
             if ((azione == "Aggiungi") || (azione == "aggiungi"))
@@ -182,8 +184,11 @@ namespace AgendaAziendale.Forms
                 {
 
                     if (Controller.InserisciLavoratore(tbUsername.Text, tbPassword.Text, tbNome.Text, tbCognome.Text, tbResidenza.Text, tbDataNascita.Text, cbCategoria.Text)) ///Inserisco l'utente nel db
+                    {
                         MessageBox.Show("Inserimento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                        PulisciCampiInserimento();
+                    }
+                        
                     else
                         MessageBox.Show("Lavoratore " + tbUsername.Text + " già presente! Inserimento impossibile.", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -252,6 +257,20 @@ namespace AgendaAziendale.Forms
             }*/
 
             return check;
+        }
+
+        /// <summary>
+        /// Metodo adibito alla pulizia di tutti i campi d'inserimento
+        /// </summary>
+        private void PulisciCampiInserimento()
+        {
+            tbNome.Text = "";
+            tbCognome.Text = "";
+            tbResidenza.Text = "";
+            tbDataNascita.Text = "";
+            tbUsername.Text = "";
+            tbPassword.Text = "";
+            cbCategoria.Text = "";
         }
         #endregion
     }

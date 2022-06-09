@@ -193,7 +193,11 @@ namespace AgendaAziendale.Forms
                 if ((azione == "Aggiungi") || (azione == "aggiungi"))
                 {
                     if (Controller.CreaProgetto(tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbCliente.Text))
+                    {
+                        PulisciCampiInserimento();
                         MessageBox.Show("Inserimento progetto " + tbNome.Text + " avvenuto con successo!", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                        
 
                     else
                         MessageBox.Show("Errore in fase d'inserimento.", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -251,6 +255,18 @@ namespace AgendaAziendale.Forms
             }
 
             return check;
+        }
+
+        /// <summary>
+        /// Metodo adibito alla pulizia di tutti i campi d'inserimento
+        /// </summary>
+        private void PulisciCampiInserimento()
+        {
+            tbNome.Text = "";
+            tbDescrizione.Text = "";
+            tbDataInizio.Text = "";
+            tbDataFine.Text = "";
+            tbCliente.Text = "";
         }
         #endregion
     }
