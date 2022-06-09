@@ -19,7 +19,7 @@ namespace AgendaAziendale
             try
             {
                 Sessione.ServerAziendale = new SRAgendaAziendale.ServiceAgendaAziendaleClient(); //Istanziazione client per comunicazione con ServerAziendale
-                //TODO: RIMUOVI COMMENTOOO Sessione.ServerAziendale.TestConnessione(); //Test connessione al server al fine di verificarne il funzionamento
+                Sessione.ServerAziendale.TestConnessione(); //Test connessione al server al fine di verificarne il funzionamento
 
                 ///Avvio software
                 Application.EnableVisualStyles();

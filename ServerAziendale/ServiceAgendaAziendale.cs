@@ -33,9 +33,6 @@ namespace ServerAziendale
             {
                 if (Sessione.ServerAziendaleDB.Login(username, password))
                     return true;
-
-                else
-                    return false;
             }
 
             catch (Exception ex)
@@ -66,9 +63,6 @@ namespace ServerAziendale
 
                 if (result != "")
                     return result;
-
-                else
-                    return "";
             }
 
             catch (Exception ex)
@@ -104,20 +98,17 @@ namespace ServerAziendale
             {
                 if (Sessione.ServerAziendaleDB.InserisciLavoratore(username, username_in, password, nome, cognome, residenza, dataNascita.ToString("yyyy-MM-dd"), email, categoria))
                     return true;
-
-                else
-                    return false;
             }
 
             catch (Exception ex)
             {
-                Console.WriteLine("ERRORE!!! Richiamo funzione AggiungiLavoratore() in ServerAziendale: " + ex.ToString());
+                Console.WriteLine("ERRORE!!! Richiamo funzione InserisciLavoratore() in ServerAziendale: " + ex.ToString());
                 Console.ReadLine();
             }
 
             finally
             {
-                WriteLog(username, "AggiungiLavoratore()"); ///Scrittura log
+                WriteLog(username, "InserisciLavoratore()"); ///Scrittura log
             }
 
             return false;
@@ -130,9 +121,24 @@ namespace ServerAziendale
         /// <returns>string</returns>
         public string GetElencoLavoratori(string username)
         {
-            Console.WriteLine("Funzeca");
+            try
+            {
+                string result = Sessione.ServerAziendaleDB.GetElencoLavoratori(username);
 
-            WriteLog(username, "GetElencoLavoratori()"); ///Scrittura log
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione GetElencoLavoratori() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoLavoratori()"); ///Scrittura log
+            }
 
             return "";
         }
@@ -153,9 +159,6 @@ namespace ServerAziendale
             {
                 if (Sessione.ServerAziendaleDB.CreaEvento(username, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), luogo))
                     return true;
-
-                else
-                    return false;
             }
 
             catch (Exception ex)
@@ -188,9 +191,6 @@ namespace ServerAziendale
             {
                 if (Sessione.ServerAziendaleDB.CreaProgetto(username, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), cliente))
                     return true;
-
-                else
-                    return false;
             }
 
             catch (Exception ex)

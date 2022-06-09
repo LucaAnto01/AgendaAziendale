@@ -69,6 +69,20 @@ namespace AgendaAziendale.Modelli
         }
 
         /// <summary>
+        /// Funzione adibita all'ottenimento dell'elenco di tutti i lavoratori presenti nel DB
+        /// </summary>
+        /// <returns></returns>
+        public static string GetElencoLavoratori()
+        {
+            string result = Sessione.ServerAziendale.GetElencoLavoratori(Sessione.Lavoratore.Username);
+
+            if (result != "")
+                return result;
+
+            return "";
+        }
+
+        /// <summary>
         /// Metodo adibito all'inserimento di un evento nel DB
         /// </summary>
         /// <param name="codice"></param>

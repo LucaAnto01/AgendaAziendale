@@ -50,9 +50,6 @@ namespace ServerAziendaleDB
 
                 if (InterazioneDB.EseguiQuery_Lettura(query))
                     return true;
-
-                else
-                    return false;
             }
 
             catch (Exception ex)
@@ -85,9 +82,6 @@ namespace ServerAziendaleDB
 
                 if (result != "")
                     return result;
-
-                else
-                    return "";
             }
 
             catch (Exception ex)
@@ -129,8 +123,6 @@ namespace ServerAziendaleDB
             {
                 if (InterazioneDB.EseguiQueryInserimento(queries))
                     return true;
-                else
-                    return false;
             }
 
             catch (Exception ex)
@@ -148,15 +140,32 @@ namespace ServerAziendaleDB
         }
 
         /// <summary>
-        /// Servizio che restituisce l'elenco dei lavoratori presenti nel DB
+        /// Servizio che restituisce l'elenco dei lavoratori (e relative informazioni) presenti nel DB
         /// </summary>
         /// <param name="username"></param>
         /// <returns>string</returns>
         public string GetElencoLavoratori(string username)
         {
-            Console.WriteLine("Funzeca");
+            string query = "SELECT * FROM lavoratore";
 
-            WriteLog(username, "GetElencoLavoratori()"); ///Scrittura log
+            try
+            {
+                string result = InterazioneDB.EseguiQuery_GetInfo(query);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query GetElencoLavoratori() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoLavoratori()"); ///Scrittura log
+            }
 
             return "";
         }
@@ -201,9 +210,6 @@ namespace ServerAziendaleDB
                             return true;           
                     }
                 }
-                    
-                else
-                    return false;
             }
 
             catch (Exception ex)
@@ -260,9 +266,6 @@ namespace ServerAziendaleDB
                             return true;
                     }
                 }
-
-                else
-                    return false;
             }
 
             catch (Exception ex)
