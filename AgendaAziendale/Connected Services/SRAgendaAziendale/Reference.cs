@@ -39,6 +39,18 @@ namespace AgendaAziendale.SRAgendaAziendale {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/InserisciLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/InserisciLavoratoreResponse")]
         System.Threading.Tasks.Task<bool> InserisciLavoratoreAsync(string username, string username_in, string password, string nome, string cognome, string residenza, System.DateTime dataNascita, string email, string categoria);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/AggiornaLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/AggiornaLavoratoreResponse")]
+        bool AggiornaLavoratore(string username, string username_in, string nome, string cognome, string residenza, System.DateTime dataNascita, string categoria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/AggiornaLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/AggiornaLavoratoreResponse")]
+        System.Threading.Tasks.Task<bool> AggiornaLavoratoreAsync(string username, string username_in, string nome, string cognome, string residenza, System.DateTime dataNascita, string categoria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/EliminaLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/EliminaLavoratoreResponse")]
+        bool EliminaLavoratore(string username, string username_in);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/EliminaLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/EliminaLavoratoreResponse")]
+        System.Threading.Tasks.Task<bool> EliminaLavoratoreAsync(string username, string username_in);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratori", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratoriResponse")]
         string GetElencoLavoratori(string username);
         
@@ -115,6 +127,22 @@ namespace AgendaAziendale.SRAgendaAziendale {
         
         public System.Threading.Tasks.Task<bool> InserisciLavoratoreAsync(string username, string username_in, string password, string nome, string cognome, string residenza, System.DateTime dataNascita, string email, string categoria) {
             return base.Channel.InserisciLavoratoreAsync(username, username_in, password, nome, cognome, residenza, dataNascita, email, categoria);
+        }
+        
+        public bool AggiornaLavoratore(string username, string username_in, string nome, string cognome, string residenza, System.DateTime dataNascita, string categoria) {
+            return base.Channel.AggiornaLavoratore(username, username_in, nome, cognome, residenza, dataNascita, categoria);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AggiornaLavoratoreAsync(string username, string username_in, string nome, string cognome, string residenza, System.DateTime dataNascita, string categoria) {
+            return base.Channel.AggiornaLavoratoreAsync(username, username_in, nome, cognome, residenza, dataNascita, categoria);
+        }
+        
+        public bool EliminaLavoratore(string username, string username_in) {
+            return base.Channel.EliminaLavoratore(username, username_in);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EliminaLavoratoreAsync(string username, string username_in) {
+            return base.Channel.EliminaLavoratoreAsync(username, username_in);
         }
         
         public string GetElencoLavoratori(string username) {

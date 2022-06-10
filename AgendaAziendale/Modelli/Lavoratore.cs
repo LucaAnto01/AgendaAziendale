@@ -111,6 +111,25 @@ namespace AgendaAziendale.Modelli
 
             return lavoratore;
         }
+
+        /// <summary>
+        /// Metodo adibito alla creazione di una lista di Lavoratore sulla base di una stringa formattata dato-dato-...\n...
+        /// </summary>
+        /// <param name="elenco"></param>
+        /// <returns>List<Lavoratore></returns>
+        public static List<Lavoratore> GeneraElencoLavoratori(string elenco)
+        {
+            List<Lavoratore> elencoLavoratori = new List<Lavoratore>();
+
+            List<string> lavoratori_info = elenco.Split('\n').ToList(); ///Splitto l'elenco al fine di avere per ogni elemento le informazioni di ogni lavoratore
+
+            lavoratori_info.RemoveAt((lavoratori_info.Count - 1)); ///A causa dello split l'ultimo elemento rimane vuoto --> ""
+
+            foreach(string lavoratore_info in lavoratori_info) ///Popolo la lista dei lavoratori
+                elencoLavoratori.Add(GeneraLavoratore(lavoratore_info));
+            
+            return elencoLavoratori;
+        }
         #endregion
 
         #region Getters & Setters

@@ -107,11 +107,12 @@ namespace ServerAziendaleDB.Modelli
         }
 
         /// <summary>
-        /// Metodo adibito all'esecuzione di query adibite all'inserimento di dati nel DB
+        /// Metodo adibito all'esecuzione di query adibite alla modifica di dati nel DB
+        /// inserimento, aggiornamento, rimozione
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public static bool EseguiQueryInserimento(List<string> queries)
+        public static bool EseguiQueries(List<string> queries)
         {
             if (EseguiTransazione(queries))
                 return true;

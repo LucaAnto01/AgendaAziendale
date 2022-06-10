@@ -27,6 +27,7 @@ namespace ServerAziendaleDB
         [OperationContract]
         bool Login(string username, string password);
 
+        #region Lavoratori
         /// <summary>
         /// Servizio adibito all'ottenimento delle informazioni di uno specifico lavoratore
         /// </summary>
@@ -53,12 +54,36 @@ namespace ServerAziendaleDB
         bool InserisciLavoratore(string username, string username_in, string password, string nome, string cognome, string residenza, string dataNascita, string email, string categoria);
 
         /// <summary>
+        /// Servizio adibito all'aggiornamento di un Lavoratore presente nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="nome"></param>
+        /// <param name="cognome"></param>
+        /// <param name="residenza"></param>
+        /// <param name="dataNascita"></param>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool AggiornaLavoratore(string username, string username_in, string nome, string cognome, string residenza, string dataNascita, string categoria);
+
+        /// <summary>
+        /// Servizio adibito all'eiminazione di un Lavoratore presente nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool EliminaLavoratore(string username, string username_in);
+
+        /// <summary>
         /// Servizio che restituisce l'elenco dei lavoratori presenti nel DB
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
         [OperationContract]
         string GetElencoLavoratori(string username);
+        #endregion
 
         /// <summary>
         /// Servizio adibito all'inserimento di un Evento nel DB

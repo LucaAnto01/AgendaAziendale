@@ -101,6 +101,7 @@ namespace AgendaAziendale.Forms
                 cbCategoria.Text = lavoratore.Categoria;
 
                 tbUsername.Enabled = false; //Impedisco la modifica dell'username in quanto chiave primaria dei lavoratori --> garantisco l'integrità del DB
+                tbPassword.Enabled = false;
             }
             
             if ((azione == "Aggiungi") || (azione == "aggiungi"))
@@ -183,7 +184,7 @@ namespace AgendaAziendale.Forms
                 if ((azione == "Aggiungi") || (azione == "aggiungi"))
                 {
 
-                    if (Controller.InserisciLavoratore(tbUsername.Text, tbPassword.Text, tbNome.Text, tbCognome.Text, tbResidenza.Text, tbDataNascita.Text, cbCategoria.Text)) ///Inserisco l'utente nel db
+                    if (Controller.InserisciLavoratore(tbUsername.Text, tbPassword.Text, tbNome.Text, tbCognome.Text, tbResidenza.Text, tbDataNascita.Text, cbCategoria.Text)) ///Inserisco il lavoratore nel db
                     {
                         MessageBox.Show("Inserimento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         PulisciCampiInserimento();
@@ -192,12 +193,19 @@ namespace AgendaAziendale.Forms
                     else
                         MessageBox.Show("Lavoratore " + tbUsername.Text + " già presente! Inserimento impossibile.", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                    //Richiama funzione aggiungi
 
                 if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                    //Richiama funzione aggiorna
+                {
+                    if(Controller.AggiornaLavoratore(tbUsername.Text,tbNome.Text, tbCognome.Text, tbResidenza.Text, tbDataNascita.Text, cbCategoria.Text)) ///Aggiorno  il lavoratore nel db
+                    {
+                        MessageBox.Show("Aggiornamento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    ucPadre.AggiornadgvLavoratori();
+                        ucPadre.AggiornadgvLavoratori();
+                    }
+                    else
+                        MessageBox.Show("Aggiornamento lavoratore " + tbUsername.Text + "fallito.", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
             }
 
             else

@@ -43,7 +43,7 @@ namespace ServerAziendaleDB
         /// <returns>bool</returns>
         public bool Login(string username, string password)
         {
-            string query = "SELECT * FROM lavoratore l WHERE l.username = '" +  username + "' AND l.pswd = '"+ password + "'"; ///Query adibita al login
+            string query = "SELECT * FROM lavoratore l WHERE l.username = '" +  username + "' AND l.pswd = '"+ password + "';"; ///Query adibita al login
 
             try
             {
@@ -66,6 +66,7 @@ namespace ServerAziendaleDB
             return false;
         }
 
+        #region Lavoratori
         /// <summary>
         /// Servizio adibito all'ottenimento delle informazioni di uno specifico lavoratore
         /// </summary>
@@ -74,7 +75,7 @@ namespace ServerAziendaleDB
         /// <returns></returns>
         public string GetInfoLavoratore(string username, string username_cercato)
         {
-            string query = "SELECT * FROM lavoratore l WHERE l.username = '" + username_cercato + "'";
+            string query = "SELECT * FROM lavoratore l WHERE l.username = '" + username_cercato + "';";
 
             try
             {
@@ -114,14 +115,14 @@ namespace ServerAziendaleDB
         {
             string query = "INSERT INTO lavoratore (username, pswd, nome, cognome, residenza, data_nascita, email, categoria) VALUES " +
                            "('" + username_in + "','" + password + "','"+ nome +"','"+ cognome + "','" + residenza + "','" + 
-                            dataNascita + "','" + email + "','" + categoria + "')";
+                            dataNascita + "','" + email + "','" + categoria + "');";
 
             List<string> queries = new List<string>();
             queries.Add(query);
 
             try
             {
-                if (InterazioneDB.EseguiQueryInserimento(queries))
+                if (InterazioneDB.EseguiQueries(queries))
                     return true;
             }
 
@@ -134,6 +135,79 @@ namespace ServerAziendaleDB
             finally
             {
                 WriteLog(username, "AggiungiLavoratore()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'aggiornamento di un Lavoratore presente nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="nome"></param>
+        /// <param name="cognome"></param>
+        /// <param name="residenza"></param>
+        /// <param name="dataNascita"></param>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
+        public bool AggiornaLavoratore(string username, string username_in, string nome, string cognome, string residenza, string dataNascita, string categoria)
+        {
+            string query = "UPDATE lavoratore SET nome = '" + nome + "', cognome = '" +
+                                cognome + "', residenza = '" + residenza + "', data_nascita = '" + dataNascita + "', categoria = '" 
+                                + categoria + "' WHERE username = '" + username_in + "';";
+
+            List<string> queries = new List<string>();
+            queries.Add(query);
+
+            try
+            {
+                if (InterazioneDB.EseguiQueries(queries)) ///Aggiorno il lavoratore
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query AggiornaLavoratore() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "AggiornaLavoratore()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'eiminazione di un Lavoratore presente nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <returns></returns>
+        public bool EliminaLavoratore(string username, string username_in)
+        {
+            string query = "DELETE FROM lavoratore WHERE username = '" + username_in + "';";
+
+            List<string> queries = new List<string>();
+            queries.Add(query);
+
+            try
+            {
+                if (InterazioneDB.EseguiQueries(queries)) ///Elimino il lavoratore
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query EliminaLavoratore() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "EliminaLavoratore()"); ///Scrittura log
             }
 
             return false;
@@ -169,6 +243,7 @@ namespace ServerAziendaleDB
 
             return "";
         }
+        #endregion
 
         /// <summary>
         /// Servizio adibito all'inserimento di un Evento nel DB
@@ -183,8 +258,8 @@ namespace ServerAziendaleDB
         public bool CreaEvento(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo)
         {
             string query_attivita = "INSERT INTO attivita(nome, descrizione, data_inizio, data_fine) " +
-                                    "VALUES('" + nome + "', '" + descrizione + "', '" + dataInizio + "', '" + dataFine + "')"; ///Creo una nuova attività
-            string query_evento = "INSERT INTO evento(luogo) VALUES ('" + luogo + "')"; ///Creo un nuovo evento
+                                    "VALUES('" + nome + "', '" + descrizione + "', '" + dataInizio + "', '" + dataFine + "');"; ///Creo una nuova attività
+            string query_evento = "INSERT INTO evento(luogo) VALUES ('" + luogo + "');"; ///Creo un nuovo evento
 
             List<string> queries = new List<string>();
             queries.Add(query_attivita);
@@ -192,7 +267,7 @@ namespace ServerAziendaleDB
 
             try
             {
-                if (InterazioneDB.EseguiQueryInserimento(queries))
+                if (InterazioneDB.EseguiQueries(queries))
                 {
                     string query_codAttivita = "SELECT MAX(attivita.codice) as codice FROM attivita"; ///Ricavo l'ultima attività inserita nel DB
                     string query_codEvento = "SELECT MAX(evento.id) as codice FROM evento"; ///Ricavo l'ultimo evento inserito nel DB
@@ -202,11 +277,11 @@ namespace ServerAziendaleDB
 
                     if ((codUltimaAttivita[0] != "") && (codUltimoEvento[0] != ""))
                     {
-                        string query_spEvento = "INSERT INTO specifica_evento(fk_attivita, fk_evento) VALUES ('" + codUltimaAttivita[0] + "','" + codUltimoEvento[0] + "')";
+                        string query_spEvento = "INSERT INTO specifica_evento(fk_attivita, fk_evento) VALUES ('" + codUltimaAttivita[0] + "','" + codUltimoEvento[0] + "');";
                         List<string> queries_sp = new List<string>();
                         queries_sp.Add(query_spEvento);
 
-                        if (InterazioneDB.EseguiQueryInserimento(queries_sp))
+                        if (InterazioneDB.EseguiQueries(queries_sp))
                             return true;           
                     }
                 }
@@ -239,8 +314,8 @@ namespace ServerAziendaleDB
         public bool CreaProgetto(string username, string nome, string descrizione, string dataInizio, string dataFine, string cliente)
         {
             string query_attivita = "INSERT INTO attivita(nome, descrizione, data_inizio, data_fine) " +
-                                    "VALUES('" + nome + "', '" + descrizione + "', '" + dataInizio + "', '" + dataFine + "')"; ///Creo una nuova attività
-            string query_progetto = "INSERT INTO progetto(cliente) VALUES ('" + cliente + "')"; ///Creo un nuovo progetto
+                                    "VALUES('" + nome + "', '" + descrizione + "', '" + dataInizio + "', '" + dataFine + "');"; ///Creo una nuova attività
+            string query_progetto = "INSERT INTO progetto(cliente) VALUES ('" + cliente + "');"; ///Creo un nuovo progetto
 
             List<string> queries = new List<string>();
             queries.Add(query_attivita);
@@ -248,21 +323,22 @@ namespace ServerAziendaleDB
 
             try
             {
-                if (InterazioneDB.EseguiQueryInserimento(queries))
+                if (InterazioneDB.EseguiQueries(queries))
                 {
-                    string query_codAttivita = "SELECT MAX(attivita.codice) as codice FROM attivita"; ///Ricavo l'ultima attività inserita nel DB
-                    string query_codProgetto = "SELECT MAX(progetto.id) as codice FROM progetto"; ///Ricavo l'ultimo progetto inserito nel DB
+                    string query_codAttivita = "SELECT MAX(attivita.codice) as codice FROM attivita;"; ///Ricavo l'ultima attività inserita nel DB
+                    string query_codProgetto = "SELECT MAX(progetto.id) as codice FROM progetto;"; ///Ricavo l'ultimo progetto inserito nel DB
 
                     string[] codUltimaAttivita = InterazioneDB.EseguiQuery_GetInfo(query_codAttivita).Split('-');
                     string[] codUltimoProgetto = InterazioneDB.EseguiQuery_GetInfo(query_codProgetto).Split('-');
 
                     if ((codUltimaAttivita[0] != "") && (codUltimoProgetto[0] != ""))
                     {
-                        string query_spProgetto = "INSERT INTO specifica_progetto(fk_attivita, fk_progetto) VALUES ('" + codUltimaAttivita[0] + "','" + codUltimoProgetto[0] + "')";
+                        string query_spProgetto = "INSERT INTO specifica_progetto(fk_attivita, fk_progetto) " +
+                                                  "VALUES ('" + codUltimaAttivita[0] + "','" + codUltimoProgetto[0] + "');";
                         List<string> queries_sp = new List<string>();
                         queries_sp.Add(query_spProgetto);
 
-                        if (InterazioneDB.EseguiQueryInserimento(queries_sp))
+                        if (InterazioneDB.EseguiQueries(queries_sp))
                             return true;
                     }
                 }

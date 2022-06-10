@@ -49,6 +49,7 @@ namespace ServerAziendale
             return false;
         }
 
+        #region Lavoratori
         /// <summary>
         /// Servizio adibito all'ottenimento delle informazioni di uno specifico lavoratore
         /// </summary>
@@ -115,6 +116,66 @@ namespace ServerAziendale
         }
 
         /// <summary>
+        /// Servizio adibito all'aggiornamento di un Lavoratore nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="nome"></param>
+        /// <param name="cognome"></param>
+        /// <param name="residenza"></param>
+        /// <param name="dataNascita"></param>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
+        public bool AggiornaLavoratore(string username, string username_in, string nome, string cognome, string residenza, DateTime dataNascita, string categoria)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.AggiornaLavoratore(username, username_in, nome, cognome, residenza, dataNascita.ToString("yyyy-MM-dd"), categoria))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione AggiornaLavoratore() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "AggiornaLavoratore()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'eiminazione di un Lavoratore presente nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <returns></returns>
+        public bool EliminaLavoratore(string username, string username_in)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.EliminaLavoratore(username, username_in))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione EliminaLavoratore() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "EliminaLavoratore()"); ///Scrittura log
+            }
+
+            return false;
+        }
+        /// <summary>
         /// Servizio che restituisce l'elenco dei lavoratori presenti nel DB
         /// </summary>
         /// <param name="username"></param>
@@ -142,6 +203,7 @@ namespace ServerAziendale
 
             return "";
         }
+        #endregion
 
         /// <summary>
         /// Servizio adibito all'inserimento di un Evento nel DB

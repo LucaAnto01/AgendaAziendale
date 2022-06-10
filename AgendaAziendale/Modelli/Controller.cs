@@ -29,6 +29,7 @@ namespace AgendaAziendale.Modelli
                 return false;
         }
 
+        #region Lavoratori
         /// <summary>
         /// Metodo adibito all'ottenimento di un lavoratore dal DB
         /// --> richiamo del web service GetInfoLavoratore()
@@ -69,6 +70,39 @@ namespace AgendaAziendale.Modelli
         }
 
         /// <summary>
+        /// Metodo adibito alla modifica di un lavoratore presente nel DB
+        /// --> richiamo del web service AggiornaLavoratore()
+        /// </summary>
+        /// <param name="username_in"></param>
+        /// <param name="nome"></param>
+        /// <param name="cognome"></param>
+        /// <param name="residenza"></param>
+        /// <param name="dataNascita"></param>
+        /// <param name="categoria"></param>
+        /// <returns></returns>
+        public static bool AggiornaLavoratore(string username_in, string nome, string cognome, string residenza, string dataNascita, string categoria)
+        {
+            if (Sessione.ServerAziendale.AggiornaLavoratore(Sessione.Lavoratore.Username, username_in, nome, cognome, residenza, DateTime.Parse(dataNascita), categoria)) ///Aggiorno il lavoratore nel db
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Metodo adibito all'eliminazione di un utente dal DB
+        /// --> richiamo del web service EliminaLavoratore()
+        /// </summary>
+        /// <param name="username_in"></param>
+        /// <returns></returns>
+        public static bool EliminaLavoratore(string username_in)
+        {
+            if (Sessione.ServerAziendale.EliminaLavoratore(Sessione.Lavoratore.Username, username_in))
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
         /// Funzione adibita all'ottenimento dell'elenco di tutti i lavoratori presenti nel DB
         /// </summary>
         /// <returns></returns>
@@ -81,6 +115,7 @@ namespace AgendaAziendale.Modelli
 
             return "";
         }
+        #endregion
 
         /// <summary>
         /// Metodo adibito all'inserimento di un evento nel DB
