@@ -14,11 +14,12 @@ namespace AgendaAziendale.Forms.UserControls
     public partial class UCLavoratori : UserControl
     {
         #region Attributi
-        private readonly Form formPadre;
+        private Form formPadre;
         private List<Lavoratore> elencoLavoratori;
         #endregion
 
         #region Getters & Setters
+        public Form FormPadre { get => formPadre; set => formPadre = value; }
         public List<Lavoratore> ElencoLavoratori { get => elencoLavoratori; set => elencoLavoratori = value; }
         #endregion
 
@@ -28,7 +29,7 @@ namespace AgendaAziendale.Forms.UserControls
         /// <param name="formPadre"></param>
         public UCLavoratori(Form formPadre)
         {
-            this.formPadre = formPadre;
+            FormPadre = formPadre;
             InitializeComponent();
         }
 
@@ -67,8 +68,9 @@ namespace AgendaAziendale.Forms.UserControls
                 ///Seleziono il lavoratore corrispettivo da quelli presenti nella lista
                 lavoratore = ElencoLavoratori.FirstOrDefault(l => l.Username == usernameSelezionato); 
 
-                FormLavoratore formModificaLavoratore = new FormLavoratore(formPadre, this, lavoratore, "aggiorna"); //TODO: metti poi il lavoratore selezionando la riga
-                formModificaLavoratore.ShowDialog();
+                FormLavoratore formModificaLavoratore = new FormLavoratore(FormPadre, this, lavoratore, "aggiorna"); //TODO: metti poi il lavoratore selezionando la riga
+                formPadre.Hide();
+                formModificaLavoratore.Show();               
             }
 
             //Click sulla colonna con i button d'eliminazione
@@ -99,14 +101,13 @@ namespace AgendaAziendale.Forms.UserControls
         /// </summary>
         public void AggiornadgvLavoratori()
         {
-            //TODO: fai e richiama il metodo per popolare la dgv --> va fatto lato server-db --> guarda la foto in condivisa
             string result = Controller.GetElencoLavoratori();
 
-            if(result != "")
-            {
-                ElencoLavoratori = Lavoratore.GeneraElencoLavoratori(result);
+            dgvLavoratori.Rows.Clear();
 
-                dgvLavoratori.Rows.Clear();
+            if (result != "")
+            {
+                ElencoLavoratori = Lavoratore.GeneraElencoLavoratori(result);              
 
                 foreach(Lavoratore lavoratore in ElencoLavoratori)
                     dgvLavoratori.Rows.Add(lavoratore.Username, lavoratore.Nome, lavoratore.Cognome, lavoratore.Residenza, 

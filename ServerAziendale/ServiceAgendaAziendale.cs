@@ -175,6 +175,7 @@ namespace ServerAziendale
 
             return false;
         }
+
         /// <summary>
         /// Servizio che restituisce l'elenco dei lavoratori presenti nel DB
         /// </summary>
@@ -205,6 +206,7 @@ namespace ServerAziendale
         }
         #endregion
 
+        #region Eventi
         /// <summary>
         /// Servizio adibito all'inserimento di un Evento nel DB
         /// </summary>
@@ -238,6 +240,99 @@ namespace ServerAziendale
         }
 
         /// <summary>
+        /// Servizio adibito all'aggiornamento di un Evento nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="luogo"></param>
+        /// <returns></returns>
+        public bool AggiornaEvento(string username, string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.AggiornaEvento(username, codice, id, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), luogo))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione AggiornaEvento() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "AggiornaEvento()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'eliminazione di un Evento nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool EliminaEvento(string username, string codice, string id)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.EliminaEvento(username, codice, id))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione EliminaEvento() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "EliminaEvento()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GetElencoEventi(string username)
+        {
+            try
+            {
+                string result = Sessione.ServerAziendaleDB.GetElencoEventi(username);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione GetElencoEventi() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoEventi()"); ///Scrittura log
+            }
+
+            return "";
+        }
+        #endregion
+
+        /// <summary>
         /// Servizio adibito all'inserimento di un Progetto nel DB
         /// </summary>
         /// <param name="username"></param>
@@ -264,6 +359,154 @@ namespace ServerAziendale
             finally
             {
                 WriteLog(username, "CreaProgetto()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibtio all'ottenimento dell'elenco dei partecipanti (Lavoratori) ad un'attvivita
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <returns></returns>
+        public string GetElencoPartecipantiAttivita(string username, string codice)
+        {
+            try
+            {
+                string result = Sessione.ServerAziendaleDB.GetElencoPartecipantiAttivita(username, codice);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione GetElencoPartecipantiEvento() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoPartecipantiEvento()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dei Lavoratori disponibili per un'attività
+        /// --> non restituisce i lavoratori già impiegati nella stessa
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <returns></returns>
+        public string GetElencoLavoratoriAttivita(string username, string codice)
+        {
+            string result = "";
+            try
+            {
+                string result_partecipanti = Sessione.ServerAziendaleDB.GetElencoPartecipantiAttivita(username, codice);
+                string result_lavoratori = Sessione.ServerAziendaleDB.GetElencoLavoratori(username);
+
+                if ((result_partecipanti != "") && (result_lavoratori != ""))
+                {
+                    List<string> listaPartecipanti = result_partecipanti.Split('\n').ToList();
+                    listaPartecipanti.RemoveAt((listaPartecipanti.Count - 1));
+
+                    List<string> listaLavoratori = result_lavoratori.Split('\n').ToList();
+                    listaLavoratori.RemoveAt((listaLavoratori.Count - 1));
+
+                    foreach (string lavoratore in listaLavoratori)
+                    {
+                        int cont = 0;
+                        List<string> info_lavoratore = lavoratore.Split('-').ToList();
+
+                        foreach (string partecipante in listaPartecipanti)
+                        {
+                            List<string> info_partecipante = partecipante.Split('-').ToList();
+
+                            if (info_lavoratore.ElementAt(0).Equals(info_partecipante.ElementAt(0)))
+                                cont++;
+                        }
+
+                        if (cont == 0)
+                            result += lavoratore + "\n";
+                    }
+                }
+
+                else if ((result == "")  && (result_lavoratori != "")) ///Tutti i lavoratori liberi
+                    return result_lavoratori;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione GetElencoLavoratoriAattivita() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoLavoratoriAattivita()"); ///Scrittura log
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'inserimento di un nuovo partecipante (Lavoratore) ad un'attivita
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="codice"></param>
+        /// <param name="ruolo"></param>
+        /// <returns></returns>
+        public bool AggiungiPartecipanteAttivita(string username, string username_in, string codice, string ruolo)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.AggiungiPartecipanteAttivita(username, username_in, codice, ruolo))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione AggiungiPartecipanteEvento() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "AggiungiPartecipanteEvento()"); ///Scrittura log
+            }
+
+            return false;
+        }          
+
+        /// <summary>
+        /// Servizio adibito all'eliminazione di un partecipante (Lavoratore) da un'attività
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="codice"></param>
+        /// <returns></returns>>
+        public bool RimuoviPartecipanteAttivita(string username, string username_in, string codice)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.RimuoviPartecipanteAttivita(username, username_in, codice))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione RimuoviPartecipanteAttivita() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "RimuoviPartecipanteAttivita()"); ///Scrittura log
             }
 
             return false;

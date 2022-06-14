@@ -85,6 +85,7 @@ namespace ServerAziendaleDB
         string GetElencoLavoratori(string username);
         #endregion
 
+        #region Eventi
         /// <summary>
         /// Servizio adibito all'inserimento di un Evento nel DB
         /// </summary>
@@ -99,6 +100,40 @@ namespace ServerAziendaleDB
         bool CreaEvento(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo);
 
         /// <summary>
+        /// Servizio adibito all'aggiornamento di un Evento nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="luogo"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool AggiornaEvento(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string luogo);
+
+        /// <summary>
+        /// Servizio adibito all'eliminazione di un Evento nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool EliminaEvento(string username, string codice, string id);
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        [OperationContract]
+        string GetElencoEventi(string username);
+        #endregion
+
+        /// <summary>
         /// Servizio adibito all'inserimento di un Progetto nel DB
         /// </summary>
         /// <param name="username"></param>
@@ -110,6 +145,36 @@ namespace ServerAziendaleDB
         /// <returns></returns>
         [OperationContract]
         bool CreaProgetto(string username, string nome, string descrizione, string dataInizio, string dataFine, string cliente);
+
+        /// <summary>
+        /// Servizio adibtio all'ottenimento dell'elenco dei partecipanti (Lavoratori) ad un'attività
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <returns></returns>
+        [OperationContract]
+        string GetElencoPartecipantiAttivita(string username, string codice);
+
+        /// <summary>
+        /// Servizio adibito all'inserimento di un nuovo partecipante (Lavoratore) ad un'attività
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="codice"></param>
+        /// <param name="ruolo"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool AggiungiPartecipanteAttivita(string username, string username_in, string codice, string ruolo);
+
+        /// <summary>
+        /// Servizio adibito all'eliminazione di un partecipante (Lavoratore) da un'attività
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="codice"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool RimuoviPartecipanteAttivita(string username, string username_in, string codice);
         #endregion
     }
 }

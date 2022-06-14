@@ -31,7 +31,6 @@
             this.panelCentro = new System.Windows.Forms.Panel();
             this.dgvEventi = new System.Windows.Forms.DataGridView();
             this.codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.referente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataInizio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,7 +38,7 @@
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.luogo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modifica = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.gestione_lavoratori = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.gestione_partecipanti = new System.Windows.Forms.DataGridViewButtonColumn();
             this.elimina = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panelCentro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
@@ -64,7 +63,6 @@
             this.dgvEventi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEventi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codice,
-            this.referente,
             this.nome,
             this.descrizione,
             this.dataInizio,
@@ -72,7 +70,7 @@
             this.id,
             this.luogo,
             this.modifica,
-            this.gestione_lavoratori,
+            this.gestione_partecipanti,
             this.elimina});
             this.dgvEventi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEventi.GridColor = System.Drawing.Color.White;
@@ -88,12 +86,6 @@
             this.codice.HeaderText = "Codice";
             this.codice.Name = "codice";
             this.codice.ReadOnly = true;
-            // 
-            // referente
-            // 
-            this.referente.HeaderText = "Referente";
-            this.referente.Name = "referente";
-            this.referente.ReadOnly = true;
             // 
             // nome
             // 
@@ -138,14 +130,16 @@
             this.modifica.ReadOnly = true;
             this.modifica.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.modifica.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.modifica.Text = "Modifica";
             this.modifica.UseColumnTextForButtonValue = true;
             // 
-            // gestione_lavoratori
+            // gestione_partecipanti
             // 
-            this.gestione_lavoratori.HeaderText = "";
-            this.gestione_lavoratori.Name = "gestione_lavoratori";
-            this.gestione_lavoratori.ReadOnly = true;
-            this.gestione_lavoratori.UseColumnTextForButtonValue = true;
+            this.gestione_partecipanti.HeaderText = "";
+            this.gestione_partecipanti.Name = "gestione_partecipanti";
+            this.gestione_partecipanti.ReadOnly = true;
+            this.gestione_partecipanti.Text = "Partecipanti";
+            this.gestione_partecipanti.UseColumnTextForButtonValue = true;
             // 
             // elimina
             // 
@@ -154,6 +148,7 @@
             this.elimina.ReadOnly = true;
             this.elimina.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.elimina.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.elimina.Text = "Elimina";
             this.elimina.UseColumnTextForButtonValue = true;
             // 
             // UCEventi
@@ -176,7 +171,6 @@
         private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.DataGridView dgvEventi;
         private System.Windows.Forms.DataGridViewTextBoxColumn codice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn referente;
         private System.Windows.Forms.DataGridViewTextBoxColumn nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn descrizione;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataInizio;
@@ -184,7 +178,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn luogo;
         private System.Windows.Forms.DataGridViewButtonColumn modifica;
-        private System.Windows.Forms.DataGridViewButtonColumn gestione_lavoratori;
+        private System.Windows.Forms.DataGridViewButtonColumn gestione_partecipanti;
         private System.Windows.Forms.DataGridViewButtonColumn elimina;
     }
 }

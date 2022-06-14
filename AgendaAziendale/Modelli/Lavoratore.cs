@@ -21,7 +21,7 @@ namespace AgendaAziendale.Modelli
         private string categoria;
         #endregion
 
-        #region Metodi e costruttori
+        #region Metodi costruttori
         /// <summary>
         /// Metodo costruttore della classe Lavoratore
         /// </summary>
@@ -48,7 +48,20 @@ namespace AgendaAziendale.Modelli
         /// Metodo costruttore vuoto della classe Lavoratore
         /// </summary>
         public Lavoratore() { }
+        #endregion
 
+        #region Getters & Setters
+        public string Username { get => username; set => username = value; }
+        public string Password { get => password; set => password = value; }
+        public string Nome { get => nome; set => nome = value; }
+        public string Cognome { get => cognome; set => cognome = value; }
+        public string Residenza { get => residenza; set => residenza = value; }
+        public DateTime DataNascita { get => dataNascita; set => dataNascita = value; }
+        public string Email { get => email; set => email = value; }
+        public string Categoria { get => categoria; set => categoria = value; }
+        #endregion
+
+        #region Metodi
         /// <summary>
         /// Metodo per generare la mail personale di ciascun utente
         /// --> si è già sicuri che non ci sia nel db essendo basata sull'username
@@ -130,17 +143,6 @@ namespace AgendaAziendale.Modelli
             
             return elencoLavoratori;
         }
-        #endregion
-
-        #region Getters & Setters
-        public string Username { get => username; set => username = value; }
-        public string Password { get => password; set => password = value; }
-        public string Nome { get => nome; set => nome = value; }
-        public string Cognome { get => cognome; set => cognome = value; }
-        public string Residenza { get => residenza; set => residenza = value; }
-        public DateTime DataNascita { get => dataNascita; set => dataNascita = value; }
-        public string Email { get => email; set => email = value; }
-        public string Categoria { get => categoria; set => categoria = value; }
         #endregion
     }
 }

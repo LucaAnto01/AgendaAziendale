@@ -54,11 +54,47 @@
   <wsdl:message name="IServiceDBAgendaAziendale_CreaEvento_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreaEventoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_AggiornaEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:AggiornaEvento" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_AggiornaEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AggiornaEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_EliminaEvento_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminaEvento" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_EliminaEvento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminaEventoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_GetElencoEventi_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetElencoEventi" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_GetElencoEventi_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetElencoEventiResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceDBAgendaAziendale_CreaProgetto_InputMessage">
     <wsdl:part name="parameters" element="tns:CreaProgetto" />
   </wsdl:message>
   <wsdl:message name="IServiceDBAgendaAziendale_CreaProgetto_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreaProgettoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_GetElencoPartecipantiAttivita_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetElencoPartecipantiAttivita" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_GetElencoPartecipantiAttivita_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetElencoPartecipantiAttivitaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_AggiungiPartecipanteAttivita_InputMessage">
+    <wsdl:part name="parameters" element="tns:AggiungiPartecipanteAttivita" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_AggiungiPartecipanteAttivita_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AggiungiPartecipanteAttivitaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_RimuoviPartecipanteAttivita_InputMessage">
+    <wsdl:part name="parameters" element="tns:RimuoviPartecipanteAttivita" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_RimuoviPartecipanteAttivita_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RimuoviPartecipanteAttivitaResponse" />
   </wsdl:message>
   <wsdl:portType name="IServiceDBAgendaAziendale">
     <wsdl:operation name="TestConnessione">
@@ -93,9 +129,33 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaEvento" message="tns:IServiceDBAgendaAziendale_CreaEvento_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaEventoResponse" message="tns:IServiceDBAgendaAziendale_CreaEvento_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AggiornaEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaEvento" message="tns:IServiceDBAgendaAziendale_AggiornaEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaEventoResponse" message="tns:IServiceDBAgendaAziendale_AggiornaEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminaEvento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/EliminaEvento" message="tns:IServiceDBAgendaAziendale_EliminaEvento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/EliminaEventoResponse" message="tns:IServiceDBAgendaAziendale_EliminaEvento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetElencoEventi">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventi" message="tns:IServiceDBAgendaAziendale_GetElencoEventi_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventiResponse" message="tns:IServiceDBAgendaAziendale_GetElencoEventi_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreaProgetto">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgetto" message="tns:IServiceDBAgendaAziendale_CreaProgetto_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgettoResponse" message="tns:IServiceDBAgendaAziendale_CreaProgetto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetElencoPartecipantiAttivita">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoPartecipantiAttivita" message="tns:IServiceDBAgendaAziendale_GetElencoPartecipantiAttivita_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoPartecipantiAttivitaResponse" message="tns:IServiceDBAgendaAziendale_GetElencoPartecipantiAttivita_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AggiungiPartecipanteAttivita">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiungiPartecipanteAttivita" message="tns:IServiceDBAgendaAziendale_AggiungiPartecipanteAttivita_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiungiPartecipanteAttivitaResponse" message="tns:IServiceDBAgendaAziendale_AggiungiPartecipanteAttivita_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RimuoviPartecipanteAttivita">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/RimuoviPartecipanteAttivita" message="tns:IServiceDBAgendaAziendale_RimuoviPartecipanteAttivita_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/RimuoviPartecipanteAttivitaResponse" message="tns:IServiceDBAgendaAziendale_RimuoviPartecipanteAttivita_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceDBAgendaAziendale" type="tns:IServiceDBAgendaAziendale">
@@ -172,8 +232,62 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AggiornaEvento">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminaEvento">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/EliminaEvento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetElencoEventi">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreaProgetto">
       <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgetto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetElencoPartecipantiAttivita">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoPartecipantiAttivita" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AggiungiPartecipanteAttivita">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/AggiungiPartecipanteAttivita" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RimuoviPartecipanteAttivita">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/RimuoviPartecipanteAttivita" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

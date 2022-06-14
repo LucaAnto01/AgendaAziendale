@@ -15,6 +15,7 @@ namespace AgendaAziendale.Forms
     public partial class FormEvento : Form
     {
         #region Attributi
+        private readonly Form formPadre;
         private readonly UCEventi ucPadre;
         private readonly Evento evento;
         private readonly string azione;
@@ -24,12 +25,14 @@ namespace AgendaAziendale.Forms
         /// <summary>
         /// Metodo costruttore del FormEvento
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="ucPadre"></param>
         /// <param name="evento"></param>
         /// <param name="azione"></param>
-        public FormEvento(UCEventi ucPadre, Evento evento, string azione)
+        public FormEvento(Form formPadre, UCEventi ucPadre, Evento evento, string azione)
         {
             InitializeComponent();
+            this.formPadre = formPadre;
             this.ucPadre = ucPadre;
             this.evento = evento;
             this.azione = azione;
@@ -38,11 +41,13 @@ namespace AgendaAziendale.Forms
         /// <summary>
         /// Metodo costruttore del FormEvento
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="ucPadre"></param>
         /// <param name="azione"></param>
-        public FormEvento(UCEventi ucPadre,string azione)
+        public FormEvento(Form formPadre, UCEventi ucPadre,string azione)
         {
             InitializeComponent();
+            this.formPadre = formPadre;
             this.ucPadre = ucPadre;
             this.evento = null;
             this.azione = azione;
@@ -109,6 +114,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
+            formPadre.Show();
             Close();
         }
 
@@ -204,7 +210,17 @@ namespace AgendaAziendale.Forms
                     
 
                 if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                    //Richiama funzione aggiorna
+                {
+                    if(Controller.AggiornaEvento(evento.Codice, evento.Id.ToString(), tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbLuogo.Text))
+                    {
+                        MessageBox.Show("Aggiornamento evento " + tbNome.Text + " avvenuto con successo!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        formPadre.Show();
+                        Close();
+                    }
+
+                    else
+                        MessageBox.Show("Errore in fase di aggiornamento.", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
                 if (ucPadre != null)
                     ucPadre.AggiornadgvEventi();

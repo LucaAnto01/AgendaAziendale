@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgendaAziendale.Modelli;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,10 +15,12 @@ namespace AgendaAziendale.Forms.UserControls
     {
         #region Attributi
         private Form formPadre;
+        private List<Evento> elencoEventi;
         #endregion
 
         #region Getters & Setters
         public Form FormPadre { get => formPadre; set => formPadre = value; }
+        public List<Evento> ElencoEventi { get => elencoEventi; set => elencoEventi = value; }
         #endregion
 
         /// <summary>
@@ -43,6 +46,8 @@ namespace AgendaAziendale.Forms.UserControls
             panelCentro.Parent = this;
             ///Figli del panelCentro
             dgvEventi.Parent = panelCentro;
+
+            AggiornadgvEventi();
         }
 
         /// <summary>
@@ -55,26 +60,48 @@ namespace AgendaAziendale.Forms.UserControls
         private void DgvEventi_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //Click sulla colonna con i button di modifica
-            if (e.ColumnIndex == 0)
+            if (e.ColumnIndex == 7)
             {
-                FormEvento formModificaEvento = new FormEvento(this, null, "aggiorna"); //TODO: invece che null genera l'evento e passalo come parametro
+                Evento evento = new Evento();
+                string codiceEventoSelezionato = dgvEventi.Rows[e.RowIndex].Cells[0].Value.ToString();
+                int idEventoSelezionato = int.Parse(dgvEventi.Rows[e.RowIndex].Cells[5].Value.ToString());
+                evento = ElencoEventi.FirstOrDefault(ev => ev.Codice == codiceEventoSelezionato && ev.Id == idEventoSelezionato);
+
+                FormEvento formModificaEvento = new FormEvento(formPadre, this, evento, "aggiorna");
+                formPadre.Hide();
                 formModificaEvento.Show();
             }
 
-            if (e.ColumnIndex == 1)
+            if (e.ColumnIndex == 8)
             {
-                FormPartecipanti formPartecipanti = new FormPartecipanti(FormPadre, this, null, "evento"); //TODO: invece che null genera l'evento e passalo come parametro
-                formPartecipanti.ShowDialog();
+                Evento evento = new Evento();
+                string codiceEventoSelezionato = dgvEventi.Rows[e.RowIndex].Cells[0].Value.ToString();
+                int idEventoSelezionato = int.Parse(dgvEventi.Rows[e.RowIndex].Cells[5].Value.ToString());
+                evento = ElencoEventi.FirstOrDefault(ev => ev.Codice == codiceEventoSelezionato && ev.Id == idEventoSelezionato);
+
+                FormPartecipanti formPartecipanti = new FormPartecipanti(FormPadre, this, evento, "evento"); //TODO: invece che null genera l'evento e passalo come parametro
+                formPadre.Hide();
+                formPartecipanti.Show();
             }
 
             //Click sulla colonna con i button d'eliminazione
-            if (e.ColumnIndex == 2)
+            if (e.ColumnIndex == 9)
             {
                 if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione dell'evento selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
                     "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    //string username = dgvEventi.Rows[e.RowIndex].Cells[0].ToString(); ///Codice della riga selezionata
-                    //TODO: elimina il lavoratore dal DB sulla base del suo username
+                    string codice = dgvEventi.Rows[e.RowIndex].Cells[0].Value.ToString(); ///Codice della riga selezionata
+                    string id = dgvEventi.Rows[e.RowIndex].Cells[5].Value.ToString(); ///ID della riga selezionata
+
+                    if (Controller.EliminaEvento(codice, id))
+                    {
+                        MessageBox.Show("Eliminazione evento avvenuta con successo!", "UCEventi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        AggiornadgvEventi();
+                    }
+
+                    else
+                        MessageBox.Show("ERRORE! Impossibile eliminare l'evento dal DB, contattare l'amministrazione.", "UCEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
             }
         }
@@ -86,7 +113,21 @@ namespace AgendaAziendale.Forms.UserControls
         /// </summary>
         public void AggiornadgvEventi()
         {
-            //TODO: fai e richiama il metodo per popolare la dgv --> va fatto lato server-db --> guarda la foto in condivisa
+            string result = Controller.GetElencoEventi();
+
+            dgvEventi.Rows.Clear();
+
+            if (result != "")
+            {
+                ElencoEventi = Evento.GeneraElencoEventi(result);
+
+                foreach (Evento evento in ElencoEventi)
+                    dgvEventi.Rows.Add(evento.Codice, evento.Nome, evento.Descrizione, evento.DataInizio.ToShortDateString(), evento.DataFine.ToShortDateString(),
+                                       evento.Id, evento.Luogo);
+            }
+
+            else
+                MessageBox.Show("ERRORE! Impossibile ottenere i dati dal DB, contattare l'amministrazione.", "Aggiorna UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         #endregion
     }

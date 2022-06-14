@@ -16,7 +16,7 @@ namespace AgendaAziendale.Modelli
         private DateTime dataFine;
         #endregion
 
-        #region Metodi
+        #region Metodi costruttori
         /// <summary>
         /// Metodo costruttore della classe Attivita
         /// </summary>

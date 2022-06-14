@@ -88,8 +88,6 @@ namespace AgendaAziendale.Forms
 
             cbCategoria.SelectedIndex = 0;
 
-            formPadre.Hide(); ///Nascondo il form padre
-
             if(lavoratore != null) ///Se ho un lavoratore da modificare
             {
                 tbNome.Text = lavoratore.Nome;
@@ -201,6 +199,8 @@ namespace AgendaAziendale.Forms
                         MessageBox.Show("Aggiornamento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         ucPadre.AggiornadgvLavoratori();
+                        formPadre.Show();
+                        Close();
                     }
                     else
                         MessageBox.Show("Aggiornamento lavoratore " + tbUsername.Text + "fallito.", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);

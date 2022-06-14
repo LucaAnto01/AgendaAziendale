@@ -18,6 +18,7 @@ namespace AgendaAziendale.Forms
         private Form formPadre;
         private UserControl ucPadre;
         private Attivita att;
+        private List<Lavoratore> elencoLavoratori;
         private readonly string tipologia;
         #endregion
 
@@ -25,6 +26,7 @@ namespace AgendaAziendale.Forms
         public Form FormPadre { get => formPadre; set => formPadre = value; }
         public UserControl UcPadre { get => ucPadre; set => ucPadre = value; }
         public Attivita Att { get => att; set => att = value; }
+        public List<Lavoratore> ElencoLavoratori { get => elencoLavoratori; set => elencoLavoratori = value; }
         #endregion
 
         /// <summary>
@@ -40,6 +42,7 @@ namespace AgendaAziendale.Forms
             FormPadre = formPadre;
             UcPadre = ucPadre;
             Att = att;
+            ElencoLavoratori = new List<Lavoratore>();
             this.tipologia = tipologia;
         }
 
@@ -60,8 +63,12 @@ namespace AgendaAziendale.Forms
             btChiudi.Parent = panelTop;
             ///Figli del pannello centrale
             lbLavoratore.Parent = panelCentro;
+            cbLavoratore.Parent = panelCentro;
             btAggiungi.Parent = panelCentro;
-            btRimuovi.Parent = panelCentro;
+            dgvPartecipanti.Parent = panelCentro;
+
+            CaricaCBLavoratori();
+            AggiornadgvPartecipanti();
 
             if ((tipologia == "Evento") || (tipologia == "evento"))
             {
@@ -81,7 +88,7 @@ namespace AgendaAziendale.Forms
                 Application.Exit();
             }
 
-            FormPadre.Hide(); //Nascondo il FormPadre
+            //FormPadre.Hide(); //Nascondo il FormPadre
         }
 
         /// <summary>
@@ -92,7 +99,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
-            FormPadre.ShowDialog();
+            FormPadre.Show();
             Close();
         }
 
@@ -103,17 +110,114 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiungi_Click(object sender, EventArgs e)
         {
-            //TODO: aggiungi il lavoratore come partecipante nel DB
+            AggiungiPartecipante();
+            AggiornadgvPartecipanti();
         }
 
         /// <summary>
-        /// Ascoltatore click sul bottone di rimozione da un'attività
+        /// Ascoltatore click sulla cella di eliminazione
+        /// --> eliminazione partecipazione corrispettiva
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtRimuovi_Click(object sender, EventArgs e)
+        private void DgvPartecipanti_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //TODO: rimuovi il lavoratore come partecipante nel DB
+            //Click sulla colonna con i button d'eliminazione
+            if (e.ColumnIndex == 3)
+            {
+                if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione della partecipazione selezionata? Tutte le informazioni ad essa collegate verranno eliminate.",
+                    "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    string username = dgvPartecipanti.Rows[e.RowIndex].Cells[0].Value.ToString(); ///Username della riga selezionata
+                    string codice = dgvPartecipanti.Rows[e.RowIndex].Cells[1].Value.ToString(); ///Codice della riga selezionata
+
+                    if (Controller.EliminaPartecipazioneAttivita(username, codice))
+                    {
+                        MessageBox.Show("Eliminazione partecipazione avvenuta con successo!", "FormPartecipanti", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        AggiornadgvPartecipanti();
+                    }
+
+                    else
+                        MessageBox.Show("ERRORE! Impossibile eliminare la partecipazione dal DB, contattare l'amministrazione.", "FormPartecipanti", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
+        }
+        #endregion
+
+        #region Metodi
+        /// <summary>
+        /// Metodo adibito al caricamento della combobox
+        /// </summary>
+        private void CaricaCBLavoratori()
+        {
+            string result = Controller.GetElencoLavoratoriAttivita(Att.Codice);
+            cbLavoratore.Items.Clear(); ///Pulisco l'elenco
+
+            if (result != "")
+            {
+                ElencoLavoratori = Lavoratore.GeneraElencoLavoratori(result);
+
+                cbLavoratore.Enabled = true; ///Abilito la selezione               
+
+                ///Popolo la combo box
+                cbLavoratore.DisplayMember = "Text";
+                cbLavoratore.ValueMember = "Value";
+                foreach (Lavoratore lavoratore in ElencoLavoratori)
+                    cbLavoratore.Items.Add(new { Text = lavoratore.Nome + " " + lavoratore.Cognome, 
+                                                 Value = lavoratore });
+            }
+
+            else
+                MessageBox.Show("ERRORE! Impossibile ottenere i dati dal DB, contattare l'amministrazione.", "CaricaCBLavoratori FormPartecipanti", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        }
+
+        /// <summary>
+        /// Funzione adibita all'inserimento di un nuovo partecipante ad un Evento
+        /// </summary>
+        private void AggiungiPartecipante()
+        {
+            if ((tipologia == "Evento") || (tipologia == "evento"))
+            {
+                string usernamePartecipante = (cbLavoratore.SelectedItem as dynamic).Value.Username;
+                string output_nomeCognome = (cbLavoratore.SelectedItem as dynamic).Value.Nome + " " + (cbLavoratore.SelectedItem as dynamic).Value.Cognome;
+                if (Controller.AggiugniPartecipanteAttivita(usernamePartecipante, Att.Codice, "Partecipante"))
+                    MessageBox.Show("Inserimento partecipante " + output_nomeCognome + " avvenuto con successo!", "FormPartecipanti", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                else
+                    MessageBox.Show("Errore in fase d'inserimento.", "FormPartecipanti", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        /// <summary>
+        /// Metodo per aggiornare i dati presenti nella dgvPartecipanti
+        /// </summary>
+        public void AggiornadgvPartecipanti()
+        {
+            string result = "";
+
+            dgvPartecipanti.Rows.Clear();
+            CaricaCBLavoratori(); ///Ricarico la combobox per aggiornare i lavoratori disponibili ed evitare di avere doppioni
+
+            //TODO: SE TIPOLOGIA EVENTO RICHIAMA LA FUNZIONE PER L'EVENTO, ALTRIMENTI QUELLA PER I PROGETTI
+            if ((tipologia == "Evento") || (tipologia == "evento"))
+                result = Controller.GetElencoPartecipantiAttivita(Att.Codice);
+
+            if (result != "")
+            {
+                List<string> elencoPartecipazioni = result.Split('\n').ToList();
+                elencoPartecipazioni.RemoveAt((elencoPartecipazioni.Count - 1)); ///A causa dello split l'ultimo elemento rimane vuoto --> ""
+
+                foreach (string info in elencoPartecipazioni)
+                {
+                    List<string> dettagli_info = info.Split('-').ToList();
+                    dgvPartecipanti.Rows.Add(dettagli_info.ElementAt(0), dettagli_info.ElementAt(1), dettagli_info.ElementAt(2));
+                }
+            }
+
+            else
+                MessageBox.Show("Non sono ancora presenti partecipanti per questa attivita.", "Aggiorna DGVPartecipanti", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
         #endregion
     }

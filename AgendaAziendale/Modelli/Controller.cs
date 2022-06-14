@@ -117,6 +117,7 @@ namespace AgendaAziendale.Modelli
         }
         #endregion
 
+        #region Eventi
         /// <summary>
         /// Metodo adibito all'inserimento di un evento nel DB
         /// </summary>
@@ -137,6 +138,54 @@ namespace AgendaAziendale.Modelli
         }
 
         /// <summary>
+        /// Metodo adibito all'aggiornamento di un Evento nel DB
+        /// </summary>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="luogo"></param>
+        /// <returns></returns>
+        public static bool AggiornaEvento(string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo)
+        {
+            if (Sessione.ServerAziendale.AggiornaEvento(Sessione.Lavoratore.Username, codice, id, nome, descrizione, dataInizio, dataFine, luogo))
+                return true;
+
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Metodo adibito all'eliminazione di un Evento dal DB
+        /// </summary>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static bool EliminaEvento(string codice, string id)
+        {
+            if (Sessione.ServerAziendale.EliminaEvento(Sessione.Lavoratore.Username, codice, id))
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Funzione adibita all'ottenimento dell'elenco di tutti gli eventi presenti nel DB
+        /// </summary>
+        /// <returns></returns>
+        public static string GetElencoEventi()
+        {
+            string result = Sessione.ServerAziendale.GetElencoEventi(Sessione.Lavoratore.Username);
+
+            if (result != "")
+                return result;
+
+            return "";
+        }
+        #endregion
+        /// <summary>
         /// Metodo adibito all'inserimento di un progetto nel DB
         /// </summary>
         /// <param name="nome"></param>
@@ -148,6 +197,66 @@ namespace AgendaAziendale.Modelli
         public static bool CreaProgetto(string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente)
         {
             if(Sessione.ServerAziendale.CreaProgetto(Sessione.Lavoratore.Username, nome, descrizione, dataInizio, dataFine, cliente))
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Funzione adibita all'inserimento di un nuovo Lavoratore ad un'attività
+        /// </summary>
+        /// <param name="username_in"></param>
+        /// <param name="codice"></param>
+        /// <param name="ruolo"></param>
+        /// <returns></returns>
+        public static bool AggiugniPartecipanteAttivita(string username_in, string codice, string ruolo)
+        {
+            if (Sessione.ServerAziendale.AggiungiPartecipanteAttivita(Sessione.Lavoratore.Username, username_in, codice, ruolo))
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Funzione adibtia all'ottenimento dell'elenco dei partecipanti ad un'attività
+        /// </summary>
+        /// <param name="codice"></param>
+        /// <returns></returns>
+        public static string GetElencoPartecipantiAttivita(string codice)
+        {
+            string result = Sessione.ServerAziendale.GetElencoPartecipantiAttivita(Sessione.Lavoratore.Username, codice);
+
+            if (result != "")
+                return result;
+
+            return "";
+        }
+
+        /// <summary>
+        /// Funzione adibita ad ottenere l'elenco dei lavoratori disponibili ad un'attività
+        /// --> noon già impiegati in un'altra attività
+        /// </summary>
+        /// <param name="codice"></param>
+        /// <returns></returns>
+        public static string GetElencoLavoratoriAttivita(string codice)
+        {
+            string result = Sessione.ServerAziendale.GetElencoLavoratoriAttivita(Sessione.Lavoratore.Username, codice);
+
+            if (result != "")
+                return result;
+
+            return "";
+        }
+
+        /// <summary>
+        /// Funzione adibtia all'eliminazione di una partecipazione ad un'attività
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <returns></returns>
+        public static bool EliminaPartecipazioneAttivita(string username, string codice)
+        {
+            if (Sessione.ServerAziendale.RimuoviPartecipanteAttivita(Sessione.Lavoratore.Username, username, codice))
                 return true;
 
             return false;

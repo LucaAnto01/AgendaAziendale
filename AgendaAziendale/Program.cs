@@ -26,9 +26,9 @@ namespace AgendaAziendale
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new FormLogin());
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("ERRORE! ServerAziendale: " + ex.Message, "ServerAziendale da funzione Main", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ERRORE! ServerAziendale: server non raggiungibile", "ServerAziendale da funzione Main", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
         }

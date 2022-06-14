@@ -14,21 +14,25 @@ namespace AgendaAziendale.Forms
     public partial class FormGestione : Form
     {
         #region Attributi
+        private Form formPadre;
         private readonly string tipologia;
         private UserControl ucContenitore;
         #endregion
 
         #region Gettrs & Setters
         public UserControl UcContenitore { get => ucContenitore; set => ucContenitore = value; }
+        public Form FormPadre { get => formPadre; set => formPadre = value; }
         #endregion
 
         /// <summary>
         /// Metodo costruttore del FormGestione
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="tipologia"></param>
-        public FormGestione(string tipologia)
+        public FormGestione(Form formPadre, string tipologia)
         {
             InitializeComponent();
+            FormPadre = formPadre;
             this.tipologia = tipologia;
         }
 
@@ -51,19 +55,19 @@ namespace AgendaAziendale.Forms
             if((tipologia == "Lavoratore") || (tipologia == "lavoratore"))
             {
                 btAggiungi.Text = "Aggiungi lavoratore";
-                UcContenitore = new UCLavoratori(this);
+                UcContenitore = new UCLavoratori(FormPadre);
             }
 
             else if ((tipologia == "Evento") || (tipologia == "evento"))
             {
                 btAggiungi.Text = "Aggiungi evento";
-                UcContenitore = new UCEventi(this);
+                UcContenitore = new UCEventi(FormPadre);
             }
 
             else if ((tipologia == "Progetto") || (tipologia == "progetto"))
             {
                 btAggiungi.Text = "Aggiungi progetto";
-                UcContenitore = new UCProgetti(this);
+                UcContenitore = new UCProgetti(FormPadre);
             }
 
             else
@@ -79,20 +83,23 @@ namespace AgendaAziendale.Forms
         {
             if ((tipologia == "Lavoratore") || (tipologia == "lavoratore"))
             {
-                FormLavoratore formAggiungi = new FormLavoratore(this, (UCLavoratori)UcContenitore, "aggiungi");
-                formAggiungi.Show();
+                FormLavoratore formAggiungi = new FormLavoratore(FormPadre, (UCLavoratori)UcContenitore, "aggiungi");
+                FormPadre.Hide();
+                formAggiungi.ShowDialog();
             }
 
             else if ((tipologia == "Evento") || (tipologia == "evento"))
             {
-                FormEvento formAggiungi = new FormEvento((UCEventi)UcContenitore, "aggiungi");
-                formAggiungi.Show();
+                FormEvento formAggiungi = new FormEvento(FormPadre, (UCEventi)UcContenitore, "aggiungi");
+                FormPadre.Hide();
+                formAggiungi.ShowDialog();
             }
 
             else if ((tipologia == "Progetto") || (tipologia == "progetto"))
             {
                 FormProgetto formAggiungi = new FormProgetto((UCProgetti)UcContenitore, "aggiungi");
-                formAggiungi.Show();
+                FormPadre.Hide();
+                formAggiungi.ShowDialog();
             }
 
             else

@@ -117,8 +117,10 @@ namespace ServerAziendaleDB
                            "('" + username_in + "','" + password + "','"+ nome +"','"+ cognome + "','" + residenza + "','" + 
                             dataNascita + "','" + email + "','" + categoria + "');";
 
-            List<string> queries = new List<string>();
-            queries.Add(query);
+            List<string> queries = new List<string>
+            {
+                query
+            };
 
             try
             {
@@ -157,8 +159,10 @@ namespace ServerAziendaleDB
                                 cognome + "', residenza = '" + residenza + "', data_nascita = '" + dataNascita + "', categoria = '" 
                                 + categoria + "' WHERE username = '" + username_in + "';";
 
-            List<string> queries = new List<string>();
-            queries.Add(query);
+            List<string> queries = new List<string>
+            {
+                query
+            };
 
             try
             {
@@ -190,8 +194,10 @@ namespace ServerAziendaleDB
         {
             string query = "DELETE FROM lavoratore WHERE username = '" + username_in + "';";
 
-            List<string> queries = new List<string>();
-            queries.Add(query);
+            List<string> queries = new List<string>
+            {
+                query
+            };
 
             try
             {
@@ -245,6 +251,7 @@ namespace ServerAziendaleDB
         }
         #endregion
 
+        #region Eventi
         /// <summary>
         /// Servizio adibito all'inserimento di un Evento nel DB
         /// </summary>
@@ -261,9 +268,11 @@ namespace ServerAziendaleDB
                                     "VALUES('" + nome + "', '" + descrizione + "', '" + dataInizio + "', '" + dataFine + "');"; ///Creo una nuova attività
             string query_evento = "INSERT INTO evento(luogo) VALUES ('" + luogo + "');"; ///Creo un nuovo evento
 
-            List<string> queries = new List<string>();
-            queries.Add(query_attivita);
-            queries.Add(query_evento);
+            List<string> queries = new List<string>
+            {
+                query_attivita,
+                query_evento
+            };
 
             try
             {
@@ -278,8 +287,10 @@ namespace ServerAziendaleDB
                     if ((codUltimaAttivita[0] != "") && (codUltimoEvento[0] != ""))
                     {
                         string query_spEvento = "INSERT INTO specifica_evento(fk_attivita, fk_evento) VALUES ('" + codUltimaAttivita[0] + "','" + codUltimoEvento[0] + "');";
-                        List<string> queries_sp = new List<string>();
-                        queries_sp.Add(query_spEvento);
+                        List<string> queries_sp = new List<string>
+                        {
+                            query_spEvento
+                        };
 
                         if (InterazioneDB.EseguiQueries(queries_sp))
                             return true;           
@@ -302,6 +313,126 @@ namespace ServerAziendaleDB
         }
 
         /// <summary>
+        /// Servizio adibito all'aggiornamento di un Evento nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="luogo"></param>
+        /// <returns></returns>
+        public bool AggiornaEvento(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string luogo)
+        {
+            string query_attivita = "UPDATE attivita SET nome = '" + nome + "', descrizione = '" + descrizione + "', data_inizio = '" + dataInizio + "', data_fine = '" + dataFine +
+                                    "' WHERE codice = '" + codice + "';"; ///Aggiorno l'attività
+
+            string query_evento = "UPDATE evento SET luogo = '" + luogo + "' WHERE id = '" + id + "';"; ///Aggiorno l'evento
+
+            List<string> queries = new List<string>
+            {
+                query_attivita,
+                query_evento
+            };
+
+            try
+            {
+                if (InterazioneDB.EseguiQueries(queries))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query AggiornaEvento() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "AggiornaEvento()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'eliminazione di un Evento nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool EliminaEvento(string username, string codice, string id)
+        {
+            string query_sp_evento = "DELETE FROM specifica_evento WHERE fk_attivita = '" + codice + "' AND fk_evento = '" + id + "';";
+            string query_attivita = "DELETE FROM attivita WHERE codice = '" + codice + "';";
+            string query_evento = "DELETE FROM evento WHERE id = '" + id + "'";
+
+            List<string> queries = new List<string>
+            {
+                query_sp_evento,
+                query_attivita,
+                query_evento
+            };
+
+            try
+            {
+                if (InterazioneDB.EseguiQueries(queries)) ///Elimino l'evento
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query EliminaEvento() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "EliminaEvento()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GetElencoEventi(string username)
+        {
+            string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, e.id, e.luogo " +
+                           "FROM attivita a, evento e, specifica_evento se " +
+                           "WHERE a.codice = se.fk_attivita AND e.id = se.fk_evento; ";
+
+            try
+            {
+                string result = InterazioneDB.EseguiQuery_GetInfo(query);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query GetElencoEventi() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoEventi()"); ///Scrittura log
+            }
+
+            return "";
+        }       
+        #endregion
+
+        #region Progetti
+        /// <summary>
         /// Servizio adibito all'inserimento di un Progetto nel DB
         /// </summary>
         /// <param name="username"></param>
@@ -317,9 +448,11 @@ namespace ServerAziendaleDB
                                     "VALUES('" + nome + "', '" + descrizione + "', '" + dataInizio + "', '" + dataFine + "');"; ///Creo una nuova attività
             string query_progetto = "INSERT INTO progetto(cliente) VALUES ('" + cliente + "');"; ///Creo un nuovo progetto
 
-            List<string> queries = new List<string>();
-            queries.Add(query_attivita);
-            queries.Add(query_progetto);
+            List<string> queries = new List<string>
+            {
+                query_attivita,
+                query_progetto
+            };
 
             try
             {
@@ -335,8 +468,10 @@ namespace ServerAziendaleDB
                     {
                         string query_spProgetto = "INSERT INTO specifica_progetto(fk_attivita, fk_progetto) " +
                                                   "VALUES ('" + codUltimaAttivita[0] + "','" + codUltimoProgetto[0] + "');";
-                        List<string> queries_sp = new List<string>();
-                        queries_sp.Add(query_spProgetto);
+                        List<string> queries_sp = new List<string>
+                        {
+                            query_spProgetto
+                        };
 
                         if (InterazioneDB.EseguiQueries(queries_sp))
                             return true;
@@ -353,6 +488,115 @@ namespace ServerAziendaleDB
             finally
             {
                 WriteLog(username, "CreaProgetto()"); ///Scrittura log
+            }
+
+            return false;
+        }
+        #endregion
+
+        /// <summary>
+        /// Servizio adibtio all'ottenimento dell'elenco dei partecipanti (Lavoratori) ad un'attività
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <returns></returns>
+        public string GetElencoPartecipantiAttivita(string username, string codice)
+        {
+            string query = "SELECT l.username, a.codice, p.ruolo " +
+                           "FROM lavoratore l, attivita a, partecipazione p " +
+                           "WHERE l.username = p.fk_lavoratore AND a.codice = p.fk_attivita" +
+                           "      AND a.codice = '" + codice + "'; ";
+
+            try
+            {
+                string result = InterazioneDB.EseguiQuery_GetInfo(query);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query GetElencoPartecipantiEvento() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoPartecipantiEvento()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// Servizio adibito all'inserimento di un nuovo partecipante (Lavoratore) ad un'attività
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="codice"></param>
+        /// <param name="ruolo"></param>
+        /// <returns></returns>
+        public bool AggiungiPartecipanteAttivita(string username, string username_in, string codice, string ruolo)
+        {
+            string query = "INSERT INTO partecipazione(fk_lavoratore, fk_attivita, ruolo) VALUES ('" + username_in + "','" + codice + "','" + ruolo + "')";
+
+            List<string> queries = new List<string>
+            {
+                query
+            };
+
+            try
+            {
+                if (InterazioneDB.EseguiQueries(queries)) ///Elimino l'evento
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query AggiungiPartecipanteEvento() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "AggiungiPartecipanteEvento()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'eliminazione di un partecipante (Lavoratore) da un'attività
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="codice"></param>
+        /// <returns></returns>
+        public bool RimuoviPartecipanteAttivita(string username, string username_in, string codice)
+        {
+            string query = "DELETE FROM partecipazione WHERE fk_lavoratore = '" + username_in + "' AND fk_attivita = '" + codice + "';";
+
+            List<string> queries = new List<string>
+            {
+                query,
+            };
+
+            try
+            {
+                if (InterazioneDB.EseguiQueries(queries)) ///Elimino la partecipazione
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query RimuoviPartecipanteAttivita() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "RimuoviPartecipanteAttivita()"); ///Scrittura log
             }
 
             return false;

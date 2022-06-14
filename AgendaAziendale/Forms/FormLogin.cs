@@ -116,13 +116,6 @@ namespace AgendaAziendale
 
                 else
                     MessageBox.Show("Username o password non validi", "Errore compilazione campi",  MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
-
-                //DA RIMUOVERE SUCCESSIVAMENTE
-                /*FormAdmin pippo = new FormAdmin();
-                pippo.ShowDialog();
-                //this.Hide();
-                Close();*/
             }
 
             else
