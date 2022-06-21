@@ -406,7 +406,7 @@ namespace ServerAziendaleDB
         {
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, e.id, e.luogo " +
                            "FROM attivita a, evento e, specifica_evento se " +
-                           "WHERE a.codice = se.fk_attivita AND e.id = se.fk_evento; ";
+                           "WHERE a.codice = se.fk_attivita AND e.id = se.fk_evento;";
 
             try
             {
@@ -492,6 +492,271 @@ namespace ServerAziendaleDB
 
             return false;
         }
+
+        /// <summary>
+        /// Servizio adibito all'aggiornamento di un Progetto nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
+        public bool AggiornaProgetto(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string cliente)
+        {
+            string query_attivita = "UPDATE attivita SET nome = '" + nome + "', descrizione = '" + descrizione + "', data_inizio = '" + dataInizio + "', data_fine = '" + dataFine +
+                                    "' WHERE codice = '" + codice + "';"; ///Aggiorno l'attività
+
+            string query_progetto = "UPDATE progetto SET cliente = '" + cliente + "' WHERE id = '" + id + "';"; ///Aggiorno il progetto
+
+            List<string> queries = new List<string>
+            {
+                query_attivita,
+                query_progetto
+            };
+
+            try
+            {
+                if (InterazioneDB.EseguiQueries(queries))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query AggiornaProgetto() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "AggiornaProgetto()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'eliminazione di un Progetto dal DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool EliminaProgetto(string username, string codice, string id)
+        {
+            string query_sp_progetto = "DELETE FROM specifica_progetto WHERE fk_attivita = '" + codice + "' AND fk_progetto = '" + id + "';";
+            string query_attivita = "DELETE FROM attivita WHERE codice = '" + codice + "';";
+            string query_progetto = "DELETE FROM progetto WHERE id = '" + id + "'";
+
+            List<string> queries = new List<string>
+            {
+                query_sp_progetto,
+                query_attivita,
+                query_progetto
+            };
+
+            try
+            {
+                if (InterazioneDB.EseguiQueries(queries)) ///Elimino l'evento
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query EliminaProgetto() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "EliminaProgetto()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GetElencoProgetti(string username)
+        {
+            string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, p.id, p.cliente" +
+                           " FROM attivita a, progetto p, specifica_progetto sp" +
+                           " WHERE a.codice = sp.fk_attivita AND p.id = sp.fk_progetto; ";
+
+            try
+            {
+                string result = InterazioneDB.EseguiQuery_GetInfo(query);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query GetElencoProgetti() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoProgetti()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        #region Obiettivi
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'elenco di tutti gli Obiettivi di un determinato Progetto
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string GetElencoObiettivi(string username, string id)
+        {
+            string query = "SELECT * " +
+                           " FROM obiettivo " +
+                           " WHERE obiettivo.fk_progetto = '" + id + "';";
+
+            try
+            {
+                string result = InterazioneDB.EseguiQuery_GetInfo(query);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query GetElencoObiettivi() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoObiettivi()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// Servizio adibito all'inserimento di un nuovo Obiettivo ad un determinato Progetto
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="id"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="completato"></param>
+        /// <returns></returns>
+        public bool AggiungiObiettivo(string username, string id, string descrizione, bool completato)
+        {
+            string query = "INSERT INTO obiettivo(fk_progetto, descrizione, completato) " +
+                           " VALUES ('" + id + "','" + descrizione + "','" + (completato ? 1.ToString() : 0.ToString()) + "');";
+
+            List<string> queries = new List<string>
+            {
+                query
+            };
+
+            try
+            {
+                if (InterazioneDB.EseguiQueries(queries))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query AggiungiObiettivo() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "AggiungiObiettivo()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito alla modifica di un determinato obiettivo
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="id"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="completato"></param>
+        /// <returns></returns>
+        public bool ModificaObiettivo(string username, string id, string descrizione, bool completato)
+        {
+            string query = "UPDATE obiettivo SET descrizione = '" + descrizione + "',completato = '" + (completato ? 1.ToString() : 0.ToString()) + "' " +
+                           " WHERE obiettivo.id = '" + id + "';";
+
+            List<string> queries = new List<string>
+            {
+                query
+            };
+
+            try
+            {
+                if (InterazioneDB.EseguiQueries(queries))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query ModificaObiettivo() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "ModificaObiettivo()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'eliminazione di un determinato obiettivo
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool EliminaObiettivo(string username, string id)
+        {
+            string query = "DELETE FROM obiettivo WHERE obiettivo.id = '" + id + "';";
+
+            List<string> queries = new List<string>
+            {
+                query
+            };
+
+            try
+            {
+                if (InterazioneDB.EseguiQueries(queries))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query EliminaObiettivo() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "EliminaObiettivo()"); ///Scrittura log
+            }
+
+            return false;
+        }
+        #endregion
         #endregion
 
         /// <summary>
@@ -517,13 +782,13 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
-                Console.WriteLine("ERRORE!!! Esecuzione query GetElencoPartecipantiEvento() in ServerAziendaleDB: " + ex.ToString());
+                Console.WriteLine("ERRORE!!! Esecuzione query GetElencoPartecipantiAttivita() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
 
             finally
             {
-                WriteLog(username, "GetElencoPartecipantiEvento()"); ///Scrittura log
+                WriteLog(username, "GetElencoPartecipantiAttivita()"); ///Scrittura log
             }
 
             return "";
@@ -554,13 +819,13 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
-                Console.WriteLine("ERRORE!!! Esecuzione query AggiungiPartecipanteEvento() in ServerAziendaleDB: " + ex.ToString());
+                Console.WriteLine("ERRORE!!! Esecuzione query AggiungiPartecipanteAttivita() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
 
             finally
             {
-                WriteLog(username, "AggiungiPartecipanteEvento()"); ///Scrittura log
+                WriteLog(username, "AggiungiPartecipanteAttivita()"); ///Scrittura log
             }
 
             return false;

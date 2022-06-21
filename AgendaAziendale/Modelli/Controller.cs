@@ -185,6 +185,8 @@ namespace AgendaAziendale.Modelli
             return "";
         }
         #endregion
+
+        #region Progetti
         /// <summary>
         /// Metodo adibito all'inserimento di un progetto nel DB
         /// </summary>
@@ -201,6 +203,135 @@ namespace AgendaAziendale.Modelli
 
             return false;
         }
+
+        /// <summary>
+        /// Metodo adibito all'aggiornamento di un Progetto nel DB
+        /// </summary>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
+        public static bool AggiornaProgetto(string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente)
+        {
+            if (Sessione.ServerAziendale.AggiornaProgetto(Sessione.Lavoratore.Username, codice, id, nome, descrizione, dataInizio, dataFine, cliente))
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Metodo adibito all'eliminazione di un Progetto dal DB
+        /// </summary>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static bool EliminaProgetto(string codice, string id)
+        {
+            if (Sessione.ServerAziendale.EliminaProgetto(Sessione.Lavoratore.Username, codice, id))
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Funzione adibita all'ottenimento dell'elenco di tutti i progetti presenti nel DB
+        /// </summary>
+        /// <returns></returns>
+        public static string GetElencoProgetti()
+        {
+            string result = Sessione.ServerAziendale.GetElencoProgetti(Sessione.Lavoratore.Username);
+
+            if (result != "")
+                return result;
+
+            return "";
+        }
+
+        #region Obiettivi
+        /// <summary>
+        /// Funzione adibita all'ottenimento dell'elenco di tutti gli obiettivi associati ad un determinato Progetto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static string GetElencoObiettivi(string id)
+        {
+            string result = Sessione.ServerAziendale.GetElencoObiettivi(Sessione.Lavoratore.Username, id);
+
+            if (result != "")
+                return result;
+
+            return "";
+        }
+
+        /// <summary>
+        /// Funzione adibita al calcolo dell'avanzamento percentuale di un determinato progetto sulla base del completamento degli Obiettivi
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int CalcolaAvanzamentoProgetto(Progetto progetto)
+        {
+            int[] obiettivi = new int[progetto.Obiettivi.Count];
+
+            int i = 0;
+            foreach(Obiettivo obiettivo in progetto.Obiettivi)
+            {
+                obiettivi[i] = obiettivo.Completato ? 1 : 0;
+                i++;
+            }
+
+            int result = Sessione.ServerAziendale.CalcolaAvanzamento(Sessione.Lavoratore.Username, obiettivi);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Funzione adibita all'inserimento di un nuovo Obiettivo ad un determinato Progetto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="completato"></param>
+        /// <returns></returns>
+        public static bool AggiungiObiettivo(string id, string descrizione, bool completato)
+        {
+            if (Sessione.ServerAziendale.AggiungiObiettivo(Sessione.Lavoratore.Username, id, descrizione, completato))
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Funzione adibita alla modifica di un Obiettivo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="completato"></param>
+        /// <returns></returns>
+        public static bool ModificaObiettivo(string id, string descrizione, bool completato)
+        {
+            if (Sessione.ServerAziendale.ModificaObiettivo(Sessione.Lavoratore.Username, id, descrizione, completato))
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Funzione adibita all'eliminazione di un Obiettivo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static bool EliminaObiettivo(string id)
+        {
+            if (Sessione.ServerAziendale.EliminaObiettivo(Sessione.Lavoratore.Username, id))
+                return true;
+
+            return false;
+        }
+        #endregion
+        #endregion
 
         /// <summary>
         /// Funzione adibita all'inserimento di un nuovo Lavoratore ad un'attività

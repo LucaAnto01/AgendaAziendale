@@ -31,15 +31,15 @@
             this.panelCentro = new System.Windows.Forms.Panel();
             this.dgvProgetti = new System.Windows.Forms.DataGridView();
             this.codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.referente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataInizio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataFine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modifica = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.avanzamento = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gestione_lavoratori = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.modifica = new System.Windows.Forms.DataGridViewButtonColumn();
             this.elimina = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panelCentro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProgetti)).BeginInit();
@@ -64,15 +64,15 @@
             this.dgvProgetti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProgetti.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codice,
-            this.referente,
             this.nome,
             this.descrizione,
             this.dataInizio,
             this.dataFine,
             this.id,
             this.cliente,
-            this.modifica,
+            this.avanzamento,
             this.gestione_lavoratori,
+            this.modifica,
             this.elimina});
             this.dgvProgetti.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProgetti.GridColor = System.Drawing.Color.White;
@@ -88,12 +88,6 @@
             this.codice.HeaderText = "Codice";
             this.codice.Name = "codice";
             this.codice.ReadOnly = true;
-            // 
-            // referente
-            // 
-            this.referente.HeaderText = "Referente";
-            this.referente.Name = "referente";
-            this.referente.ReadOnly = true;
             // 
             // nome
             // 
@@ -131,21 +125,29 @@
             this.cliente.Name = "cliente";
             this.cliente.ReadOnly = true;
             // 
-            // modifica
+            // avanzamento
             // 
-            this.modifica.HeaderText = "";
-            this.modifica.Name = "modifica";
-            this.modifica.ReadOnly = true;
-            this.modifica.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.modifica.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.modifica.UseColumnTextForButtonValue = true;
+            this.avanzamento.HeaderText = "";
+            this.avanzamento.Name = "avanzamento";
+            this.avanzamento.ReadOnly = true;
             // 
             // gestione_lavoratori
             // 
             this.gestione_lavoratori.HeaderText = "";
             this.gestione_lavoratori.Name = "gestione_lavoratori";
             this.gestione_lavoratori.ReadOnly = true;
+            this.gestione_lavoratori.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.gestione_lavoratori.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.gestione_lavoratori.Text = "Lavoratori";
             this.gestione_lavoratori.UseColumnTextForButtonValue = true;
+            // 
+            // modifica
+            // 
+            this.modifica.HeaderText = "";
+            this.modifica.Name = "modifica";
+            this.modifica.ReadOnly = true;
+            this.modifica.Text = "Modifica";
+            this.modifica.UseColumnTextForButtonValue = true;
             // 
             // elimina
             // 
@@ -154,6 +156,7 @@
             this.elimina.ReadOnly = true;
             this.elimina.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.elimina.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.elimina.Text = "Elimina";
             this.elimina.UseColumnTextForButtonValue = true;
             // 
             // UCProgetti
@@ -176,15 +179,15 @@
         private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.DataGridView dgvProgetti;
         private System.Windows.Forms.DataGridViewTextBoxColumn codice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn referente;
         private System.Windows.Forms.DataGridViewTextBoxColumn nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn descrizione;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataInizio;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataFine;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cliente;
-        private System.Windows.Forms.DataGridViewButtonColumn modifica;
+        private System.Windows.Forms.DataGridViewButtonColumn avanzamento;
         private System.Windows.Forms.DataGridViewButtonColumn gestione_lavoratori;
+        private System.Windows.Forms.DataGridViewButtonColumn modifica;
         private System.Windows.Forms.DataGridViewButtonColumn elimina;
     }
 }

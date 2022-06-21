@@ -15,6 +15,7 @@ namespace AgendaAziendale.Forms
     public partial class FormProgetto : Form
     {
         #region Attributi
+        private readonly Form formPadre;
         private readonly UCProgetti ucPadre;
         private readonly Progetto progetto;
         private readonly string azione;
@@ -24,12 +25,14 @@ namespace AgendaAziendale.Forms
         /// <summary>
         /// Metodo costruttore del FormProgetto
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="ucPadre"></param>
         /// <param name="progetto"></param>
         /// <param name="azione"></param>
-        public FormProgetto(UCProgetti ucPadre, Progetto progetto, string azione)
+        public FormProgetto(Form formPadre, UCProgetti ucPadre, Progetto progetto, string azione)
         {
             InitializeComponent();
+            this.formPadre = formPadre;
             this.ucPadre = ucPadre;
             this.progetto = progetto;
             this.azione = azione;
@@ -38,11 +41,13 @@ namespace AgendaAziendale.Forms
         /// <summary>
         /// Metodo costruttore del FormProgetto
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="ucPadre"></param>
         /// <param name="azione"></param>
-        public FormProgetto(UCProgetti ucPadre, string azione)
+        public FormProgetto(Form formPadre, UCProgetti ucPadre, string azione)
         {
             InitializeComponent();
+            this.formPadre = formPadre;
             this.ucPadre = ucPadre;
             this.progetto = null;
             this.azione = azione;
@@ -78,6 +83,7 @@ namespace AgendaAziendale.Forms
             mcDataInizio.Parent = panelCentro;
             mcDataFine.Parent = panelCentro;
             btAggiungiAggiorna.Parent = panelCentro;
+            btGestioneObiettivi.Parent = panelCentro;   
 
             if (progetto != null) ///Se ho un evento da modificare
             {
@@ -92,7 +98,11 @@ namespace AgendaAziendale.Forms
                 btAggiungiAggiorna.Text = "Aggiungi";
 
             else if ((azione == "Aggiorna") || (azione == "aggiorna"))
+            {
                 btAggiungiAggiorna.Text = "Aggiorna";
+                btGestioneObiettivi.Visible = true;
+            }
+                
 
             else
             {
@@ -109,6 +119,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
+            formPadre.Show();
             Close();
         }
 
@@ -204,7 +215,17 @@ namespace AgendaAziendale.Forms
                 }
 
                 if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                    //Richiama funzione aggiorna
+                {
+                    if (Controller.AggiornaProgetto(progetto.Codice, progetto.Id.ToString(), tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbCliente.Text))
+                    {
+                        MessageBox.Show("Aggiornamento progetto " + tbNome.Text + " avvenuto con successo!", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        formPadre.Show();
+                        Close();
+                    }
+
+                    else
+                        MessageBox.Show("Errore in fase di aggiornamento.", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
                 if (ucPadre != null)
                     ucPadre.AggiornadgvProgetti();
@@ -213,6 +234,19 @@ namespace AgendaAziendale.Forms
             else
                 lbErrore.Visible = true;
         }
+
+        /// <summary>
+        /// Click sul bottone di aggiunta di un Obiettivo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtGestioneObiettivi_Click(object sender, EventArgs e)
+        {
+            FormObiettivi formObiettivi = new FormObiettivi(this, ucPadre, progetto);
+            formObiettivi.Show();
+            Hide();
+        }
+
         #endregion
 
         #region Metodi

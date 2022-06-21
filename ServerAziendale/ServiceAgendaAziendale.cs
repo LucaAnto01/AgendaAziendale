@@ -332,6 +332,7 @@ namespace ServerAziendale
         }
         #endregion
 
+        #region Progetti
         /// <summary>
         /// Servizio adibito all'inserimento di un Progetto nel DB
         /// </summary>
@@ -363,6 +364,253 @@ namespace ServerAziendale
 
             return false;
         }
+
+        /// <summary>
+        /// Servizio adibito all'aggiornamento di un Progetto nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
+        public bool AggiornaProgetto(string username, string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.AggiornaProgetto(username, codice, id, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), cliente))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione AggiornaProgetto() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "AggiornaProgetto()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'eliminazione di un Progetto dal DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool EliminaProgetto(string username, string codice, string id)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.EliminaProgetto(username, codice, id))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione EliminaProgetto() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "EliminaProgetto()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GetElencoProgetti(string username)
+        {
+            try
+            {
+                string result = Sessione.ServerAziendaleDB.GetElencoProgetti(username);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione GetElencoProgetti() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoProgetti()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        #region Obiettivi
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'elenco di tutti gli Obiettivi di un determinato Progetto
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string GetElencoObiettivi(string username, string id)
+        {
+            try
+            {
+                string result = Sessione.ServerAziendaleDB.GetElencoObiettivi(username, id);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione GetElencoObiettivi() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoObiettivi()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// Servizio adibito al calcolo dell'avanzamento percentuale di un determinato progetto sulla base del completamento degli Obiettivi
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="obiettivi"></param>
+        /// <returns></returns>
+        public int CalcolaAvanzamento(string username, int[] obiettivi)
+        {
+            int result = 0;
+            int completati = 0;
+
+            try
+            {
+                foreach (int obiettivo in obiettivi)
+                    if (obiettivo == 1) //1 --> completato
+                        completati++;
+
+                result = ((100 * completati) / obiettivi.Length);
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione CalcolaAvanzamento() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "CalcolaAvanzamento()"); ///Scrittura log
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'inserimento di un nuovo Obiettivo ad un determinato Progetto
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="id"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="completato"></param>
+        /// <returns></returns>
+        public bool AggiungiObiettivo(string username, string id, string descrizione, bool completato)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.AggiungiObiettivo(username, id, descrizione, completato))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione AggiungiObiettivo() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "AggiungiObiettivo()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito alla modifica di un determinato obiettivo
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="id"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="completato"></param>
+        /// <returns></returns>
+        public bool ModificaObiettivo(string username, string id, string descrizione, bool completato)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.ModificaObiettivo(username, id, descrizione, completato))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione ModificaObiettivo() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "ModificaObiettivo()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'eliminazione di un determinato obiettivo
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool EliminaObiettivo(string username, string id)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.EliminaObiettivo(username, id))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione EliminaObiettivo() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "EliminaObiettivo()"); ///Scrittura log
+            }
+
+            return false;
+        }
+        #endregion
+        #endregion
 
         /// <summary>
         /// Servizio adibtio all'ottenimento dell'elenco dei partecipanti (Lavoratori) ad un'attvivita

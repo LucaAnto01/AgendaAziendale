@@ -41,7 +41,7 @@
             this.tbNome = new System.Windows.Forms.TextBox();
             this.lbNome = new System.Windows.Forms.Label();
             this.panelCentro = new System.Windows.Forms.Panel();
-            this.btAggiungiPartecipante = new System.Windows.Forms.Button();
+            this.btGestioneObiettivi = new System.Windows.Forms.Button();
             this.lbErrore = new System.Windows.Forms.Label();
             this.mcDataFine = new System.Windows.Forms.MonthCalendar();
             this.mcDataInizio = new System.Windows.Forms.MonthCalendar();
@@ -180,7 +180,7 @@
             // 
             // panelCentro
             // 
-            this.panelCentro.Controls.Add(this.btAggiungiPartecipante);
+            this.panelCentro.Controls.Add(this.btGestioneObiettivi);
             this.panelCentro.Controls.Add(this.lbErrore);
             this.panelCentro.Controls.Add(this.mcDataFine);
             this.panelCentro.Controls.Add(this.mcDataInizio);
@@ -191,14 +191,16 @@
             this.panelCentro.Size = new System.Drawing.Size(750, 525);
             this.panelCentro.TabIndex = 68;
             // 
-            // btAggiungiPartecipante
+            // btGestioneObiettivi
             // 
-            this.btAggiungiPartecipante.Location = new System.Drawing.Point(15, 404);
-            this.btAggiungiPartecipante.Name = "btAggiungiPartecipante";
-            this.btAggiungiPartecipante.Size = new System.Drawing.Size(143, 23);
-            this.btAggiungiPartecipante.TabIndex = 69;
-            this.btAggiungiPartecipante.Text = "Aggiungi partecipante";
-            this.btAggiungiPartecipante.UseVisualStyleBackColor = true;
+            this.btGestioneObiettivi.Location = new System.Drawing.Point(19, 402);
+            this.btGestioneObiettivi.Name = "btGestioneObiettivi";
+            this.btGestioneObiettivi.Size = new System.Drawing.Size(118, 23);
+            this.btGestioneObiettivi.TabIndex = 69;
+            this.btGestioneObiettivi.Text = "Gestione obiettivi";
+            this.btGestioneObiettivi.UseVisualStyleBackColor = true;
+            this.btGestioneObiettivi.Visible = false;
+            this.btGestioneObiettivi.Click += new System.EventHandler(this.BtGestioneObiettivi_Click);
             // 
             // lbErrore
             // 
@@ -288,6 +290,6 @@
         private System.Windows.Forms.MonthCalendar mcDataInizio;
         private System.Windows.Forms.TextBox tbDataInizio;
         private System.Windows.Forms.Label lbErrore;
-        private System.Windows.Forms.Button btAggiungiPartecipante;
+        private System.Windows.Forms.Button btGestioneObiettivi;
     }
 }

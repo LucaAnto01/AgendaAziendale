@@ -17,6 +17,8 @@ namespace AgendaAziendale.Forms
         #region Attributi
         private Form formPadre;
         private readonly UCProgetti ucPadre;
+        private readonly UCObiettivi ucObiettivi;
+        private readonly Progetto progetto;
         private readonly Obiettivo obiettivo;
         private readonly string azione;
         #endregion
@@ -30,15 +32,17 @@ namespace AgendaAziendale.Forms
         /// Metodo costruttore del FormObiettivo
         /// </summary>
         /// <param name="formPadre"></param>
+        /// <param name="progetto"></param>
         /// <param name="ucPadre"></param>
-        /// <param name="obiettivo"></param>
         /// <param name="azione"></param>
-        public FormObiettivo(Form formPadre, UCProgetti ucPadre, Obiettivo obiettivo, string azione)
+        public FormObiettivo(Form formPadre, Progetto progetto, UCProgetti ucPadre, string azione)
         {
             InitializeComponent();
             FormPadre = formPadre;
+            this.progetto = progetto;
             this.ucPadre = ucPadre;
-            this.obiettivo = obiettivo;
+            ucObiettivi = null;
+            obiettivo = null;
             this.azione = azione;
         }
 
@@ -47,13 +51,28 @@ namespace AgendaAziendale.Forms
         /// </summary>
         /// <param name="formPadre"></param>
         /// <param name="ucPadre"></param>
+        /// <param name="progetto"></param>
+        /// <param name="obiettivo"></param>
         /// <param name="azione"></param>
-        public FormObiettivo(Form formPadre, UCProgetti ucPadre, string azione)
+        public FormObiettivo(Form formPadre, UCProgetti ucPadre, Progetto progetto, Obiettivo obiettivo, string azione)
         {
             InitializeComponent();
             FormPadre = formPadre;
             this.ucPadre = ucPadre;
-            this.obiettivo = null;
+            ucObiettivi = null;
+            this.progetto = progetto;
+            this.obiettivo = obiettivo;
+            this.azione = azione;
+        }
+
+        public FormObiettivo(Form formPadre, UCProgetti ucPadre, UCObiettivi ucObiettivi, Progetto progetto, Obiettivo obiettivo, string azione)
+        {
+            InitializeComponent();
+            FormPadre = formPadre;
+            this.ucPadre = ucPadre;
+            this.ucObiettivi = ucObiettivi;
+            this.progetto = progetto;
+            this.obiettivo = obiettivo;
             this.azione = azione;
         }
         #endregion
@@ -111,7 +130,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
-            FormPadre.ShowDialog();
+            FormPadre.Show();          
             Close();
         }
 
@@ -124,14 +143,46 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiungiAggiorna_Click(object sender, EventArgs e)
         {
-            if ((azione == "Aggiungi") || (azione == "aggiungi"))
-                //Richiama funzione aggiungi
+            if (tbDescrizione.Text != "")
+            {
+                if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                {
+                    if (Controller.AggiungiObiettivo(progetto.Id.ToString(), tbDescrizione.Text, ckCompletato.Checked))
+                    {
+                        MessageBox.Show("Inserimento obiettivo " + tbDescrizione.Text + " avvenuto con successo!", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        tbDescrizione.Text = "";
+                    }
+                        
+                    else
+                        MessageBox.Show("Errore in fase d'inserimento.", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                //Richiama funzione aggiorna
+                }
 
-            if (ucPadre != null)
-                ucPadre.AggiornadgvProgetti();
+                if ((azione == "Aggiorna") || (azione == "aggiorna"))
+                {
+                    if (Controller.ModificaObiettivo(obiettivo.Id.ToString(), tbDescrizione.Text, ckCompletato.Checked)) ///Aggiorno l'obiettivo nel db
+                    {
+                        MessageBox.Show("Aggiornamento obiettivo avvenuto con successo!", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        ucPadre.AggiornadgvProgetti();
+                        formPadre.Show();
+                        Close();
+                    }
+                    else
+                        MessageBox.Show("Aggiornamento obiettivo fallito.", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (ucPadre != null)
+                    ucPadre.AggiornadgvProgetti();
+
+                if (ucObiettivi != null)
+                    ucObiettivi.AggiornadgvObiettivi();
+
+                lbErrore.Visible = false;
+            }
+
+            else
+                lbErrore.Visible = true;
         }
         #endregion
     }

@@ -37,8 +37,8 @@
             this.dataFine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.luogo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modifica = new System.Windows.Forms.DataGridViewButtonColumn();
             this.gestione_partecipanti = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.modifica = new System.Windows.Forms.DataGridViewButtonColumn();
             this.elimina = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panelCentro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEventi)).BeginInit();
@@ -69,8 +69,8 @@
             this.dataFine,
             this.id,
             this.luogo,
-            this.modifica,
             this.gestione_partecipanti,
+            this.modifica,
             this.elimina});
             this.dgvEventi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEventi.GridColor = System.Drawing.Color.White;
@@ -123,23 +123,23 @@
             this.luogo.Name = "luogo";
             this.luogo.ReadOnly = true;
             // 
-            // modifica
-            // 
-            this.modifica.HeaderText = "";
-            this.modifica.Name = "modifica";
-            this.modifica.ReadOnly = true;
-            this.modifica.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.modifica.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.modifica.Text = "Modifica";
-            this.modifica.UseColumnTextForButtonValue = true;
-            // 
             // gestione_partecipanti
             // 
             this.gestione_partecipanti.HeaderText = "";
             this.gestione_partecipanti.Name = "gestione_partecipanti";
             this.gestione_partecipanti.ReadOnly = true;
+            this.gestione_partecipanti.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.gestione_partecipanti.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.gestione_partecipanti.Text = "Partecipanti";
             this.gestione_partecipanti.UseColumnTextForButtonValue = true;
+            // 
+            // modifica
+            // 
+            this.modifica.HeaderText = "";
+            this.modifica.Name = "modifica";
+            this.modifica.ReadOnly = true;
+            this.modifica.Text = "Modifica";
+            this.modifica.UseColumnTextForButtonValue = true;
             // 
             // elimina
             // 
@@ -177,8 +177,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataFine;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn luogo;
-        private System.Windows.Forms.DataGridViewButtonColumn modifica;
         private System.Windows.Forms.DataGridViewButtonColumn gestione_partecipanti;
+        private System.Windows.Forms.DataGridViewButtonColumn modifica;
         private System.Windows.Forms.DataGridViewButtonColumn elimina;
     }
 }

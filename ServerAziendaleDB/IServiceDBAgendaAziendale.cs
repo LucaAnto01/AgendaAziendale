@@ -133,6 +133,7 @@ namespace ServerAziendaleDB
         string GetElencoEventi(string username);
         #endregion
 
+        #region Progetti
         /// <summary>
         /// Servizio adibito all'inserimento di un Progetto nel DB
         /// </summary>
@@ -145,6 +146,82 @@ namespace ServerAziendaleDB
         /// <returns></returns>
         [OperationContract]
         bool CreaProgetto(string username, string nome, string descrizione, string dataInizio, string dataFine, string cliente);
+
+        /// <summary>
+        /// Servizio adibito all'aggiornamento di un Progetto nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <param name="nome"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="dataInizio"></param>
+        /// <param name="dataFine"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool AggiornaProgetto(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string cliente);
+
+        /// <summary>
+        /// Servizio adibito all'eliminazione di un Progetto dal DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="codice"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool EliminaProgetto(string username, string codice, string id);
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        [OperationContract]
+        string GetElencoProgetti(string username);
+
+        #region Obiettivi
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'elenco di tutti gli Obiettivi di un determinato Progetto
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [OperationContract]
+        string GetElencoObiettivi(string username, string id);
+
+        /// <summary>
+        /// Servizio adibito all'inserimento di un nuovo Obiettivo ad un determinato Progetto
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="id"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="completato"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool AggiungiObiettivo(string username, string id, string descrizione, bool completato);
+
+        /// <summary>
+        /// Servizio adibito alla modifica di un determinato obiettivo
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="id"></param>
+        /// <param name="descrizione"></param>
+        /// <param name="completato"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool ModificaObiettivo(string username, string id, string descrizione, bool completato);
+
+        /// <summary>
+        /// Servizio adibito all'eliminazione di un determinato obiettivo
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool EliminaObiettivo(string username, string id);
+        #endregion
+        #endregion
 
         /// <summary>
         /// Servizio adibtio all'ottenimento dell'elenco dei partecipanti (Lavoratori) ad un'attività

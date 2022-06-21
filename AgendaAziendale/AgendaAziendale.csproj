@@ -90,6 +90,12 @@
     <Compile Include="Forms\FormLavoratore.Designer.cs">
       <DependentUpon>FormLavoratore.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormObiettivi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormObiettivi.Designer.cs">
+      <DependentUpon>FormObiettivi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormObiettivo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +144,12 @@
     <Compile Include="Forms\UserControls\UCLavoratori.Designer.cs">
       <DependentUpon>UCLavoratori.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserControls\UCObiettivi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\UCObiettivi.Designer.cs">
+      <DependentUpon>UCObiettivi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserControls\UCProgetti.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -183,6 +195,9 @@
     <EmbeddedResource Include="Forms\FormLavoratore.resx">
       <DependentUpon>FormLavoratore.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormObiettivi.resx">
+      <DependentUpon>FormObiettivi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormObiettivo.resx">
       <DependentUpon>FormObiettivo.cs</DependentUpon>
     </EmbeddedResource>
@@ -207,6 +222,9 @@
     <EmbeddedResource Include="Forms\UserControls\UCLavoratori.resx">
       <DependentUpon>UCLavoratori.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserControls\UCObiettivi.resx">
+      <DependentUpon>UCObiettivi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserControls\UCProgetti.resx">
       <DependentUpon>UCProgetti.cs</DependentUpon>
     </EmbeddedResource>
@@ -230,6 +248,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\SRAgendaAziendale\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SRAgendaAziendale\item2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\SRAgendaAziendale\ServiceAgendaAziendale.wsdl" />

@@ -1,5 +1,4 @@
-﻿using AgendaAziendale.Modelli;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AgendaAziendale.Modelli;
 
 namespace AgendaAziendale.Forms.UserControls
 {
@@ -37,6 +37,7 @@ namespace AgendaAziendale.Forms.UserControls
         /// <summary>
         /// Metodo richiamato al caricamento dell'interfaccia
         ///  --> settaggio gerarchie interfaccia
+        ///  --> caricamento dati
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -51,38 +52,32 @@ namespace AgendaAziendale.Forms.UserControls
         }
 
         /// <summary>
-        /// Ascoltatore click sulle celle della dgv con possibilità di click (7a e 8a)
-        /// 7a --> effettua modifica del lavoratore
-        /// 8a --> effettua eliminazione del lavoratore
+        /// Ascoltatore click sulle celle della dgv con possibilità di click (7a, 8a, 9a)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DgvEventi_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Click sulla colonna con i button di modifica
+            Evento evento = new Evento();
+            string codiceEventoSelezionato = dgvEventi.Rows[e.RowIndex].Cells[0].Value.ToString();
+            int idEventoSelezionato = int.Parse(dgvEventi.Rows[e.RowIndex].Cells[5].Value.ToString());
+            evento = ElencoEventi.FirstOrDefault(ev => ev.Codice == codiceEventoSelezionato && ev.Id == idEventoSelezionato);
+
+            //Click sulla colonna con i button di gestione della partecipazione
             if (e.ColumnIndex == 7)
-            {
-                Evento evento = new Evento();
-                string codiceEventoSelezionato = dgvEventi.Rows[e.RowIndex].Cells[0].Value.ToString();
-                int idEventoSelezionato = int.Parse(dgvEventi.Rows[e.RowIndex].Cells[5].Value.ToString());
-                evento = ElencoEventi.FirstOrDefault(ev => ev.Codice == codiceEventoSelezionato && ev.Id == idEventoSelezionato);
-
-                FormEvento formModificaEvento = new FormEvento(formPadre, this, evento, "aggiorna");
-                formPadre.Hide();
-                formModificaEvento.Show();
-            }
-
-            if (e.ColumnIndex == 8)
-            {
-                Evento evento = new Evento();
-                string codiceEventoSelezionato = dgvEventi.Rows[e.RowIndex].Cells[0].Value.ToString();
-                int idEventoSelezionato = int.Parse(dgvEventi.Rows[e.RowIndex].Cells[5].Value.ToString());
-                evento = ElencoEventi.FirstOrDefault(ev => ev.Codice == codiceEventoSelezionato && ev.Id == idEventoSelezionato);
-
+            {              
                 FormPartecipanti formPartecipanti = new FormPartecipanti(FormPadre, this, evento, "evento"); //TODO: invece che null genera l'evento e passalo come parametro
                 formPadre.Hide();
                 formPartecipanti.Show();
             }
+
+            //Click sulla colonna con i button di modifica
+            if (e.ColumnIndex == 8)
+            {
+                FormEvento formModificaEvento = new FormEvento(formPadre, this, evento, "aggiorna");
+                formPadre.Hide();
+                formModificaEvento.Show();
+            }           
 
             //Click sulla colonna con i button d'eliminazione
             if (e.ColumnIndex == 9)
@@ -90,10 +85,7 @@ namespace AgendaAziendale.Forms.UserControls
                 if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione dell'evento selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
                     "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    string codice = dgvEventi.Rows[e.RowIndex].Cells[0].Value.ToString(); ///Codice della riga selezionata
-                    string id = dgvEventi.Rows[e.RowIndex].Cells[5].Value.ToString(); ///ID della riga selezionata
-
-                    if (Controller.EliminaEvento(codice, id))
+                    if (Controller.EliminaEvento(codiceEventoSelezionato, idEventoSelezionato.ToString()))
                     {
                         MessageBox.Show("Eliminazione evento avvenuta con successo!", "UCEventi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         AggiornadgvEventi();
@@ -104,6 +96,9 @@ namespace AgendaAziendale.Forms.UserControls
 
                 }
             }
+
+            else
+                Console.WriteLine("No action");
         }
         #endregion
 

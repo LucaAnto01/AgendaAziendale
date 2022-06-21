@@ -37,6 +37,7 @@ namespace AgendaAziendale.Forms.UserControls
         /// <summary>
         /// Metodo richiamato al caricamento dell'interfaccia
         ///  --> settaggio gerarchie interfaccia
+        ///  --> caricamento dati
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -92,6 +93,9 @@ namespace AgendaAziendale.Forms.UserControls
 
                 }
             }
+
+            else
+                Console.WriteLine("No action");
         }
         #endregion
 

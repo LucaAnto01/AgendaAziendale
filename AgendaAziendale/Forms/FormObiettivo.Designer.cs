@@ -31,11 +31,12 @@
             this.btChiudi = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
             this.panelCentro = new System.Windows.Forms.Panel();
+            this.btAggiungiAggiorna = new System.Windows.Forms.Button();
+            this.ckCompletato = new System.Windows.Forms.CheckBox();
+            this.lbCompletato = new System.Windows.Forms.Label();
             this.tbDescrizione = new System.Windows.Forms.TextBox();
             this.lbDescrizione = new System.Windows.Forms.Label();
-            this.lbCompletato = new System.Windows.Forms.Label();
-            this.ckCompletato = new System.Windows.Forms.CheckBox();
-            this.btAggiungiAggiorna = new System.Windows.Forms.Button();
+            this.lbErrore = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +67,7 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.lbErrore);
             this.panelCentro.Controls.Add(this.btAggiungiAggiorna);
             this.panelCentro.Controls.Add(this.ckCompletato);
             this.panelCentro.Controls.Add(this.lbCompletato);
@@ -76,6 +78,36 @@
             this.panelCentro.Name = "panelCentro";
             this.panelCentro.Size = new System.Drawing.Size(514, 402);
             this.panelCentro.TabIndex = 69;
+            // 
+            // btAggiungiAggiorna
+            // 
+            this.btAggiungiAggiorna.Location = new System.Drawing.Point(15, 227);
+            this.btAggiungiAggiorna.Name = "btAggiungiAggiorna";
+            this.btAggiungiAggiorna.Size = new System.Drawing.Size(75, 23);
+            this.btAggiungiAggiorna.TabIndex = 75;
+            this.btAggiungiAggiorna.Text = "Agg";
+            this.btAggiungiAggiorna.UseVisualStyleBackColor = true;
+            this.btAggiungiAggiorna.Click += new System.EventHandler(this.BtAggiungiAggiorna_Click);
+            // 
+            // ckCompletato
+            // 
+            this.ckCompletato.AutoSize = true;
+            this.ckCompletato.Location = new System.Drawing.Point(119, 158);
+            this.ckCompletato.Name = "ckCompletato";
+            this.ckCompletato.Size = new System.Drawing.Size(79, 17);
+            this.ckCompletato.TabIndex = 74;
+            this.ckCompletato.Text = "Completato";
+            this.ckCompletato.UseVisualStyleBackColor = true;
+            // 
+            // lbCompletato
+            // 
+            this.lbCompletato.AutoSize = true;
+            this.lbCompletato.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCompletato.Location = new System.Drawing.Point(12, 156);
+            this.lbCompletato.Name = "lbCompletato";
+            this.lbCompletato.Size = new System.Drawing.Size(89, 18);
+            this.lbCompletato.TabIndex = 73;
+            this.lbCompletato.Text = "Completato";
             // 
             // tbDescrizione
             // 
@@ -99,35 +131,17 @@
             this.lbDescrizione.TabIndex = 71;
             this.lbDescrizione.Text = "Descrizione";
             // 
-            // lbCompletato
+            // lbErrore
             // 
-            this.lbCompletato.AutoSize = true;
-            this.lbCompletato.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCompletato.Location = new System.Drawing.Point(12, 156);
-            this.lbCompletato.Name = "lbCompletato";
-            this.lbCompletato.Size = new System.Drawing.Size(89, 18);
-            this.lbCompletato.TabIndex = 73;
-            this.lbCompletato.Text = "Completato";
-            // 
-            // ckCompletato
-            // 
-            this.ckCompletato.AutoSize = true;
-            this.ckCompletato.Location = new System.Drawing.Point(119, 158);
-            this.ckCompletato.Name = "ckCompletato";
-            this.ckCompletato.Size = new System.Drawing.Size(79, 17);
-            this.ckCompletato.TabIndex = 74;
-            this.ckCompletato.Text = "Completato";
-            this.ckCompletato.UseVisualStyleBackColor = true;
-            // 
-            // btAggiungiAggiorna
-            // 
-            this.btAggiungiAggiorna.Location = new System.Drawing.Point(15, 227);
-            this.btAggiungiAggiorna.Name = "btAggiungiAggiorna";
-            this.btAggiungiAggiorna.Size = new System.Drawing.Size(75, 23);
-            this.btAggiungiAggiorna.TabIndex = 75;
-            this.btAggiungiAggiorna.Text = "Agg";
-            this.btAggiungiAggiorna.UseVisualStyleBackColor = true;
-            this.btAggiungiAggiorna.Click += new System.EventHandler(this.BtAggiungiAggiorna_Click);
+            this.lbErrore.AutoSize = true;
+            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrore.ForeColor = System.Drawing.Color.Red;
+            this.lbErrore.Location = new System.Drawing.Point(12, 299);
+            this.lbErrore.Name = "lbErrore";
+            this.lbErrore.Size = new System.Drawing.Size(189, 24);
+            this.lbErrore.TabIndex = 76;
+            this.lbErrore.Text = "Compila la descrizione!";
+            this.lbErrore.Visible = false;
             // 
             // FormObiettivo
             // 
@@ -159,5 +173,6 @@
         private System.Windows.Forms.CheckBox ckCompletato;
         private System.Windows.Forms.Label lbCompletato;
         private System.Windows.Forms.Button btAggiungiAggiorna;
+        private System.Windows.Forms.Label lbErrore;
     }
 }

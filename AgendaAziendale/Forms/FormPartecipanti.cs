@@ -64,6 +64,8 @@ namespace AgendaAziendale.Forms
             ///Figli del pannello centrale
             lbLavoratore.Parent = panelCentro;
             cbLavoratore.Parent = panelCentro;
+            lbRuolo.Parent = panelCentro;
+            cbRuolo.Parent = panelCentro;   
             btAggiungi.Parent = panelCentro;
             dgvPartecipanti.Parent = panelCentro;
 
@@ -80,6 +82,10 @@ namespace AgendaAziendale.Forms
             {
                 UcPadre = (UCProgetti)UcPadre;
                 Att = (Progetto)Att;
+
+                lbRuolo.Visible = true;
+                cbRuolo.Visible = true;
+                cbRuolo.Enabled = true;
             }
 
             else
@@ -87,8 +93,6 @@ namespace AgendaAziendale.Forms
                 MessageBox.Show("ERRORE! Valore FormPartecipanti:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
-
-            //FormPadre.Hide(); //Nascondo il FormPadre
         }
 
         /// <summary>
@@ -110,8 +114,11 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiungi_Click(object sender, EventArgs e)
         {
-            AggiungiPartecipante();
-            AggiornadgvPartecipanti();
+            if(CheckCampi())
+            {
+                AggiungiPartecipante();
+                AggiornadgvPartecipanti();
+            }           
         }
 
         /// <summary>
@@ -142,6 +149,26 @@ namespace AgendaAziendale.Forms
 
                 }
             }
+        }
+
+        /// <summary>
+        /// Click sulla combobox relativa alla selezione del ruolo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CbRuolo_Enter(object sender, EventArgs e)
+        {
+            cbRuolo.BackColor = Color.White;
+        }
+
+        /// <summary>
+        /// Click sulla combobox relativa alla selezione del ruolo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CbLavoratore_Enter(object sender, EventArgs e)
+        {
+            cbLavoratore.BackColor = Color.White;
         }
         #endregion
 
@@ -174,20 +201,25 @@ namespace AgendaAziendale.Forms
         }
 
         /// <summary>
-        /// Funzione adibita all'inserimento di un nuovo partecipante ad un Evento
+        /// Funzione adibita all'inserimento di un nuovo partecipante ad un'Attività
         /// </summary>
         private void AggiungiPartecipante()
         {
-            if ((tipologia == "Evento") || (tipologia == "evento"))
-            {
-                string usernamePartecipante = (cbLavoratore.SelectedItem as dynamic).Value.Username;
-                string output_nomeCognome = (cbLavoratore.SelectedItem as dynamic).Value.Nome + " " + (cbLavoratore.SelectedItem as dynamic).Value.Cognome;
-                if (Controller.AggiugniPartecipanteAttivita(usernamePartecipante, Att.Codice, "Partecipante"))
-                    MessageBox.Show("Inserimento partecipante " + output_nomeCognome + " avvenuto con successo!", "FormPartecipanti", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            string ruolo = "Partecipante";
 
-                else
-                    MessageBox.Show("Errore in fase d'inserimento.", "FormPartecipanti", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            if ((tipologia == "Progetto") || (tipologia == "progetto"))
+                ruolo = cbRuolo.Text;
+
+            string usernamePartecipante = (cbLavoratore.SelectedItem as dynamic).Value.Username;
+            string output_nomeCognome = (cbLavoratore.SelectedItem as dynamic).Value.Nome + " " + (cbLavoratore.SelectedItem as dynamic).Value.Cognome;
+
+            if (Controller.AggiugniPartecipanteAttivita(usernamePartecipante, Att.Codice, ruolo))
+                MessageBox.Show("Inserimento partecipante " + output_nomeCognome + " avvenuto con successo!", "FormPartecipanti", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            else
+                MessageBox.Show("Errore in fase d'inserimento.", "FormPartecipanti", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                      
         }
 
         /// <summary>
@@ -199,10 +231,8 @@ namespace AgendaAziendale.Forms
 
             dgvPartecipanti.Rows.Clear();
             CaricaCBLavoratori(); ///Ricarico la combobox per aggiornare i lavoratori disponibili ed evitare di avere doppioni
-
-            //TODO: SE TIPOLOGIA EVENTO RICHIAMA LA FUNZIONE PER L'EVENTO, ALTRIMENTI QUELLA PER I PROGETTI
-            if ((tipologia == "Evento") || (tipologia == "evento"))
-                result = Controller.GetElencoPartecipantiAttivita(Att.Codice);
+            
+            result = Controller.GetElencoPartecipantiAttivita(Att.Codice);
 
             if (result != "")
             {
@@ -218,6 +248,40 @@ namespace AgendaAziendale.Forms
 
             else
                 MessageBox.Show("Non sono ancora presenti partecipanti per questa attivita.", "Aggiorna DGVPartecipanti", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        /// <summary>
+        /// Funzione adibita alla validazione dei campi d'inserimento
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckCampi()
+        {
+            bool esito = false;
+
+            if (cbLavoratore.Text != "")
+                esito = true;
+            
+            else
+            {
+                MessageBox.Show("Seleziona un lavoratore!", "FormPartecipanti", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbLavoratore.BackColor = Color.Red;
+                return false;
+            }
+
+            if ((tipologia == "Progetto") || (tipologia == "progetto"))
+            {
+                if (cbRuolo.Text != "")
+                    esito = true;
+
+                else
+                {
+                    MessageBox.Show("Seleziona un ruolo per il lavoratore!", "FormPartecipanti", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cbRuolo.BackColor = Color.Red;
+                    return false;
+                }
+            }
+                         
+            return esito;
         }
         #endregion
     }

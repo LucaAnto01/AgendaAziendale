@@ -97,7 +97,7 @@ namespace AgendaAziendale.Forms
 
             else if ((tipologia == "Progetto") || (tipologia == "progetto"))
             {
-                FormProgetto formAggiungi = new FormProgetto((UCProgetti)UcContenitore, "aggiungi");
+                FormProgetto formAggiungi = new FormProgetto(FormPadre, (UCProgetti)UcContenitore, "aggiungi");
                 FormPadre.Hide();
                 formAggiungi.ShowDialog();
             }
@@ -107,16 +107,6 @@ namespace AgendaAziendale.Forms
                 MessageBox.Show("ERRORE! Valore FormGestione:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
-        }
-        #endregion
-
-        #region Metodi
-        /// <summary>
-        /// Metodo per aggiornare l'interfaccia
-        /// </summary>
-        public void Aggiorna()
-        {
-            //TODO: pensa a come aggiornare la dgv
         }
         #endregion
     }

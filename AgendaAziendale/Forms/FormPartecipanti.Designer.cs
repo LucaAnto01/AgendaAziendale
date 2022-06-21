@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelTop = new System.Windows.Forms.Panel();
             this.btChiudi = new System.Windows.Forms.Button();
             this.panelCentro = new System.Windows.Forms.Panel();
@@ -40,6 +40,8 @@
             this.btAggiungi = new System.Windows.Forms.Button();
             this.cbLavoratore = new System.Windows.Forms.ComboBox();
             this.lbLavoratore = new System.Windows.Forms.Label();
+            this.lbRuolo = new System.Windows.Forms.Label();
+            this.cbRuolo = new System.Windows.Forms.ComboBox();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartecipanti)).BeginInit();
@@ -71,6 +73,8 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.cbRuolo);
+            this.panelCentro.Controls.Add(this.lbRuolo);
             this.panelCentro.Controls.Add(this.dgvPartecipanti);
             this.panelCentro.Controls.Add(this.btAggiungi);
             this.panelCentro.Controls.Add(this.cbLavoratore);
@@ -122,10 +126,10 @@
             // 
             // rimuovi
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Red;
-            this.rimuovi.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Red;
+            this.rimuovi.DefaultCellStyle = dataGridViewCellStyle8;
             this.rimuovi.HeaderText = "";
             this.rimuovi.Name = "rimuovi";
             this.rimuovi.ReadOnly = true;
@@ -144,12 +148,15 @@
             // 
             // cbLavoratore
             // 
+            this.cbLavoratore.BackColor = System.Drawing.Color.White;
             this.cbLavoratore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLavoratore.FormattingEnabled = true;
             this.cbLavoratore.Location = new System.Drawing.Point(124, 43);
+            this.cbLavoratore.MaxDropDownItems = 100;
             this.cbLavoratore.Name = "cbLavoratore";
             this.cbLavoratore.Size = new System.Drawing.Size(182, 21);
             this.cbLavoratore.TabIndex = 73;
+            this.cbLavoratore.Enter += new System.EventHandler(this.CbLavoratore_Enter);
             // 
             // lbLavoratore
             // 
@@ -160,6 +167,35 @@
             this.lbLavoratore.Size = new System.Drawing.Size(86, 18);
             this.lbLavoratore.TabIndex = 72;
             this.lbLavoratore.Text = "Lavoratore";
+            // 
+            // lbRuolo
+            // 
+            this.lbRuolo.AutoSize = true;
+            this.lbRuolo.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRuolo.Location = new System.Drawing.Point(12, 105);
+            this.lbRuolo.Name = "lbRuolo";
+            this.lbRuolo.Size = new System.Drawing.Size(50, 18);
+            this.lbRuolo.TabIndex = 76;
+            this.lbRuolo.Text = "Ruolo";
+            this.lbRuolo.Visible = false;
+            // 
+            // cbRuolo
+            // 
+            this.cbRuolo.BackColor = System.Drawing.Color.White;
+            this.cbRuolo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRuolo.Enabled = false;
+            this.cbRuolo.FormattingEnabled = true;
+            this.cbRuolo.Items.AddRange(new object[] {
+            "Project Manager",
+            "Referente",
+            "Sviluppatore",
+            "Partecipante"});
+            this.cbRuolo.Location = new System.Drawing.Point(124, 105);
+            this.cbRuolo.Name = "cbRuolo";
+            this.cbRuolo.Size = new System.Drawing.Size(182, 21);
+            this.cbRuolo.TabIndex = 77;
+            this.cbRuolo.Visible = false;
+            this.cbRuolo.Enter += new System.EventHandler(this.CbRuolo_Enter);
             // 
             // FormPartecipanti
             // 
@@ -195,5 +231,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn codice_attivita;
         private System.Windows.Forms.DataGridViewTextBoxColumn ruolo;
         private System.Windows.Forms.DataGridViewButtonColumn rimuovi;
+        private System.Windows.Forms.Label lbRuolo;
+        private System.Windows.Forms.ComboBox cbRuolo;
     }
 }

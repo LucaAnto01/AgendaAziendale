@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AgendaAziendale.Modelli;
 
 namespace AgendaAziendale.Forms.UserControls
 {
@@ -14,10 +15,12 @@ namespace AgendaAziendale.Forms.UserControls
     {
         #region Attributi
         private Form formPadre;
+        private List<Progetto> elencoProgetti;
         #endregion
 
         #region Getters & Setters
         public Form FormPadre { get => formPadre; set => formPadre = value; }
+        public List<Progetto> ElencoProgetti { get => elencoProgetti; set => elencoProgetti = value; }
         #endregion
 
         /// <summary>
@@ -34,6 +37,7 @@ namespace AgendaAziendale.Forms.UserControls
         /// <summary>
         /// Metodo richiamato al caricamento dell'interfaccia
         ///  --> settaggio gerarchie interfaccia
+        ///  --> caricamento dati
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -43,36 +47,68 @@ namespace AgendaAziendale.Forms.UserControls
             panelCentro.Parent = this;
             ///Figli del panelCentro
             dgvProgetti.Parent = panelCentro;
+
+            AggiornadgvProgetti();
         }
 
-        #endregion
-
+        /// <summary>
+        /// Ascoltatore click sulle celle della dgv con possibilità di click (7a, 8a, 9a, 10a)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DgvProgetti_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Click sulla colonna con i button di modifica
-            if (e.ColumnIndex == 0)
+            Progetto progetto = new Progetto();
+            string codiceProgettoSelezionato = dgvProgetti.Rows[e.RowIndex].Cells[0].Value.ToString();
+            int idProgettoSelezionato = int.Parse(dgvProgetti.Rows[e.RowIndex].Cells[5].Value.ToString());
+            progetto = ElencoProgetti.FirstOrDefault(ev => ev.Codice == codiceProgettoSelezionato && ev.Id == idProgettoSelezionato);
+
+            //Click sulla colonna con i button di visualizzazione e gestione degli obiettivi
+            if (e.ColumnIndex == 7)
             {
-                FormProgetto formModificaProgetto = new FormProgetto(this, null, "aggiorna"); //TODO: invece che null genera il progetto e passalo come parametro
-                formModificaProgetto.ShowDialog();
+                FormObiettivi formObiettivi = new FormObiettivi(FormPadre, this, progetto);
+                formPadre.Hide();
+                formObiettivi.Show();
             }
 
-            if (e.ColumnIndex == 1)
-            {
-                FormPartecipanti formPartecipanti = new FormPartecipanti(FormPadre, this, null, "progetto"); //TODO: invece che null genera il progetto e passalo come parametro
-                formPartecipanti.ShowDialog();
+            //Click sulla colonna con i button di gestione della partecipazione
+            if (e.ColumnIndex == 8)
+            {                               
+                FormPartecipanti formPartecipanti = new FormPartecipanti(FormPadre, this, progetto, "progetto");
+                formPadre.Hide();
+                formPartecipanti.Show();
+            }
+
+            //Click sulla colonna con i button di modifica
+            if (e.ColumnIndex == 9)
+            {                               
+                FormProgetto formModificaProgetto = new FormProgetto(FormPadre, this, progetto, "aggiorna");
+                formPadre.Hide();
+                formModificaProgetto.Show();
             }
 
             //Click sulla colonna con i button d'eliminazione
-            if (e.ColumnIndex == 2)
+            if (e.ColumnIndex == 10)
             {
-                if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione dell'evento selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
+                if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione del progetto selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
                     "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    //string username = dgvProgetti.Rows[e.RowIndex].Cells[0].ToString(); ///Codice della riga selezionata
-                    //TODO: elimina il lavoratore dal DB sulla base del suo username
+                    if (Controller.EliminaProgetto(codiceProgettoSelezionato, idProgettoSelezionato.ToString()))
+                    {
+                        MessageBox.Show("Eliminazione progetto avvenuta con successo!", "UCProgetti", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        AggiornadgvProgetti();
+                    }
+
+                    else
+                        MessageBox.Show("ERRORE! Impossibile eliminare il progetto dal DB, contattare l'amministrazione.", "UCProgetti", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
+            else
+                Console.WriteLine("No action");
         }
+
+        #endregion       
 
         #region Metodi
         /// <summary>
@@ -80,7 +116,37 @@ namespace AgendaAziendale.Forms.UserControls
         /// </summary>
         public void AggiornadgvProgetti()
         {
-            //TODO: fai e richiama il metodo per popolare la dgv --> va fatto lato server-db --> guarda la foto in condivisa
+            string result_progetti = Controller.GetElencoProgetti();
+
+            dgvProgetti.Rows.Clear();
+
+            if (result_progetti != "")
+            {
+                ElencoProgetti = Progetto.GeneraElencoProgetti(result_progetti);
+
+                foreach (Progetto progetto in ElencoProgetti)
+                {
+                    
+                    int indice_riga = dgvProgetti.Rows.Add(progetto.Codice, progetto.Nome, progetto.Descrizione, progetto.DataInizio.ToShortDateString(), progetto.DataFine.ToShortDateString(),
+                                       progetto.Id, progetto.Cliente);
+
+                    string result_obiettivi = Controller.GetElencoObiettivi(progetto.Id.ToString()); ///Aggiungo gli obiettivi al progetto
+                    if (result_obiettivi != "")
+                    {
+                        List<Obiettivo> elencoObiettivi = new List<Obiettivo>();
+                        elencoObiettivi = Obiettivo.GeneraElencoObiettivi(result_obiettivi);
+                        progetto.Obiettivi = elencoObiettivi;
+
+                        dgvProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
+                    }
+
+                    else
+                        dgvProgetti.Rows[indice_riga].Cells[7].Value = "/";
+                }
+            }
+
+            else
+                MessageBox.Show("ERRORE! Impossibile ottenere i dati dal DB, contattare l'amministrazione.", "Aggiorna UCProgeti", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         #endregion
     }

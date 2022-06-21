@@ -78,6 +78,48 @@
   <wsdl:message name="IServiceDBAgendaAziendale_CreaProgetto_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreaProgettoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_AggiornaProgetto_InputMessage">
+    <wsdl:part name="parameters" element="tns:AggiornaProgetto" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_AggiornaProgetto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AggiornaProgettoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_EliminaProgetto_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminaProgetto" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_EliminaProgetto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminaProgettoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_GetElencoProgetti_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetElencoProgetti" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_GetElencoProgetti_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetElencoProgettiResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_GetElencoObiettivi_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetElencoObiettivi" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_GetElencoObiettivi_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetElencoObiettiviResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_AggiungiObiettivo_InputMessage">
+    <wsdl:part name="parameters" element="tns:AggiungiObiettivo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_AggiungiObiettivo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AggiungiObiettivoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_ModificaObiettivo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModificaObiettivo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_ModificaObiettivo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModificaObiettivoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_EliminaObiettivo_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminaObiettivo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceDBAgendaAziendale_EliminaObiettivo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminaObiettivoResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceDBAgendaAziendale_GetElencoPartecipantiAttivita_InputMessage">
     <wsdl:part name="parameters" element="tns:GetElencoPartecipantiAttivita" />
   </wsdl:message>
@@ -144,6 +186,34 @@
     <wsdl:operation name="CreaProgetto">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgetto" message="tns:IServiceDBAgendaAziendale_CreaProgetto_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgettoResponse" message="tns:IServiceDBAgendaAziendale_CreaProgetto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AggiornaProgetto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaProgetto" message="tns:IServiceDBAgendaAziendale_AggiornaProgetto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaProgettoResponse" message="tns:IServiceDBAgendaAziendale_AggiornaProgetto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminaProgetto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/EliminaProgetto" message="tns:IServiceDBAgendaAziendale_EliminaProgetto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/EliminaProgettoResponse" message="tns:IServiceDBAgendaAziendale_EliminaProgetto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetElencoProgetti">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgetti" message="tns:IServiceDBAgendaAziendale_GetElencoProgetti_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiResponse" message="tns:IServiceDBAgendaAziendale_GetElencoProgetti_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetElencoObiettivi">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoObiettivi" message="tns:IServiceDBAgendaAziendale_GetElencoObiettivi_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoObiettiviResponse" message="tns:IServiceDBAgendaAziendale_GetElencoObiettivi_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AggiungiObiettivo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiungiObiettivo" message="tns:IServiceDBAgendaAziendale_AggiungiObiettivo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiungiObiettivoResponse" message="tns:IServiceDBAgendaAziendale_AggiungiObiettivo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificaObiettivo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/ModificaObiettivo" message="tns:IServiceDBAgendaAziendale_ModificaObiettivo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/ModificaObiettivoResponse" message="tns:IServiceDBAgendaAziendale_ModificaObiettivo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminaObiettivo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/EliminaObiettivo" message="tns:IServiceDBAgendaAziendale_EliminaObiettivo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/EliminaObiettivoResponse" message="tns:IServiceDBAgendaAziendale_EliminaObiettivo_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetElencoPartecipantiAttivita">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoPartecipantiAttivita" message="tns:IServiceDBAgendaAziendale_GetElencoPartecipantiAttivita_InputMessage" />
@@ -261,6 +331,69 @@
     </wsdl:operation>
     <wsdl:operation name="CreaProgetto">
       <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgetto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AggiornaProgetto">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaProgetto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminaProgetto">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/EliminaProgetto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetElencoProgetti">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgetti" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetElencoObiettivi">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoObiettivi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AggiungiObiettivo">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/AggiungiObiettivo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificaObiettivo">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/ModificaObiettivo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminaObiettivo">
+      <soap:operation soapAction="http://tempuri.org/IServiceDBAgendaAziendale/EliminaObiettivo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

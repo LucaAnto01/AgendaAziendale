@@ -87,6 +87,54 @@ namespace AgendaAziendale.SRAgendaAziendale {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/CreaProgetto", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/CreaProgettoResponse")]
         System.Threading.Tasks.Task<bool> CreaProgettoAsync(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string cliente);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/AggiornaProgetto", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/AggiornaProgettoResponse")]
+        bool AggiornaProgetto(string username, string codice, string id, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string cliente);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/AggiornaProgetto", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/AggiornaProgettoResponse")]
+        System.Threading.Tasks.Task<bool> AggiornaProgettoAsync(string username, string codice, string id, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string cliente);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/EliminaProgetto", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/EliminaProgettoResponse")]
+        bool EliminaProgetto(string username, string codice, string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/EliminaProgetto", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/EliminaProgettoResponse")]
+        System.Threading.Tasks.Task<bool> EliminaProgettoAsync(string username, string codice, string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoProgetti", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoProgettiResponse")]
+        string GetElencoProgetti(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoProgetti", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoProgettiResponse")]
+        System.Threading.Tasks.Task<string> GetElencoProgettiAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoObiettivi", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoObiettiviResponse")]
+        string GetElencoObiettivi(string username, string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoObiettivi", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoObiettiviResponse")]
+        System.Threading.Tasks.Task<string> GetElencoObiettiviAsync(string username, string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/CalcolaAvanzamento", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/CalcolaAvanzamentoResponse")]
+        int CalcolaAvanzamento(string username, int[] obiettivi);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/CalcolaAvanzamento", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/CalcolaAvanzamentoResponse")]
+        System.Threading.Tasks.Task<int> CalcolaAvanzamentoAsync(string username, int[] obiettivi);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/AggiungiObiettivo", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/AggiungiObiettivoResponse")]
+        bool AggiungiObiettivo(string username, string id, string descrizione, bool completato);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/AggiungiObiettivo", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/AggiungiObiettivoResponse")]
+        System.Threading.Tasks.Task<bool> AggiungiObiettivoAsync(string username, string id, string descrizione, bool completato);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/ModificaObiettivo", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/ModificaObiettivoResponse")]
+        bool ModificaObiettivo(string username, string id, string descrizione, bool completato);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/ModificaObiettivo", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/ModificaObiettivoResponse")]
+        System.Threading.Tasks.Task<bool> ModificaObiettivoAsync(string username, string id, string descrizione, bool completato);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/EliminaObiettivo", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/EliminaObiettivoResponse")]
+        bool EliminaObiettivo(string username, string id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/EliminaObiettivo", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/EliminaObiettivoResponse")]
+        System.Threading.Tasks.Task<bool> EliminaObiettivoAsync(string username, string id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoPartecipantiAttivita", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoPartecipantiAttivitaResponse")]
         string GetElencoPartecipantiAttivita(string username, string codice);
         
@@ -233,6 +281,70 @@ namespace AgendaAziendale.SRAgendaAziendale {
         
         public System.Threading.Tasks.Task<bool> CreaProgettoAsync(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string cliente) {
             return base.Channel.CreaProgettoAsync(username, nome, descrizione, dataInizio, dataFine, cliente);
+        }
+        
+        public bool AggiornaProgetto(string username, string codice, string id, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string cliente) {
+            return base.Channel.AggiornaProgetto(username, codice, id, nome, descrizione, dataInizio, dataFine, cliente);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AggiornaProgettoAsync(string username, string codice, string id, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string cliente) {
+            return base.Channel.AggiornaProgettoAsync(username, codice, id, nome, descrizione, dataInizio, dataFine, cliente);
+        }
+        
+        public bool EliminaProgetto(string username, string codice, string id) {
+            return base.Channel.EliminaProgetto(username, codice, id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EliminaProgettoAsync(string username, string codice, string id) {
+            return base.Channel.EliminaProgettoAsync(username, codice, id);
+        }
+        
+        public string GetElencoProgetti(string username) {
+            return base.Channel.GetElencoProgetti(username);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetElencoProgettiAsync(string username) {
+            return base.Channel.GetElencoProgettiAsync(username);
+        }
+        
+        public string GetElencoObiettivi(string username, string id) {
+            return base.Channel.GetElencoObiettivi(username, id);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetElencoObiettiviAsync(string username, string id) {
+            return base.Channel.GetElencoObiettiviAsync(username, id);
+        }
+        
+        public int CalcolaAvanzamento(string username, int[] obiettivi) {
+            return base.Channel.CalcolaAvanzamento(username, obiettivi);
+        }
+        
+        public System.Threading.Tasks.Task<int> CalcolaAvanzamentoAsync(string username, int[] obiettivi) {
+            return base.Channel.CalcolaAvanzamentoAsync(username, obiettivi);
+        }
+        
+        public bool AggiungiObiettivo(string username, string id, string descrizione, bool completato) {
+            return base.Channel.AggiungiObiettivo(username, id, descrizione, completato);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AggiungiObiettivoAsync(string username, string id, string descrizione, bool completato) {
+            return base.Channel.AggiungiObiettivoAsync(username, id, descrizione, completato);
+        }
+        
+        public bool ModificaObiettivo(string username, string id, string descrizione, bool completato) {
+            return base.Channel.ModificaObiettivo(username, id, descrizione, completato);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ModificaObiettivoAsync(string username, string id, string descrizione, bool completato) {
+            return base.Channel.ModificaObiettivoAsync(username, id, descrizione, completato);
+        }
+        
+        public bool EliminaObiettivo(string username, string id) {
+            return base.Channel.EliminaObiettivo(username, id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> EliminaObiettivoAsync(string username, string id) {
+            return base.Channel.EliminaObiettivoAsync(username, id);
         }
         
         public string GetElencoPartecipantiAttivita(string username, string codice) {
