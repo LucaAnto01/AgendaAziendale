@@ -81,6 +81,12 @@ namespace AgendaAziendale.SRAgendaAziendale {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoEventi", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoEventiResponse")]
         System.Threading.Tasks.Task<string> GetElencoEventiAsync(string username);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoEventiLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoEventiLavoratoreResponse")]
+        string GetElencoEventiLavoratore(string username, string username_in);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoEventiLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoEventiLavoratoreResponse")]
+        System.Threading.Tasks.Task<string> GetElencoEventiLavoratoreAsync(string username, string username_in);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetStoricoEventi", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetStoricoEventiResponse")]
         string GetStoricoEventi(string username);
         
@@ -110,6 +116,12 @@ namespace AgendaAziendale.SRAgendaAziendale {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoProgetti", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoProgettiResponse")]
         System.Threading.Tasks.Task<string> GetElencoProgettiAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoProgettiLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoProgettiLavoratoreResponse")]
+        string GetElencoProgettiLavoratore(string username, string username_in);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoProgettiLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoProgettiLavoratoreResponse")]
+        System.Threading.Tasks.Task<string> GetElencoProgettiLavoratoreAsync(string username, string username_in);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetStoricoProgetti", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetStoricoProgettiResponse")]
         string GetStoricoProgetti(string username);
@@ -287,6 +299,14 @@ namespace AgendaAziendale.SRAgendaAziendale {
             return base.Channel.GetElencoEventiAsync(username);
         }
         
+        public string GetElencoEventiLavoratore(string username, string username_in) {
+            return base.Channel.GetElencoEventiLavoratore(username, username_in);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetElencoEventiLavoratoreAsync(string username, string username_in) {
+            return base.Channel.GetElencoEventiLavoratoreAsync(username, username_in);
+        }
+        
         public string GetStoricoEventi(string username) {
             return base.Channel.GetStoricoEventi(username);
         }
@@ -325,6 +345,14 @@ namespace AgendaAziendale.SRAgendaAziendale {
         
         public System.Threading.Tasks.Task<string> GetElencoProgettiAsync(string username) {
             return base.Channel.GetElencoProgettiAsync(username);
+        }
+        
+        public string GetElencoProgettiLavoratore(string username, string username_in) {
+            return base.Channel.GetElencoProgettiLavoratore(username, username_in);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetElencoProgettiLavoratoreAsync(string username, string username_in) {
+            return base.Channel.GetElencoProgettiLavoratoreAsync(username, username_in);
         }
         
         public string GetStoricoProgetti(string username) {

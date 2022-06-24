@@ -332,6 +332,37 @@ namespace ServerAziendale
         }
 
         /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB con una data maggiore o uguale all'odierna
+        /// a cui partecipa uno specifico lavoratore
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <returns></returns>
+        public string GetElencoEventiLavoratore(string username, string username_in)
+        {
+            try
+            {
+                string result = Sessione.ServerAziendaleDB.GetElencoEventiLavoratore(username, username_in);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione GetElencoEventiLavoratore() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoEventiLavoratore()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        /// <summary>
         /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB
         /// </summary>
         /// <param name="username"></param>
@@ -481,6 +512,37 @@ namespace ServerAziendale
             finally
             {
                 WriteLog(username, "GetElencoProgetti()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB  con una data maggiore o uguale all'odierna
+        /// a cui partecipa uno specifico lavoratore
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <returns></returns>
+        public string GetElencoProgettiLavoratore(string username, string username_in)
+        {
+            try
+            {
+                string result = Sessione.ServerAziendaleDB.GetElencoProgettiLavoratore(username, username_in);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione GetElencoProgettiLavoratore() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoProgettiLavoratore()"); ///Scrittura log
             }
 
             return "";

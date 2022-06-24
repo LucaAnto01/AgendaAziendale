@@ -133,6 +133,16 @@ namespace ServerAziendale
         string GetElencoEventi(string username);
 
         /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB con una data maggiore o uguale all'odierna
+        /// a cui partecipa uno specifico lavoratore
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <returns></returns>
+        [OperationContract]
+        string GetElencoEventiLavoratore(string username, string username_in);
+
+        /// <summary>
         /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB
         /// </summary>
         /// <param name="username"></param>
@@ -187,6 +197,16 @@ namespace ServerAziendale
         /// <returns></returns>
         [OperationContract]
         string GetElencoProgetti(string username);
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB  con una data maggiore o uguale all'odierna
+        /// a cui partecipa uno specifico lavoratore
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <returns></returns>
+        [OperationContract]
+        string GetElencoProgettiLavoratore(string username, string username_in);
 
         /// <summary>
         /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB

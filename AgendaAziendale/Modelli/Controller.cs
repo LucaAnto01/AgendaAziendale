@@ -186,6 +186,23 @@ namespace AgendaAziendale.Modelli
         }
 
         /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB con una data maggiore o uguale all'odierna
+        /// a cui partecipa uno specifico lavoratore
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <returns></returns>
+        public static string GetElencoEventiLavoratore(string username, string username_in)
+        {
+            string result = Sessione.ServerAziendale.GetElencoEventiLavoratore(Sessione.Lavoratore.Username, username_in);
+
+            if (result != "")
+                return result;
+
+            return "";
+        }
+
+        /// <summary>
         /// Funzione adibita all'ottenimento dell'elenco di tutti gli eventi presenti nel DB
         /// </summary>
         /// <returns></returns>
@@ -258,6 +275,22 @@ namespace AgendaAziendale.Modelli
         public static string GetElencoProgetti()
         {
             string result = Sessione.ServerAziendale.GetElencoProgetti(Sessione.Lavoratore.Username);
+
+            if (result != "")
+                return result;
+
+            return "";
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB  con una data maggiore o uguale all'odierna
+        /// a cui partecipa uno specifico lavoratore
+        /// </summary>
+        /// <param name="username_in"></param>
+        /// <returns></returns>
+        public static string GetElencoProgettiLavoratore(string username_in)
+        {
+            string result = Sessione.ServerAziendale.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username, username_in);
 
             if (result != "")
                 return result;
