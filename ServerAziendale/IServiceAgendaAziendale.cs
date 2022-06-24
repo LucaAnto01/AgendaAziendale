@@ -125,12 +125,20 @@ namespace ServerAziendale
         bool EliminaEvento(string username, string codice, string id);
 
         /// <summary>
-        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB con una data maggiore o uguale all'odierna
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
         [OperationContract]
         string GetElencoEventi(string username);
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        [OperationContract]
+        string GetStoricoEventi(string username);
         #endregion
 
         #region Progetti
@@ -173,12 +181,20 @@ namespace ServerAziendale
         bool EliminaProgetto(string username, string codice, string id);
 
         /// <summary>
-        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB con una data maggiore o uguale all'odierna
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
         [OperationContract]
         string GetElencoProgetti(string username);
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        [OperationContract]
+        string GetStoricoProgetti(string username);
 
         #region Obiettivi
         /// <summary>

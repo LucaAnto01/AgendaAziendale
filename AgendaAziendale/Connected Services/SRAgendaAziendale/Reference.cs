@@ -81,6 +81,12 @@ namespace AgendaAziendale.SRAgendaAziendale {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoEventi", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoEventiResponse")]
         System.Threading.Tasks.Task<string> GetElencoEventiAsync(string username);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetStoricoEventi", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetStoricoEventiResponse")]
+        string GetStoricoEventi(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetStoricoEventi", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetStoricoEventiResponse")]
+        System.Threading.Tasks.Task<string> GetStoricoEventiAsync(string username);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/CreaProgetto", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/CreaProgettoResponse")]
         bool CreaProgetto(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string cliente);
         
@@ -104,6 +110,12 @@ namespace AgendaAziendale.SRAgendaAziendale {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoProgetti", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoProgettiResponse")]
         System.Threading.Tasks.Task<string> GetElencoProgettiAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetStoricoProgetti", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetStoricoProgettiResponse")]
+        string GetStoricoProgetti(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetStoricoProgetti", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetStoricoProgettiResponse")]
+        System.Threading.Tasks.Task<string> GetStoricoProgettiAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoObiettivi", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoObiettiviResponse")]
         string GetElencoObiettivi(string username, string id);
@@ -275,6 +287,14 @@ namespace AgendaAziendale.SRAgendaAziendale {
             return base.Channel.GetElencoEventiAsync(username);
         }
         
+        public string GetStoricoEventi(string username) {
+            return base.Channel.GetStoricoEventi(username);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetStoricoEventiAsync(string username) {
+            return base.Channel.GetStoricoEventiAsync(username);
+        }
+        
         public bool CreaProgetto(string username, string nome, string descrizione, System.DateTime dataInizio, System.DateTime dataFine, string cliente) {
             return base.Channel.CreaProgetto(username, nome, descrizione, dataInizio, dataFine, cliente);
         }
@@ -305,6 +325,14 @@ namespace AgendaAziendale.SRAgendaAziendale {
         
         public System.Threading.Tasks.Task<string> GetElencoProgettiAsync(string username) {
             return base.Channel.GetElencoProgettiAsync(username);
+        }
+        
+        public string GetStoricoProgetti(string username) {
+            return base.Channel.GetStoricoProgetti(username);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetStoricoProgettiAsync(string username) {
+            return base.Channel.GetStoricoProgettiAsync(username);
         }
         
         public string GetElencoObiettivi(string username, string id) {

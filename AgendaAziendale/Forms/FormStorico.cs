@@ -14,21 +14,25 @@ namespace AgendaAziendale.Forms
     public partial class FormStorico : Form
     {
         #region Attributi
+        private Form formPadre;
         private readonly string tipologia;
         private UserControl ucContenitore;
         #endregion
 
         #region Getters & Setters
         public UserControl UcContenitore { get => ucContenitore; set => ucContenitore = value; }
+        public Form FormPadre { get => formPadre; set => formPadre = value; }
         #endregion
 
         /// <summary>
         /// Metodo costruttore FormStorico 
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="tipologia"></param>
-        public FormStorico(string tipologia)
+        public FormStorico(Form formPadre, string tipologia)
         {
             InitializeComponent();
+            FormPadre = formPadre;
             this.tipologia = tipologia;
         }
 
@@ -48,7 +52,7 @@ namespace AgendaAziendale.Forms
 
             if ((tipologia == "Eventi") || (tipologia == "eventi"))
             {
-                UcContenitore = new UCStoricoEventi();
+                UcContenitore = new UCStoricoEventi(FormPadre);
             }
 
             else if ((tipologia == "Progetti") || (tipologia == "progetti"))

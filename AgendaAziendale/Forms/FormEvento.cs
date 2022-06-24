@@ -84,6 +84,10 @@ namespace AgendaAziendale.Forms
             mcDataFine.Parent = panelCentro;
             btAggiungiAggiorna.Parent = panelCentro;
 
+            ///Setto un minimo valido per il settaggio delle date di un nuovo Evento
+            mcDataInizio.MinDate = DateTime.Now;
+            mcDataFine.MinDate = DateTime.Now;
+
             if (evento != null) ///Se ho un evento da modificare
             {
                 tbNome.Text = evento.Nome;

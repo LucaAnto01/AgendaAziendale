@@ -29,16 +29,15 @@
         private void InitializeComponent()
         {
             this.dgvStoricoEventi = new System.Windows.Forms.DataGridView();
+            this.panelCentro = new System.Windows.Forms.Panel();
             this.codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.referente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataInizio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataFine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.luogo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.info = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.panelCentro = new System.Windows.Forms.Panel();
+            this.elimina = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStoricoEventi)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,14 +51,13 @@
             this.dgvStoricoEventi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStoricoEventi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codice,
-            this.referente,
             this.nome,
             this.descrizione,
             this.dataInizio,
             this.dataFine,
             this.id,
             this.luogo,
-            this.info});
+            this.elimina});
             this.dgvStoricoEventi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvStoricoEventi.GridColor = System.Drawing.Color.White;
             this.dgvStoricoEventi.Location = new System.Drawing.Point(0, 0);
@@ -69,17 +67,19 @@
             this.dgvStoricoEventi.TabIndex = 1;
             this.dgvStoricoEventi.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvStoricoEventi_CellClick);
             // 
+            // panelCentro
+            // 
+            this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCentro.Location = new System.Drawing.Point(0, 0);
+            this.panelCentro.Name = "panelCentro";
+            this.panelCentro.Size = new System.Drawing.Size(700, 610);
+            this.panelCentro.TabIndex = 2;
+            // 
             // codice
             // 
             this.codice.HeaderText = "Codice";
             this.codice.Name = "codice";
             this.codice.ReadOnly = true;
-            // 
-            // referente
-            // 
-            this.referente.HeaderText = "Referente";
-            this.referente.Name = "referente";
-            this.referente.ReadOnly = true;
             // 
             // nome
             // 
@@ -117,22 +117,15 @@
             this.luogo.Name = "luogo";
             this.luogo.ReadOnly = true;
             // 
-            // info
+            // elimina
             // 
-            this.info.HeaderText = "";
-            this.info.Name = "info";
-            this.info.ReadOnly = true;
-            this.info.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.info.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.info.UseColumnTextForButtonValue = true;
-            // 
-            // panelCentro
-            // 
-            this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCentro.Location = new System.Drawing.Point(0, 0);
-            this.panelCentro.Name = "panelCentro";
-            this.panelCentro.Size = new System.Drawing.Size(700, 610);
-            this.panelCentro.TabIndex = 2;
+            this.elimina.HeaderText = "";
+            this.elimina.Name = "elimina";
+            this.elimina.ReadOnly = true;
+            this.elimina.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.elimina.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.elimina.Text = "Elimina";
+            this.elimina.UseColumnTextForButtonValue = true;
             // 
             // UCStoricoEventi
             // 
@@ -152,15 +145,14 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvStoricoEventi;
+        private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.DataGridViewTextBoxColumn codice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn referente;
         private System.Windows.Forms.DataGridViewTextBoxColumn nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn descrizione;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataInizio;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataFine;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn luogo;
-        private System.Windows.Forms.DataGridViewButtonColumn info;
-        private System.Windows.Forms.Panel panelCentro;
+        private System.Windows.Forms.DataGridViewButtonColumn elimina;
     }
 }

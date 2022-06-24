@@ -117,7 +117,7 @@ namespace AgendaAziendale.Forms.UserControls
             }
 
             else
-                MessageBox.Show("ERRORE! Impossibile ottenere i dati dal DB, contattare l'amministrazione.", "Aggiorna UCObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Non sono presenti obiettivi!", "Aggiorna UCObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion       
     }

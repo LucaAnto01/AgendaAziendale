@@ -99,7 +99,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtVisualizzaStoricoEvento_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormStorico("eventi"));
+            CaricaForm(new FormStorico(this, "eventi"));
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtStoricoProgetti_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormStorico("progetti"));
+            CaricaForm(new FormStorico(this, "progetti"));
         }
 
         /// <summary>

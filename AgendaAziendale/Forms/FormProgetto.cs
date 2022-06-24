@@ -83,7 +83,11 @@ namespace AgendaAziendale.Forms
             mcDataInizio.Parent = panelCentro;
             mcDataFine.Parent = panelCentro;
             btAggiungiAggiorna.Parent = panelCentro;
-            btGestioneObiettivi.Parent = panelCentro;   
+            btGestioneObiettivi.Parent = panelCentro;
+
+            ///Setto un minimo valido per il settaggio delle date di un nuovo Progetto
+            mcDataInizio.MinDate = DateTime.Now;
+            mcDataFine.MinDate = DateTime.Now.AddDays(1);
 
             if (progetto != null) ///Se ho un evento da modificare
             {
@@ -135,6 +139,7 @@ namespace AgendaAziendale.Forms
             ((TextBox)sender).BackColor = Color.White;
             mcDataInizio.Show();
             tbDataInizio.Enabled = false;
+            tbDataFine.Enabled = false;
         }
 
         /// <summary>
@@ -148,6 +153,7 @@ namespace AgendaAziendale.Forms
         {
             mcDataInizio.Hide();
             tbDataInizio.Enabled = true;
+            tbDataFine.Enabled = true;
             tbDataInizio.Text = mcDataInizio.SelectionRange.Start.ToShortDateString();
         }
 
@@ -163,6 +169,7 @@ namespace AgendaAziendale.Forms
             ((TextBox)sender).BackColor = Color.White;
             mcDataFine.Show();
             tbDataFine.Enabled = false;
+            tbDataInizio.Enabled = false;
         }
 
         /// <summary>
@@ -176,6 +183,7 @@ namespace AgendaAziendale.Forms
         {
             mcDataFine.Hide();
             tbDataFine.Enabled = true;
+            tbDataInizio.Enabled = true;
             tbDataFine.Text = mcDataFine.SelectionRange.Start.ToShortDateString();
         }
 

@@ -122,7 +122,7 @@ namespace AgendaAziendale.Forms.UserControls
             }
 
             else
-                MessageBox.Show("ERRORE! Impossibile ottenere i dati dal DB, contattare l'amministrazione.", "Aggiorna UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Non sono presenti eventi!", "Aggiorna UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
     }

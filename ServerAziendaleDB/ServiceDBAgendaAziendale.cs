@@ -194,6 +194,10 @@ namespace ServerAziendaleDB
         {
             string query = "DELETE FROM lavoratore WHERE username = '" + username_in + "';";
 
+            ///Al fine di garantire l'integrità del database si verifica che non siano presenti partecipazioni ad eventi o progetti da parte del lavoratore
+            if ((GetElencoEventiLavoratore(username, username_in) != "") || (GetElencoProgettiLavoratore(username, username_in) != ""))
+                return false;
+
             List<string> queries = new List<string>
             {
                 query
@@ -398,7 +402,7 @@ namespace ServerAziendaleDB
         }
 
         /// <summary>
-        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB con una data maggiore o uguale all'odierna
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
@@ -406,7 +410,8 @@ namespace ServerAziendaleDB
         {
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, e.id, e.luogo " +
                            "FROM attivita a, evento e, specifica_evento se " +
-                           "WHERE a.codice = se.fk_attivita AND e.id = se.fk_evento;";
+                           "WHERE a.codice = se.fk_attivita AND e.id = se.fk_evento AND a.data_inizio >= CURRENT_DATE " +
+                           " ORDER BY a.data_inizio ASC;";
 
             try
             {
@@ -428,7 +433,76 @@ namespace ServerAziendaleDB
             }
 
             return "";
-        }       
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB con una data maggiore o uguale all'odierna
+        /// a cui partecipa uno specifico lavoratore
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <returns></returns>
+        public string GetElencoEventiLavoratore(string username, string username_in)
+        {
+            string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, e.id, e.luogo" +
+                           " FROM attivita a, evento e, specifica_evento se, partecipazione pa" +
+                           " WHERE a.codice = se.fk_attivita AND a.codice = pa.fk_attivita AND e.id = se.fk_evento" +
+                           "       AND pa.fk_lavoratore = '" + username_in + "' AND a.data_inizio >= CURRENT_DATE" +
+                           " ORDER BY a.data_inizio ASC; ";
+            try
+            {
+                string result = InterazioneDB.EseguiQuery_GetInfo(query);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query GetElencoEventiLavoratore() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoEventiLavoratore()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GetStoricoEventi(string username)
+        {
+            string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, e.id, e.luogo " +
+               "FROM attivita a, evento e, specifica_evento se " +
+               "WHERE a.codice = se.fk_attivita AND e.id = se.fk_evento;";
+
+            try
+            {
+                string result = InterazioneDB.EseguiQuery_GetInfo(query);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query GetStoricoEventi() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetStoricoEventi()"); ///Scrittura log
+            }
+
+            return "";
+        }
         #endregion
 
         #region Progetti
@@ -579,7 +653,7 @@ namespace ServerAziendaleDB
         }
 
         /// <summary>
-        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB con una data maggiore o uguale all'odierna
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
@@ -587,7 +661,8 @@ namespace ServerAziendaleDB
         {
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, p.id, p.cliente" +
                            " FROM attivita a, progetto p, specifica_progetto sp" +
-                           " WHERE a.codice = sp.fk_attivita AND p.id = sp.fk_progetto; ";
+                           " WHERE a.codice = sp.fk_attivita AND p.id = sp.fk_progetto AND a.data_inizio >= CURRENT_DATE" +
+                           " ORDER BY a.data_inizio ASC;";
 
             try
             {
@@ -606,6 +681,76 @@ namespace ServerAziendaleDB
             finally
             {
                 WriteLog(username, "GetElencoProgetti()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB  con una data maggiore o uguale all'odierna
+        /// a cui partecipa uno specifico lavoratore
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <returns></returns>
+        public string GetElencoProgettiLavoratore(string username, string username_in)
+        {
+            string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, p.id, p.cliente" +
+                           " FROM attivita a, progetto p, specifica_progetto sp, partecipazione pa" +
+                           " WHERE a.codice = sp.fk_attivita AND a.codice = pa.fk_attivita AND p.id = sp.fk_progetto" +
+                           "       AND pa.fk_lavoratore = '" + username_in + "' AND a.data_inizio >= CURRENT_DATE" +
+                           " ORDER BY a.data_inizio ASC;";
+
+            try
+            {
+                string result = InterazioneDB.EseguiQuery_GetInfo(query);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query GetElencoProgettiLavoratore() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetElencoProgettiLavoratore()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GetStoricoProgetti(string username)
+        {
+            string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, p.id, p.cliente" +
+               " FROM attivita a, progetto p, specifica_progetto sp" +
+               " WHERE a.codice = sp.fk_attivita AND p.id = sp.fk_progetto;";
+
+            try
+            {
+                string result = InterazioneDB.EseguiQuery_GetInfo(query);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Esecuzione query GetStoricoProgetti() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetStoricoProgetti()"); ///Scrittura log
             }
 
             return "";

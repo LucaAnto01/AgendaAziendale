@@ -89,7 +89,7 @@ namespace AgendaAziendale.Forms.UserControls
                     }
 
                     else
-                        MessageBox.Show("ERRORE! Impossibile eliminare l'utente dal DB, contattare l'amministrazione.", "UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Impossibile eliminare l'utente dal DB. Controllare che non sia associato ad alcuna attività", "UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
             }
@@ -119,7 +119,7 @@ namespace AgendaAziendale.Forms.UserControls
             }
 
             else
-                MessageBox.Show("ERRORE! Impossibile ottenere i dati dal DB, contattare l'amministrazione.", "Aggiorna UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Non sono presenti lavoratori!", "Aggiorna UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Information);
             
         }
         #endregion

@@ -132,10 +132,8 @@ namespace AgendaAziendale.Forms.UserControls
 
                     string result_obiettivi = Controller.GetElencoObiettivi(progetto.Id.ToString()); ///Aggiungo gli obiettivi al progetto
                     if (result_obiettivi != "")
-                    {
-                        List<Obiettivo> elencoObiettivi = new List<Obiettivo>();
-                        elencoObiettivi = Obiettivo.GeneraElencoObiettivi(result_obiettivi);
-                        progetto.Obiettivi = elencoObiettivi;
+                    { 
+                        progetto.Obiettivi = Obiettivo.GeneraElencoObiettivi(result_obiettivi);
 
                         dgvProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
                     }
@@ -146,7 +144,7 @@ namespace AgendaAziendale.Forms.UserControls
             }
 
             else
-                MessageBox.Show("ERRORE! Impossibile ottenere i dati dal DB, contattare l'amministrazione.", "Aggiorna UCProgeti", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Non sono presenti progetti!", "Aggiorna UCProgeti", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
     }

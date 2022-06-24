@@ -303,7 +303,7 @@ namespace ServerAziendale
         }
 
         /// <summary>
-        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB con una data maggiore o uguale all'odierna
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
@@ -326,6 +326,35 @@ namespace ServerAziendale
             finally
             {
                 WriteLog(username, "GetElencoEventi()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GetStoricoEventi(string username)
+        {
+            try
+            {
+                string result = Sessione.ServerAziendaleDB.GetStoricoEventi(username);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione GetStoricoEventi() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetStoricoEventi()"); ///Scrittura log
             }
 
             return "";
@@ -429,7 +458,7 @@ namespace ServerAziendale
         }
 
         /// <summary>
-        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB con una data maggiore o uguale all'odierna
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
@@ -452,6 +481,35 @@ namespace ServerAziendale
             finally
             {
                 WriteLog(username, "GetElencoProgetti()"); ///Scrittura log
+            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GetStoricoProgetti(string username)
+        {
+            try
+            {
+                string result = Sessione.ServerAziendaleDB.GetStoricoProgetti(username);
+
+                if (result != "")
+                    return result;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione GetStoricoProgetti() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "GetStoricoProgetti()"); ///Scrittura log
             }
 
             return "";

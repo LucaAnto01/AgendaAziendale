@@ -172,12 +172,26 @@ namespace AgendaAziendale.Modelli
         }
 
         /// <summary>
-        /// Funzione adibita all'ottenimento dell'elenco di tutti gli eventi presenti nel DB
+        /// Funzione adibita all'ottenimento dell'elenco di tutti gli eventi presenti nel DB con una data maggiore o uguale all'odierna
         /// </summary>
         /// <returns></returns>
         public static string GetElencoEventi()
         {
             string result = Sessione.ServerAziendale.GetElencoEventi(Sessione.Lavoratore.Username);
+
+            if (result != "")
+                return result;
+
+            return "";
+        }
+
+        /// <summary>
+        /// Funzione adibita all'ottenimento dell'elenco di tutti gli eventi presenti nel DB
+        /// </summary>
+        /// <returns></returns>
+        public static string GetStoricoEventi()
+        {
+            string result = Sessione.ServerAziendale.GetStoricoEventi(Sessione.Lavoratore.Username);
 
             if (result != "")
                 return result;
@@ -238,12 +252,26 @@ namespace AgendaAziendale.Modelli
         }
 
         /// <summary>
-        /// Funzione adibita all'ottenimento dell'elenco di tutti i progetti presenti nel DB
+        /// Funzione adibita all'ottenimento dell'elenco di tutti i progetti presenti nel DB con una data maggiore o uguale all'odierna
         /// </summary>
         /// <returns></returns>
         public static string GetElencoProgetti()
         {
             string result = Sessione.ServerAziendale.GetElencoProgetti(Sessione.Lavoratore.Username);
+
+            if (result != "")
+                return result;
+
+            return "";
+        }
+
+        /// <summary>
+        /// Funzione adibita all'ottenimento dell'elenco di tutti i progetti presenti nel DB
+        /// </summary>
+        /// <returns></returns>
+        public static string GetStoricoProgetti()
+        {
+            string result = Sessione.ServerAziendale.GetStoricoProgetti(Sessione.Lavoratore.Username);
 
             if (result != "")
                 return result;

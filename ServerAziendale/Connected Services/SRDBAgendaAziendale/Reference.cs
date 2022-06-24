@@ -81,6 +81,18 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventi", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventiResponse")]
         System.Threading.Tasks.Task<string> GetElencoEventiAsync(string username);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventiLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventiLavoratoreResponse")]
+        string GetElencoEventiLavoratore(string username, string username_in);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventiLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventiLavoratoreResponse")]
+        System.Threading.Tasks.Task<string> GetElencoEventiLavoratoreAsync(string username, string username_in);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoEventi", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoEventiResponse")]
+        string GetStoricoEventi(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoEventi", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoEventiResponse")]
+        System.Threading.Tasks.Task<string> GetStoricoEventiAsync(string username);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgetto", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgettoResponse")]
         bool CreaProgetto(string username, string nome, string descrizione, string dataInizio, string dataFine, string cliente);
         
@@ -104,6 +116,18 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgetti", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiResponse")]
         System.Threading.Tasks.Task<string> GetElencoProgettiAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiLavoratoreResponse")]
+        string GetElencoProgettiLavoratore(string username, string username_in);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiLavoratoreResponse")]
+        System.Threading.Tasks.Task<string> GetElencoProgettiLavoratoreAsync(string username, string username_in);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoProgetti", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoProgettiResponse")]
+        string GetStoricoProgetti(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoProgetti", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoProgettiResponse")]
+        System.Threading.Tasks.Task<string> GetStoricoProgettiAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoObiettivi", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoObiettiviResponse")]
         string GetElencoObiettivi(string username, string id);
@@ -267,6 +291,22 @@ namespace ServerAziendale.SRDBAgendaAziendale {
             return base.Channel.GetElencoEventiAsync(username);
         }
         
+        public string GetElencoEventiLavoratore(string username, string username_in) {
+            return base.Channel.GetElencoEventiLavoratore(username, username_in);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetElencoEventiLavoratoreAsync(string username, string username_in) {
+            return base.Channel.GetElencoEventiLavoratoreAsync(username, username_in);
+        }
+        
+        public string GetStoricoEventi(string username) {
+            return base.Channel.GetStoricoEventi(username);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetStoricoEventiAsync(string username) {
+            return base.Channel.GetStoricoEventiAsync(username);
+        }
+        
         public bool CreaProgetto(string username, string nome, string descrizione, string dataInizio, string dataFine, string cliente) {
             return base.Channel.CreaProgetto(username, nome, descrizione, dataInizio, dataFine, cliente);
         }
@@ -297,6 +337,22 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         
         public System.Threading.Tasks.Task<string> GetElencoProgettiAsync(string username) {
             return base.Channel.GetElencoProgettiAsync(username);
+        }
+        
+        public string GetElencoProgettiLavoratore(string username, string username_in) {
+            return base.Channel.GetElencoProgettiLavoratore(username, username_in);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetElencoProgettiLavoratoreAsync(string username, string username_in) {
+            return base.Channel.GetElencoProgettiLavoratoreAsync(username, username_in);
+        }
+        
+        public string GetStoricoProgetti(string username) {
+            return base.Channel.GetStoricoProgetti(username);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetStoricoProgettiAsync(string username) {
+            return base.Channel.GetStoricoProgettiAsync(username);
         }
         
         public string GetElencoObiettivi(string username, string id) {
