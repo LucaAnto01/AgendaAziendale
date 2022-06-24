@@ -127,7 +127,7 @@
             // 
             // avanzamento
             // 
-            this.avanzamento.HeaderText = "";
+            this.avanzamento.HeaderText = "Avanzamento";
             this.avanzamento.Name = "avanzamento";
             this.avanzamento.ReadOnly = true;
             // 

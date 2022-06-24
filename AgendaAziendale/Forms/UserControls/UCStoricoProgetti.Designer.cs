@@ -31,14 +31,14 @@
             this.panelCentro = new System.Windows.Forms.Panel();
             this.dgvStoricoProgetti = new System.Windows.Forms.DataGridView();
             this.codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.referente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataInizio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataFine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.info = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.avanzamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.elimina = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panelCentro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStoricoProgetti)).BeginInit();
             this.SuspendLayout();
@@ -62,14 +62,14 @@
             this.dgvStoricoProgetti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStoricoProgetti.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codice,
-            this.referente,
             this.nome,
             this.descrizione,
             this.dataInizio,
             this.dataFine,
             this.id,
             this.cliente,
-            this.info});
+            this.avanzamento,
+            this.elimina});
             this.dgvStoricoProgetti.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvStoricoProgetti.GridColor = System.Drawing.Color.White;
             this.dgvStoricoProgetti.Location = new System.Drawing.Point(0, 0);
@@ -84,12 +84,6 @@
             this.codice.HeaderText = "Codice";
             this.codice.Name = "codice";
             this.codice.ReadOnly = true;
-            // 
-            // referente
-            // 
-            this.referente.HeaderText = "Referente";
-            this.referente.Name = "referente";
-            this.referente.ReadOnly = true;
             // 
             // nome
             // 
@@ -127,14 +121,21 @@
             this.cliente.Name = "cliente";
             this.cliente.ReadOnly = true;
             // 
-            // info
+            // avanzamento
             // 
-            this.info.HeaderText = "";
-            this.info.Name = "info";
-            this.info.ReadOnly = true;
-            this.info.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.info.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.info.UseColumnTextForButtonValue = true;
+            this.avanzamento.HeaderText = "Avanzamento";
+            this.avanzamento.Name = "avanzamento";
+            this.avanzamento.ReadOnly = true;
+            // 
+            // elimina
+            // 
+            this.elimina.HeaderText = "";
+            this.elimina.Name = "elimina";
+            this.elimina.ReadOnly = true;
+            this.elimina.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.elimina.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.elimina.Text = "Elimina";
+            this.elimina.UseColumnTextForButtonValue = true;
             // 
             // UCStoricoProgetti
             // 
@@ -156,13 +157,13 @@
         private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.DataGridView dgvStoricoProgetti;
         private System.Windows.Forms.DataGridViewTextBoxColumn codice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn referente;
         private System.Windows.Forms.DataGridViewTextBoxColumn nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn descrizione;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataInizio;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataFine;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cliente;
-        private System.Windows.Forms.DataGridViewButtonColumn info;
+        private System.Windows.Forms.DataGridViewTextBoxColumn avanzamento;
+        private System.Windows.Forms.DataGridViewButtonColumn elimina;
     }
 }

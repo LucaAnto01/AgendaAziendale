@@ -57,7 +57,7 @@ namespace AgendaAziendale.Forms
 
             else if ((tipologia == "Progetti") || (tipologia == "progetti"))
             {
-                UcContenitore = new UCStoricoProgetti();
+                UcContenitore = new UCStoricoProgetti(FormPadre);
             }
 
             else

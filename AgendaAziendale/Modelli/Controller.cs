@@ -189,10 +189,9 @@ namespace AgendaAziendale.Modelli
         /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB con una data maggiore o uguale all'odierna
         /// a cui partecipa uno specifico lavoratore
         /// </summary>
-        /// <param name="username"></param>
         /// <param name="username_in"></param>
         /// <returns></returns>
-        public static string GetElencoEventiLavoratore(string username, string username_in)
+        public static string GetElencoEventiLavoratore(string username_in)
         {
             string result = Sessione.ServerAziendale.GetElencoEventiLavoratore(Sessione.Lavoratore.Username, username_in);
 
