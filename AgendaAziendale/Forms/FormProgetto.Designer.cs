@@ -46,6 +46,7 @@
             this.mcDataFine = new System.Windows.Forms.MonthCalendar();
             this.mcDataInizio = new System.Windows.Forms.MonthCalendar();
             this.tbDataInizio = new System.Windows.Forms.TextBox();
+            this.lbErroreData = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -180,6 +181,7 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.lbErroreData);
             this.panelCentro.Controls.Add(this.btGestioneObiettivi);
             this.panelCentro.Controls.Add(this.lbErrore);
             this.panelCentro.Controls.Add(this.mcDataFine);
@@ -240,6 +242,18 @@
             this.tbDataInizio.TabIndex = 48;
             this.tbDataInizio.Enter += new System.EventHandler(this.TbDataInizio_Enter);
             // 
+            // lbErroreData
+            // 
+            this.lbErroreData.AutoSize = true;
+            this.lbErroreData.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErroreData.ForeColor = System.Drawing.Color.Red;
+            this.lbErroreData.Location = new System.Drawing.Point(412, 365);
+            this.lbErroreData.Name = "lbErroreData";
+            this.lbErroreData.Size = new System.Drawing.Size(305, 24);
+            this.lbErroreData.TabIndex = 72;
+            this.lbErroreData.Text = "Inserisci una data di fine evento valida";
+            this.lbErroreData.Visible = false;
+            // 
             // FormProgetto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,5 +305,6 @@
         private System.Windows.Forms.TextBox tbDataInizio;
         private System.Windows.Forms.Label lbErrore;
         private System.Windows.Forms.Button btGestioneObiettivi;
+        private System.Windows.Forms.Label lbErroreData;
     }
 }

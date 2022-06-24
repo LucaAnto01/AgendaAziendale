@@ -82,6 +82,8 @@ namespace AgendaAziendale.Forms
             tbCliente.Parent = panelCentro;
             mcDataInizio.Parent = panelCentro;
             mcDataFine.Parent = panelCentro;
+            lbErrore.Parent = panelCentro;
+            lbErroreData.Parent = panelCentro;
             btAggiungiAggiorna.Parent = panelCentro;
             btGestioneObiettivi.Parent = panelCentro;
 
@@ -167,6 +169,7 @@ namespace AgendaAziendale.Forms
         private void TbDataFine_Enter(object sender, EventArgs e)
         {
             ((TextBox)sender).BackColor = Color.White;
+            lbErroreData.Visible = false;
             mcDataFine.Show();
             tbDataFine.Enabled = false;
             tbDataInizio.Enabled = false;
@@ -290,6 +293,12 @@ namespace AgendaAziendale.Forms
                 check = false;
             }
 
+            if (DateTime.Parse(tbDataFine.Text) < DateTime.Parse(tbDataInizio.Text)) ///Controllo validità data fine
+            {
+                lbErroreData.Visible = true;
+                check = false;
+            }
+
             if (tbCliente.Text == "")
             {
                 tbCliente.BackColor = Color.Red;
@@ -309,6 +318,8 @@ namespace AgendaAziendale.Forms
             tbDataInizio.Text = "";
             tbDataFine.Text = "";
             tbCliente.Text = "";
+            lbErrore.Visible = false;
+            lbErroreData.Visible = false;
         }
         #endregion
     }

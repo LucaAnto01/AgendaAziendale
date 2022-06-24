@@ -45,6 +45,7 @@
             this.lbNome = new System.Windows.Forms.Label();
             this.panelCentro = new System.Windows.Forms.Panel();
             this.lbErrore = new System.Windows.Forms.Label();
+            this.lbErroreData = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -205,6 +206,7 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.lbErroreData);
             this.panelCentro.Controls.Add(this.lbErrore);
             this.panelCentro.Controls.Add(this.mcDataFine);
             this.panelCentro.Controls.Add(this.mcDataInizio);
@@ -226,6 +228,18 @@
             this.lbErrore.TabIndex = 70;
             this.lbErrore.Text = "Compila tutti i campi!";
             this.lbErrore.Visible = false;
+            // 
+            // lbErroreData
+            // 
+            this.lbErroreData.AutoSize = true;
+            this.lbErroreData.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErroreData.ForeColor = System.Drawing.Color.Red;
+            this.lbErroreData.Location = new System.Drawing.Point(412, 365);
+            this.lbErroreData.Name = "lbErroreData";
+            this.lbErroreData.Size = new System.Drawing.Size(305, 24);
+            this.lbErroreData.TabIndex = 71;
+            this.lbErroreData.Text = "Inserisci una data di fine evento valida";
+            this.lbErroreData.Visible = false;
             // 
             // FormEvento
             // 
@@ -277,5 +291,6 @@
         private System.Windows.Forms.Label lbNome;
         private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.Label lbErrore;
+        private System.Windows.Forms.Label lbErroreData;
     }
 }

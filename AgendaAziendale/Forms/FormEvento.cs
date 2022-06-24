@@ -82,6 +82,8 @@ namespace AgendaAziendale.Forms
             tbLuogo.Parent = panelCentro;
             mcDataInizio.Parent = panelCentro;
             mcDataFine.Parent = panelCentro;
+            lbErrore.Parent = panelCentro;
+            lbErroreData.Parent = panelCentro;
             btAggiungiAggiorna.Parent = panelCentro;
 
             ///Setto un minimo valido per il settaggio delle date di un nuovo Evento
@@ -134,6 +136,7 @@ namespace AgendaAziendale.Forms
             ((TextBox)sender).BackColor = Color.White;
             mcDataInizio.Show();
             tbDataInizio.Enabled = false;
+            tbDataFine.Enabled = false;
         }
 
         /// <summary>
@@ -147,6 +150,7 @@ namespace AgendaAziendale.Forms
         {
             mcDataInizio.Hide();
             tbDataInizio.Enabled = true;
+            tbDataFine.Enabled = true;
             tbDataInizio.Text = mcDataInizio.SelectionRange.Start.ToShortDateString();
         }
 
@@ -160,8 +164,10 @@ namespace AgendaAziendale.Forms
         private void TbDataFine_Enter(object sender, EventArgs e)
         {
             ((TextBox)sender).BackColor = Color.White;
+            lbErroreData.Visible = false;
             mcDataFine.Show();
             tbDataFine.Enabled = false;
+            tbDataInizio.Enabled = false;
         }
 
         /// <summary>
@@ -175,6 +181,7 @@ namespace AgendaAziendale.Forms
         {
             mcDataFine.Hide();
             tbDataFine.Enabled = true;
+            tbDataInizio.Enabled = true;
             tbDataFine.Text = mcDataFine.SelectionRange.Start.ToShortDateString();
         }
 
@@ -268,6 +275,12 @@ namespace AgendaAziendale.Forms
                 check = false;
             }
 
+            if(DateTime.Parse(tbDataFine.Text) < DateTime.Parse(tbDataInizio.Text)) ///Controllo validità data fine
+            {
+                lbErroreData.Visible = true;
+                check = false;
+            }
+
             if (tbLuogo.Text == "")
             {
                 tbLuogo.BackColor = Color.Red;
@@ -287,6 +300,8 @@ namespace AgendaAziendale.Forms
             tbDataInizio.Text = "";
             tbDataFine.Text = "";
             tbLuogo.Text = "";
+            lbErrore.Visible = false;
+            lbErroreData.Visible = false;
         }
         #endregion
     }
