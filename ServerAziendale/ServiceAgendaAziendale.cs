@@ -625,7 +625,8 @@ namespace ServerAziendale
                     if (obiettivo == 1) //1 --> completato
                         completati++;
 
-                result = ((100 * completati) / obiettivi.Length);
+                if(obiettivi.Length != 0) ///Al fine di evitare divisioni per zero
+                    result = ((100 * completati) / obiettivi.Length);
             }
 
             catch (Exception ex)
