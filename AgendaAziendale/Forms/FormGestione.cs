@@ -14,17 +14,25 @@ namespace AgendaAziendale.Forms
     public partial class FormGestione : Form
     {
         #region Attributi
+        private Form formPadre;
         private readonly string tipologia;
         private UserControl ucContenitore;
         #endregion
 
         #region Gettrs & Setters
         public UserControl UcContenitore { get => ucContenitore; set => ucContenitore = value; }
+        public Form FormPadre { get => formPadre; set => formPadre = value; }
         #endregion
 
-        public FormGestione(string tipologia)
+        /// <summary>
+        /// Metodo costruttore del FormGestione
+        /// </summary>
+        /// <param name="formPadre"></param>
+        /// <param name="tipologia"></param>
+        public FormGestione(Form formPadre, string tipologia)
         {
             InitializeComponent();
+            FormPadre = formPadre;
             this.tipologia = tipologia;
         }
 
@@ -47,19 +55,19 @@ namespace AgendaAziendale.Forms
             if((tipologia == "Lavoratore") || (tipologia == "lavoratore"))
             {
                 btAggiungi.Text = "Aggiungi lavoratore";
-                UcContenitore = new UCLavoratori();
+                UcContenitore = new UCLavoratori(FormPadre);
             }
 
             else if ((tipologia == "Evento") || (tipologia == "evento"))
             {
                 btAggiungi.Text = "Aggiungi evento";
-                UcContenitore = new UCEventi();
+                UcContenitore = new UCEventi(FormPadre);
             }
 
             else if ((tipologia == "Progetto") || (tipologia == "progetto"))
             {
                 btAggiungi.Text = "Aggiungi progetto";
-                UcContenitore = new UCProgetti();
+                UcContenitore = new UCProgetti(FormPadre);
             }
 
             else
@@ -75,20 +83,23 @@ namespace AgendaAziendale.Forms
         {
             if ((tipologia == "Lavoratore") || (tipologia == "lavoratore"))
             {
-                FormLavoratore formAggiungi = new FormLavoratore((UCLavoratori)UcContenitore, "aggiungi");
-                formAggiungi.Show();
+                FormLavoratore formAggiungi = new FormLavoratore(FormPadre, (UCLavoratori)UcContenitore, "aggiungi");
+                FormPadre.Hide();
+                formAggiungi.ShowDialog();
             }
 
             else if ((tipologia == "Evento") || (tipologia == "evento"))
             {
-                FormEvento formAggiungi = new FormEvento((UCEventi)UcContenitore, "aggiungi");
-                formAggiungi.Show();
+                FormEvento formAggiungi = new FormEvento(FormPadre, (UCEventi)UcContenitore, "aggiungi");
+                FormPadre.Hide();
+                formAggiungi.ShowDialog();
             }
 
             else if ((tipologia == "Progetto") || (tipologia == "progetto"))
             {
-                FormProgetto formAggiungi = new FormProgetto((UCProgetti)UcContenitore, "aggiungi");
-                formAggiungi.Show();
+                FormProgetto formAggiungi = new FormProgetto(FormPadre, (UCProgetti)UcContenitore, "aggiungi");
+                FormPadre.Hide();
+                formAggiungi.ShowDialog();
             }
 
             else
@@ -96,16 +107,6 @@ namespace AgendaAziendale.Forms
                 MessageBox.Show("ERRORE! Valore FormGestione:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
-        }
-        #endregion
-
-        #region Metodi
-        /// <summary>
-        /// Metodo per aggiornare l'interfaccia
-        /// </summary>
-        public void Aggiorna()
-        {
-            //TODO: pensa a come aggiornare la dgv
         }
         #endregion
     }

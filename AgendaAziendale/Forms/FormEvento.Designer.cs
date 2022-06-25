@@ -43,9 +43,9 @@
             this.lbDescrizione = new System.Windows.Forms.Label();
             this.tbNome = new System.Windows.Forms.TextBox();
             this.lbNome = new System.Windows.Forms.Label();
-            this.lbReferente = new System.Windows.Forms.Label();
-            this.cbReferente = new System.Windows.Forms.ComboBox();
             this.panelCentro = new System.Windows.Forms.Panel();
+            this.lbErrore = new System.Windows.Forms.Label();
+            this.lbErroreData = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -77,18 +77,19 @@
             // tbLuogo
             // 
             this.tbLuogo.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbLuogo.Location = new System.Drawing.Point(119, 321);
+            this.tbLuogo.Location = new System.Drawing.Point(119, 265);
             this.tbLuogo.MaxLength = 50;
             this.tbLuogo.Name = "tbLuogo";
             this.tbLuogo.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.tbLuogo.Size = new System.Drawing.Size(181, 21);
             this.tbLuogo.TabIndex = 52;
+            this.tbLuogo.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbLuogo
             // 
             this.lbLuogo.AutoSize = true;
             this.lbLuogo.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbLuogo.Location = new System.Drawing.Point(12, 321);
+            this.lbLuogo.Location = new System.Drawing.Point(12, 265);
             this.lbLuogo.Name = "lbLuogo";
             this.lbLuogo.Size = new System.Drawing.Size(53, 18);
             this.lbLuogo.TabIndex = 51;
@@ -96,7 +97,7 @@
             // 
             // mcDataFine
             // 
-            this.mcDataFine.Location = new System.Drawing.Point(451, 237);
+            this.mcDataFine.Location = new System.Drawing.Point(451, 181);
             this.mcDataFine.Name = "mcDataFine";
             this.mcDataFine.TabIndex = 33;
             this.mcDataFine.Visible = false;
@@ -105,7 +106,7 @@
             // tbDataFine
             // 
             this.tbDataFine.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbDataFine.Location = new System.Drawing.Point(119, 280);
+            this.tbDataFine.Location = new System.Drawing.Point(119, 224);
             this.tbDataFine.MaxLength = 25;
             this.tbDataFine.Name = "tbDataFine";
             this.tbDataFine.Size = new System.Drawing.Size(110, 21);
@@ -116,7 +117,7 @@
             // 
             this.lbDataFine.AutoSize = true;
             this.lbDataFine.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDataFine.Location = new System.Drawing.Point(12, 280);
+            this.lbDataFine.Location = new System.Drawing.Point(12, 224);
             this.lbDataFine.Name = "lbDataFine";
             this.lbDataFine.Size = new System.Drawing.Size(71, 18);
             this.lbDataFine.TabIndex = 49;
@@ -124,7 +125,7 @@
             // 
             // mcDataInizio
             // 
-            this.mcDataInizio.Location = new System.Drawing.Point(451, 237);
+            this.mcDataInizio.Location = new System.Drawing.Point(451, 181);
             this.mcDataInizio.Name = "mcDataInizio";
             this.mcDataInizio.TabIndex = 30;
             this.mcDataInizio.Visible = false;
@@ -132,7 +133,7 @@
             // 
             // btAggiungiAggiorna
             // 
-            this.btAggiungiAggiorna.Location = new System.Drawing.Point(15, 403);
+            this.btAggiungiAggiorna.Location = new System.Drawing.Point(15, 347);
             this.btAggiungiAggiorna.Name = "btAggiungiAggiorna";
             this.btAggiungiAggiorna.Size = new System.Drawing.Size(75, 23);
             this.btAggiungiAggiorna.TabIndex = 38;
@@ -143,7 +144,7 @@
             // tbDataInizio
             // 
             this.tbDataInizio.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbDataInizio.Location = new System.Drawing.Point(119, 235);
+            this.tbDataInizio.Location = new System.Drawing.Point(119, 179);
             this.tbDataInizio.MaxLength = 25;
             this.tbDataInizio.Name = "tbDataInizio";
             this.tbDataInizio.Size = new System.Drawing.Size(110, 21);
@@ -154,7 +155,7 @@
             // 
             this.lbDataInizio.AutoSize = true;
             this.lbDataInizio.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDataInizio.Location = new System.Drawing.Point(12, 237);
+            this.lbDataInizio.Location = new System.Drawing.Point(12, 181);
             this.lbDataInizio.Name = "lbDataInizio";
             this.lbDataInizio.Size = new System.Drawing.Size(82, 18);
             this.lbDataInizio.TabIndex = 47;
@@ -164,19 +165,20 @@
             // 
             this.tbDescrizione.AcceptsReturn = true;
             this.tbDescrizione.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbDescrizione.Location = new System.Drawing.Point(119, 168);
+            this.tbDescrizione.Location = new System.Drawing.Point(119, 112);
             this.tbDescrizione.MaxLength = 500;
             this.tbDescrizione.Multiline = true;
             this.tbDescrizione.Name = "tbDescrizione";
             this.tbDescrizione.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbDescrizione.Size = new System.Drawing.Size(246, 46);
             this.tbDescrizione.TabIndex = 46;
+            this.tbDescrizione.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbDescrizione
             // 
             this.lbDescrizione.AutoSize = true;
             this.lbDescrizione.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDescrizione.Location = new System.Drawing.Point(12, 168);
+            this.lbDescrizione.Location = new System.Drawing.Point(12, 112);
             this.lbDescrizione.Name = "lbDescrizione";
             this.lbDescrizione.Size = new System.Drawing.Size(93, 18);
             this.lbDescrizione.TabIndex = 45;
@@ -185,42 +187,27 @@
             // tbNome
             // 
             this.tbNome.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNome.Location = new System.Drawing.Point(119, 125);
+            this.tbNome.Location = new System.Drawing.Point(119, 69);
             this.tbNome.MaxLength = 50;
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(110, 21);
             this.tbNome.TabIndex = 40;
+            this.tbNome.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbNome
             // 
             this.lbNome.AutoSize = true;
             this.lbNome.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNome.Location = new System.Drawing.Point(12, 125);
+            this.lbNome.Location = new System.Drawing.Point(12, 69);
             this.lbNome.Name = "lbNome";
             this.lbNome.Size = new System.Drawing.Size(49, 18);
             this.lbNome.TabIndex = 39;
             this.lbNome.Text = "Nome";
             // 
-            // lbReferente
-            // 
-            this.lbReferente.AutoSize = true;
-            this.lbReferente.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbReferente.Location = new System.Drawing.Point(12, 85);
-            this.lbReferente.Name = "lbReferente";
-            this.lbReferente.Size = new System.Drawing.Size(80, 18);
-            this.lbReferente.TabIndex = 42;
-            this.lbReferente.Text = "Referente";
-            // 
-            // cbReferente
-            // 
-            this.cbReferente.FormattingEnabled = true;
-            this.cbReferente.Location = new System.Drawing.Point(119, 84);
-            this.cbReferente.Name = "cbReferente";
-            this.cbReferente.Size = new System.Drawing.Size(110, 21);
-            this.cbReferente.TabIndex = 41;
-            // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.lbErroreData);
+            this.panelCentro.Controls.Add(this.lbErrore);
             this.panelCentro.Controls.Add(this.mcDataFine);
             this.panelCentro.Controls.Add(this.mcDataInizio);
             this.panelCentro.Controls.Add(this.tbDataInizio);
@@ -229,6 +216,30 @@
             this.panelCentro.Name = "panelCentro";
             this.panelCentro.Size = new System.Drawing.Size(750, 525);
             this.panelCentro.TabIndex = 54;
+            // 
+            // lbErrore
+            // 
+            this.lbErrore.AutoSize = true;
+            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrore.ForeColor = System.Drawing.Color.Red;
+            this.lbErrore.Location = new System.Drawing.Point(450, 125);
+            this.lbErrore.Name = "lbErrore";
+            this.lbErrore.Size = new System.Drawing.Size(172, 24);
+            this.lbErrore.TabIndex = 70;
+            this.lbErrore.Text = "Compila tutti i campi!";
+            this.lbErrore.Visible = false;
+            // 
+            // lbErroreData
+            // 
+            this.lbErroreData.AutoSize = true;
+            this.lbErroreData.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErroreData.ForeColor = System.Drawing.Color.Red;
+            this.lbErroreData.Location = new System.Drawing.Point(412, 365);
+            this.lbErroreData.Name = "lbErroreData";
+            this.lbErroreData.Size = new System.Drawing.Size(305, 24);
+            this.lbErroreData.TabIndex = 71;
+            this.lbErroreData.Text = "Inserisci una data di fine evento valida";
+            this.lbErroreData.Visible = false;
             // 
             // FormEvento
             // 
@@ -247,8 +258,6 @@
             this.Controls.Add(this.lbDescrizione);
             this.Controls.Add(this.tbNome);
             this.Controls.Add(this.lbNome);
-            this.Controls.Add(this.lbReferente);
-            this.Controls.Add(this.cbReferente);
             this.Controls.Add(this.panelCentro);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormEvento";
@@ -280,8 +289,8 @@
         private System.Windows.Forms.Label lbDescrizione;
         private System.Windows.Forms.TextBox tbNome;
         private System.Windows.Forms.Label lbNome;
-        private System.Windows.Forms.Label lbReferente;
-        private System.Windows.Forms.ComboBox cbReferente;
         private System.Windows.Forms.Panel panelCentro;
+        private System.Windows.Forms.Label lbErrore;
+        private System.Windows.Forms.Label lbErroreData;
     }
 }

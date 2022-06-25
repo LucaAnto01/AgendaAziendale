@@ -29,13 +29,16 @@
         private void InitializeComponent()
         {
             this.panelTop = new System.Windows.Forms.Panel();
+            this.btChiudi = new System.Windows.Forms.Button();
             this.panelSinistra = new System.Windows.Forms.Panel();
             this.lbIntestazioneSinistra = new System.Windows.Forms.Label();
             this.panelSinistraTop = new System.Windows.Forms.Panel();
             this.pctbxLogo = new System.Windows.Forms.PictureBox();
             this.panelCentro = new System.Windows.Forms.Panel();
             this.btAccedi = new System.Windows.Forms.Button();
-            this.btChiudi = new System.Windows.Forms.Button();
+            this.tbUsername = new System.Windows.Forms.TextBox();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.lbErrore = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelSinistra.SuspendLayout();
             this.panelSinistraTop.SuspendLayout();
@@ -52,6 +55,20 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(1000, 40);
             this.panelTop.TabIndex = 2;
+            // 
+            // btChiudi
+            // 
+            this.btChiudi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btChiudi.BackColor = System.Drawing.Color.Transparent;
+            this.btChiudi.BackgroundImage = global::AgendaAziendale.Properties.Resources.Chiudi;
+            this.btChiudi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btChiudi.Location = new System.Drawing.Point(947, 5);
+            this.btChiudi.Name = "btChiudi";
+            this.btChiudi.Size = new System.Drawing.Size(45, 30);
+            this.btChiudi.TabIndex = 3;
+            this.btChiudi.UseVisualStyleBackColor = false;
+            this.btChiudi.Click += new System.EventHandler(this.BtChiudi_Click);
             // 
             // panelSinistra
             // 
@@ -95,6 +112,9 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.lbErrore);
+            this.panelCentro.Controls.Add(this.tbPassword);
+            this.panelCentro.Controls.Add(this.tbUsername);
             this.panelCentro.Controls.Add(this.btAccedi);
             this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCentro.Location = new System.Drawing.Point(300, 40);
@@ -112,19 +132,43 @@
             this.btAccedi.UseVisualStyleBackColor = true;
             this.btAccedi.Click += new System.EventHandler(this.BtAccedi_Click);
             // 
-            // btChiudi
+            // tbUsername
             // 
-            this.btChiudi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btChiudi.BackColor = System.Drawing.Color.Transparent;
-            this.btChiudi.BackgroundImage = global::AgendaAziendale.Properties.Resources.Chiudi;
-            this.btChiudi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btChiudi.Location = new System.Drawing.Point(947, 5);
-            this.btChiudi.Name = "btChiudi";
-            this.btChiudi.Size = new System.Drawing.Size(45, 30);
-            this.btChiudi.TabIndex = 3;
-            this.btChiudi.UseVisualStyleBackColor = false;
-            this.btChiudi.Click += new System.EventHandler(this.BtChiudi_Click);
+            this.tbUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbUsername.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbUsername.ForeColor = System.Drawing.Color.DarkGray;
+            this.tbUsername.Location = new System.Drawing.Point(277, 248);
+            this.tbUsername.MaxLength = 25;
+            this.tbUsername.Name = "tbUsername";
+            this.tbUsername.Size = new System.Drawing.Size(158, 27);
+            this.tbUsername.TabIndex = 1;
+            this.tbUsername.Text = "Username";
+            this.tbUsername.Enter += new System.EventHandler(this.TbUsername_Enter);
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbPassword.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPassword.ForeColor = System.Drawing.Color.DarkGray;
+            this.tbPassword.Location = new System.Drawing.Point(277, 303);
+            this.tbPassword.MaxLength = 25;
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(158, 27);
+            this.tbPassword.TabIndex = 2;
+            this.tbPassword.Text = "Password";
+            this.tbPassword.Enter += new System.EventHandler(this.TbPassword_Enter);
+            // 
+            // lbErrore
+            // 
+            this.lbErrore.AutoSize = true;
+            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrore.ForeColor = System.Drawing.Color.Red;
+            this.lbErrore.Location = new System.Drawing.Point(272, 394);
+            this.lbErrore.Name = "lbErrore";
+            this.lbErrore.Size = new System.Drawing.Size(172, 24);
+            this.lbErrore.TabIndex = 70;
+            this.lbErrore.Text = "Compila tutti i campi!";
+            this.lbErrore.Visible = false;
             // 
             // FormLogin
             // 
@@ -146,6 +190,7 @@
             this.panelSinistraTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pctbxLogo)).EndInit();
             this.panelCentro.ResumeLayout(false);
+            this.panelCentro.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -160,6 +205,9 @@
         private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.Button btAccedi;
         private System.Windows.Forms.Button btChiudi;
+        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.TextBox tbUsername;
+        private System.Windows.Forms.Label lbErrore;
     }
 }
 

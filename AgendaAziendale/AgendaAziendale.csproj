@@ -35,6 +35,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\SRAgendaAziendale\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,12 +72,6 @@
     <Compile Include="Forms\FormEvento.Designer.cs">
       <DependentUpon>FormEvento.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormEliminazione.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormEliminazione.Designer.cs">
-      <DependentUpon>FormEliminazione.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormGestione.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,23 +84,41 @@
     <Compile Include="Forms\FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormModifica.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormModifica.Designer.cs">
-      <DependentUpon>FormModifica.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormLavoratore.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormLavoratore.Designer.cs">
       <DependentUpon>FormLavoratore.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormObiettivi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormObiettivi.Designer.cs">
+      <DependentUpon>FormObiettivi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormObiettivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormObiettivo.Designer.cs">
+      <DependentUpon>FormObiettivo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPartecipanti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPartecipanti.Designer.cs">
+      <DependentUpon>FormPartecipanti.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormProgetto.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormProgetto.Designer.cs">
       <DependentUpon>FormProgetto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormStorico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormStorico.Designer.cs">
+      <DependentUpon>FormStorico.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormVisualizzazioneAttivita.cs">
       <SubType>Form</SubType>
@@ -124,15 +144,35 @@
     <Compile Include="Forms\UserControls\UCLavoratori.Designer.cs">
       <DependentUpon>UCLavoratori.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserControls\UCObiettivi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\UCObiettivi.Designer.cs">
+      <DependentUpon>UCObiettivi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\UserControls\UCProgetti.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\UserControls\UCProgetti.Designer.cs">
       <DependentUpon>UCProgetti.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UserControls\UCStoricoEventi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\UCStoricoEventi.Designer.cs">
+      <DependentUpon>UCStoricoEventi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\UserControls\UCStoricoProgetti.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UserControls\UCStoricoProgetti.Designer.cs">
+      <DependentUpon>UCStoricoProgetti.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modelli\Attivita.cs" />
+    <Compile Include="Modelli\Controller.cs" />
     <Compile Include="Modelli\Evento.cs" />
     <Compile Include="Modelli\Lavoratore.cs" />
+    <Compile Include="Modelli\Sessione.cs" />
     <Compile Include="Modelli\Obiettivo.cs" />
     <Compile Include="Modelli\Progetto.cs" />
     <Compile Include="Program.cs" />
@@ -146,23 +186,29 @@
     <EmbeddedResource Include="Forms\FormEvento.resx">
       <DependentUpon>FormEvento.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormEliminazione.resx">
-      <DependentUpon>FormEliminazione.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormGestione.resx">
       <DependentUpon>FormGestione.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormModifica.resx">
-      <DependentUpon>FormModifica.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLavoratore.resx">
       <DependentUpon>FormLavoratore.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormObiettivi.resx">
+      <DependentUpon>FormObiettivi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormObiettivo.resx">
+      <DependentUpon>FormObiettivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPartecipanti.resx">
+      <DependentUpon>FormPartecipanti.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormProgetto.resx">
       <DependentUpon>FormProgetto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormStorico.resx">
+      <DependentUpon>FormStorico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormVisualizzazioneAttivita.resx">
       <DependentUpon>FormVisualizzazioneAttivita.cs</DependentUpon>
@@ -176,8 +222,17 @@
     <EmbeddedResource Include="Forms\UserControls\UCLavoratori.resx">
       <DependentUpon>UCLavoratori.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserControls\UCObiettivi.resx">
+      <DependentUpon>UCObiettivi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserControls\UCProgetti.resx">
       <DependentUpon>UCProgetti.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserControls\UCStoricoEventi.resx">
+      <DependentUpon>UCStoricoEventi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UserControls\UCStoricoProgetti.resx">
+      <DependentUpon>UCStoricoProgetti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -189,6 +244,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Connected Services\SRAgendaAziendale\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SRAgendaAziendale\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SRAgendaAziendale\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SRAgendaAziendale\ServiceAgendaAziendale.wsdl" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -202,9 +267,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SRAgendaAziendale\item.disco" />
+    <None Include="Connected Services\SRAgendaAziendale\configuration91.svcinfo" />
+    <None Include="Connected Services\SRAgendaAziendale\configuration.svcinfo" />
+    <None Include="Connected Services\SRAgendaAziendale\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Img\Icone\Chiudi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\SRAgendaAziendale\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

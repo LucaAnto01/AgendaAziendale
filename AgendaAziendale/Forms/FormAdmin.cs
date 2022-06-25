@@ -71,7 +71,7 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtGestioneLavoratori_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormGestione("lavoratore"));
+            CaricaForm(new FormGestione(this, "lavoratore"));
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtGestioneEventi_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormGestione("evento"));
+            CaricaForm(new FormGestione(this, "evento"));
         }
 
         /// <summary>
@@ -91,17 +91,27 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtGestioneProgetti_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormGestione("progetto"));
+            CaricaForm(new FormGestione(this, "progetto"));
         }
 
         /// <summary>
-        /// Ascoltatore evento click sul bottone per visualizzare lo storico di eventi e progetti
+        /// Ascoltatore evento click sul bottone per visualizzare lo storico di eventi
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtVisualizzaStorico_Click(object sender, EventArgs e)
+        private void BtVisualizzaStoricoEventi_Click(object sender, EventArgs e)
         {
-            //TODO: visualizza lo storico
+            CaricaForm(new FormStorico(this, "eventi"));
+        }
+
+        /// <summary>
+        /// Ascoltatore evento click sul bottone per visualizzare lo storico dei progetti
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtStoricoProgetti_Click(object sender, EventArgs e)
+        {
+            CaricaForm(new FormStorico(this, "progetti"));
         }
 
         /// <summary>
@@ -113,7 +123,7 @@ namespace AgendaAziendale
         private void BtLogout_Click(object sender, EventArgs e)
         {
             FormLogin formLogin = new FormLogin();
-            formLogin.Show();
+            formLogin.ShowDialog();
             Close(); //Chiudo questo form
         }
         #endregion

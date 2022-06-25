@@ -15,6 +15,7 @@ namespace AgendaAziendale.Forms
     public partial class FormEvento : Form
     {
         #region Attributi
+        private readonly Form formPadre;
         private readonly UCEventi ucPadre;
         private readonly Evento evento;
         private readonly string azione;
@@ -24,12 +25,14 @@ namespace AgendaAziendale.Forms
         /// <summary>
         /// Metodo costruttore del FormEvento
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="ucPadre"></param>
         /// <param name="evento"></param>
         /// <param name="azione"></param>
-        public FormEvento(UCEventi ucPadre, Evento evento, string azione)
+        public FormEvento(Form formPadre, UCEventi ucPadre, Evento evento, string azione)
         {
             InitializeComponent();
+            this.formPadre = formPadre;
             this.ucPadre = ucPadre;
             this.evento = evento;
             this.azione = azione;
@@ -38,11 +41,13 @@ namespace AgendaAziendale.Forms
         /// <summary>
         /// Metodo costruttore del FormEvento
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="ucPadre"></param>
         /// <param name="azione"></param>
-        public FormEvento(UCEventi ucPadre,string azione)
+        public FormEvento(Form formPadre, UCEventi ucPadre,string azione)
         {
             InitializeComponent();
+            this.formPadre = formPadre;
             this.ucPadre = ucPadre;
             this.evento = null;
             this.azione = azione;
@@ -65,13 +70,11 @@ namespace AgendaAziendale.Forms
             ///Figli del pannello top
             btChiudi.Parent = panelTop;
             ///Figli del pannello centrale
-            lbReferente.Parent = panelCentro;
             lbNome.Parent = panelCentro;
             lbDescrizione.Parent = panelCentro;
             lbDataInizio.Parent = panelCentro;
             lbDataFine.Parent = panelCentro;
             lbLuogo.Parent = panelCentro;
-            cbReferente.Parent = panelCentro;
             tbNome.Parent = panelCentro;
             tbDescrizione.Parent = panelCentro;
             tbDataInizio.Parent = panelCentro;
@@ -79,13 +82,16 @@ namespace AgendaAziendale.Forms
             tbLuogo.Parent = panelCentro;
             mcDataInizio.Parent = panelCentro;
             mcDataFine.Parent = panelCentro;
+            lbErrore.Parent = panelCentro;
+            lbErroreData.Parent = panelCentro;
             btAggiungiAggiorna.Parent = panelCentro;
 
-            cbReferente.DropDownStyle = ComboBoxStyle.DropDownList; ///Possibilità di selezionare solo elementi della cb, senza poter scrivere manaulmente, al fine di evitare errori
+            ///Setto un minimo valido per il settaggio delle date di un nuovo Evento
+            mcDataInizio.MinDate = DateTime.Now;
+            mcDataFine.MinDate = DateTime.Now;
 
             if (evento != null) ///Se ho un evento da modificare
             {
-                cbReferente.Text = evento.Referente.Username;
                 tbNome.Text = evento.Nome;
                 tbDescrizione.Text = evento.Descrizione;
                 tbDataInizio.Text = evento.DataInizio.ToShortDateString();
@@ -114,6 +120,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
+            formPadre.Show();
             Close();
         }
 
@@ -126,8 +133,10 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbDataInizio_Enter(object sender, EventArgs e)
         {
+            ((TextBox)sender).BackColor = Color.White;
             mcDataInizio.Show();
             tbDataInizio.Enabled = false;
+            tbDataFine.Enabled = false;
         }
 
         /// <summary>
@@ -141,6 +150,7 @@ namespace AgendaAziendale.Forms
         {
             mcDataInizio.Hide();
             tbDataInizio.Enabled = true;
+            tbDataFine.Enabled = true;
             tbDataInizio.Text = mcDataInizio.SelectionRange.Start.ToShortDateString();
         }
 
@@ -153,8 +163,11 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbDataFine_Enter(object sender, EventArgs e)
         {
+            ((TextBox)sender).BackColor = Color.White;
+            lbErroreData.Visible = false;
             mcDataFine.Show();
             tbDataFine.Enabled = false;
+            tbDataInizio.Enabled = false;
         }
 
         /// <summary>
@@ -168,7 +181,19 @@ namespace AgendaAziendale.Forms
         {
             mcDataFine.Hide();
             tbDataFine.Enabled = true;
-            tbDataFine.Text = mcDataInizio.SelectionRange.Start.ToShortDateString();
+            tbDataInizio.Enabled = true;
+            tbDataFine.Text = mcDataFine.SelectionRange.Start.ToShortDateString();
+        }
+
+        /// <summary>
+        /// Ascoltatore evento click text box
+        /// --> settaggio background color --> white
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TbEnter_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).BackColor = Color.White;
         }
 
         /// <summary>
@@ -180,14 +205,103 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiungiAggiorna_Click(object sender, EventArgs e)
         {
-            if ((azione == "Aggiungi") || (azione == "aggiungi"))
-                //Richiama funzione aggiungi
+            if(CheckCampi())
+            {
+                if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                {
+                    if(Controller.CreaEvento(tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbLuogo.Text))
+                    {
+                        MessageBox.Show("Inserimento evento " + tbNome.Text + " avvenuto con successo!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        PulisciCampiInserimento();
+                    }
+                        
+                    else
+                        MessageBox.Show("Errore in fase d'inserimento.", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                    
 
-            if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                //Richiama funzione aggiorna
+                if ((azione == "Aggiorna") || (azione == "aggiorna"))
+                {
+                    if(Controller.AggiornaEvento(evento.Codice, evento.Id.ToString(), tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbLuogo.Text))
+                    {
+                        MessageBox.Show("Aggiornamento evento " + tbNome.Text + " avvenuto con successo!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        formPadre.Show();
+                        Close();
+                    }
 
-            if(ucPadre != null)
-                ucPadre.AggiornadgvEventi();
+                    else
+                        MessageBox.Show("Errore in fase di aggiornamento.", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (ucPadre != null)
+                    ucPadre.AggiornadgvEventi();
+            }
+
+            else
+                lbErrore.Visible = true;
+        }
+        #endregion
+
+        #region Metodi
+        /// <summary>
+        /// Funzione adibita al controllo del completamento dei campi d'inserimento
+        /// </summary>
+        /// <returns>bool</returns>
+        private bool CheckCampi()
+        {
+            bool check = true; ///True, tutti i campi compilati
+
+            if (tbNome.Text == "")
+            {
+                tbNome.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbDescrizione.Text == "")
+            {
+                tbDescrizione.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbDataInizio.Text == "")
+            {
+                tbDataInizio.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbDataFine.Text == "")
+            {
+                tbDataFine.BackColor = Color.Red;
+                check = false;
+            }
+
+            if(DateTime.Parse(tbDataFine.Text) < DateTime.Parse(tbDataInizio.Text)) ///Controllo validità data fine
+            {
+                lbErroreData.Visible = true;
+                check = false;
+            }
+
+            if (tbLuogo.Text == "")
+            {
+                tbLuogo.BackColor = Color.Red;
+                check = false;
+            }
+
+            return check;
+        }
+
+        /// <summary>
+        /// Metodo adibito alla pulizia di tutti i campi d'inserimento
+        /// </summary>
+        private void PulisciCampiInserimento()
+        {
+            tbNome.Text = "";
+            tbDescrizione.Text = "";
+            tbDataInizio.Text = "";
+            tbDataFine.Text = "";
+            tbLuogo.Text = "";
+            lbErrore.Visible = false;
+            lbErroreData.Visible = false;
         }
         #endregion
     }

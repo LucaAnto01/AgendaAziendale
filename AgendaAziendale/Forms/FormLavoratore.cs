@@ -15,6 +15,7 @@ namespace AgendaAziendale.Forms
     public partial class FormLavoratore : Form
     {
         #region Attributi
+        private readonly Form formPadre;
         private readonly UCLavoratori ucPadre;
         private readonly Lavoratore lavoratore;
         private readonly string azione;
@@ -23,12 +24,14 @@ namespace AgendaAziendale.Forms
         /// <summary>
         /// Metodo costruttore del FormLavoratore
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="ucPadre"></param>
         /// <param name="lavoratore"></param>
-        /// <param name="azione"></param> aggiungi | modifica
-        public FormLavoratore(UCLavoratori ucPadre, Lavoratore lavoratore, string azione)
+        /// <param name="azione"></param>
+        public FormLavoratore(Form formPadre, UCLavoratori ucPadre, Lavoratore lavoratore, string azione)
         {
             InitializeComponent();
+            this.formPadre = formPadre;
             this.ucPadre = ucPadre;
             this.lavoratore = lavoratore;
             this.azione = azione;
@@ -37,11 +40,13 @@ namespace AgendaAziendale.Forms
         /// <summary>
         /// Metodo costruttore del FormLavoratore
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="ucPadre"></param>
         /// <param name="azione"></param>
-        public FormLavoratore(UCLavoratori ucPadre, string azione)
+        public FormLavoratore(Form formPadre, UCLavoratori ucPadre, string azione)
         {
             InitializeComponent();
+            this.formPadre = formPadre;
             this.ucPadre = ucPadre;
             this.lavoratore = null;
             this.azione = azione;
@@ -92,6 +97,9 @@ namespace AgendaAziendale.Forms
                 tbUsername.Text = lavoratore.Username;
                 tbPassword.Text = lavoratore.Password;
                 cbCategoria.Text = lavoratore.Categoria;
+
+                tbUsername.Enabled = false; //Impedisco la modifica dell'username in quanto chiave primaria dei lavoratori --> garantisco l'integrità del DB
+                tbPassword.Enabled = false;
             }
             
             if ((azione == "Aggiungi") || (azione == "aggiungi"))
@@ -115,6 +123,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
+            formPadre.Show(); ///Mostro il form padre
             Close();
         }
 
@@ -141,8 +150,20 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbDataNascita_Enter(object sender, EventArgs e)
         {
+            ((TextBox)sender).BackColor = Color.White;
             mcDataNascita.Show();
             tbDataNascita.Enabled = false;
+        }
+
+        /// <summary>
+        /// Ascoltatore evento click text box
+        /// --> settaggio background color --> white
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TbEnter_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).BackColor = Color.White;
         }
 
         /// <summary>
@@ -159,27 +180,36 @@ namespace AgendaAziendale.Forms
                 lbErrore.Visible = false;
 
                 if ((azione == "Aggiungi") || (azione == "aggiungi"))
-                    //Richiama funzione aggiungi
+                {
+
+                    if (Controller.InserisciLavoratore(tbUsername.Text, tbPassword.Text, tbNome.Text, tbCognome.Text, tbResidenza.Text, tbDataNascita.Text, cbCategoria.Text)) ///Inserisco il lavoratore nel db
+                    {
+                        MessageBox.Show("Inserimento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        PulisciCampiInserimento();
+                    }
+                        
+                    else
+                        MessageBox.Show("Lavoratore " + tbUsername.Text + " già presente! Inserimento impossibile.", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
                 if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                    //Richiama funzione aggiorna
+                {
+                    if(Controller.AggiornaLavoratore(tbUsername.Text,tbNome.Text, tbCognome.Text, tbResidenza.Text, tbDataNascita.Text, cbCategoria.Text)) ///Aggiorno  il lavoratore nel db
+                    {
+                        MessageBox.Show("Aggiornamento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    ucPadre.AggiornadgvLavoratori();
+                        ucPadre.AggiornadgvLavoratori();
+                        formPadre.Show();
+                        Close();
+                    }
+                    else
+                        MessageBox.Show("Aggiornamento lavoratore " + tbUsername.Text + "fallito.", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
             }
 
             else
                 lbErrore.Visible = true;
-        }
-
-        /// <summary>
-        /// Ascoltatore evento click text box
-        /// --> settaggio background color --> white
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TbEnter_Click(object sender, EventArgs e)
-        {
-            ((TextBox)sender).BackColor = Color.White; 
         }
         #endregion
 
@@ -235,8 +265,20 @@ namespace AgendaAziendale.Forms
             }*/
 
             return check;
+        }
 
-            //TODO: AGGIUNGI LABEL ERRORE COMPILAZIONE CAMPI
+        /// <summary>
+        /// Metodo adibito alla pulizia di tutti i campi d'inserimento
+        /// </summary>
+        private void PulisciCampiInserimento()
+        {
+            tbNome.Text = "";
+            tbCognome.Text = "";
+            tbResidenza.Text = "";
+            tbDataNascita.Text = "";
+            tbUsername.Text = "";
+            tbPassword.Text = "";
+            cbCategoria.Text = "";
         }
         #endregion
     }

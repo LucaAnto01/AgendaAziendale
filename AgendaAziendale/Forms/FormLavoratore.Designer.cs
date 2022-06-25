@@ -83,7 +83,8 @@
             this.cbCategoria.Items.AddRange(new object[] {
             "Project Manager",
             "Sviluppatore",
-            "Segretario"});
+            "Segretario",
+            "Admin"});
             this.cbCategoria.Location = new System.Drawing.Point(119, 370);
             this.cbCategoria.Name = "cbCategoria";
             this.cbCategoria.Size = new System.Drawing.Size(110, 21);
@@ -155,7 +156,7 @@
             this.tbDataNascita.Name = "tbDataNascita";
             this.tbDataNascita.Size = new System.Drawing.Size(110, 21);
             this.tbDataNascita.TabIndex = 15;
-            this.tbDataNascita.Enter += new System.EventHandler(this.TbEnter_Click);
+            this.tbDataNascita.Enter += new System.EventHandler(this.TbDataNascita_Enter);
             // 
             // lbDataNascita
             // 

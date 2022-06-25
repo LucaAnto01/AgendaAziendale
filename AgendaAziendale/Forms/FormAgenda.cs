@@ -13,22 +13,13 @@ namespace AgendaAziendale.Forms
 {
     public partial class FormAgenda : Form
     {
-        #region Attributi
-        private Lavoratore lavoratore; ///Lavoratore che ha effettuato il login
-        #endregion
-
-        #region Getters & Setters
-        public Lavoratore Lavoratore { get => lavoratore; set => lavoratore = value; }
-        #endregion
         
         /// <summary>
         /// Metodo costruttore del FormAgenda
         /// </summary>
-        /// <param name="lavoratore"></param>
-        public FormAgenda(Lavoratore lavoratore)
+        public FormAgenda()
         {
             InitializeComponent();
-            Lavoratore = lavoratore;
         }
 
         #region Ascoltatori eventi
@@ -50,7 +41,8 @@ namespace AgendaAziendale.Forms
             btVisualizzaAgenda.Parent = panelSinistra;
             btProgettiEventi.Parent = panelSinistra;
             btGestione.Parent = panelSinistra;
-            btVisualizzaStorico.Parent = panelSinistra;
+            btStoricoProgetti.Parent = panelSinistra;
+            btProgettiEventi.Parent= panelSinistra;
             btLogout.Parent = panelSinistra;
 
             //SETTA IL TESTO DEL btProgettiEventi e gestisci la visibilità del btGestione
@@ -75,7 +67,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtVisualizzaAgenda_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormVisualizzazioneAttivita(Lavoratore));
+            CaricaForm(new FormVisualizzazioneAttivita(Sessione.Lavoratore));
         }
 
         /// <summary>
@@ -101,14 +93,23 @@ namespace AgendaAziendale.Forms
         }
 
         /// <summary>
-        /// Ascoltatore evento click sul bottone per visualizzare lo storico
-        /// --> a seconda della tipologia di account loggato si visualizza lo storico di eventi (tutti) e progetti (PM, sviluppatore)
+        /// Ascoltatore evento click sul bottone per visualizzare lo storico di eventi
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtVisualizzaStorico_Click(object sender, EventArgs e)
+        private void BtVisualizzaStoricoEvento_Click(object sender, EventArgs e)
         {
-            //TODO: fai vedere il tutto
+            CaricaForm(new FormStorico(this, "eventi"));
+        }
+
+        /// <summary>
+        /// Ascoltatore evento click sul bottone per visualizzare lo storico dei progetti
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtStoricoProgetti_Click(object sender, EventArgs e)
+        {
+            CaricaForm(new FormStorico(this, "progetti"));
         }
 
         /// <summary>
@@ -120,7 +121,7 @@ namespace AgendaAziendale.Forms
         private void BtLogout_Click(object sender, EventArgs e)
         {
             FormLogin formLogin = new FormLogin();
-            formLogin.Show();
+            formLogin.ShowDialog();
             Close(); //Chiudo questo form
         }
         #endregion

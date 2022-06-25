@@ -15,6 +15,7 @@ namespace AgendaAziendale.Forms
     public partial class FormProgetto : Form
     {
         #region Attributi
+        private readonly Form formPadre;
         private readonly UCProgetti ucPadre;
         private readonly Progetto progetto;
         private readonly string azione;
@@ -24,12 +25,14 @@ namespace AgendaAziendale.Forms
         /// <summary>
         /// Metodo costruttore del FormProgetto
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="ucPadre"></param>
         /// <param name="progetto"></param>
         /// <param name="azione"></param>
-        public FormProgetto(UCProgetti ucPadre, Progetto progetto, string azione)
+        public FormProgetto(Form formPadre, UCProgetti ucPadre, Progetto progetto, string azione)
         {
             InitializeComponent();
+            this.formPadre = formPadre;
             this.ucPadre = ucPadre;
             this.progetto = progetto;
             this.azione = azione;
@@ -38,11 +41,13 @@ namespace AgendaAziendale.Forms
         /// <summary>
         /// Metodo costruttore del FormProgetto
         /// </summary>
+        /// <param name="formPadre"></param>
         /// <param name="ucPadre"></param>
         /// <param name="azione"></param>
-        public FormProgetto(UCProgetti ucPadre, string azione)
+        public FormProgetto(Form formPadre, UCProgetti ucPadre, string azione)
         {
             InitializeComponent();
+            this.formPadre = formPadre;
             this.ucPadre = ucPadre;
             this.progetto = null;
             this.azione = azione;
@@ -65,13 +70,11 @@ namespace AgendaAziendale.Forms
             ///Figli del pannello top
             btChiudi.Parent = panelTop;
             ///Figli del pannello centrale
-            lbReferente.Parent = panelCentro;
             lbNome.Parent = panelCentro;
             lbDescrizione.Parent = panelCentro;
             lbDataInizio.Parent = panelCentro;
             lbDataFine.Parent = panelCentro;
             lbCliente.Parent = panelCentro;
-            cbReferente.Parent = panelCentro;
             tbNome.Parent = panelCentro;
             tbDescrizione.Parent = panelCentro;
             tbDataInizio.Parent = panelCentro;
@@ -79,13 +82,17 @@ namespace AgendaAziendale.Forms
             tbCliente.Parent = panelCentro;
             mcDataInizio.Parent = panelCentro;
             mcDataFine.Parent = panelCentro;
+            lbErrore.Parent = panelCentro;
+            lbErroreData.Parent = panelCentro;
             btAggiungiAggiorna.Parent = panelCentro;
+            btGestioneObiettivi.Parent = panelCentro;
 
-            cbReferente.DropDownStyle = ComboBoxStyle.DropDownList; ///Possibilità di selezionare solo elementi della cb, senza poter scrivere manaulmente, al fine di evitare errori
+            ///Setto un minimo valido per il settaggio delle date di un nuovo Progetto
+            mcDataInizio.MinDate = DateTime.Now;
+            mcDataFine.MinDate = DateTime.Now.AddDays(1);
 
             if (progetto != null) ///Se ho un evento da modificare
             {
-                cbReferente.Text = progetto.Referente.Username;
                 tbNome.Text = progetto.Nome;
                 tbDescrizione.Text = progetto.Descrizione;
                 tbDataInizio.Text = progetto.DataInizio.ToShortDateString();
@@ -97,7 +104,11 @@ namespace AgendaAziendale.Forms
                 btAggiungiAggiorna.Text = "Aggiungi";
 
             else if ((azione == "Aggiorna") || (azione == "aggiorna"))
+            {
                 btAggiungiAggiorna.Text = "Aggiorna";
+                btGestioneObiettivi.Visible = true;
+            }
+                
 
             else
             {
@@ -114,6 +125,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
+            formPadre.Show();
             Close();
         }
 
@@ -126,8 +138,10 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbDataInizio_Enter(object sender, EventArgs e)
         {
+            ((TextBox)sender).BackColor = Color.White;
             mcDataInizio.Show();
             tbDataInizio.Enabled = false;
+            tbDataFine.Enabled = false;
         }
 
         /// <summary>
@@ -141,6 +155,7 @@ namespace AgendaAziendale.Forms
         {
             mcDataInizio.Hide();
             tbDataInizio.Enabled = true;
+            tbDataFine.Enabled = true;
             tbDataInizio.Text = mcDataInizio.SelectionRange.Start.ToShortDateString();
         }
 
@@ -153,8 +168,11 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbDataFine_Enter(object sender, EventArgs e)
         {
+            ((TextBox)sender).BackColor = Color.White;
+            lbErroreData.Visible = false;
             mcDataFine.Show();
             tbDataFine.Enabled = false;
+            tbDataInizio.Enabled = false;
         }
 
         /// <summary>
@@ -168,7 +186,19 @@ namespace AgendaAziendale.Forms
         {
             mcDataFine.Hide();
             tbDataFine.Enabled = true;
-            tbDataFine.Text = mcDataInizio.SelectionRange.Start.ToShortDateString();
+            tbDataInizio.Enabled = true;
+            tbDataFine.Text = mcDataFine.SelectionRange.Start.ToShortDateString();
+        }
+
+        /// <summary>
+        /// Ascoltatore evento click text box
+        /// --> settaggio background color --> white
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TbEnter_Click(object sender, EventArgs e)
+        {
+            ((TextBox)sender).BackColor = Color.White;
         }
 
         /// <summary>
@@ -180,14 +210,116 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiungiAggiorna_Click(object sender, EventArgs e)
         {
-            if ((azione == "Aggiungi") || (azione == "aggiungi"))
-                //Richiama funzione aggiungi
+            if (CheckCampi())
+            {
+                if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                {
+                    if (Controller.CreaProgetto(tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbCliente.Text))
+                    {
+                        PulisciCampiInserimento();
+                        MessageBox.Show("Inserimento progetto " + tbNome.Text + " avvenuto con successo!", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                        
+
+                    else
+                        MessageBox.Show("Errore in fase d'inserimento.", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
 
                 if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                    //Richiama funzione aggiorna
+                {
+                    if (Controller.AggiornaProgetto(progetto.Codice, progetto.Id.ToString(), tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbCliente.Text))
+                    {
+                        MessageBox.Show("Aggiornamento progetto " + tbNome.Text + " avvenuto con successo!", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        formPadre.Show();
+                        Close();
+                    }
 
-                    if (ucPadre != null)
-                        ucPadre.AggiornadgvProgetti();
+                    else
+                        MessageBox.Show("Errore in fase di aggiornamento.", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                if (ucPadre != null)
+                    ucPadre.AggiornadgvProgetti();
+            }
+
+            else
+                lbErrore.Visible = true;
+        }
+
+        /// <summary>
+        /// Click sul bottone di aggiunta di un Obiettivo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtGestioneObiettivi_Click(object sender, EventArgs e)
+        {
+            FormObiettivi formObiettivi = new FormObiettivi(this, ucPadre, progetto);
+            formObiettivi.Show();
+            Hide();
+        }
+
+        #endregion
+
+        #region Metodi
+        /// <summary>
+        /// Funzione adibita al controllo del completamento dei campi d'inserimento
+        /// </summary>
+        /// <returns>bool</returns>
+        private bool CheckCampi()
+        {
+            bool check = true; ///True, tutti i campi compilati
+
+            if (tbNome.Text == "")
+            {
+                tbNome.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbDescrizione.Text == "")
+            {
+                tbDescrizione.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbDataInizio.Text == "")
+            {
+                tbDataInizio.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (tbDataFine.Text == "")
+            {
+                tbDataFine.BackColor = Color.Red;
+                check = false;
+            }
+
+            if (DateTime.Parse(tbDataFine.Text) < DateTime.Parse(tbDataInizio.Text)) ///Controllo validità data fine
+            {
+                lbErroreData.Visible = true;
+                check = false;
+            }
+
+            if (tbCliente.Text == "")
+            {
+                tbCliente.BackColor = Color.Red;
+                check = false;
+            }
+
+            return check;
+        }
+
+        /// <summary>
+        /// Metodo adibito alla pulizia di tutti i campi d'inserimento
+        /// </summary>
+        private void PulisciCampiInserimento()
+        {
+            tbNome.Text = "";
+            tbDescrizione.Text = "";
+            tbDataInizio.Text = "";
+            tbDataFine.Text = "";
+            tbCliente.Text = "";
+            lbErrore.Visible = false;
+            lbErroreData.Visible = false;
         }
         #endregion
     }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +21,7 @@ namespace AgendaAziendale.Modelli
         private string categoria;
         #endregion
 
-        #region Metodi e costruttori
+        #region Metodi costruttori
         /// <summary>
         /// Metodo costruttore della classe Lavoratore
         /// </summary>
@@ -46,34 +48,6 @@ namespace AgendaAziendale.Modelli
         /// Metodo costruttore vuoto della classe Lavoratore
         /// </summary>
         public Lavoratore() { }
-
-        /// <summary>
-        /// Metodo adibito all'inserimento nel DB di un nuovo lavoratore
-        /// --> da includere in un try-catch
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="categoria"></param>
-        public static void GeneraLavoratore(string username, string password, string nome, string cognome, string residenza, DateTime dataNascita, string categoria)
-        {
-            //GeneraEmail(username, cognome);
-            //TODO: inserisci nel DB un nuovo lavoratore
-        }
-
-        /// <summary>
-        /// Metodo per generare la mail personale di ciascun utente
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="cognome"></param>
-        /// <returns></returns>
-        private string GeneraEmail(string username, string cognome)
-        {
-            return username.ToLower() + "." + cognome.ToLower() + "@agendaaziendale.it";
-        }
         #endregion
 
         #region Getters & Setters
@@ -85,6 +59,90 @@ namespace AgendaAziendale.Modelli
         public DateTime DataNascita { get => dataNascita; set => dataNascita = value; }
         public string Email { get => email; set => email = value; }
         public string Categoria { get => categoria; set => categoria = value; }
+        #endregion
+
+        #region Metodi
+        /// <summary>
+        /// Metodo per generare la mail personale di ciascun utente
+        /// --> si è già sicuri che non ci sia nel db essendo basata sull'username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="cognome"></param>
+        /// <returns></returns>
+        public static string GeneraEmail(string username, string cognome)
+        {
+            return username.ToLower() + "." + cognome.ToLower() + "@agendaaziendale.it";
+        }
+
+        /// <summary>
+        /// Metodo adibido all'effetuazione dell'hashing della password
+        /// </summary>
+        /// <param name="passowrd"></param>
+        /// <returns></returns>
+        public static string PasswordHashing(string passowrd)
+        {
+            ///Effettuo l'hashing in SHA256 della password
+            /*var salt = Encoding.UTF8.GetBytes(Sessione.Salt); 
+            var password = Encoding.UTF8.GetBytes(passowrd); ///Converto la stringa in un array di byte
+
+            HMACMD5 hmacMD5 = new HMACMD5(salt); ///Chiave (+salt) in MD5
+            var saltedHash = hmacMD5.ComputeHash(password); ///Azione di hash sulla password*/
+
+            using (SHA256 sha256Hash = SHA256.Create())
+            {  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(passowrd)); ///Converto la stringa in un array di byte
+
+                ///Converto l'array di byte nella stringa hashata 
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2")); ///ToString("x2") --> solo caratteri (lettere minuscole + numeri)
+                }
+                return builder.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Metodo adibito alla creazione di un Lavoratore sulla base di una stringa formattata dato-dato-...
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns>Lavoratore</returns>
+        public static Lavoratore GeneraLavoratore(string info)
+        {
+            Lavoratore lavoratore = new Lavoratore();
+
+            List<string> informazioni = info.Split('-').ToList();
+
+            lavoratore.Username = informazioni.ElementAt(0);
+            lavoratore.Password = informazioni.ElementAt(1);
+            lavoratore.Nome = informazioni.ElementAt(2);
+            lavoratore.Cognome = informazioni.ElementAt(3);
+            lavoratore.Residenza = informazioni.ElementAt(4);
+            lavoratore.DataNascita = DateTime.Parse(informazioni.ElementAt(5));
+            lavoratore.Email = informazioni.ElementAt(6);
+            lavoratore.Categoria = informazioni.ElementAt(7);
+
+            return lavoratore;
+        }
+
+        /// <summary>
+        /// Metodo adibito alla creazione di una lista di Lavoratore sulla base di una stringa formattata dato-dato-...\n...
+        /// </summary>
+        /// <param name="elenco"></param>
+        /// <returns>List<Lavoratore></returns>
+        public static List<Lavoratore> GeneraElencoLavoratori(string elenco)
+        {
+            List<Lavoratore> elencoLavoratori = new List<Lavoratore>();
+
+            List<string> lavoratori_info = elenco.Split('\n').ToList(); ///Splitto l'elenco al fine di avere per ogni elemento le informazioni di ogni lavoratore
+
+            lavoratori_info.RemoveAt((lavoratori_info.Count - 1)); ///A causa dello split l'ultimo elemento rimane vuoto --> ""
+
+            foreach(string lavoratore_info in lavoratori_info) ///Popolo la lista dei lavoratori
+                elencoLavoratori.Add(GeneraLavoratore(lavoratore_info));
+            
+            return elencoLavoratori;
+        }
         #endregion
     }
 }
