@@ -185,6 +185,7 @@ namespace AgendaAziendale.Forms
                     if (Controller.InserisciLavoratore(tbUsername.Text, tbPassword.Text, tbNome.Text, tbCognome.Text, tbResidenza.Text, tbDataNascita.Text, cbCategoria.Text)) ///Inserisco il lavoratore nel db
                     {
                         MessageBox.Show("Inserimento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ucPadre.AggiornadgvLavoratori();
                         PulisciCampiInserimento();
                     }
                         

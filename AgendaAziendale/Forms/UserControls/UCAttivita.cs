@@ -93,6 +93,7 @@ namespace AgendaAziendale.Forms.UserControls
                 lbClienteLuogo.Text = evento.Luogo;
                 lbDataInizioFineInt.Text = "Inizio - Fine";
                 lbDataInizioFine.Text = evento.DataInizio.ToString("dd-MM-yyyy") + " - " + evento.DataFine.ToString("dd-MM-yyyy");
+                Size = new Size(345, 100);
             }
 
             else if(Attivita is Progetto)
@@ -103,6 +104,10 @@ namespace AgendaAziendale.Forms.UserControls
                 lbDataInizioFineInt.Text = "Consegna";
                 lbDataInizioFine.Text = progetto.DataFine.ToString("dd-MM-yyyy");
                 pbProgetto.Visible = true;
+
+                pbProgetto.Maximum = 100;
+                pbProgetto.BackColor = Color.Green; //TODO: MODIFICA IL COLORE IN BASE ALLA PERCENTUALE, FAI ROSSO - GIALLO - VERDE
+                pbProgetto.Value = Controller.CalcolaAvanzamentoProgetto(progetto); ///Calcolo l'avanzamento del progetto e lo mostro mostrando l'avanzamento della progress bar
             }
         }
         #endregion

@@ -30,11 +30,11 @@
         {
             this.lbTitolo = new System.Windows.Forms.Label();
             this.panelCentro = new System.Windows.Forms.Panel();
+            this.lbDataInizioFineInt = new System.Windows.Forms.Label();
+            this.lbClienteLuogoInt = new System.Windows.Forms.Label();
             this.pbProgetto = new System.Windows.Forms.ProgressBar();
             this.lbDataInizioFine = new System.Windows.Forms.Label();
             this.lbClienteLuogo = new System.Windows.Forms.Label();
-            this.lbClienteLuogoInt = new System.Windows.Forms.Label();
-            this.lbDataInizioFineInt = new System.Windows.Forms.Label();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,15 +59,35 @@
             this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCentro.Location = new System.Drawing.Point(0, 0);
             this.panelCentro.Name = "panelCentro";
-            this.panelCentro.Size = new System.Drawing.Size(256, 138);
+            this.panelCentro.Size = new System.Drawing.Size(345, 145);
             this.panelCentro.TabIndex = 1;
+            // 
+            // lbDataInizioFineInt
+            // 
+            this.lbDataInizioFineInt.AutoSize = true;
+            this.lbDataInizioFineInt.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDataInizioFineInt.Location = new System.Drawing.Point(4, 69);
+            this.lbDataInizioFineInt.Name = "lbDataInizioFineInt";
+            this.lbDataInizioFineInt.Size = new System.Drawing.Size(95, 18);
+            this.lbDataInizioFineInt.TabIndex = 6;
+            this.lbDataInizioFineInt.Text = "DataInFiCon";
+            // 
+            // lbClienteLuogoInt
+            // 
+            this.lbClienteLuogoInt.AutoSize = true;
+            this.lbClienteLuogoInt.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbClienteLuogoInt.Location = new System.Drawing.Point(4, 49);
+            this.lbClienteLuogoInt.Name = "lbClienteLuogoInt";
+            this.lbClienteLuogoInt.Size = new System.Drawing.Size(72, 18);
+            this.lbClienteLuogoInt.TabIndex = 5;
+            this.lbClienteLuogoInt.Text = "CliLuogo";
             // 
             // pbProgetto
             // 
             this.pbProgetto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbProgetto.Location = new System.Drawing.Point(5, 103);
+            this.pbProgetto.Location = new System.Drawing.Point(5, 106);
             this.pbProgetto.Name = "pbProgetto";
-            this.pbProgetto.Size = new System.Drawing.Size(246, 23);
+            this.pbProgetto.Size = new System.Drawing.Size(335, 23);
             this.pbProgetto.TabIndex = 4;
             this.pbProgetto.Visible = false;
             // 
@@ -91,26 +111,6 @@
             this.lbClienteLuogo.TabIndex = 2;
             this.lbClienteLuogo.Text = "ClienteLuogo";
             // 
-            // lbClienteLuogoInt
-            // 
-            this.lbClienteLuogoInt.AutoSize = true;
-            this.lbClienteLuogoInt.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbClienteLuogoInt.Location = new System.Drawing.Point(4, 49);
-            this.lbClienteLuogoInt.Name = "lbClienteLuogoInt";
-            this.lbClienteLuogoInt.Size = new System.Drawing.Size(72, 18);
-            this.lbClienteLuogoInt.TabIndex = 5;
-            this.lbClienteLuogoInt.Text = "CliLuogo";
-            // 
-            // lbDataInizioFineInt
-            // 
-            this.lbDataInizioFineInt.AutoSize = true;
-            this.lbDataInizioFineInt.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDataInizioFineInt.Location = new System.Drawing.Point(4, 69);
-            this.lbDataInizioFineInt.Name = "lbDataInizioFineInt";
-            this.lbDataInizioFineInt.Size = new System.Drawing.Size(95, 18);
-            this.lbDataInizioFineInt.TabIndex = 6;
-            this.lbDataInizioFineInt.Text = "DataInFiCon";
-            // 
             // UCAttivita
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -119,7 +119,7 @@
             this.Controls.Add(this.lbTitolo);
             this.Controls.Add(this.panelCentro);
             this.Name = "UCAttivita";
-            this.Size = new System.Drawing.Size(256, 138);
+            this.Size = new System.Drawing.Size(345, 145);
             this.Load += new System.EventHandler(this.UCAttivita_Load);
             this.MouseEnter += new System.EventHandler(this.UCAttivita_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.UCAttivita_MouseLeave);

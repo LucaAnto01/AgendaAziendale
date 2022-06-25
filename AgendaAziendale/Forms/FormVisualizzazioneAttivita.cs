@@ -15,55 +15,131 @@ namespace AgendaAziendale.Forms
     public partial class FormVisualizzazioneAttivita : Form
     {
         #region Attributi
-        private Lavoratore lavoratore;
+        private Form formPadre;
+        private List<Attivita> elencoAttivita;
+        private List<UCAttivita> listaUCAttivita;
         #endregion
 
-        #region Getters & Setters
-        public Lavoratore Lavoratore { get => lavoratore; set => lavoratore = value; }
+        #region Gettrs & Setters
+        public Form FormPadre { get => formPadre; set => formPadre = value; }
+        public List<Attivita> ElencoAttivita { get => elencoAttivita; set => elencoAttivita = value; }
+        public List<UCAttivita> ListaUCAttivita { get => listaUCAttivita; set => listaUCAttivita = value; }
         #endregion
 
         /// <summary>
         /// Metodo costruttore del FormVisualizzazioneAttivita
         /// </summary>
-        /// <param name="lavoratore"></param>
-        public FormVisualizzazioneAttivita(Lavoratore lavoratore)
+        /// <param name="formPadre"></param>
+        public FormVisualizzazioneAttivita(Form formPadre)
         {
             InitializeComponent();
-            Lavoratore = lavoratore;
+            FormPadre = formPadre;
+            ElencoAttivita = new List<Attivita>();
+            ListaUCAttivita = new List<UCAttivita>();
         }
 
         #region Ascoltatori eventi
         /// <summary>
         /// Metodo richiamato al caricamento dell'interfaccia
         ///  --> settaggio gerarchie interfaccia
-        ///  --> visualizzo le attività
+        ///  --> visualizzazione attività
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void FormVisualizzazioneAttivita_Load(object sender, EventArgs e)
         {
-            flpCentro.Parent = this;
-            CaricaAttivita();
+            ///Figli del form
+            panelTop.Parent = this;
+            panelCentro.Parent = this;
+            ///Figli del panelTop
+            lbEventi.Parent = panelTop;
+            lbProgetti.Parent = panelTop;
+            ///Figli del pannelCentro
+            flpSinistra.Parent = panelCentro;
+            flpDestra.Parent = panelCentro;
+
+            if (Sessione.Lavoratore.Categoria == "Segretario")
+            {
+                flpDestra.Visible = false;
+                lbProgetti.Visible = false;
+            }
+
+            AggiornaInterfaccia();
         }
         #endregion
 
         #region Metodi
         /// <summary>
-        /// Metodo che si occupa del caricamento degli UCAttività nel form al fine di mostrarli all'utente
+        /// Metodo adibito all'aggiornamento dei dati visualizzati nell'interfaccia
         /// </summary>
-        private void CaricaAttivita()
+        private void AggiornaInterfaccia()
         {
-            flpCentro.Controls.Clear(); ///Mi assicuro che il pannello sia pulito e lo pulisco nel caso ci sia da aggiornare l'interfaccia
+            ///Pulisco le List
+            ElencoAttivita.Clear();
+            ListaUCAttivita.Clear();
 
-            List<UCAttivita> listaUCAttivita = new List<UCAttivita>();
+            CaricaEventi();
 
-            //TODO: OTTIENI UNA LISTA DI ATTIVITA' INERROGANDO IL DB e differenzia in base al tipo di account loggato
-            //FAI PRIMA UN CICLO PER GLI EVENTI E POI UNO PER I PROGETTI --> FAI DUE LISTE (fai due metodi che peschino tutti gli eventi
-            //e tutti i progetti) ED UNISCILE IN UNA UNICA
-            //ORDINALI PER DATA D'INIZIO
-            //AGGIUNGILI A listaUCAttivita
-            //AGGIUNGI L'ELEMENTO CORRENTE A flpCentro.Controls.Add(elemtno i-esimo)
-            //AGGIUNGI L'ASCOLTATORE DELL'EVENTO: eli-esimo.Click += EventHandler(UCAttivita_Click);
+            if (Sessione.Lavoratore.Categoria != "Segretario")
+                CaricaProgetti();
+        }
+
+        /// <summary>
+        /// Metodo che si occupa del caricamento degli UCAttività di tipologia Evento nel flpSinistra al fine di mostrarli all'utente
+        /// </summary>
+        private void CaricaEventi()
+        {
+            string result_eventi = Controller.GetElencoEventiLavoratore(Sessione.Lavoratore.Username);
+            flpSinistra.Controls.Clear(); ///Mi assicuro che il pannello sia pulito e lo pulisco nel caso ci sia da aggiornare l'interfaccia
+
+            if (result_eventi != "")
+            {
+                List<Evento> elencoEventi = Evento.GeneraElencoEventi(result_eventi);
+                List<UCAttivita> listaUCAttivita = new List<UCAttivita>();
+
+                elencoEventi.ForEach(evento => listaUCAttivita.Add(new UCAttivita(evento))); ///Genero gli UCAttivita associati ad ogni evento
+
+                foreach(UCAttivita attivita in listaUCAttivita)
+                {
+                    attivita.Click += UCAttivita_Click; ///Aggiungo l'ascoltatore dell'evento del click sull'UC
+                    flpSinistra.Controls.Add(attivita); ///Inserisco nel flpSinistra l'UC                   
+                }
+
+                ElencoAttivita.Concat(elencoEventi); ///Aggiungo l'elenco degli eventi  all'elenco delle attività
+                ListaUCAttivita.Concat(listaUCAttivita); ///Aggiungo l'elenco delle UCAttività alla lista degli UC attività
+            }
+
+            else
+                MessageBox.Show("Non partecipi ad alcun evento!", "CaricaEventi FormVisualizzazioneAttivita", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        /// <summary>
+        /// Metodo che si occupa del caricamento degli UCAttività di tipologia Progetto nel flpDestra al fine di mostrarli all'utente
+        /// </summary>
+        private void CaricaProgetti()
+        {
+            string result_progetti = Controller.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username);
+            flpDestra.Controls.Clear(); ///Mi assicuro che il pannello sia pulito e lo pulisco nel caso ci sia da aggiornare l'interfaccia
+
+            if (result_progetti != "")
+            {
+                List<Progetto> elencoProgetti = Progetto.GeneraElencoProgetti(result_progetti);
+                List<UCAttivita> listaUCAttivita = new List<UCAttivita>();
+
+                elencoProgetti.ForEach(progetto => listaUCAttivita.Add(new UCAttivita(progetto))); ///Genero gli UCAttivita associati ad ogni evento
+
+                foreach (UCAttivita attivita in listaUCAttivita)
+                {
+                    attivita.Click += UCAttivita_Click; ///Aggiungo l'ascoltatore dell'evento del click sull'UC
+                    flpDestra.Controls.Add(attivita); ///Inserisco nel flpSinistra l'UC                   
+                }
+
+                ElencoAttivita.Concat(elencoProgetti); ///Aggiungo l'elenco dei progetto  all'elenco delle attività
+                ListaUCAttivita.Concat(listaUCAttivita); ///Aggiungo l'elenco delle UCAttività alla lista degli UC attività
+            }
+
+            else
+                MessageBox.Show("Non partecipi ad alcun progetto!", "CaricaProgetti FormVisualizzazioneAttivita", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
@@ -76,7 +152,7 @@ namespace AgendaAziendale.Forms
         private void UCAttivita_Click(object sender, EventArgs e)
         {
             UCAttivita ucAttivita = (UCAttivita)sender; ///Ottengo l'elemento cliccato
-
+            MessageBox.Show("Funzeca");
             //Se progetto --> form per segnare le cose fatte
             //Se evento --> form per mostrare le info
         }
