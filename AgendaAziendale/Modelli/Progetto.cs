@@ -47,7 +47,13 @@ namespace AgendaAziendale.Modelli
         {
             Id = id;
             Cliente = cliente;
-            obiettivi = new List<Obiettivo>();
+
+            string result_obiettivi = Controller.GetElencoObiettivi(Id.ToString()); ///Aggiungo gli obiettivi al progetto
+            if (result_obiettivi != "")
+               Obiettivi = Obiettivo.GeneraElencoObiettivi(result_obiettivi);
+
+            else
+                Obiettivi = new List<Obiettivo>();
         }
         
         /// <summary>
@@ -87,18 +93,18 @@ namespace AgendaAziendale.Modelli
         /// <param name="info"></param>
         /// <returns>Progetto</returns>
         public static Progetto GeneraProgetto(string info)
-        {
-            Progetto progetto = new Progetto();
-
+        {            
             List<string> informazioni = info.Split('-').ToList();
 
-            progetto.Codice = informazioni.ElementAt(0);
-            progetto.Nome = informazioni.ElementAt(1);
-            progetto.Descrizione = informazioni.ElementAt(2);
-            progetto.DataInizio = DateTime.Parse(informazioni.ElementAt(3));
-            progetto.DataFine = DateTime.Parse(informazioni.ElementAt(4));
-            progetto.Id = int.Parse(informazioni.ElementAt(5));
-            progetto.Cliente = informazioni.ElementAt(6);
+            string codice = informazioni.ElementAt(0);
+            string nome = informazioni.ElementAt(1);
+            string descrizione = informazioni.ElementAt(2);
+            DateTime dataInizio = DateTime.Parse(informazioni.ElementAt(3));
+            DateTime dataFine = DateTime.Parse(informazioni.ElementAt(4));
+            int id = int.Parse(informazioni.ElementAt(5));
+            string cliente = informazioni.ElementAt(6);
+
+            Progetto progetto = new Progetto(codice, nome, descrizione, dataInizio, dataFine, id, cliente);
 
             return progetto;
         }

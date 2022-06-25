@@ -130,13 +130,16 @@ namespace AgendaAziendale.Forms.UserControls
                     int indice_riga = dgvProgetti.Rows.Add(progetto.Codice, progetto.Nome, progetto.Descrizione, progetto.DataInizio.ToShortDateString(), progetto.DataFine.ToShortDateString(),
                                        progetto.Id, progetto.Cliente);
 
-                    string result_obiettivi = Controller.GetElencoObiettivi(progetto.Id.ToString()); ///Aggiungo gli obiettivi al progetto
+                    /*string result_obiettivi = Controller.GetElencoObiettivi(progetto.Id.ToString()); ///Aggiungo gli obiettivi al progetto
                     if (result_obiettivi != "")
                     { 
                         progetto.Obiettivi = Obiettivo.GeneraElencoObiettivi(result_obiettivi);
 
                         dgvProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
-                    }
+                    }*/
+
+                    if(Controller.GetElencoObiettivi(progetto.Id.ToString()) != "")
+                        dgvProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
 
                     else
                         dgvProgetti.Rows[indice_riga].Cells[7].Value = "/";
