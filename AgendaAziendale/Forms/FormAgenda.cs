@@ -45,7 +45,7 @@ namespace AgendaAziendale.Forms
             btProgettiEventi.Parent= panelSinistra;
             btLogout.Parent = panelSinistra;
 
-            //SETTA IL TESTO DEL btProgettiEventi e gestisci la visibilità del btGestione
+            SettaggioInterfaccia();
         }
 
         /// <summary>
@@ -78,7 +78,11 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtProgettiEventi_Click(object sender, EventArgs e)
         {
-            //TODO: fai vedere il tutto
+            if ((Sessione.Lavoratore.Categoria == "Project Manager") || (Sessione.Lavoratore.Categoria == "Sviluppatore"))
+                CaricaForm(new FormGestione(this, "Progetto")); //TODO: SOLO QUELLI CON LA SUA PARTECIPAZIONE
+
+            else if (Sessione.Lavoratore.Categoria == "Segretario")
+                CaricaForm(new FormGestione(this, "Evento")); //TODO: SOLO QUELLI CON LA SUA PARTECIPAZIONE
         }
 
         /// <summary>
@@ -89,7 +93,11 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtGestione_Click(object sender, EventArgs e)
         {
-            //CaricaForm(new FormGestioneAttivita()); -->TODO: per farlo devi prima creare le sottoclassi di lavoratore in modo da poter richimare il metodo
+            if (Sessione.Lavoratore.Categoria == "Project Manager")
+                CaricaForm(new FormGestione(this, "Progetto"));
+
+            else if (Sessione.Lavoratore.Categoria == "Segretario")
+                CaricaForm(new FormGestione(this, "Evento"));
         }
 
         /// <summary>
@@ -144,6 +152,33 @@ namespace AgendaAziendale.Forms
             panelCentro.Controls.Add(f); //Asssegno i controlli al form "dinamico" creato
             panelCentro.Tag = f;
             f.Show();
+        }
+
+        /// <summary>
+        /// Metodo adibito al settaggio dei testi e visualizzazione dei button a seconda della tipologia di account loggato
+        /// </summary>
+        private void SettaggioInterfaccia()
+        {
+            if(Sessione.Lavoratore.Categoria == "Project Manager")
+            {
+                btGestione.Visible = true;
+                btStoricoProgetti.Visible = true;
+                btGestione.Text = "Gestione progetti";
+                btProgettiEventi.Text = "Progetti";
+            }
+
+            else if(Sessione.Lavoratore.Categoria == "Segretario")
+            {
+                btGestione.Visible = true;
+                btProgettiEventi.Visible = true;
+                btGestione.Text = "Gestione eventi";
+                btProgettiEventi.Text = "Eventi";
+            }
+
+            else if (Sessione.Lavoratore.Categoria == "Sviluppatore")
+            {
+                btProgettiEventi.Text = "Progetti";
+            }
         }
         #endregion
     }

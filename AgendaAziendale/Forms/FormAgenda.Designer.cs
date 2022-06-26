@@ -95,12 +95,13 @@
             this.btStoricoProgetti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btStoricoProgetti.ForeColor = System.Drawing.Color.White;
             this.btStoricoProgetti.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btStoricoProgetti.Location = new System.Drawing.Point(50, 390);
+            this.btStoricoProgetti.Location = new System.Drawing.Point(50, 311);
             this.btStoricoProgetti.Name = "btStoricoProgetti";
             this.btStoricoProgetti.Size = new System.Drawing.Size(200, 35);
             this.btStoricoProgetti.TabIndex = 9;
             this.btStoricoProgetti.Text = "Storico progetti";
             this.btStoricoProgetti.UseVisualStyleBackColor = false;
+            this.btStoricoProgetti.Visible = false;
             this.btStoricoProgetti.Click += new System.EventHandler(this.BtStoricoProgetti_Click);
             // 
             // btVisualizzaStoricoEvento
@@ -109,12 +110,13 @@
             this.btVisualizzaStoricoEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btVisualizzaStoricoEvento.ForeColor = System.Drawing.Color.White;
             this.btVisualizzaStoricoEvento.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btVisualizzaStoricoEvento.Location = new System.Drawing.Point(50, 312);
+            this.btVisualizzaStoricoEvento.Location = new System.Drawing.Point(50, 311);
             this.btVisualizzaStoricoEvento.Name = "btVisualizzaStoricoEvento";
             this.btVisualizzaStoricoEvento.Size = new System.Drawing.Size(200, 35);
             this.btVisualizzaStoricoEvento.TabIndex = 7;
             this.btVisualizzaStoricoEvento.Text = "Storico eventi";
             this.btVisualizzaStoricoEvento.UseVisualStyleBackColor = false;
+            this.btVisualizzaStoricoEvento.Visible = false;
             this.btVisualizzaStoricoEvento.Click += new System.EventHandler(this.BtVisualizzaStoricoEvento_Click);
             // 
             // btGestione
@@ -123,7 +125,7 @@
             this.btGestione.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btGestione.ForeColor = System.Drawing.Color.White;
             this.btGestione.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btGestione.Location = new System.Drawing.Point(50, 234);
+            this.btGestione.Location = new System.Drawing.Point(50, 241);
             this.btGestione.Name = "btGestione";
             this.btGestione.Size = new System.Drawing.Size(200, 35);
             this.btGestione.TabIndex = 6;
@@ -138,7 +140,7 @@
             this.btProgettiEventi.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btProgettiEventi.ForeColor = System.Drawing.Color.White;
             this.btProgettiEventi.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btProgettiEventi.Location = new System.Drawing.Point(50, 156);
+            this.btProgettiEventi.Location = new System.Drawing.Point(50, 171);
             this.btProgettiEventi.Name = "btProgettiEventi";
             this.btProgettiEventi.Size = new System.Drawing.Size(200, 35);
             this.btProgettiEventi.TabIndex = 4;
@@ -152,7 +154,7 @@
             this.btVisualizzaAgenda.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btVisualizzaAgenda.ForeColor = System.Drawing.Color.White;
             this.btVisualizzaAgenda.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btVisualizzaAgenda.Location = new System.Drawing.Point(50, 78);
+            this.btVisualizzaAgenda.Location = new System.Drawing.Point(50, 101);
             this.btVisualizzaAgenda.Name = "btVisualizzaAgenda";
             this.btVisualizzaAgenda.Size = new System.Drawing.Size(200, 35);
             this.btVisualizzaAgenda.TabIndex = 3;

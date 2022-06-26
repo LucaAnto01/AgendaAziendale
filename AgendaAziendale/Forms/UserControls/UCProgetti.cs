@@ -48,6 +48,9 @@ namespace AgendaAziendale.Forms.UserControls
             ///Figli del panelCentro
             dgvProgetti.Parent = panelCentro;
 
+            if(Sessione.Lavoratore.Categoria == "Sviluppatore")
+                dgvProgetti.Columns["gestione_lavoratori"].Visible = false;
+
             AggiornadgvProgetti();
         }
 
@@ -116,7 +119,13 @@ namespace AgendaAziendale.Forms.UserControls
         /// </summary>
         public void AggiornadgvProgetti()
         {
-            string result_progetti = Controller.GetElencoProgetti();
+            string result_progetti = "";
+
+            if (Sessione.Lavoratore.Categoria == "Sviluppatore")
+                result_progetti = Controller.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username);
+
+            else
+                result_progetti = Controller.GetElencoProgetti();
 
             dgvProgetti.Rows.Clear();
 
