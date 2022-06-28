@@ -69,7 +69,7 @@ namespace AgendaAziendale.Forms.UserControls
                 ///Seleziono il lavoratore corrispettivo da quelli presenti nella lista
                 lavoratore = ElencoLavoratori.FirstOrDefault(l => l.Username == usernameSelezionato); 
 
-                FormLavoratore formModificaLavoratore = new FormLavoratore(FormPadre, this, lavoratore, "aggiorna"); //TODO: metti poi il lavoratore selezionando la riga
+                FormLavoratore formModificaLavoratore = new FormLavoratore(FormPadre, this, lavoratore, "aggiorna");
                 formPadre.Hide();
                 formModificaLavoratore.Show();               
             }

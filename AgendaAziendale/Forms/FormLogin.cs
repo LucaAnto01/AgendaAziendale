@@ -113,8 +113,6 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtAccedi_Click(object sender, EventArgs e)
         {
-            //TODO: avvia procedura di login --> setta i dati in sessione
-
             if (CheckCampi())
             {
                 string username = tbUsername.Text;

@@ -70,7 +70,7 @@ namespace AgendaAziendale.Forms.UserControls
             //Click sulla colonna con i button di gestione della partecipazione
             if (e.ColumnIndex == 7)
             {              
-                FormPartecipanti formPartecipanti = new FormPartecipanti(FormPadre, this, evento, "evento"); //TODO: invece che null genera l'evento e passalo come parametro
+                FormPartecipanti formPartecipanti = new FormPartecipanti(FormPadre, this, evento, "evento");
                 formPadre.Hide();
                 formPartecipanti.Show();
             }
