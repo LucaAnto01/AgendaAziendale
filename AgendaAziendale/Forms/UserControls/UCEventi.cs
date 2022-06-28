@@ -16,21 +16,25 @@ namespace AgendaAziendale.Forms.UserControls
         #region Attributi
         private Form formPadre;
         private List<Evento> elencoEventi;
+        private bool filtra;
         #endregion
 
         #region Getters & Setters
         public Form FormPadre { get => formPadre; set => formPadre = value; }
         public List<Evento> ElencoEventi { get => elencoEventi; set => elencoEventi = value; }
+        public bool Filtra { get => filtra; set => filtra = value; }
         #endregion
 
         /// <summary>
         /// Metodo costruttore dell'user control UCEventi
         /// </summary>
         /// <param name="formPadre"></param>
-        public UCEventi(Form formPadre)
+        /// <param name="filtra"></param>
+        public UCEventi(Form formPadre, bool filtra)
         {
             InitializeComponent();
             FormPadre = formPadre;
+            Filtra = filtra;
         }
 
         #region Meotdi ascoltatori
@@ -108,7 +112,13 @@ namespace AgendaAziendale.Forms.UserControls
         /// </summary>
         public void AggiornadgvEventi()
         {
-            string result = Controller.GetElencoEventi();
+            string result = "";
+
+            if (Filtra)
+                result = Controller.GetElencoEventiLavoratore(Sessione.Lavoratore.Username);
+
+            else
+                result = Controller.GetElencoEventi();
 
             dgvEventi.Rows.Clear();
 

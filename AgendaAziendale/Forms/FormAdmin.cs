@@ -71,7 +71,7 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtGestioneLavoratori_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormGestione(this, "lavoratore"));
+            CaricaForm(new FormGestione(this, "lavoratore", false));
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtGestioneEventi_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormGestione(this, "evento"));
+            CaricaForm(new FormGestione(this, "evento", false));
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtGestioneProgetti_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormGestione(this, "progetto"));
+            CaricaForm(new FormGestione(this, "progetto", false));
         }
 
         /// <summary>

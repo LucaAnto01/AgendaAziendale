@@ -79,10 +79,7 @@ namespace AgendaAziendale.Forms
         private void BtProgettiEventi_Click(object sender, EventArgs e)
         {
             if ((Sessione.Lavoratore.Categoria == "Project Manager") || (Sessione.Lavoratore.Categoria == "Sviluppatore"))
-                CaricaForm(new FormGestione(this, "Progetto")); //TODO: SOLO QUELLI CON LA SUA PARTECIPAZIONE
-
-            else if (Sessione.Lavoratore.Categoria == "Segretario")
-                CaricaForm(new FormGestione(this, "Evento")); //TODO: SOLO QUELLI CON LA SUA PARTECIPAZIONE
+                CaricaForm(new FormGestione(this, "Progetto", true));
         }
 
         /// <summary>
@@ -94,10 +91,10 @@ namespace AgendaAziendale.Forms
         private void BtGestione_Click(object sender, EventArgs e)
         {
             if (Sessione.Lavoratore.Categoria == "Project Manager")
-                CaricaForm(new FormGestione(this, "Progetto"));
+                CaricaForm(new FormGestione(this, "Progetto", false));
 
             else if (Sessione.Lavoratore.Categoria == "Segretario")
-                CaricaForm(new FormGestione(this, "Evento"));
+                CaricaForm(new FormGestione(this, "Evento", false));
         }
 
         /// <summary>
@@ -163,6 +160,7 @@ namespace AgendaAziendale.Forms
             {
                 btGestione.Visible = true;
                 btStoricoProgetti.Visible = true;
+                btVisualizzaStoricoEvento.Visible = false;
                 btGestione.Text = "Gestione progetti";
                 btProgettiEventi.Text = "Progetti";
             }
@@ -170,7 +168,10 @@ namespace AgendaAziendale.Forms
             else if(Sessione.Lavoratore.Categoria == "Segretario")
             {
                 btGestione.Visible = true;
-                btProgettiEventi.Visible = true;
+                btGestione.Location = new Point(50, 205);
+                btProgettiEventi.Visible = false;
+                btVisualizzaStoricoEvento.Visible = true;
+                btStoricoProgetti.Visible = false;
                 btGestione.Text = "Gestione eventi";
                 btProgettiEventi.Text = "Eventi";
             }

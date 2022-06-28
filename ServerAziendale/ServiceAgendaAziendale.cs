@@ -149,6 +149,35 @@ namespace ServerAziendale
         }
 
         /// <summary>
+        /// Servizio adibito all'aggiornamento della password di un Lavoratore presente nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public bool AggiornaPassword(string username, string username_in, string password)
+        {
+            try
+            {
+                if (Sessione.ServerAziendaleDB.AggiornaPassword(username, username_in, password))
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERRORE!!! Richiamo funzione AggiornaPassword() in ServerAziendale: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "AggiornaPassword()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Servizio adibito all'eiminazione di un Lavoratore presente nel DB
         /// </summary>
         /// <param name="username"></param>

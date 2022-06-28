@@ -85,6 +85,7 @@ namespace AgendaAziendale.Forms
             mcDataNascita.Parent = panelCentro;
             btAAggiornaAggiungi.Parent = panelCentro;
             lbErrore.Parent = panelCentro;
+            lbInfoPassword.Parent = panelCentro;
 
             cbCategoria.SelectedIndex = 0;
 
@@ -99,7 +100,7 @@ namespace AgendaAziendale.Forms
                 cbCategoria.Text = lavoratore.Categoria;
 
                 tbUsername.Enabled = false; //Impedisco la modifica dell'username in quanto chiave primaria dei lavoratori --> garantisco l'integrità del DB
-                tbPassword.Enabled = false;
+                btAggiornaPassowrd.Visible = true;
             }
             
             if ((azione == "Aggiungi") || (azione == "aggiungi"))
@@ -212,6 +213,33 @@ namespace AgendaAziendale.Forms
             else
                 lbErrore.Visible = true;
         }
+
+        /// <summary>
+        /// Ascoltatore click sul button adibito all'aggiornamento della password dell'utente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtAggiornaPassowrd_Click(object sender, EventArgs e)
+        {
+            if(tbPassword.Text != "")
+            {
+                if (Controller.AggiornaPassword(tbUsername.Text, tbPassword.Text)) ///Inserisco il lavoratore nel db
+                {
+                    MessageBox.Show("Aggiornamento passowrd lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ucPadre.AggiornadgvLavoratori();
+                }
+
+                else
+                    MessageBox.Show("Errore in fase di aggiornamento!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            else
+            {
+                tbPassword.BackColor = Color.Red;
+                MessageBox.Show("Compila il campo di input relativo alla passowrd!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);               
+            }
+                
+        }
         #endregion
 
         #region Metodi
@@ -281,6 +309,6 @@ namespace AgendaAziendale.Forms
             tbPassword.Text = "";
             cbCategoria.Text = "";
         }
-        #endregion
+        #endregion      
     }
 }

@@ -48,6 +48,8 @@
             this.tbCognome = new System.Windows.Forms.TextBox();
             this.panelCentro = new System.Windows.Forms.Panel();
             this.lbErrore = new System.Windows.Forms.Label();
+            this.lbInfoPassword = new System.Windows.Forms.Label();
+            this.btAggiornaPassowrd = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -112,7 +114,7 @@
             // 
             // mcDataNascita
             // 
-            this.mcDataNascita.Location = new System.Drawing.Point(292, 158);
+            this.mcDataNascita.Location = new System.Drawing.Point(292, 180);
             this.mcDataNascita.Name = "mcDataNascita";
             this.mcDataNascita.TabIndex = 16;
             this.mcDataNascita.Visible = false;
@@ -241,6 +243,8 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.Controls.Add(this.btAggiornaPassowrd);
+            this.panelCentro.Controls.Add(this.lbInfoPassword);
             this.panelCentro.Controls.Add(this.lbErrore);
             this.panelCentro.Controls.Add(this.lbCategoria);
             this.panelCentro.Controls.Add(this.cbCategoria);
@@ -271,6 +275,30 @@
             this.lbErrore.TabIndex = 20;
             this.lbErrore.Text = "Compila tutti i campi!";
             this.lbErrore.Visible = false;
+            // 
+            // lbInfoPassword
+            // 
+            this.lbInfoPassword.AutoSize = true;
+            this.lbInfoPassword.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbInfoPassword.ForeColor = System.Drawing.Color.YellowGreen;
+            this.lbInfoPassword.Location = new System.Drawing.Point(427, 58);
+            this.lbInfoPassword.Name = "lbInfoPassword";
+            this.lbInfoPassword.Size = new System.Drawing.Size(311, 96);
+            this.lbInfoPassword.TabIndex = 21;
+            this.lbInfoPassword.Text = "Al fine di aggiornare la password\r\ne\' necesario cliccare l\'apposito bottone\r\ndopo" +
+    " aver compilato il campo con la \r\nnuova password";
+            this.lbInfoPassword.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // btAggiornaPassowrd
+            // 
+            this.btAggiornaPassowrd.Location = new System.Drawing.Point(15, 475);
+            this.btAggiornaPassowrd.Name = "btAggiornaPassowrd";
+            this.btAggiornaPassowrd.Size = new System.Drawing.Size(116, 23);
+            this.btAggiornaPassowrd.TabIndex = 22;
+            this.btAggiornaPassowrd.Text = "Aggiorna password";
+            this.btAggiornaPassowrd.UseVisualStyleBackColor = true;
+            this.btAggiornaPassowrd.Visible = false;
+            this.btAggiornaPassowrd.Click += new System.EventHandler(this.BtAggiornaPassowrd_Click);
             // 
             // FormLavoratore
             // 
@@ -319,5 +347,7 @@
         private System.Windows.Forms.TextBox tbCognome;
         private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.Label lbErrore;
+        private System.Windows.Forms.Label lbInfoPassword;
+        private System.Windows.Forms.Button btAggiornaPassowrd;
     }
 }

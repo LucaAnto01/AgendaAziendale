@@ -45,6 +45,12 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaLavoratoreResponse")]
         System.Threading.Tasks.Task<bool> AggiornaLavoratoreAsync(string username, string username_in, string nome, string cognome, string residenza, string dataNascita, string categoria);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaPassword", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaPasswordResponse")]
+        bool AggiornaPassword(string username, string username_in, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaPassword", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaPasswordResponse")]
+        System.Threading.Tasks.Task<bool> AggiornaPasswordAsync(string username, string username_in, string password);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/EliminaLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/EliminaLavoratoreResponse")]
         bool EliminaLavoratore(string username, string username_in);
         
@@ -241,6 +247,14 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         
         public System.Threading.Tasks.Task<bool> AggiornaLavoratoreAsync(string username, string username_in, string nome, string cognome, string residenza, string dataNascita, string categoria) {
             return base.Channel.AggiornaLavoratoreAsync(username, username_in, nome, cognome, residenza, dataNascita, categoria);
+        }
+        
+        public bool AggiornaPassword(string username, string username_in, string password) {
+            return base.Channel.AggiornaPassword(username, username_in, password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AggiornaPasswordAsync(string username, string username_in, string password) {
+            return base.Channel.AggiornaPasswordAsync(username, username_in, password);
         }
         
         public bool EliminaLavoratore(string username, string username_in) {

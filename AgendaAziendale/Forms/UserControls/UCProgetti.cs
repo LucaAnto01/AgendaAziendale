@@ -16,21 +16,25 @@ namespace AgendaAziendale.Forms.UserControls
         #region Attributi
         private Form formPadre;
         private List<Progetto> elencoProgetti;
+        private bool filtra; 
         #endregion
 
         #region Getters & Setters
         public Form FormPadre { get => formPadre; set => formPadre = value; }
         public List<Progetto> ElencoProgetti { get => elencoProgetti; set => elencoProgetti = value; }
+        public bool Filtra { get => filtra; set => filtra = value; }
         #endregion
 
         /// <summary>
         /// Metodo costruttore dell'user control UCProgetti
         /// </summary>
         /// <param name="formPadre"></param>
-        public UCProgetti(Form formPadre)
+        /// <param name="filtra"></param>
+        public UCProgetti(Form formPadre, bool filtra)
         {
             InitializeComponent();
             FormPadre = formPadre;
+            Filtra = filtra; ///Se è settato a true, mostra solo i progetti del lavoratore loggato
         }
 
         #region Meotdi ascoltatori
@@ -49,7 +53,12 @@ namespace AgendaAziendale.Forms.UserControls
             dgvProgetti.Parent = panelCentro;
 
             if(Sessione.Lavoratore.Categoria == "Sviluppatore")
+            {
                 dgvProgetti.Columns["gestione_lavoratori"].Visible = false;
+                dgvProgetti.Columns["modifica"].Visible = false;
+                dgvProgetti.Columns["elimina"].Visible = false;              
+            }
+                
 
             AggiornadgvProgetti();
         }
@@ -121,7 +130,7 @@ namespace AgendaAziendale.Forms.UserControls
         {
             string result_progetti = "";
 
-            if (Sessione.Lavoratore.Categoria == "Sviluppatore")
+            if (Filtra)
                 result_progetti = Controller.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username);
 
             else

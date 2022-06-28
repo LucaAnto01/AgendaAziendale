@@ -89,6 +89,22 @@ namespace AgendaAziendale.Modelli
         }
 
         /// <summary>
+        /// Metodo adibito all'aggiornamento della password associata ad un Lavoratore
+        /// --> richiamo del web service AggiornaPassword()
+        /// </summary>
+        /// <param name="username_in"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static bool AggiornaPassword(string username_in, string password)
+        {
+            string passwordHash = Lavoratore.PasswordHashing(password);
+            if (Sessione.ServerAziendale.AggiornaPassword(Sessione.Lavoratore.Username, username_in, passwordHash))
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
         /// Metodo adibito all'eliminazione di un utente dal DB
         /// --> richiamo del web service EliminaLavoratore()
         /// </summary>
