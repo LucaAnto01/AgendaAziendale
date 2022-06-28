@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -106,10 +107,36 @@ namespace AgendaAziendale.Forms.UserControls
                 pbProgetto.Visible = true;
 
                 pbProgetto.Maximum = 100;
-                pbProgetto.BackColor = Color.Green; //TODO: MODIFICA IL COLORE IN BASE ALLA PERCENTUALE, FAI ROSSO - GIALLO - VERDE
-                pbProgetto.Value = Controller.CalcolaAvanzamentoProgetto(progetto); ///Calcolo l'avanzamento del progetto e lo mostro mostrando l'avanzamento della progress bar
+                int avanzamento = Controller.CalcolaAvanzamentoProgetto(progetto);
+                pbProgetto.Value = avanzamento; ///Calcolo l'avanzamento del progetto e lo mostro mostrando l'avanzamento della progress bar
+
+                ///A seconda della percentuale di avanzamento setto il colore della barra
+                if (avanzamento <= 30)
+                    ProgressBarColor.SetState(pbProgetto, 2);
+
+                else if ((avanzamento > 30) && (avanzamento <= 85))
+                    ProgressBarColor.SetState(pbProgetto, 3);
+
+                else if (avanzamento > 85)
+                    ProgressBarColor.SetState(pbProgetto, 1);
             }
         }
         #endregion
     }
+
+    #region Classe ProgressBarColor
+    /// <summary>
+    /// Classe di comodo utilizzata per poter modificare il colore della progress bar
+    /// --> https://foxlearn.com/windows-forms/change-color-progress-bar-in-csharp-350.html
+    /// </summary>
+    public static class ProgressBarColor
+    {
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
+        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr w, IntPtr l);
+        public static void SetState(this ProgressBar p, int state)
+        {
+            SendMessage(p.Handle, 1040, (IntPtr)state, IntPtr.Zero);
+        }
+    }
+    #endregion
 }
