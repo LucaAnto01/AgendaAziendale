@@ -35,10 +35,10 @@
             this.panelSinistraTop = new System.Windows.Forms.Panel();
             this.pctbxLogo = new System.Windows.Forms.PictureBox();
             this.panelCentro = new System.Windows.Forms.Panel();
-            this.btAccedi = new System.Windows.Forms.Button();
-            this.tbUsername = new System.Windows.Forms.TextBox();
-            this.tbPassword = new System.Windows.Forms.TextBox();
             this.lbErrore = new System.Windows.Forms.Label();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.tbUsername = new System.Windows.Forms.TextBox();
+            this.btAccedi = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelSinistra.SuspendLayout();
             this.panelSinistraTop.SuspendLayout();
@@ -122,28 +122,17 @@
             this.panelCentro.Size = new System.Drawing.Size(700, 610);
             this.panelCentro.TabIndex = 4;
             // 
-            // btAccedi
+            // lbErrore
             // 
-            this.btAccedi.Location = new System.Drawing.Point(318, 478);
-            this.btAccedi.Name = "btAccedi";
-            this.btAccedi.Size = new System.Drawing.Size(75, 23);
-            this.btAccedi.TabIndex = 0;
-            this.btAccedi.Text = "Accedi";
-            this.btAccedi.UseVisualStyleBackColor = true;
-            this.btAccedi.Click += new System.EventHandler(this.BtAccedi_Click);
-            // 
-            // tbUsername
-            // 
-            this.tbUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbUsername.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbUsername.ForeColor = System.Drawing.Color.DarkGray;
-            this.tbUsername.Location = new System.Drawing.Point(277, 248);
-            this.tbUsername.MaxLength = 25;
-            this.tbUsername.Name = "tbUsername";
-            this.tbUsername.Size = new System.Drawing.Size(158, 27);
-            this.tbUsername.TabIndex = 1;
-            this.tbUsername.Text = "Username";
-            this.tbUsername.Enter += new System.EventHandler(this.TbUsername_Enter);
+            this.lbErrore.AutoSize = true;
+            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrore.ForeColor = System.Drawing.Color.Red;
+            this.lbErrore.Location = new System.Drawing.Point(272, 394);
+            this.lbErrore.Name = "lbErrore";
+            this.lbErrore.Size = new System.Drawing.Size(172, 24);
+            this.lbErrore.TabIndex = 70;
+            this.lbErrore.Text = "Compila tutti i campi!";
+            this.lbErrore.Visible = false;
             // 
             // tbPassword
             // 
@@ -156,19 +145,32 @@
             this.tbPassword.Size = new System.Drawing.Size(158, 27);
             this.tbPassword.TabIndex = 2;
             this.tbPassword.Text = "Password";
+            this.tbPassword.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbPassword.Enter += new System.EventHandler(this.TbPassword_Enter);
             // 
-            // lbErrore
+            // tbUsername
             // 
-            this.lbErrore.AutoSize = true;
-            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbErrore.ForeColor = System.Drawing.Color.Red;
-            this.lbErrore.Location = new System.Drawing.Point(272, 394);
-            this.lbErrore.Name = "lbErrore";
-            this.lbErrore.Size = new System.Drawing.Size(172, 24);
-            this.lbErrore.TabIndex = 70;
-            this.lbErrore.Text = "Compila tutti i campi!";
-            this.lbErrore.Visible = false;
+            this.tbUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbUsername.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbUsername.ForeColor = System.Drawing.Color.DarkGray;
+            this.tbUsername.Location = new System.Drawing.Point(277, 248);
+            this.tbUsername.MaxLength = 25;
+            this.tbUsername.Name = "tbUsername";
+            this.tbUsername.Size = new System.Drawing.Size(158, 27);
+            this.tbUsername.TabIndex = 1;
+            this.tbUsername.Text = "Username";
+            this.tbUsername.TextChanged += new System.EventHandler(this.Tb_TextChanged);
+            this.tbUsername.Enter += new System.EventHandler(this.TbUsername_Enter);
+            // 
+            // btAccedi
+            // 
+            this.btAccedi.Location = new System.Drawing.Point(318, 478);
+            this.btAccedi.Name = "btAccedi";
+            this.btAccedi.Size = new System.Drawing.Size(75, 23);
+            this.btAccedi.TabIndex = 0;
+            this.btAccedi.Text = "Accedi";
+            this.btAccedi.UseVisualStyleBackColor = true;
+            this.btAccedi.Click += new System.EventHandler(this.BtAccedi_Click);
             // 
             // FormLogin
             // 

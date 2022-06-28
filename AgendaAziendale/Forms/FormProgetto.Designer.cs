@@ -41,12 +41,12 @@
             this.tbNome = new System.Windows.Forms.TextBox();
             this.lbNome = new System.Windows.Forms.Label();
             this.panelCentro = new System.Windows.Forms.Panel();
+            this.lbErroreData = new System.Windows.Forms.Label();
             this.btGestioneObiettivi = new System.Windows.Forms.Button();
             this.lbErrore = new System.Windows.Forms.Label();
             this.mcDataFine = new System.Windows.Forms.MonthCalendar();
             this.mcDataInizio = new System.Windows.Forms.MonthCalendar();
             this.tbDataInizio = new System.Windows.Forms.TextBox();
-            this.lbErroreData = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -84,6 +84,7 @@
             this.tbCliente.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.tbCliente.Size = new System.Drawing.Size(181, 21);
             this.tbCliente.TabIndex = 66;
+            this.tbCliente.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbCliente.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbCliente
@@ -147,6 +148,7 @@
             this.tbDescrizione.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbDescrizione.Size = new System.Drawing.Size(246, 46);
             this.tbDescrizione.TabIndex = 61;
+            this.tbDescrizione.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbDescrizione.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbDescrizione
@@ -167,6 +169,7 @@
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(110, 21);
             this.tbNome.TabIndex = 57;
+            this.tbNome.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbNome.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbNome
@@ -192,6 +195,18 @@
             this.panelCentro.Name = "panelCentro";
             this.panelCentro.Size = new System.Drawing.Size(750, 525);
             this.panelCentro.TabIndex = 68;
+            // 
+            // lbErroreData
+            // 
+            this.lbErroreData.AutoSize = true;
+            this.lbErroreData.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErroreData.ForeColor = System.Drawing.Color.Red;
+            this.lbErroreData.Location = new System.Drawing.Point(412, 365);
+            this.lbErroreData.Name = "lbErroreData";
+            this.lbErroreData.Size = new System.Drawing.Size(305, 24);
+            this.lbErroreData.TabIndex = 72;
+            this.lbErroreData.Text = "Inserisci una data di fine evento valida";
+            this.lbErroreData.Visible = false;
             // 
             // btGestioneObiettivi
             // 
@@ -241,18 +256,6 @@
             this.tbDataInizio.Size = new System.Drawing.Size(110, 21);
             this.tbDataInizio.TabIndex = 48;
             this.tbDataInizio.Enter += new System.EventHandler(this.TbDataInizio_Enter);
-            // 
-            // lbErroreData
-            // 
-            this.lbErroreData.AutoSize = true;
-            this.lbErroreData.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbErroreData.ForeColor = System.Drawing.Color.Red;
-            this.lbErroreData.Location = new System.Drawing.Point(412, 365);
-            this.lbErroreData.Name = "lbErroreData";
-            this.lbErroreData.Size = new System.Drawing.Size(305, 24);
-            this.lbErroreData.TabIndex = 72;
-            this.lbErroreData.Text = "Inserisci una data di fine evento valida";
-            this.lbErroreData.Visible = false;
             // 
             // FormProgetto
             // 

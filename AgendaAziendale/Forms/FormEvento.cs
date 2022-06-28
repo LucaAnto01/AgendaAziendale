@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using AgendaAziendale.Modelli;
 using AgendaAziendale.Forms.UserControls;
 
@@ -122,6 +123,21 @@ namespace AgendaAziendale.Forms
         {
             formPadre.Show();
             Close();
+        }
+
+        /// <summary>
+        /// Validazione caratteri durante l'inserimento nelle text box
+        /// --> no lettere con accenti e caratteri strani
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Tb_TextChanged(object sender, EventArgs e)
+        {
+            if ((!Regex.IsMatch(((TextBox)sender).Text, Sessione.Regex)) && (((TextBox)sender).Text != ""))
+            {
+                MessageBox.Show("Non inserire lettere accentate o caratteri speciali!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ((TextBox)sender).Text = "";
+            }
         }
 
         /// <summary>
@@ -303,6 +319,6 @@ namespace AgendaAziendale.Forms
             lbErrore.Visible = false;
             lbErroreData.Visible = false;
         }
-        #endregion
+        #endregion       
     }
 }

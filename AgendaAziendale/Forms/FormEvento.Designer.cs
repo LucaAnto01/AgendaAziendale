@@ -44,8 +44,8 @@
             this.tbNome = new System.Windows.Forms.TextBox();
             this.lbNome = new System.Windows.Forms.Label();
             this.panelCentro = new System.Windows.Forms.Panel();
-            this.lbErrore = new System.Windows.Forms.Label();
             this.lbErroreData = new System.Windows.Forms.Label();
+            this.lbErrore = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +83,7 @@
             this.tbLuogo.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.tbLuogo.Size = new System.Drawing.Size(181, 21);
             this.tbLuogo.TabIndex = 52;
+            this.tbLuogo.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbLuogo.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbLuogo
@@ -172,6 +173,7 @@
             this.tbDescrizione.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbDescrizione.Size = new System.Drawing.Size(246, 46);
             this.tbDescrizione.TabIndex = 46;
+            this.tbDescrizione.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbDescrizione.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbDescrizione
@@ -192,6 +194,7 @@
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(110, 21);
             this.tbNome.TabIndex = 40;
+            this.tbNome.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbNome.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbNome
@@ -217,18 +220,6 @@
             this.panelCentro.Size = new System.Drawing.Size(750, 525);
             this.panelCentro.TabIndex = 54;
             // 
-            // lbErrore
-            // 
-            this.lbErrore.AutoSize = true;
-            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbErrore.ForeColor = System.Drawing.Color.Red;
-            this.lbErrore.Location = new System.Drawing.Point(450, 125);
-            this.lbErrore.Name = "lbErrore";
-            this.lbErrore.Size = new System.Drawing.Size(172, 24);
-            this.lbErrore.TabIndex = 70;
-            this.lbErrore.Text = "Compila tutti i campi!";
-            this.lbErrore.Visible = false;
-            // 
             // lbErroreData
             // 
             this.lbErroreData.AutoSize = true;
@@ -240,6 +231,18 @@
             this.lbErroreData.TabIndex = 71;
             this.lbErroreData.Text = "Inserisci una data di fine evento valida";
             this.lbErroreData.Visible = false;
+            // 
+            // lbErrore
+            // 
+            this.lbErrore.AutoSize = true;
+            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrore.ForeColor = System.Drawing.Color.Red;
+            this.lbErrore.Location = new System.Drawing.Point(450, 125);
+            this.lbErrore.Name = "lbErrore";
+            this.lbErrore.Size = new System.Drawing.Size(172, 24);
+            this.lbErrore.TabIndex = 70;
+            this.lbErrore.Text = "Compila tutti i campi!";
+            this.lbErrore.Visible = false;
             // 
             // FormEvento
             // 

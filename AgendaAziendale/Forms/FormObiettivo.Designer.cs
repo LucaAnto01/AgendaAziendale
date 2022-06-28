@@ -31,12 +31,12 @@
             this.btChiudi = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
             this.panelCentro = new System.Windows.Forms.Panel();
+            this.lbErrore = new System.Windows.Forms.Label();
             this.btAggiungiAggiorna = new System.Windows.Forms.Button();
             this.ckCompletato = new System.Windows.Forms.CheckBox();
             this.lbCompletato = new System.Windows.Forms.Label();
             this.tbDescrizione = new System.Windows.Forms.TextBox();
             this.lbDescrizione = new System.Windows.Forms.Label();
-            this.lbErrore = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +79,18 @@
             this.panelCentro.Size = new System.Drawing.Size(514, 402);
             this.panelCentro.TabIndex = 69;
             // 
+            // lbErrore
+            // 
+            this.lbErrore.AutoSize = true;
+            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrore.ForeColor = System.Drawing.Color.Red;
+            this.lbErrore.Location = new System.Drawing.Point(12, 299);
+            this.lbErrore.Name = "lbErrore";
+            this.lbErrore.Size = new System.Drawing.Size(189, 24);
+            this.lbErrore.TabIndex = 76;
+            this.lbErrore.Text = "Compila la descrizione!";
+            this.lbErrore.Visible = false;
+            // 
             // btAggiungiAggiorna
             // 
             this.btAggiungiAggiorna.Location = new System.Drawing.Point(15, 227);
@@ -120,6 +132,7 @@
             this.tbDescrizione.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbDescrizione.Size = new System.Drawing.Size(246, 46);
             this.tbDescrizione.TabIndex = 72;
+            this.tbDescrizione.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             // 
             // lbDescrizione
             // 
@@ -130,18 +143,6 @@
             this.lbDescrizione.Size = new System.Drawing.Size(93, 18);
             this.lbDescrizione.TabIndex = 71;
             this.lbDescrizione.Text = "Descrizione";
-            // 
-            // lbErrore
-            // 
-            this.lbErrore.AutoSize = true;
-            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbErrore.ForeColor = System.Drawing.Color.Red;
-            this.lbErrore.Location = new System.Drawing.Point(12, 299);
-            this.lbErrore.Name = "lbErrore";
-            this.lbErrore.Size = new System.Drawing.Size(189, 24);
-            this.lbErrore.TabIndex = 76;
-            this.lbErrore.Text = "Compila la descrizione!";
-            this.lbErrore.Visible = false;
             // 
             // FormObiettivo
             // 
