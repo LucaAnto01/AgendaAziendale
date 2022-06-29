@@ -131,7 +131,8 @@
             // 
             // btVisualizzaStoricoEvento
             // 
-            this.btVisualizzaStoricoEvento.BackColor = System.Drawing.Color.DarkGray;
+            this.btVisualizzaStoricoEvento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.btVisualizzaStoricoEvento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btVisualizzaStoricoEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btVisualizzaStoricoEvento.ForeColor = System.Drawing.Color.White;
             this.btVisualizzaStoricoEvento.Image = global::AgendaAziendale.Properties.Resources.Storico;
@@ -213,7 +214,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(1000, 650);
             this.Controls.Add(this.panelCentro);
             this.Controls.Add(this.panelSinistra);

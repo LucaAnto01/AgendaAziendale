@@ -94,7 +94,7 @@ namespace AgendaAziendale.Forms.UserControls
                 lbClienteLuogo.Text = evento.Luogo;
                 lbDataInizioFineInt.Text = "Inizio - Fine";
                 lbDataInizioFine.Text = evento.DataInizio.ToString("dd-MM-yyyy") + " - " + evento.DataFine.ToString("dd-MM-yyyy");
-                Size = new Size(345, 100);
+                Size = new Size(325, 100);
             }
 
             else if(Attivita is Progetto)

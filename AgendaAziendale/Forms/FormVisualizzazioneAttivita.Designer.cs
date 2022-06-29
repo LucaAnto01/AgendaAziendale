@@ -40,6 +40,7 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.panelCentro.Controls.Add(this.flpDestra);
             this.panelCentro.Controls.Add(this.flpSinistra);
             this.panelCentro.Controls.Add(this.panelTop);
@@ -51,21 +52,27 @@
             // 
             // flpDestra
             // 
+            this.flpDestra.AutoScroll = true;
             this.flpDestra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.flpDestra.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flpDestra.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpDestra.Location = new System.Drawing.Point(350, 45);
             this.flpDestra.Name = "flpDestra";
             this.flpDestra.Size = new System.Drawing.Size(350, 565);
             this.flpDestra.TabIndex = 2;
+            this.flpDestra.WrapContents = false;
             // 
             // flpSinistra
             // 
+            this.flpSinistra.AutoScroll = true;
             this.flpSinistra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.flpSinistra.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flpSinistra.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpSinistra.Location = new System.Drawing.Point(0, 45);
             this.flpSinistra.Name = "flpSinistra";
             this.flpSinistra.Size = new System.Drawing.Size(350, 565);
             this.flpSinistra.TabIndex = 1;
+            this.flpSinistra.WrapContents = false;
             // 
             // panelTop
             // 
@@ -104,7 +111,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(700, 610);
             this.Controls.Add(this.panelCentro);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

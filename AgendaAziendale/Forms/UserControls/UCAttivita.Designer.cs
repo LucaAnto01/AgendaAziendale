@@ -61,7 +61,7 @@
             this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCentro.Location = new System.Drawing.Point(0, 0);
             this.panelCentro.Name = "panelCentro";
-            this.panelCentro.Size = new System.Drawing.Size(345, 145);
+            this.panelCentro.Size = new System.Drawing.Size(325, 145);
             this.panelCentro.TabIndex = 1;
             // 
             // lbDataInizioFineInt
@@ -93,7 +93,7 @@
             this.pbProgetto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pbProgetto.Location = new System.Drawing.Point(5, 106);
             this.pbProgetto.Name = "pbProgetto";
-            this.pbProgetto.Size = new System.Drawing.Size(335, 23);
+            this.pbProgetto.Size = new System.Drawing.Size(315, 23);
             this.pbProgetto.TabIndex = 4;
             this.pbProgetto.Visible = false;
             // 
@@ -129,7 +129,7 @@
             this.Controls.Add(this.lbTitolo);
             this.Controls.Add(this.panelCentro);
             this.Name = "UCAttivita";
-            this.Size = new System.Drawing.Size(345, 145);
+            this.Size = new System.Drawing.Size(325, 145);
             this.Load += new System.EventHandler(this.UCAttivita_Load);
             this.MouseEnter += new System.EventHandler(this.UCAttivita_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.UCAttivita_MouseLeave);
