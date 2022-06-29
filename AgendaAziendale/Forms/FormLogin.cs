@@ -41,10 +41,7 @@ namespace AgendaAziendale
             ///Figli del pannello top
             btChiudi.Parent = panelTop;
             ///Figli del pannello di sinistra
-            panelSinistraTop.Parent = panelSinistra;
             lbIntestazioneSinistra.Parent = panelSinistra;
-            ///Figli del pannello di sinistra top
-            pctbxLogo.Parent = panelSinistraTop;
             ///Figli del pannello centrale
             tbUsername.Parent = panelCentro;
             tbPassword.Parent = panelCentro;
@@ -61,6 +58,17 @@ namespace AgendaAziendale
         private void BtChiudi_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        /// <summary>
+        /// Ascoltatore evento click sul bottone di minimizzazione
+        /// --> riduzione ad icona dell'applicazione
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtMinimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
         }
 
         /// <summary>

@@ -36,6 +36,7 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.panelCentro.Controls.Add(this.panelUCcontenitore);
             this.panelCentro.Controls.Add(this.btAggiungi);
             this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -60,8 +61,9 @@
             this.btAggiungi.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAggiungi.BackColor = System.Drawing.Color.DarkGray;
+            this.btAggiungi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.btAggiungi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btAggiungi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btAggiungi.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btAggiungi.ForeColor = System.Drawing.Color.White;
             this.btAggiungi.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;

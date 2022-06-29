@@ -480,7 +480,7 @@ namespace ServerAziendaleDB
         {
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, e.id, e.luogo " +
                            "FROM attivita a, evento e, specifica_evento se " +
-                           "WHERE a.codice = se.fk_attivita AND e.id = se.fk_evento AND a.data_inizio >= CURRENT_DATE " +
+                           "WHERE a.codice = se.fk_attivita AND e.id = se.fk_evento AND a.data_fine >= CURRENT_DATE " +
                            " ORDER BY a.data_inizio ASC;";
 
             try
@@ -520,7 +520,7 @@ namespace ServerAziendaleDB
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, e.id, e.luogo" +
                            " FROM attivita a, evento e, specifica_evento se, partecipazione pa" +
                            " WHERE a.codice = se.fk_attivita AND a.codice = pa.fk_attivita AND e.id = se.fk_evento" +
-                           "       AND pa.fk_lavoratore = '" + username_in + "' AND a.data_inizio >= CURRENT_DATE" +
+                           "       AND pa.fk_lavoratore = '" + username_in + "' AND a.data_fine >= CURRENT_DATE" +
                            " ORDER BY a.data_inizio ASC; ";
             try
             {
@@ -749,7 +749,7 @@ namespace ServerAziendaleDB
         {
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, p.id, p.cliente" +
                            " FROM attivita a, progetto p, specifica_progetto sp" +
-                           " WHERE a.codice = sp.fk_attivita AND p.id = sp.fk_progetto AND a.data_inizio >= CURRENT_DATE" +
+                           " WHERE a.codice = sp.fk_attivita AND p.id = sp.fk_progetto AND a.data_fine >= CURRENT_DATE" +
                            " ORDER BY a.data_inizio ASC;";
 
             try
@@ -789,7 +789,7 @@ namespace ServerAziendaleDB
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, p.id, p.cliente" +
                            " FROM attivita a, progetto p, specifica_progetto sp, partecipazione pa" +
                            " WHERE a.codice = sp.fk_attivita AND a.codice = pa.fk_attivita AND p.id = sp.fk_progetto" +
-                           "       AND pa.fk_lavoratore = '" + username_in + "' AND a.data_inizio >= CURRENT_DATE" +
+                           "       AND pa.fk_lavoratore = '" + username_in + "' AND a.data_fine >= CURRENT_DATE" +
                            " ORDER BY a.data_inizio ASC;";
 
             try

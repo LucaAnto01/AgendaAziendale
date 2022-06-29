@@ -44,7 +44,7 @@
             // 
             // panelUCcontenitore
             // 
-            this.panelUCcontenitore.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelUCcontenitore.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.panelUCcontenitore.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelUCcontenitore.Location = new System.Drawing.Point(0, 0);
             this.panelUCcontenitore.Name = "panelUCcontenitore";

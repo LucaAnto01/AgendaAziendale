@@ -60,7 +60,7 @@
             this.dgvLavoratori.AllowUserToAddRows = false;
             this.dgvLavoratori.AllowUserToDeleteRows = false;
             this.dgvLavoratori.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvLavoratori.BackgroundColor = System.Drawing.Color.White;
+            this.dgvLavoratori.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvLavoratori.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvLavoratori.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLavoratori.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -74,7 +74,7 @@
             this.modifica,
             this.elimina});
             this.dgvLavoratori.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLavoratori.GridColor = System.Drawing.Color.White;
+            this.dgvLavoratori.GridColor = System.Drawing.Color.WhiteSmoke;
             this.dgvLavoratori.Location = new System.Drawing.Point(0, 0);
             this.dgvLavoratori.Name = "dgvLavoratori";
             this.dgvLavoratori.ReadOnly = true;
@@ -146,7 +146,6 @@
             // 
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Historic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;

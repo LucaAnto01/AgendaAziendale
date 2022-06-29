@@ -130,6 +130,17 @@ namespace AgendaAziendale.Forms
         }
 
         /// <summary>
+        /// Ascoltatore evento click sul bottone di minimizzazione
+        /// --> riduzione ad icona dell'applicazione
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtMinimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        /// <summary>
         /// Validazione caratteri durante l'inserimento nelle text box
         /// --> no lettere con accenti e caratteri strani
         /// </summary>

@@ -60,6 +60,17 @@ namespace AgendaAziendale.Forms
         }
 
         /// <summary>
+        /// Ascoltatore evento click sul bottone di minimizzazione
+        /// --> riduzione ad icona dell'applicazione
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtMinimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        /// <summary>
         /// Ascoltatore evento click sul bottone per visualizzare evnti o progetti
         /// --> a seconda della tipologia di account loggato verranno visualizzati eventi (in tutti i casi) e progetti (PM, sviluppatore)
         /// </summary>
@@ -162,7 +173,9 @@ namespace AgendaAziendale.Forms
                 btStoricoProgetti.Visible = true;
                 btVisualizzaStoricoEvento.Visible = false;
                 btGestione.Text = "Gestione progetti";
+                btGestione.Image = Properties.Resources.Progetti; ///Settaggio dell'icona
                 btProgettiEventi.Text = "Progetti";
+                btProgettiEventi.Image = Properties.Resources.Progetti;
             }
 
             else if(Sessione.Lavoratore.Categoria == "Segretario")
@@ -173,12 +186,15 @@ namespace AgendaAziendale.Forms
                 btVisualizzaStoricoEvento.Visible = true;
                 btStoricoProgetti.Visible = false;
                 btGestione.Text = "Gestione eventi";
+                btGestione.Image = Properties.Resources.Eventi;
                 btProgettiEventi.Text = "Eventi";
+                btProgettiEventi.Image = Properties.Resources.Eventi;
             }
 
             else if (Sessione.Lavoratore.Categoria == "Sviluppatore")
             {
                 btProgettiEventi.Text = "Progetti";
+                btProgettiEventi.Image = Properties.Resources.Progetti;
             }
         }
         #endregion

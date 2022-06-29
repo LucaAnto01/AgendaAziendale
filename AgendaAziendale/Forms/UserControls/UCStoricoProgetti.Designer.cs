@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCentro = new System.Windows.Forms.Panel();
             this.dgvStoricoProgetti = new System.Windows.Forms.DataGridView();
             this.codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,7 +58,7 @@
             this.dgvStoricoProgetti.AllowUserToAddRows = false;
             this.dgvStoricoProgetti.AllowUserToDeleteRows = false;
             this.dgvStoricoProgetti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvStoricoProgetti.BackgroundColor = System.Drawing.Color.White;
+            this.dgvStoricoProgetti.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvStoricoProgetti.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvStoricoProgetti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStoricoProgetti.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -71,7 +72,7 @@
             this.avanzamento,
             this.elimina});
             this.dgvStoricoProgetti.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvStoricoProgetti.GridColor = System.Drawing.Color.White;
+            this.dgvStoricoProgetti.GridColor = System.Drawing.Color.WhiteSmoke;
             this.dgvStoricoProgetti.Location = new System.Drawing.Point(0, 0);
             this.dgvStoricoProgetti.Name = "dgvStoricoProgetti";
             this.dgvStoricoProgetti.ReadOnly = true;
@@ -129,6 +130,13 @@
             // 
             // elimina
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.elimina.DefaultCellStyle = dataGridViewCellStyle1;
+            this.elimina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.elimina.HeaderText = "";
             this.elimina.Name = "elimina";
             this.elimina.ReadOnly = true;

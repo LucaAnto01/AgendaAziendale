@@ -41,7 +41,9 @@
             // lbTitolo
             // 
             this.lbTitolo.AutoSize = true;
+            this.lbTitolo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(89)))), ((int)(((byte)(150)))));
             this.lbTitolo.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTitolo.ForeColor = System.Drawing.Color.White;
             this.lbTitolo.Location = new System.Drawing.Point(3, 15);
             this.lbTitolo.Name = "lbTitolo";
             this.lbTitolo.Size = new System.Drawing.Size(64, 24);
@@ -50,7 +52,7 @@
             // 
             // panelCentro
             // 
-            this.panelCentro.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelCentro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(89)))), ((int)(((byte)(150)))));
             this.panelCentro.Controls.Add(this.lbDataInizioFineInt);
             this.panelCentro.Controls.Add(this.lbClienteLuogoInt);
             this.panelCentro.Controls.Add(this.pbProgetto);
@@ -65,7 +67,9 @@
             // lbDataInizioFineInt
             // 
             this.lbDataInizioFineInt.AutoSize = true;
+            this.lbDataInizioFineInt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(89)))), ((int)(((byte)(150)))));
             this.lbDataInizioFineInt.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDataInizioFineInt.ForeColor = System.Drawing.Color.White;
             this.lbDataInizioFineInt.Location = new System.Drawing.Point(4, 69);
             this.lbDataInizioFineInt.Name = "lbDataInizioFineInt";
             this.lbDataInizioFineInt.Size = new System.Drawing.Size(95, 18);
@@ -75,7 +79,9 @@
             // lbClienteLuogoInt
             // 
             this.lbClienteLuogoInt.AutoSize = true;
+            this.lbClienteLuogoInt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(89)))), ((int)(((byte)(150)))));
             this.lbClienteLuogoInt.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbClienteLuogoInt.ForeColor = System.Drawing.Color.White;
             this.lbClienteLuogoInt.Location = new System.Drawing.Point(4, 49);
             this.lbClienteLuogoInt.Name = "lbClienteLuogoInt";
             this.lbClienteLuogoInt.Size = new System.Drawing.Size(72, 18);
@@ -94,7 +100,9 @@
             // lbDataInizioFine
             // 
             this.lbDataInizioFine.AutoSize = true;
+            this.lbDataInizioFine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(89)))), ((int)(((byte)(150)))));
             this.lbDataInizioFine.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDataInizioFine.ForeColor = System.Drawing.Color.White;
             this.lbDataInizioFine.Location = new System.Drawing.Point(99, 69);
             this.lbDataInizioFine.Name = "lbDataInizioFine";
             this.lbDataInizioFine.Size = new System.Drawing.Size(144, 17);
@@ -104,7 +112,9 @@
             // lbClienteLuogo
             // 
             this.lbClienteLuogo.AutoSize = true;
+            this.lbClienteLuogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(89)))), ((int)(((byte)(150)))));
             this.lbClienteLuogo.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbClienteLuogo.ForeColor = System.Drawing.Color.White;
             this.lbClienteLuogo.Location = new System.Drawing.Point(99, 49);
             this.lbClienteLuogo.Name = "lbClienteLuogo";
             this.lbClienteLuogo.Size = new System.Drawing.Size(93, 17);

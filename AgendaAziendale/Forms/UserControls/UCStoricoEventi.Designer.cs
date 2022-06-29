@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvStoricoEventi = new System.Windows.Forms.DataGridView();
-            this.panelCentro = new System.Windows.Forms.Panel();
             this.codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,6 +38,7 @@
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.luogo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.elimina = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.panelCentro = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStoricoEventi)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,7 +47,7 @@
             this.dgvStoricoEventi.AllowUserToAddRows = false;
             this.dgvStoricoEventi.AllowUserToDeleteRows = false;
             this.dgvStoricoEventi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvStoricoEventi.BackgroundColor = System.Drawing.Color.White;
+            this.dgvStoricoEventi.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvStoricoEventi.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvStoricoEventi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStoricoEventi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -59,21 +60,13 @@
             this.luogo,
             this.elimina});
             this.dgvStoricoEventi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvStoricoEventi.GridColor = System.Drawing.Color.White;
+            this.dgvStoricoEventi.GridColor = System.Drawing.Color.WhiteSmoke;
             this.dgvStoricoEventi.Location = new System.Drawing.Point(0, 0);
             this.dgvStoricoEventi.Name = "dgvStoricoEventi";
             this.dgvStoricoEventi.ReadOnly = true;
             this.dgvStoricoEventi.Size = new System.Drawing.Size(700, 610);
             this.dgvStoricoEventi.TabIndex = 1;
             this.dgvStoricoEventi.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvStoricoEventi_CellClick);
-            // 
-            // panelCentro
-            // 
-            this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCentro.Location = new System.Drawing.Point(0, 0);
-            this.panelCentro.Name = "panelCentro";
-            this.panelCentro.Size = new System.Drawing.Size(700, 610);
-            this.panelCentro.TabIndex = 2;
             // 
             // codice
             // 
@@ -119,6 +112,13 @@
             // 
             // elimina
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.elimina.DefaultCellStyle = dataGridViewCellStyle1;
+            this.elimina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.elimina.HeaderText = "";
             this.elimina.Name = "elimina";
             this.elimina.ReadOnly = true;
@@ -126,6 +126,14 @@
             this.elimina.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.elimina.Text = "Elimina";
             this.elimina.UseColumnTextForButtonValue = true;
+            // 
+            // panelCentro
+            // 
+            this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCentro.Location = new System.Drawing.Point(0, 0);
+            this.panelCentro.Name = "panelCentro";
+            this.panelCentro.Size = new System.Drawing.Size(700, 610);
+            this.panelCentro.TabIndex = 2;
             // 
             // UCStoricoEventi
             // 

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.panelCentro = new System.Windows.Forms.Panel();
-            this.panelTop = new System.Windows.Forms.Panel();
-            this.flpSinistra = new System.Windows.Forms.FlowLayoutPanel();
             this.flpDestra = new System.Windows.Forms.FlowLayoutPanel();
-            this.lbEventi = new System.Windows.Forms.Label();
+            this.flpSinistra = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelTop = new System.Windows.Forms.Panel();
             this.lbProgetti = new System.Windows.Forms.Label();
+            this.lbEventi = new System.Windows.Forms.Label();
             this.panelCentro.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.SuspendLayout();
@@ -49,8 +49,27 @@
             this.panelCentro.Size = new System.Drawing.Size(700, 610);
             this.panelCentro.TabIndex = 1;
             // 
+            // flpDestra
+            // 
+            this.flpDestra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.flpDestra.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flpDestra.Location = new System.Drawing.Point(350, 45);
+            this.flpDestra.Name = "flpDestra";
+            this.flpDestra.Size = new System.Drawing.Size(350, 565);
+            this.flpDestra.TabIndex = 2;
+            // 
+            // flpSinistra
+            // 
+            this.flpSinistra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.flpSinistra.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flpSinistra.Location = new System.Drawing.Point(0, 45);
+            this.flpSinistra.Name = "flpSinistra";
+            this.flpSinistra.Size = new System.Drawing.Size(350, 565);
+            this.flpSinistra.TabIndex = 1;
+            // 
             // panelTop
             // 
+            this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.panelTop.Controls.Add(this.lbProgetti);
             this.panelTop.Controls.Add(this.lbEventi);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
@@ -59,41 +78,27 @@
             this.panelTop.Size = new System.Drawing.Size(700, 45);
             this.panelTop.TabIndex = 0;
             // 
-            // flpSinistra
-            // 
-            this.flpSinistra.Dock = System.Windows.Forms.DockStyle.Left;
-            this.flpSinistra.Location = new System.Drawing.Point(0, 45);
-            this.flpSinistra.Name = "flpSinistra";
-            this.flpSinistra.Size = new System.Drawing.Size(350, 565);
-            this.flpSinistra.TabIndex = 1;
-            // 
-            // flpDestra
-            // 
-            this.flpDestra.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flpDestra.Location = new System.Drawing.Point(350, 45);
-            this.flpDestra.Name = "flpDestra";
-            this.flpDestra.Size = new System.Drawing.Size(350, 565);
-            this.flpDestra.TabIndex = 2;
-            // 
-            // lbEventi
-            // 
-            this.lbEventi.AutoSize = true;
-            this.lbEventi.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbEventi.Location = new System.Drawing.Point(141, 10);
-            this.lbEventi.Name = "lbEventi";
-            this.lbEventi.Size = new System.Drawing.Size(69, 24);
-            this.lbEventi.TabIndex = 0;
-            this.lbEventi.Text = "Eventi";
-            // 
             // lbProgetti
             // 
             this.lbProgetti.AutoSize = true;
             this.lbProgetti.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbProgetti.ForeColor = System.Drawing.Color.White;
             this.lbProgetti.Location = new System.Drawing.Point(483, 10);
             this.lbProgetti.Name = "lbProgetti";
             this.lbProgetti.Size = new System.Drawing.Size(85, 24);
             this.lbProgetti.TabIndex = 1;
             this.lbProgetti.Text = "Progetti";
+            // 
+            // lbEventi
+            // 
+            this.lbEventi.AutoSize = true;
+            this.lbEventi.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEventi.ForeColor = System.Drawing.Color.White;
+            this.lbEventi.Location = new System.Drawing.Point(141, 10);
+            this.lbEventi.Name = "lbEventi";
+            this.lbEventi.Size = new System.Drawing.Size(69, 24);
+            this.lbEventi.TabIndex = 0;
+            this.lbEventi.Text = "Eventi";
             // 
             // FormVisualizzazioneAttivita
             // 
