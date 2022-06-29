@@ -82,14 +82,20 @@ namespace AgendaAziendale.Forms.UserControls
                 {
                     string username = dgvLavoratori.Rows[e.RowIndex].Cells[0].Value.ToString(); ///Username dell'utente da eliminare selezionato
 
-                    if(Controller.EliminaLavoratore(username))
+                    if(username != Sessione.Lavoratore.Username)
                     {
-                        MessageBox.Show("Eliminazione lavoratore " + username + " avvenuta con successo!", "UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        AggiornadgvLavoratori();
+                        if (Controller.EliminaLavoratore(username))
+                        {
+                            MessageBox.Show("Eliminazione lavoratore " + username + " avvenuta con successo!", "UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            AggiornadgvLavoratori();
+                        }
+
+                        else
+                            MessageBox.Show("Impossibile eliminare l'utente dal DB. Controllare che non sia associato ad alcuna attività", "UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                     else
-                        MessageBox.Show("Impossibile eliminare l'utente dal DB. Controllare che non sia associato ad alcuna attività", "UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Non puoi eliminare il tuo account mentre sei loggato!", "UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
             }
