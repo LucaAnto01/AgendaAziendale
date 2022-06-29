@@ -181,7 +181,7 @@ namespace AgendaAziendale.Forms
             else if(Sessione.Lavoratore.Categoria == "Segretario")
             {
                 btGestione.Visible = true;
-                btGestione.Location = new Point(33, 207);
+                btGestione.Location = new Point(33, 205);
                 btProgettiEventi.Visible = false;
                 btVisualizzaStoricoEvento.Visible = true;
                 btStoricoProgetti.Visible = false;
