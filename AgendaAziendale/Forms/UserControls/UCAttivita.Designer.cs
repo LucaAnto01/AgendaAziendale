@@ -30,6 +30,7 @@
         {
             this.lbTitolo = new System.Windows.Forms.Label();
             this.panelCentro = new System.Windows.Forms.Panel();
+            this.btInfo = new System.Windows.Forms.Button();
             this.lbDataInizioFineInt = new System.Windows.Forms.Label();
             this.lbClienteLuogoInt = new System.Windows.Forms.Label();
             this.pbProgetto = new System.Windows.Forms.ProgressBar();
@@ -53,6 +54,7 @@
             // panelCentro
             // 
             this.panelCentro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(89)))), ((int)(((byte)(150)))));
+            this.panelCentro.Controls.Add(this.btInfo);
             this.panelCentro.Controls.Add(this.lbDataInizioFineInt);
             this.panelCentro.Controls.Add(this.lbClienteLuogoInt);
             this.panelCentro.Controls.Add(this.pbProgetto);
@@ -63,6 +65,23 @@
             this.panelCentro.Name = "panelCentro";
             this.panelCentro.Size = new System.Drawing.Size(325, 145);
             this.panelCentro.TabIndex = 1;
+            // 
+            // btInfo
+            // 
+            this.btInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(89)))), ((int)(((byte)(150)))));
+            this.btInfo.BackgroundImage = global::AgendaAziendale.Properties.Resources.Info;
+            this.btInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btInfo.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btInfo.FlatAppearance.BorderSize = 0;
+            this.btInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btInfo.Location = new System.Drawing.Point(285, 55);
+            this.btInfo.Name = "btInfo";
+            this.btInfo.Size = new System.Drawing.Size(35, 35);
+            this.btInfo.TabIndex = 7;
+            this.btInfo.UseVisualStyleBackColor = false;
+            this.btInfo.Click += new System.EventHandler(this.BtInfo_Click);
             // 
             // lbDataInizioFineInt
             // 
@@ -149,5 +168,6 @@
         private System.Windows.Forms.ProgressBar pbProgetto;
         private System.Windows.Forms.Label lbClienteLuogoInt;
         private System.Windows.Forms.Label lbDataInizioFineInt;
+        private System.Windows.Forms.Button btInfo;
     }
 }

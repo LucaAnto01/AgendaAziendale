@@ -49,7 +49,8 @@ namespace AgendaAziendale.Forms.UserControls
             lbClienteLuogoInt.Parent = panelCentro;
             lbClienteLuogo.Parent = panelCentro;  
             lbDataInizioFineInt.Parent = panelCentro;
-            lbDataInizioFine.Parent = panelCentro; 
+            lbDataInizioFine.Parent = panelCentro;
+            btInfo.Parent = panelCentro;
             pbProgetto.Parent = panelCentro;
 
             SetTesti();
@@ -75,6 +76,16 @@ namespace AgendaAziendale.Forms.UserControls
         private void UCAttivita_MouseLeave(object sender, EventArgs e)
         {
             panelCentro.BackColor = Color.WhiteSmoke;
+        }
+
+        /// <summary>
+        /// Ascoltatore click sul bottone adibito al mostrare le informazioni relative all'attività
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtInfo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Nome: " + Attivita.Nome + "\nDescrizione: " + Attivita.Descrizione + ".", Attivita.Nome, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
 
@@ -121,7 +132,7 @@ namespace AgendaAziendale.Forms.UserControls
                     ProgressBarColor.SetState(pbProgetto, 1);
             }
         }
-        #endregion
+        #endregion        
     }
 
     #region Classe ProgressBarColor

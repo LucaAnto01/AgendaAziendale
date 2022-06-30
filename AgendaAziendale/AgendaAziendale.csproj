@@ -271,6 +271,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Img\Icone\Info.png" />
     <None Include="Img\Icone\Logout.png" />
     <None Include="Img\Icone\Storico_progetti.png" />
     <None Include="Img\Icone\Storico.png" />
