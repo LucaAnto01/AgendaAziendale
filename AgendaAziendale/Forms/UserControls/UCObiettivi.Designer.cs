@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCentro = new System.Windows.Forms.Panel();
             this.dgvObiettivi = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,7 +55,7 @@
             this.dgvObiettivi.AllowUserToAddRows = false;
             this.dgvObiettivi.AllowUserToDeleteRows = false;
             this.dgvObiettivi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvObiettivi.BackgroundColor = System.Drawing.Color.White;
+            this.dgvObiettivi.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvObiettivi.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvObiettivi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvObiettivi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -63,7 +65,7 @@
             this.modifica,
             this.elimina});
             this.dgvObiettivi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvObiettivi.GridColor = System.Drawing.Color.White;
+            this.dgvObiettivi.GridColor = System.Drawing.Color.WhiteSmoke;
             this.dgvObiettivi.Location = new System.Drawing.Point(0, 0);
             this.dgvObiettivi.Name = "dgvObiettivi";
             this.dgvObiettivi.ReadOnly = true;
@@ -91,6 +93,13 @@
             // 
             // modifica
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.modifica.DefaultCellStyle = dataGridViewCellStyle1;
+            this.modifica.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.modifica.HeaderText = "";
             this.modifica.Name = "modifica";
             this.modifica.ReadOnly = true;
@@ -99,6 +108,13 @@
             // 
             // elimina
             // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            this.elimina.DefaultCellStyle = dataGridViewCellStyle2;
+            this.elimina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.elimina.HeaderText = "";
             this.elimina.Name = "elimina";
             this.elimina.ReadOnly = true;

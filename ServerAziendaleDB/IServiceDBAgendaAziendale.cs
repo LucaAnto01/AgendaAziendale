@@ -68,6 +68,16 @@ namespace ServerAziendaleDB
         bool AggiornaLavoratore(string username, string username_in, string nome, string cognome, string residenza, string dataNascita, string categoria);
 
         /// <summary>
+        /// Servizio adibito all'aggiornamento della password di un Lavoratore presente nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool AggiornaPassword(string username, string username_in, string password);
+
+        /// <summary>
         /// Servizio adibito all'eiminazione di un Lavoratore presente nel DB
         /// </summary>
         /// <param name="username"></param>

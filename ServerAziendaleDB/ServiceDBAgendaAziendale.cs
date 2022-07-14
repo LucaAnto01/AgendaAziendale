@@ -30,8 +30,11 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Apertura connessione DB in ServerAziendaleDB: " + ex.ToString());
-                Console.ReadLine();
+                Console.ReadLine();               
             }
         }
 
@@ -54,6 +57,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query Login() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -87,12 +93,16 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query GetInfoLavoratore() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
 
             finally
             {
+                
                 WriteLog(username, "GetInfoLavoratore()"); ///Scrittura log
             }
 
@@ -130,12 +140,15 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query AggiungiLavoratore() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
 
             finally
-            {
+            {              
                 WriteLog(username, "AggiungiLavoratore()"); ///Scrittura log
             }
 
@@ -172,13 +185,55 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query AggiornaLavoratore() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
 
             finally
-            {
+            {               
                 WriteLog(username, "AggiornaLavoratore()"); ///Scrittura log
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Servizio adibito all'aggiornamento della password di un Lavoratore presente nel DB
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="username_in"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public bool AggiornaPassword(string username, string username_in, string password)
+        {
+            string query = "UPDATE lavoratore SET pswd = '" + password + "' WHERE username = '" + username_in + "';";
+
+            List<string> queries = new List<string>
+            {
+                query
+            };
+
+            try
+            {
+                if (InterazioneDB.EseguiQueries(queries)) ///Aggiorno il lavoratore
+                    return true;
+            }
+
+            catch (Exception ex)
+            {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
+                Console.WriteLine("ERRORE!!! Esecuzione query AggiornaPassword() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {
+                WriteLog(username, "AggiornaPassword()"); ///Scrittura log
             }
 
             return false;
@@ -211,6 +266,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query EliminaLavoratore() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -242,12 +300,15 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query GetElencoLavoratori() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
 
             finally
-            {
+            {               
                 WriteLog(username, "GetElencoLavoratori()"); ///Scrittura log
             }
 
@@ -304,6 +365,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query CreaEvento() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -349,6 +413,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query AggiornaEvento() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -389,6 +456,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query EliminaEvento() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -410,7 +480,7 @@ namespace ServerAziendaleDB
         {
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, e.id, e.luogo " +
                            "FROM attivita a, evento e, specifica_evento se " +
-                           "WHERE a.codice = se.fk_attivita AND e.id = se.fk_evento AND a.data_inizio >= CURRENT_DATE " +
+                           "WHERE a.codice = se.fk_attivita AND e.id = se.fk_evento AND a.data_fine >= CURRENT_DATE " +
                            " ORDER BY a.data_inizio ASC;";
 
             try
@@ -423,6 +493,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query GetElencoEventi() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -447,7 +520,7 @@ namespace ServerAziendaleDB
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, e.id, e.luogo" +
                            " FROM attivita a, evento e, specifica_evento se, partecipazione pa" +
                            " WHERE a.codice = se.fk_attivita AND a.codice = pa.fk_attivita AND e.id = se.fk_evento" +
-                           "       AND pa.fk_lavoratore = '" + username_in + "' AND a.data_inizio >= CURRENT_DATE" +
+                           "       AND pa.fk_lavoratore = '" + username_in + "' AND a.data_fine >= CURRENT_DATE" +
                            " ORDER BY a.data_inizio ASC; ";
             try
             {
@@ -459,6 +532,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query GetElencoEventiLavoratore() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -492,6 +568,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query GetStoricoEventi() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -555,6 +634,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query CreaProgetto() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -600,6 +682,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query AggiornaProgetto() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -640,6 +725,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query EliminaProgetto() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -661,7 +749,7 @@ namespace ServerAziendaleDB
         {
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, p.id, p.cliente" +
                            " FROM attivita a, progetto p, specifica_progetto sp" +
-                           " WHERE a.codice = sp.fk_attivita AND p.id = sp.fk_progetto AND a.data_inizio >= CURRENT_DATE" +
+                           " WHERE a.codice = sp.fk_attivita AND p.id = sp.fk_progetto AND a.data_fine >= CURRENT_DATE" +
                            " ORDER BY a.data_inizio ASC;";
 
             try
@@ -674,6 +762,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query GetElencoProgetti() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -698,7 +789,7 @@ namespace ServerAziendaleDB
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, p.id, p.cliente" +
                            " FROM attivita a, progetto p, specifica_progetto sp, partecipazione pa" +
                            " WHERE a.codice = sp.fk_attivita AND a.codice = pa.fk_attivita AND p.id = sp.fk_progetto" +
-                           "       AND pa.fk_lavoratore = '" + username_in + "' AND a.data_inizio >= CURRENT_DATE" +
+                           "       AND pa.fk_lavoratore = '" + username_in + "' AND a.data_fine >= CURRENT_DATE" +
                            " ORDER BY a.data_inizio ASC;";
 
             try
@@ -711,6 +802,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query GetElencoProgettiLavoratore() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -744,6 +838,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query GetStoricoProgetti() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -779,6 +876,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query GetElencoObiettivi() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -817,6 +917,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query AggiungiObiettivo() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -855,6 +958,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query ModificaObiettivo() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -890,6 +996,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query EliminaObiettivo() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -927,6 +1036,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query GetElencoPartecipantiAttivita() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -964,6 +1076,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query AggiungiPartecipanteAttivita() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
@@ -1000,6 +1115,9 @@ namespace ServerAziendaleDB
 
             catch (Exception ex)
             {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
                 Console.WriteLine("ERRORE!!! Esecuzione query RimuoviPartecipanteAttivita() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -48,7 +49,8 @@ namespace AgendaAziendale.Forms.UserControls
             lbClienteLuogoInt.Parent = panelCentro;
             lbClienteLuogo.Parent = panelCentro;  
             lbDataInizioFineInt.Parent = panelCentro;
-            lbDataInizioFine.Parent = panelCentro; 
+            lbDataInizioFine.Parent = panelCentro;
+            btInfo.Parent = panelCentro;
             pbProgetto.Parent = panelCentro;
 
             SetTesti();
@@ -75,6 +77,16 @@ namespace AgendaAziendale.Forms.UserControls
         {
             panelCentro.BackColor = Color.WhiteSmoke;
         }
+
+        /// <summary>
+        /// Ascoltatore click sul bottone adibito al mostrare le informazioni relative all'attività
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtInfo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Nome: " + Attivita.Nome + "\nDescrizione: " + Attivita.Descrizione + ".", Attivita.Nome, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
         #endregion
 
         #region Metodi
@@ -93,6 +105,7 @@ namespace AgendaAziendale.Forms.UserControls
                 lbClienteLuogo.Text = evento.Luogo;
                 lbDataInizioFineInt.Text = "Inizio - Fine";
                 lbDataInizioFine.Text = evento.DataInizio.ToString("dd-MM-yyyy") + " - " + evento.DataFine.ToString("dd-MM-yyyy");
+                Size = new Size(325, 100);
             }
 
             else if(Attivita is Progetto)
@@ -103,8 +116,38 @@ namespace AgendaAziendale.Forms.UserControls
                 lbDataInizioFineInt.Text = "Consegna";
                 lbDataInizioFine.Text = progetto.DataFine.ToString("dd-MM-yyyy");
                 pbProgetto.Visible = true;
+
+                pbProgetto.Maximum = 100;
+                int avanzamento = Controller.CalcolaAvanzamentoProgetto(progetto);
+                pbProgetto.Value = avanzamento; ///Calcolo l'avanzamento del progetto e lo mostro mostrando l'avanzamento della progress bar
+
+                ///A seconda della percentuale di avanzamento setto il colore della barra
+                if (avanzamento <= 30)
+                    ProgressBarColor.SetState(pbProgetto, 2);
+
+                else if ((avanzamento > 30) && (avanzamento <= 85))
+                    ProgressBarColor.SetState(pbProgetto, 3);
+
+                else if (avanzamento > 85)
+                    ProgressBarColor.SetState(pbProgetto, 1);
             }
         }
-        #endregion
+        #endregion        
     }
+
+    #region Classe ProgressBarColor
+    /// <summary>
+    /// Classe di comodo utilizzata per poter modificare il colore della progress bar
+    /// --> https://foxlearn.com/windows-forms/change-color-progress-bar-in-csharp-350.html
+    /// </summary>
+    public static class ProgressBarColor
+    {
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = false)]
+        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr w, IntPtr l);
+        public static void SetState(this ProgressBar p, int state)
+        {
+            SendMessage(p.Handle, 1040, (IntPtr)state, IntPtr.Zero);
+        }
+    }
+    #endregion
 }

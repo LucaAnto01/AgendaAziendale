@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using AgendaAziendale.Forms;
 using AgendaAziendale.Modelli;
 
@@ -40,10 +41,7 @@ namespace AgendaAziendale
             ///Figli del pannello top
             btChiudi.Parent = panelTop;
             ///Figli del pannello di sinistra
-            panelSinistraTop.Parent = panelSinistra;
             lbIntestazioneSinistra.Parent = panelSinistra;
-            ///Figli del pannello di sinistra top
-            pctbxLogo.Parent = panelSinistraTop;
             ///Figli del pannello centrale
             tbUsername.Parent = panelCentro;
             tbPassword.Parent = panelCentro;
@@ -60,6 +58,32 @@ namespace AgendaAziendale
         private void BtChiudi_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        /// <summary>
+        /// Ascoltatore evento click sul bottone di minimizzazione
+        /// --> riduzione ad icona dell'applicazione
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtMinimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        /// <summary>
+        /// Validazione caratteri durante l'inserimento nelle text box
+        /// --> no lettere con accenti e caratteri strani
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Tb_TextChanged(object sender, EventArgs e)
+        {
+            if ((!Regex.IsMatch(((TextBox)sender).Text, Sessione.Regex)) && (((TextBox)sender).Text != ""))
+            {
+                MessageBox.Show("Non inserire lettere accentate o caratteri speciali!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ((TextBox)sender).Text = "";
+            }
         }
 
         /// <summary>
@@ -97,8 +121,6 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtAccedi_Click(object sender, EventArgs e)
         {
-            //TODO: avvia procedura di login --> setta i dati in sessione
-
             if (CheckCampi())
             {
                 string username = tbUsername.Text;

@@ -45,7 +45,7 @@ namespace AgendaAziendale.Forms
             btProgettiEventi.Parent= panelSinistra;
             btLogout.Parent = panelSinistra;
 
-            //SETTA IL TESTO DEL btProgettiEventi e gestisci la visibilità del btGestione
+            SettaggioInterfaccia();
         }
 
         /// <summary>
@@ -60,6 +60,17 @@ namespace AgendaAziendale.Forms
         }
 
         /// <summary>
+        /// Ascoltatore evento click sul bottone di minimizzazione
+        /// --> riduzione ad icona dell'applicazione
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtMinimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        /// <summary>
         /// Ascoltatore evento click sul bottone per visualizzare evnti o progetti
         /// --> a seconda della tipologia di account loggato verranno visualizzati eventi (in tutti i casi) e progetti (PM, sviluppatore)
         /// </summary>
@@ -67,7 +78,7 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtVisualizzaAgenda_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormVisualizzazioneAttivita(Sessione.Lavoratore));
+            CaricaForm(new FormVisualizzazioneAttivita(this));
         }
 
         /// <summary>
@@ -78,7 +89,8 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtProgettiEventi_Click(object sender, EventArgs e)
         {
-            //TODO: fai vedere il tutto
+            if ((Sessione.Lavoratore.Categoria == "Project Manager") || (Sessione.Lavoratore.Categoria == "Sviluppatore"))
+                CaricaForm(new FormGestione(this, "Progetto", true));
         }
 
         /// <summary>
@@ -89,7 +101,11 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtGestione_Click(object sender, EventArgs e)
         {
-            //CaricaForm(new FormGestioneAttivita()); -->TODO: per farlo devi prima creare le sottoclassi di lavoratore in modo da poter richimare il metodo
+            if (Sessione.Lavoratore.Categoria == "Project Manager")
+                CaricaForm(new FormGestione(this, "Progetto", false));
+
+            else if (Sessione.Lavoratore.Categoria == "Segretario")
+                CaricaForm(new FormGestione(this, "Evento", false));
         }
 
         /// <summary>
@@ -144,6 +160,42 @@ namespace AgendaAziendale.Forms
             panelCentro.Controls.Add(f); //Asssegno i controlli al form "dinamico" creato
             panelCentro.Tag = f;
             f.Show();
+        }
+
+        /// <summary>
+        /// Metodo adibito al settaggio dei testi e visualizzazione dei button a seconda della tipologia di account loggato
+        /// </summary>
+        private void SettaggioInterfaccia()
+        {
+            if(Sessione.Lavoratore.Categoria == "Project Manager")
+            {
+                btGestione.Visible = true;
+                btStoricoProgetti.Visible = true;
+                btVisualizzaStoricoEvento.Visible = false;
+                btGestione.Text = "Gestione progetti";
+                btGestione.Image = Properties.Resources.Progetti; ///Settaggio dell'icona
+                btProgettiEventi.Text = "Progetti";
+                btProgettiEventi.Image = Properties.Resources.Progetti;
+            }
+
+            else if(Sessione.Lavoratore.Categoria == "Segretario")
+            {
+                btGestione.Visible = true;
+                btGestione.Location = new Point(33, 205);
+                btProgettiEventi.Visible = false;
+                btVisualizzaStoricoEvento.Visible = true;
+                btStoricoProgetti.Visible = false;
+                btGestione.Text = "Gestione eventi";
+                btGestione.Image = Properties.Resources.Eventi;
+                btProgettiEventi.Text = "Eventi";
+                btProgettiEventi.Image = Properties.Resources.Eventi;
+            }
+
+            else if (Sessione.Lavoratore.Categoria == "Sviluppatore")
+            {
+                btProgettiEventi.Text = "Progetti";
+                btProgettiEventi.Image = Properties.Resources.Progetti;
+            }
         }
         #endregion
     }

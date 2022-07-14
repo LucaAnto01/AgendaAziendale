@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AgendaAziendale.Forms.UserControls;
+using AgendaAziendale.Modelli;
 
 namespace AgendaAziendale.Forms
 {
@@ -17,11 +18,13 @@ namespace AgendaAziendale.Forms
         private Form formPadre;
         private readonly string tipologia;
         private UserControl ucContenitore;
+        private bool filtra;
         #endregion
 
         #region Gettrs & Setters
         public UserControl UcContenitore { get => ucContenitore; set => ucContenitore = value; }
         public Form FormPadre { get => formPadre; set => formPadre = value; }
+        public bool Filtra { get => filtra; set => filtra = value; }
         #endregion
 
         /// <summary>
@@ -29,11 +32,25 @@ namespace AgendaAziendale.Forms
         /// </summary>
         /// <param name="formPadre"></param>
         /// <param name="tipologia"></param>
-        public FormGestione(Form formPadre, string tipologia)
+        /*public FormGestione(Form formPadre, string tipologia)
         {
             InitializeComponent();
             FormPadre = formPadre;
             this.tipologia = tipologia;
+        }*/
+
+        /// <summary>
+        /// Metodo costruttore del FormGestione
+        /// </summary>
+        /// <param name="formPadre"></param>
+        /// <param name="tipologia"></param>
+        /// <param name="filtra"></param>
+        public FormGestione(Form formPadre, string tipologia, bool filtra)
+        {
+            InitializeComponent();
+            FormPadre = formPadre;
+            this.tipologia = tipologia;
+            Filtra = filtra;
         }
 
         #region Ascoltatori eventi
@@ -52,6 +69,9 @@ namespace AgendaAziendale.Forms
             btAggiungi.Parent = panelCentro;
             panelUCcontenitore.Parent = panelCentro;
 
+            if(Filtra)
+                btAggiungi.Visible = false;
+
             if((tipologia == "Lavoratore") || (tipologia == "lavoratore"))
             {
                 btAggiungi.Text = "Aggiungi lavoratore";
@@ -61,13 +81,13 @@ namespace AgendaAziendale.Forms
             else if ((tipologia == "Evento") || (tipologia == "evento"))
             {
                 btAggiungi.Text = "Aggiungi evento";
-                UcContenitore = new UCEventi(FormPadre);
+                UcContenitore = new UCEventi(FormPadre, Filtra);
             }
 
             else if ((tipologia == "Progetto") || (tipologia == "progetto"))
             {
                 btAggiungi.Text = "Aggiungi progetto";
-                UcContenitore = new UCProgetti(FormPadre);
+                UcContenitore = new UCProgetti(FormPadre, Filtra);
             }
 
             else

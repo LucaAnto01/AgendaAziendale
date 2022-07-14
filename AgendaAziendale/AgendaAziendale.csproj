@@ -22,6 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -271,6 +273,14 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Img\Icone\Info.png" />
+    <None Include="Img\Icone\Logout.png" />
+    <None Include="Img\Icone\Storico_progetti.png" />
+    <None Include="Img\Icone\Storico.png" />
+    <None Include="Img\Icone\Progetti.png" />
+    <None Include="Img\Icone\Eventi.png" />
+    <None Include="Img\Icone\GestioneUtenti.png" />
+    <None Include="Img\Icone\Minimize.png" />
     <None Include="Connected Services\SRAgendaAziendale\item.disco" />
     <None Include="Connected Services\SRAgendaAziendale\configuration91.svcinfo" />
     <None Include="Connected Services\SRAgendaAziendale\configuration.svcinfo" />
@@ -278,6 +288,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Img\Icone\Agenda.png" />
     <Content Include="Img\Icone\Chiudi.png" />
   </ItemGroup>
   <ItemGroup>

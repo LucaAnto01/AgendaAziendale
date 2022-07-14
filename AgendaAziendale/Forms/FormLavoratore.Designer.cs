@@ -37,6 +37,7 @@
             this.tbNome = new System.Windows.Forms.TextBox();
             this.lbNome = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.btMinimize = new System.Windows.Forms.Button();
             this.tbDataNascita = new System.Windows.Forms.TextBox();
             this.lbDataNascita = new System.Windows.Forms.Label();
             this.tbResidenza = new System.Windows.Forms.TextBox();
@@ -47,6 +48,8 @@
             this.lbUsername = new System.Windows.Forms.Label();
             this.tbCognome = new System.Windows.Forms.TextBox();
             this.panelCentro = new System.Windows.Forms.Panel();
+            this.btAggiornaPassowrd = new System.Windows.Forms.Button();
+            this.lbInfoPassword = new System.Windows.Forms.Label();
             this.lbErrore = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
@@ -56,9 +59,11 @@
             // 
             this.btChiudi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btChiudi.BackColor = System.Drawing.Color.Transparent;
+            this.btChiudi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
             this.btChiudi.BackgroundImage = global::AgendaAziendale.Properties.Resources.Chiudi;
             this.btChiudi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btChiudi.FlatAppearance.BorderSize = 0;
+            this.btChiudi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btChiudi.Location = new System.Drawing.Point(697, 5);
             this.btChiudi.Name = "btChiudi";
             this.btChiudi.Size = new System.Drawing.Size(45, 30);
@@ -69,7 +74,9 @@
             // lbCategoria
             // 
             this.lbCategoria.AutoSize = true;
+            this.lbCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.lbCategoria.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCategoria.ForeColor = System.Drawing.Color.White;
             this.lbCategoria.Location = new System.Drawing.Point(12, 370);
             this.lbCategoria.Name = "lbCategoria";
             this.lbCategoria.Size = new System.Drawing.Size(77, 18);
@@ -78,6 +85,7 @@
             // 
             // cbCategoria
             // 
+            this.cbCategoria.BackColor = System.Drawing.Color.WhiteSmoke;
             this.cbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCategoria.FormattingEnabled = true;
             this.cbCategoria.Items.AddRange(new object[] {
@@ -92,6 +100,8 @@
             // 
             // btAAggiornaAggiungi
             // 
+            this.btAAggiornaAggiungi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btAAggiornaAggiungi.ForeColor = System.Drawing.Color.White;
             this.btAAggiornaAggiungi.Location = new System.Drawing.Point(15, 436);
             this.btAAggiornaAggiungi.Name = "btAAggiornaAggiungi";
             this.btAAggiornaAggiungi.Size = new System.Drawing.Size(75, 23);
@@ -103,7 +113,9 @@
             // lbCognome
             // 
             this.lbCognome.AutoSize = true;
+            this.lbCognome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.lbCognome.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCognome.ForeColor = System.Drawing.Color.White;
             this.lbCognome.Location = new System.Drawing.Point(12, 129);
             this.lbCognome.Name = "lbCognome";
             this.lbCognome.Size = new System.Drawing.Size(76, 18);
@@ -112,7 +124,8 @@
             // 
             // mcDataNascita
             // 
-            this.mcDataNascita.Location = new System.Drawing.Point(292, 158);
+            this.mcDataNascita.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.mcDataNascita.Location = new System.Drawing.Point(292, 180);
             this.mcDataNascita.Name = "mcDataNascita";
             this.mcDataNascita.TabIndex = 16;
             this.mcDataNascita.Visible = false;
@@ -120,18 +133,22 @@
             // 
             // tbNome
             // 
+            this.tbNome.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tbNome.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNome.Location = new System.Drawing.Point(119, 85);
             this.tbNome.MaxLength = 50;
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(110, 21);
             this.tbNome.TabIndex = 12;
+            this.tbNome.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbNome.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbNome
             // 
             this.lbNome.AutoSize = true;
+            this.lbNome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.lbNome.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNome.ForeColor = System.Drawing.Color.White;
             this.lbNome.Location = new System.Drawing.Point(12, 85);
             this.lbNome.Name = "lbNome";
             this.lbNome.Size = new System.Drawing.Size(49, 18);
@@ -140,7 +157,8 @@
             // 
             // panelTop
             // 
-            this.panelTop.BackColor = System.Drawing.Color.Gainsboro;
+            this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.panelTop.Controls.Add(this.btMinimize);
             this.panelTop.Controls.Add(this.btChiudi);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
@@ -148,8 +166,25 @@
             this.panelTop.Size = new System.Drawing.Size(750, 40);
             this.panelTop.TabIndex = 10;
             // 
+            // btMinimize
+            // 
+            this.btMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.btMinimize.BackgroundImage = global::AgendaAziendale.Properties.Resources.Minimize;
+            this.btMinimize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btMinimize.FlatAppearance.BorderSize = 0;
+            this.btMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btMinimize.Location = new System.Drawing.Point(645, 5);
+            this.btMinimize.Name = "btMinimize";
+            this.btMinimize.Size = new System.Drawing.Size(45, 30);
+            this.btMinimize.TabIndex = 16;
+            this.btMinimize.UseVisualStyleBackColor = false;
+            this.btMinimize.Click += new System.EventHandler(this.BtMinimize_Click);
+            // 
             // tbDataNascita
             // 
+            this.tbDataNascita.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tbDataNascita.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbDataNascita.Location = new System.Drawing.Point(119, 216);
             this.tbDataNascita.MaxLength = 100;
@@ -161,7 +196,9 @@
             // lbDataNascita
             // 
             this.lbDataNascita.AutoSize = true;
+            this.lbDataNascita.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.lbDataNascita.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDataNascita.ForeColor = System.Drawing.Color.White;
             this.lbDataNascita.Location = new System.Drawing.Point(12, 216);
             this.lbDataNascita.Name = "lbDataNascita";
             this.lbDataNascita.Size = new System.Drawing.Size(94, 18);
@@ -170,16 +207,19 @@
             // 
             // tbResidenza
             // 
+            this.tbResidenza.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tbResidenza.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbResidenza.Location = new System.Drawing.Point(119, 182);
             this.tbResidenza.MaxLength = 100;
             this.tbResidenza.Name = "tbResidenza";
             this.tbResidenza.Size = new System.Drawing.Size(110, 21);
             this.tbResidenza.TabIndex = 11;
+            this.tbResidenza.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbResidenza.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // tbPassword
             // 
+            this.tbPassword.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tbPassword.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPassword.Location = new System.Drawing.Point(119, 314);
             this.tbPassword.MaxLength = 25;
@@ -187,12 +227,15 @@
             this.tbPassword.Size = new System.Drawing.Size(110, 21);
             this.tbPassword.TabIndex = 13;
             this.tbPassword.UseSystemPasswordChar = true;
+            this.tbPassword.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbPassword.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbResidenza
             // 
             this.lbResidenza.AutoSize = true;
+            this.lbResidenza.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.lbResidenza.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbResidenza.ForeColor = System.Drawing.Color.White;
             this.lbResidenza.Location = new System.Drawing.Point(12, 182);
             this.lbResidenza.Name = "lbResidenza";
             this.lbResidenza.Size = new System.Drawing.Size(83, 18);
@@ -202,7 +245,9 @@
             // lbPassword
             // 
             this.lbPassword.AutoSize = true;
+            this.lbPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.lbPassword.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPassword.ForeColor = System.Drawing.Color.White;
             this.lbPassword.Location = new System.Drawing.Point(12, 314);
             this.lbPassword.Name = "lbPassword";
             this.lbPassword.Size = new System.Drawing.Size(77, 18);
@@ -211,18 +256,22 @@
             // 
             // tbUsername
             // 
+            this.tbUsername.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tbUsername.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbUsername.Location = new System.Drawing.Point(119, 265);
             this.tbUsername.MaxLength = 25;
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(110, 21);
             this.tbUsername.TabIndex = 11;
+            this.tbUsername.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbUsername.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbUsername
             // 
             this.lbUsername.AutoSize = true;
+            this.lbUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.lbUsername.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUsername.ForeColor = System.Drawing.Color.White;
             this.lbUsername.Location = new System.Drawing.Point(12, 265);
             this.lbUsername.Name = "lbUsername";
             this.lbUsername.Size = new System.Drawing.Size(80, 18);
@@ -231,16 +280,21 @@
             // 
             // tbCognome
             // 
+            this.tbCognome.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tbCognome.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCognome.Location = new System.Drawing.Point(119, 129);
             this.tbCognome.MaxLength = 50;
             this.tbCognome.Name = "tbCognome";
             this.tbCognome.Size = new System.Drawing.Size(110, 21);
             this.tbCognome.TabIndex = 14;
+            this.tbCognome.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbCognome.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // panelCentro
             // 
+            this.panelCentro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.panelCentro.Controls.Add(this.btAggiornaPassowrd);
+            this.panelCentro.Controls.Add(this.lbInfoPassword);
             this.panelCentro.Controls.Add(this.lbErrore);
             this.panelCentro.Controls.Add(this.lbCategoria);
             this.panelCentro.Controls.Add(this.cbCategoria);
@@ -259,6 +313,32 @@
             this.panelCentro.Name = "panelCentro";
             this.panelCentro.Size = new System.Drawing.Size(750, 525);
             this.panelCentro.TabIndex = 15;
+            // 
+            // btAggiornaPassowrd
+            // 
+            this.btAggiornaPassowrd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btAggiornaPassowrd.ForeColor = System.Drawing.Color.White;
+            this.btAggiornaPassowrd.Location = new System.Drawing.Point(15, 475);
+            this.btAggiornaPassowrd.Name = "btAggiornaPassowrd";
+            this.btAggiornaPassowrd.Size = new System.Drawing.Size(116, 23);
+            this.btAggiornaPassowrd.TabIndex = 22;
+            this.btAggiornaPassowrd.Text = "Aggiorna password";
+            this.btAggiornaPassowrd.UseVisualStyleBackColor = true;
+            this.btAggiornaPassowrd.Visible = false;
+            this.btAggiornaPassowrd.Click += new System.EventHandler(this.BtAggiornaPassowrd_Click);
+            // 
+            // lbInfoPassword
+            // 
+            this.lbInfoPassword.AutoSize = true;
+            this.lbInfoPassword.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbInfoPassword.ForeColor = System.Drawing.Color.YellowGreen;
+            this.lbInfoPassword.Location = new System.Drawing.Point(427, 58);
+            this.lbInfoPassword.Name = "lbInfoPassword";
+            this.lbInfoPassword.Size = new System.Drawing.Size(311, 96);
+            this.lbInfoPassword.TabIndex = 21;
+            this.lbInfoPassword.Text = "Al fine di aggiornare la password\r\ne\' necesario cliccare l\'apposito bottone\r\ndopo" +
+    " aver compilato il campo con la \r\nnuova password";
+            this.lbInfoPassword.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lbErrore
             // 
@@ -319,5 +399,8 @@
         private System.Windows.Forms.TextBox tbCognome;
         private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.Label lbErrore;
+        private System.Windows.Forms.Label lbInfoPassword;
+        private System.Windows.Forms.Button btAggiornaPassowrd;
+        private System.Windows.Forms.Button btMinimize;
     }
 }

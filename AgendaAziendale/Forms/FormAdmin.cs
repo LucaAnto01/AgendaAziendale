@@ -14,21 +14,12 @@ namespace AgendaAziendale
 {
     public partial class FormAdmin : Form
     {
-        #region Attributi
-        private Lavoratore lavoratoreAdmin;
-        #endregion
-
-        #region Getters & Setters
-        public Lavoratore LavoratoreAdmin { get => lavoratoreAdmin; set => lavoratoreAdmin = value; }
-        #endregion
-
         /// <summary>
         /// Metodo costruttore del FormLogin
         /// </summary>
-        public FormAdmin(/*Lavoratore lavoratoreAdmin*/)
+        public FormAdmin()
         {
             InitializeComponent();
-            //LavoratoreAdmin = lavoratoreAdmin;
         }
 
         #region Ascoltatori eventi
@@ -46,6 +37,7 @@ namespace AgendaAziendale
             panelCentro.Parent = this;
             ///Figli del pannello top
             btChiudi.Parent = panelTop;
+            btMinimize.Parent = panelTop;
             ///Figli del pannello di sinistra
             btGestioneLavoratori.Parent = panelSinistra;
             btGestioneEventi.Parent = panelSinistra;
@@ -64,6 +56,17 @@ namespace AgendaAziendale
         }
 
         /// <summary>
+        /// Ascoltatore evento click sul bottone di minimizzazione
+        /// --> riduzione ad icona dell'applicazione
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtMinimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        /// <summary>
         /// Ascoltatore evento click sul bottone di gestione per lavoratori
         /// --> visualizzazione Form di gestione per gli lavoratori
         /// </summary>
@@ -71,7 +74,7 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtGestioneLavoratori_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormGestione(this, "lavoratore"));
+            CaricaForm(new FormGestione(this, "lavoratore", false));
         }
 
         /// <summary>
@@ -81,7 +84,7 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtGestioneEventi_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormGestione(this, "evento"));
+            CaricaForm(new FormGestione(this, "evento", false));
         }
 
         /// <summary>
@@ -91,7 +94,7 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtGestioneProgetti_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormGestione(this, "progetto"));
+            CaricaForm(new FormGestione(this, "progetto", false));
         }
 
         /// <summary>
@@ -147,6 +150,6 @@ namespace AgendaAziendale
             panelCentro.Tag = f;
             f.Show();
         }
-        #endregion
+        #endregion       
     }
 }

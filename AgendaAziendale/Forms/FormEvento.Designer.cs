@@ -30,6 +30,7 @@
         {
             this.btChiudi = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.btMinimize = new System.Windows.Forms.Button();
             this.tbLuogo = new System.Windows.Forms.TextBox();
             this.lbLuogo = new System.Windows.Forms.Label();
             this.mcDataFine = new System.Windows.Forms.MonthCalendar();
@@ -44,8 +45,8 @@
             this.tbNome = new System.Windows.Forms.TextBox();
             this.lbNome = new System.Windows.Forms.Label();
             this.panelCentro = new System.Windows.Forms.Panel();
-            this.lbErrore = new System.Windows.Forms.Label();
             this.lbErroreData = new System.Windows.Forms.Label();
+            this.lbErrore = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             this.panelCentro.SuspendLayout();
             this.SuspendLayout();
@@ -54,9 +55,11 @@
             // 
             this.btChiudi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btChiudi.BackColor = System.Drawing.Color.Transparent;
+            this.btChiudi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
             this.btChiudi.BackgroundImage = global::AgendaAziendale.Properties.Resources.Chiudi;
             this.btChiudi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btChiudi.FlatAppearance.BorderSize = 0;
+            this.btChiudi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btChiudi.Location = new System.Drawing.Point(697, 5);
             this.btChiudi.Name = "btChiudi";
             this.btChiudi.Size = new System.Drawing.Size(45, 30);
@@ -66,7 +69,8 @@
             // 
             // panelTop
             // 
-            this.panelTop.BackColor = System.Drawing.Color.Gainsboro;
+            this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.panelTop.Controls.Add(this.btMinimize);
             this.panelTop.Controls.Add(this.btChiudi);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
@@ -74,8 +78,25 @@
             this.panelTop.Size = new System.Drawing.Size(750, 40);
             this.panelTop.TabIndex = 53;
             // 
+            // btMinimize
+            // 
+            this.btMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btMinimize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
+            this.btMinimize.BackgroundImage = global::AgendaAziendale.Properties.Resources.Minimize;
+            this.btMinimize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btMinimize.FlatAppearance.BorderSize = 0;
+            this.btMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btMinimize.Location = new System.Drawing.Point(645, 5);
+            this.btMinimize.Name = "btMinimize";
+            this.btMinimize.Size = new System.Drawing.Size(45, 30);
+            this.btMinimize.TabIndex = 72;
+            this.btMinimize.UseVisualStyleBackColor = false;
+            this.btMinimize.Click += new System.EventHandler(this.BtMinimize_Click);
+            // 
             // tbLuogo
             // 
+            this.tbLuogo.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tbLuogo.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbLuogo.Location = new System.Drawing.Point(119, 265);
             this.tbLuogo.MaxLength = 50;
@@ -83,12 +104,15 @@
             this.tbLuogo.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.tbLuogo.Size = new System.Drawing.Size(181, 21);
             this.tbLuogo.TabIndex = 52;
+            this.tbLuogo.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbLuogo.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbLuogo
             // 
             this.lbLuogo.AutoSize = true;
+            this.lbLuogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.lbLuogo.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLuogo.ForeColor = System.Drawing.Color.White;
             this.lbLuogo.Location = new System.Drawing.Point(12, 265);
             this.lbLuogo.Name = "lbLuogo";
             this.lbLuogo.Size = new System.Drawing.Size(53, 18);
@@ -97,6 +121,7 @@
             // 
             // mcDataFine
             // 
+            this.mcDataFine.BackColor = System.Drawing.Color.WhiteSmoke;
             this.mcDataFine.Location = new System.Drawing.Point(451, 181);
             this.mcDataFine.Name = "mcDataFine";
             this.mcDataFine.TabIndex = 33;
@@ -105,6 +130,7 @@
             // 
             // tbDataFine
             // 
+            this.tbDataFine.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tbDataFine.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbDataFine.Location = new System.Drawing.Point(119, 224);
             this.tbDataFine.MaxLength = 25;
@@ -116,7 +142,9 @@
             // lbDataFine
             // 
             this.lbDataFine.AutoSize = true;
+            this.lbDataFine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.lbDataFine.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDataFine.ForeColor = System.Drawing.Color.White;
             this.lbDataFine.Location = new System.Drawing.Point(12, 224);
             this.lbDataFine.Name = "lbDataFine";
             this.lbDataFine.Size = new System.Drawing.Size(71, 18);
@@ -125,6 +153,7 @@
             // 
             // mcDataInizio
             // 
+            this.mcDataInizio.BackColor = System.Drawing.Color.WhiteSmoke;
             this.mcDataInizio.Location = new System.Drawing.Point(451, 181);
             this.mcDataInizio.Name = "mcDataInizio";
             this.mcDataInizio.TabIndex = 30;
@@ -133,16 +162,20 @@
             // 
             // btAggiungiAggiorna
             // 
+            this.btAggiungiAggiorna.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.btAggiungiAggiorna.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btAggiungiAggiorna.ForeColor = System.Drawing.Color.White;
             this.btAggiungiAggiorna.Location = new System.Drawing.Point(15, 347);
             this.btAggiungiAggiorna.Name = "btAggiungiAggiorna";
             this.btAggiungiAggiorna.Size = new System.Drawing.Size(75, 23);
             this.btAggiungiAggiorna.TabIndex = 38;
             this.btAggiungiAggiorna.Text = "Agg";
-            this.btAggiungiAggiorna.UseVisualStyleBackColor = true;
+            this.btAggiungiAggiorna.UseVisualStyleBackColor = false;
             this.btAggiungiAggiorna.Click += new System.EventHandler(this.BtAggiungiAggiorna_Click);
             // 
             // tbDataInizio
             // 
+            this.tbDataInizio.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tbDataInizio.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbDataInizio.Location = new System.Drawing.Point(119, 179);
             this.tbDataInizio.MaxLength = 25;
@@ -154,7 +187,9 @@
             // lbDataInizio
             // 
             this.lbDataInizio.AutoSize = true;
+            this.lbDataInizio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.lbDataInizio.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDataInizio.ForeColor = System.Drawing.Color.White;
             this.lbDataInizio.Location = new System.Drawing.Point(12, 181);
             this.lbDataInizio.Name = "lbDataInizio";
             this.lbDataInizio.Size = new System.Drawing.Size(82, 18);
@@ -164,6 +199,7 @@
             // tbDescrizione
             // 
             this.tbDescrizione.AcceptsReturn = true;
+            this.tbDescrizione.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tbDescrizione.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbDescrizione.Location = new System.Drawing.Point(119, 112);
             this.tbDescrizione.MaxLength = 500;
@@ -172,12 +208,15 @@
             this.tbDescrizione.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbDescrizione.Size = new System.Drawing.Size(246, 46);
             this.tbDescrizione.TabIndex = 46;
+            this.tbDescrizione.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbDescrizione.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbDescrizione
             // 
             this.lbDescrizione.AutoSize = true;
+            this.lbDescrizione.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.lbDescrizione.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDescrizione.ForeColor = System.Drawing.Color.White;
             this.lbDescrizione.Location = new System.Drawing.Point(12, 112);
             this.lbDescrizione.Name = "lbDescrizione";
             this.lbDescrizione.Size = new System.Drawing.Size(93, 18);
@@ -186,18 +225,22 @@
             // 
             // tbNome
             // 
+            this.tbNome.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tbNome.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNome.Location = new System.Drawing.Point(119, 69);
             this.tbNome.MaxLength = 50;
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(110, 21);
             this.tbNome.TabIndex = 40;
+            this.tbNome.TextChanged += new System.EventHandler(this.Tb_TextChanged);
             this.tbNome.Enter += new System.EventHandler(this.TbEnter_Click);
             // 
             // lbNome
             // 
             this.lbNome.AutoSize = true;
+            this.lbNome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.lbNome.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNome.ForeColor = System.Drawing.Color.White;
             this.lbNome.Location = new System.Drawing.Point(12, 69);
             this.lbNome.Name = "lbNome";
             this.lbNome.Size = new System.Drawing.Size(49, 18);
@@ -206,6 +249,7 @@
             // 
             // panelCentro
             // 
+            this.panelCentro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.panelCentro.Controls.Add(this.lbErroreData);
             this.panelCentro.Controls.Add(this.lbErrore);
             this.panelCentro.Controls.Add(this.mcDataFine);
@@ -216,18 +260,6 @@
             this.panelCentro.Name = "panelCentro";
             this.panelCentro.Size = new System.Drawing.Size(750, 525);
             this.panelCentro.TabIndex = 54;
-            // 
-            // lbErrore
-            // 
-            this.lbErrore.AutoSize = true;
-            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbErrore.ForeColor = System.Drawing.Color.Red;
-            this.lbErrore.Location = new System.Drawing.Point(450, 125);
-            this.lbErrore.Name = "lbErrore";
-            this.lbErrore.Size = new System.Drawing.Size(172, 24);
-            this.lbErrore.TabIndex = 70;
-            this.lbErrore.Text = "Compila tutti i campi!";
-            this.lbErrore.Visible = false;
             // 
             // lbErroreData
             // 
@@ -240,6 +272,18 @@
             this.lbErroreData.TabIndex = 71;
             this.lbErroreData.Text = "Inserisci una data di fine evento valida";
             this.lbErroreData.Visible = false;
+            // 
+            // lbErrore
+            // 
+            this.lbErrore.AutoSize = true;
+            this.lbErrore.Font = new System.Drawing.Font("Arial Narrow", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrore.ForeColor = System.Drawing.Color.Red;
+            this.lbErrore.Location = new System.Drawing.Point(450, 125);
+            this.lbErrore.Name = "lbErrore";
+            this.lbErrore.Size = new System.Drawing.Size(172, 24);
+            this.lbErrore.TabIndex = 70;
+            this.lbErrore.Text = "Compila tutti i campi!";
+            this.lbErrore.Visible = false;
             // 
             // FormEvento
             // 
@@ -292,5 +336,6 @@
         private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.Label lbErrore;
         private System.Windows.Forms.Label lbErroreData;
+        private System.Windows.Forms.Button btMinimize;
     }
 }

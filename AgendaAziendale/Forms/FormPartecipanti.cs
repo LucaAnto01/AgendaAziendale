@@ -108,6 +108,17 @@ namespace AgendaAziendale.Forms
         }
 
         /// <summary>
+        /// Ascoltatore evento click sul bottone di minimizzazione
+        /// --> riduzione ad icona dell'applicazione
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtMinimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        /// <summary>
         /// Ascoltatore click sul bottone di aggiunta ad un'attività
         /// </summary>
         /// <param name="sender"></param>

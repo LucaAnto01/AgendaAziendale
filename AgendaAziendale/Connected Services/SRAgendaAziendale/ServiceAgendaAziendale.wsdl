@@ -37,6 +37,12 @@
   <wsdl:message name="IServiceAgendaAziendale_AggiornaLavoratore_OutputMessage">
     <wsdl:part name="parameters" element="tns:AggiornaLavoratoreResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceAgendaAziendale_AggiornaPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:AggiornaPassword" />
+  </wsdl:message>
+  <wsdl:message name="IServiceAgendaAziendale_AggiornaPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AggiornaPasswordResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceAgendaAziendale_EliminaLavoratore_InputMessage">
     <wsdl:part name="parameters" element="tns:EliminaLavoratore" />
   </wsdl:message>
@@ -196,6 +202,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceAgendaAziendale/AggiornaLavoratore" message="tns:IServiceAgendaAziendale_AggiornaLavoratore_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceAgendaAziendale/AggiornaLavoratoreResponse" message="tns:IServiceAgendaAziendale_AggiornaLavoratore_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AggiornaPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceAgendaAziendale/AggiornaPassword" message="tns:IServiceAgendaAziendale_AggiornaPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceAgendaAziendale/AggiornaPasswordResponse" message="tns:IServiceAgendaAziendale_AggiornaPassword_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="EliminaLavoratore">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceAgendaAziendale/EliminaLavoratore" message="tns:IServiceAgendaAziendale_EliminaLavoratore_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceAgendaAziendale/EliminaLavoratoreResponse" message="tns:IServiceAgendaAziendale_EliminaLavoratore_OutputMessage" />
@@ -329,6 +339,15 @@
     </wsdl:operation>
     <wsdl:operation name="AggiornaLavoratore">
       <soap:operation soapAction="http://tempuri.org/IServiceAgendaAziendale/AggiornaLavoratore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AggiornaPassword">
+      <soap:operation soapAction="http://tempuri.org/IServiceAgendaAziendale/AggiornaPassword" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

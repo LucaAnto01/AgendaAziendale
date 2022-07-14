@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelCentro = new System.Windows.Forms.Panel();
             this.dgvEventi = new System.Windows.Forms.DataGridView();
             this.codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,7 +61,7 @@
             this.dgvEventi.AllowUserToAddRows = false;
             this.dgvEventi.AllowUserToDeleteRows = false;
             this.dgvEventi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvEventi.BackgroundColor = System.Drawing.Color.White;
+            this.dgvEventi.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvEventi.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvEventi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEventi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -73,7 +76,7 @@
             this.modifica,
             this.elimina});
             this.dgvEventi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvEventi.GridColor = System.Drawing.Color.White;
+            this.dgvEventi.GridColor = System.Drawing.Color.WhiteSmoke;
             this.dgvEventi.Location = new System.Drawing.Point(0, 0);
             this.dgvEventi.Name = "dgvEventi";
             this.dgvEventi.ReadOnly = true;
@@ -125,6 +128,13 @@
             // 
             // gestione_partecipanti
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.gestione_partecipanti.DefaultCellStyle = dataGridViewCellStyle1;
+            this.gestione_partecipanti.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gestione_partecipanti.HeaderText = "";
             this.gestione_partecipanti.Name = "gestione_partecipanti";
             this.gestione_partecipanti.ReadOnly = true;
@@ -135,6 +145,13 @@
             // 
             // modifica
             // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            this.modifica.DefaultCellStyle = dataGridViewCellStyle2;
+            this.modifica.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.modifica.HeaderText = "";
             this.modifica.Name = "modifica";
             this.modifica.ReadOnly = true;
@@ -143,6 +160,13 @@
             // 
             // elimina
             // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            this.elimina.DefaultCellStyle = dataGridViewCellStyle3;
+            this.elimina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.elimina.HeaderText = "";
             this.elimina.Name = "elimina";
             this.elimina.ReadOnly = true;

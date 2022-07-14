@@ -16,21 +16,25 @@ namespace AgendaAziendale.Forms.UserControls
         #region Attributi
         private Form formPadre;
         private List<Progetto> elencoProgetti;
+        private bool filtra; 
         #endregion
 
         #region Getters & Setters
         public Form FormPadre { get => formPadre; set => formPadre = value; }
         public List<Progetto> ElencoProgetti { get => elencoProgetti; set => elencoProgetti = value; }
+        public bool Filtra { get => filtra; set => filtra = value; }
         #endregion
 
         /// <summary>
         /// Metodo costruttore dell'user control UCProgetti
         /// </summary>
         /// <param name="formPadre"></param>
-        public UCProgetti(Form formPadre)
+        /// <param name="filtra"></param>
+        public UCProgetti(Form formPadre, bool filtra)
         {
             InitializeComponent();
             FormPadre = formPadre;
+            Filtra = filtra; ///Se è settato a true, mostra solo i progetti del lavoratore loggato
         }
 
         #region Meotdi ascoltatori
@@ -47,6 +51,14 @@ namespace AgendaAziendale.Forms.UserControls
             panelCentro.Parent = this;
             ///Figli del panelCentro
             dgvProgetti.Parent = panelCentro;
+
+            if(Sessione.Lavoratore.Categoria == "Sviluppatore")
+            {
+                dgvProgetti.Columns["gestione_lavoratori"].Visible = false;
+                dgvProgetti.Columns["modifica"].Visible = false;
+                dgvProgetti.Columns["elimina"].Visible = false;              
+            }
+                
 
             AggiornadgvProgetti();
         }
@@ -116,7 +128,13 @@ namespace AgendaAziendale.Forms.UserControls
         /// </summary>
         public void AggiornadgvProgetti()
         {
-            string result_progetti = Controller.GetElencoProgetti();
+            string result_progetti = "";
+
+            if (Filtra)
+                result_progetti = Controller.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username);
+
+            else
+                result_progetti = Controller.GetElencoProgetti();
 
             dgvProgetti.Rows.Clear();
 
@@ -130,13 +148,16 @@ namespace AgendaAziendale.Forms.UserControls
                     int indice_riga = dgvProgetti.Rows.Add(progetto.Codice, progetto.Nome, progetto.Descrizione, progetto.DataInizio.ToShortDateString(), progetto.DataFine.ToShortDateString(),
                                        progetto.Id, progetto.Cliente);
 
-                    string result_obiettivi = Controller.GetElencoObiettivi(progetto.Id.ToString()); ///Aggiungo gli obiettivi al progetto
+                    /*string result_obiettivi = Controller.GetElencoObiettivi(progetto.Id.ToString()); ///Aggiungo gli obiettivi al progetto
                     if (result_obiettivi != "")
                     { 
                         progetto.Obiettivi = Obiettivo.GeneraElencoObiettivi(result_obiettivi);
 
                         dgvProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
-                    }
+                    }*/
+
+                    if(Controller.GetElencoObiettivi(progetto.Id.ToString()) != "")
+                        dgvProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
 
                     else
                         dgvProgetti.Rows[indice_riga].Cells[7].Value = "/";

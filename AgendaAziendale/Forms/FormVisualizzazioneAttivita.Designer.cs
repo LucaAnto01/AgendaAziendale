@@ -28,35 +28,110 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flpCentro = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelCentro = new System.Windows.Forms.Panel();
+            this.flpDestra = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpSinistra = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.lbProgetti = new System.Windows.Forms.Label();
+            this.lbEventi = new System.Windows.Forms.Label();
+            this.panelCentro.SuspendLayout();
+            this.panelTop.SuspendLayout();
             this.SuspendLayout();
             // 
-            // flpCentro
+            // panelCentro
             // 
-            this.flpCentro.BackColor = System.Drawing.Color.White;
-            this.flpCentro.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpCentro.Location = new System.Drawing.Point(0, 0);
-            this.flpCentro.Name = "flpCentro";
-            this.flpCentro.Size = new System.Drawing.Size(700, 610);
-            this.flpCentro.TabIndex = 0;
+            this.panelCentro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.panelCentro.Controls.Add(this.flpDestra);
+            this.panelCentro.Controls.Add(this.flpSinistra);
+            this.panelCentro.Controls.Add(this.panelTop);
+            this.panelCentro.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCentro.Location = new System.Drawing.Point(0, 0);
+            this.panelCentro.Name = "panelCentro";
+            this.panelCentro.Size = new System.Drawing.Size(700, 610);
+            this.panelCentro.TabIndex = 1;
+            // 
+            // flpDestra
+            // 
+            this.flpDestra.AutoScroll = true;
+            this.flpDestra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.flpDestra.Dock = System.Windows.Forms.DockStyle.Right;
+            this.flpDestra.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flpDestra.Location = new System.Drawing.Point(350, 45);
+            this.flpDestra.Name = "flpDestra";
+            this.flpDestra.Size = new System.Drawing.Size(350, 565);
+            this.flpDestra.TabIndex = 2;
+            this.flpDestra.WrapContents = false;
+            // 
+            // flpSinistra
+            // 
+            this.flpSinistra.AutoScroll = true;
+            this.flpSinistra.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.flpSinistra.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flpSinistra.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flpSinistra.Location = new System.Drawing.Point(0, 45);
+            this.flpSinistra.Name = "flpSinistra";
+            this.flpSinistra.Size = new System.Drawing.Size(350, 565);
+            this.flpSinistra.TabIndex = 1;
+            this.flpSinistra.WrapContents = false;
+            // 
+            // panelTop
+            // 
+            this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
+            this.panelTop.Controls.Add(this.lbProgetti);
+            this.panelTop.Controls.Add(this.lbEventi);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(700, 45);
+            this.panelTop.TabIndex = 0;
+            // 
+            // lbProgetti
+            // 
+            this.lbProgetti.AutoSize = true;
+            this.lbProgetti.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbProgetti.ForeColor = System.Drawing.Color.White;
+            this.lbProgetti.Location = new System.Drawing.Point(483, 10);
+            this.lbProgetti.Name = "lbProgetti";
+            this.lbProgetti.Size = new System.Drawing.Size(85, 24);
+            this.lbProgetti.TabIndex = 1;
+            this.lbProgetti.Text = "Progetti";
+            // 
+            // lbEventi
+            // 
+            this.lbEventi.AutoSize = true;
+            this.lbEventi.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEventi.ForeColor = System.Drawing.Color.White;
+            this.lbEventi.Location = new System.Drawing.Point(141, 10);
+            this.lbEventi.Name = "lbEventi";
+            this.lbEventi.Size = new System.Drawing.Size(69, 24);
+            this.lbEventi.TabIndex = 0;
+            this.lbEventi.Text = "Eventi";
             // 
             // FormVisualizzazioneAttivita
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(700, 610);
-            this.Controls.Add(this.flpCentro);
+            this.Controls.Add(this.panelCentro);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormVisualizzazioneAttivita";
             this.Text = "FormVisualizzazioneAttivita";
             this.Load += new System.EventHandler(this.FormVisualizzazioneAttivita_Load);
+            this.panelCentro.ResumeLayout(false);
+            this.panelTop.ResumeLayout(false);
+            this.panelTop.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flpCentro;
+        private System.Windows.Forms.Panel panelCentro;
+        private System.Windows.Forms.Panel panelTop;
+        private System.Windows.Forms.FlowLayoutPanel flpDestra;
+        private System.Windows.Forms.FlowLayoutPanel flpSinistra;
+        private System.Windows.Forms.Label lbProgetti;
+        private System.Windows.Forms.Label lbEventi;
     }
 }
