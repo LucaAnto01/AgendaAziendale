@@ -65,50 +65,59 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void FormEvento_Load(object sender, EventArgs e)
         {
-            ///Figli del Form
-            panelTop.Parent = this;
-            panelCentro.Parent = this;
-            ///Figli del pannello top
-            btChiudi.Parent = panelTop;
-            ///Figli del pannello centrale
-            lbNome.Parent = panelCentro;
-            lbDescrizione.Parent = panelCentro;
-            lbDataInizio.Parent = panelCentro;
-            lbDataFine.Parent = panelCentro;
-            lbLuogo.Parent = panelCentro;
-            tbNome.Parent = panelCentro;
-            tbDescrizione.Parent = panelCentro;
-            tbDataInizio.Parent = panelCentro;
-            tbDataFine.Parent = panelCentro;
-            tbLuogo.Parent = panelCentro;
-            mcDataInizio.Parent = panelCentro;
-            mcDataFine.Parent = panelCentro;
-            lbErrore.Parent = panelCentro;
-            lbErroreData.Parent = panelCentro;
-            btAggiungiAggiorna.Parent = panelCentro;
-
-            ///Setto un minimo valido per il settaggio delle date di un nuovo Evento
-            mcDataInizio.MinDate = DateTime.Now;
-            mcDataFine.MinDate = DateTime.Now;
-
-            if (evento != null) ///Se ho un evento da modificare
+            try
             {
-                tbNome.Text = evento.Nome;
-                tbDescrizione.Text = evento.Descrizione;
-                tbDataInizio.Text = evento.DataInizio.ToShortDateString();
-                tbDataFine.Text = evento.DataFine.ToShortDateString();
-                tbLuogo.Text = evento.Luogo;
+                ///Figli del Form
+                panelTop.Parent = this;
+                panelCentro.Parent = this;
+                ///Figli del pannello top
+                btChiudi.Parent = panelTop;
+                ///Figli del pannello centrale
+                lbNome.Parent = panelCentro;
+                lbDescrizione.Parent = panelCentro;
+                lbDataInizio.Parent = panelCentro;
+                lbDataFine.Parent = panelCentro;
+                lbLuogo.Parent = panelCentro;
+                tbNome.Parent = panelCentro;
+                tbDescrizione.Parent = panelCentro;
+                tbDataInizio.Parent = panelCentro;
+                tbDataFine.Parent = panelCentro;
+                tbLuogo.Parent = panelCentro;
+                mcDataInizio.Parent = panelCentro;
+                mcDataFine.Parent = panelCentro;
+                lbErrore.Parent = panelCentro;
+                lbErroreData.Parent = panelCentro;
+                btAggiungiAggiorna.Parent = panelCentro;
+
+                ///Setto un minimo valido per il settaggio delle date di un nuovo Evento
+                mcDataInizio.MinDate = DateTime.Now;
+                mcDataFine.MinDate = DateTime.Now;
+
+                if (evento != null) ///Se ho un evento da modificare
+                {
+                    tbNome.Text = evento.Nome;
+                    tbDescrizione.Text = evento.Descrizione;
+                    tbDataInizio.Text = evento.DataInizio.ToShortDateString();
+                    tbDataFine.Text = evento.DataFine.ToShortDateString();
+                    tbLuogo.Text = evento.Luogo;
+                }
+
+                if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                    btAggiungiAggiorna.Text = "Aggiungi";
+
+                else if ((azione == "Aggiorna") || (azione == "aggiorna"))
+                    btAggiungiAggiorna.Text = "Aggiorna";
+
+                else
+                {
+                    MessageBox.Show("ERRORE! Valore FormEvento:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
             }
-
-            if ((azione == "Aggiungi") || (azione == "aggiungi"))
-                btAggiungiAggiorna.Text = "Aggiungi";
-
-            else if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                btAggiungiAggiorna.Text = "Aggiorna";
-
-            else
+           
+            catch
             {
-                MessageBox.Show("ERRORE! Valore FormEvento:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ERRORE! FormEvento: caricamento form", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
         }
@@ -121,8 +130,17 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
-            formPadre.Show();
-            Close();
+            try
+            {
+                formPadre.Show();
+                Close();
+            }
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormEvento: impossibile chiudere il form", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -133,7 +151,16 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtMinimize_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Minimized;
+            try
+            {
+                WindowState = FormWindowState.Minimized;
+            }
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormEvento: impossibile minimizzare il form", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -144,10 +171,19 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void Tb_TextChanged(object sender, EventArgs e)
         {
-            if ((!Regex.IsMatch(((TextBox)sender).Text, Sessione.Regex)) && (((TextBox)sender).Text != ""))
+            try
             {
-                MessageBox.Show("Non inserire lettere accentate o caratteri speciali!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ((TextBox)sender).Text = "";
+                if ((!Regex.IsMatch(((TextBox)sender).Text, Sessione.Regex)) && (((TextBox)sender).Text != ""))
+                {
+                    MessageBox.Show("Non inserire lettere accentate o caratteri speciali!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ((TextBox)sender).Text = "";
+                }
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormEvento: errore correzzione caratteri speciali", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
         }
 
@@ -160,10 +196,19 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbDataInizio_Enter(object sender, EventArgs e)
         {
-            ((TextBox)sender).BackColor = Color.White;
-            mcDataInizio.Show();
-            tbDataInizio.Enabled = false;
-            tbDataFine.Enabled = false;
+            try
+            {
+                ((TextBox)sender).BackColor = Color.White;
+                mcDataInizio.Show();
+                tbDataInizio.Enabled = false;
+                tbDataFine.Enabled = false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormEvento: errore visualizzazione calendario per input data inizio", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -175,10 +220,19 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void McDataInizio_DateSelected(object sender, DateRangeEventArgs e)
         {
-            mcDataInizio.Hide();
-            tbDataInizio.Enabled = true;
-            tbDataFine.Enabled = true;
-            tbDataInizio.Text = mcDataInizio.SelectionRange.Start.ToShortDateString();
+            try
+            {
+                mcDataInizio.Hide();
+                tbDataInizio.Enabled = true;
+                tbDataFine.Enabled = true;
+                tbDataInizio.Text = mcDataInizio.SelectionRange.Start.ToShortDateString();
+            }
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormEvento: errore chiusura calendario per input data inizio", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -190,11 +244,20 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbDataFine_Enter(object sender, EventArgs e)
         {
-            ((TextBox)sender).BackColor = Color.White;
-            lbErroreData.Visible = false;
-            mcDataFine.Show();
-            tbDataFine.Enabled = false;
-            tbDataInizio.Enabled = false;
+            try
+            {
+                ((TextBox)sender).BackColor = Color.White;
+                lbErroreData.Visible = false;
+                mcDataFine.Show();
+                tbDataFine.Enabled = false;
+                tbDataInizio.Enabled = false;
+            }
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormEvento: errore visualizzazione calendario per input data fine", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -206,10 +269,19 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void McDataFine_DateSelected(object sender, DateRangeEventArgs e)
         {
-            mcDataFine.Hide();
-            tbDataFine.Enabled = true;
-            tbDataInizio.Enabled = true;
-            tbDataFine.Text = mcDataFine.SelectionRange.Start.ToShortDateString();
+            try
+            {
+                mcDataFine.Hide();
+                tbDataFine.Enabled = true;
+                tbDataInizio.Enabled = true;
+                tbDataFine.Text = mcDataFine.SelectionRange.Start.ToShortDateString();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormEvento: errore chiusura calendario per input data inizio", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -220,7 +292,16 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbEnter_Click(object sender, EventArgs e)
         {
-            ((TextBox)sender).BackColor = Color.White;
+            try
+            {
+                ((TextBox)sender).BackColor = Color.White;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormEvento: errore pulizia campo input", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -232,40 +313,49 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiungiAggiorna_Click(object sender, EventArgs e)
         {
-            if(CheckCampi())
+            try
             {
-                if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                if (CheckCampi())
                 {
-                    if(Controller.CreaEvento(tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbLuogo.Text))
+                    if ((azione == "Aggiungi") || (azione == "aggiungi"))
                     {
-                        MessageBox.Show("Inserimento evento " + tbNome.Text + " avvenuto con successo!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        PulisciCampiInserimento();
-                    }
-                        
-                    else
-                        MessageBox.Show("Errore in fase d'inserimento.", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                    
+                        if (Controller.CreaEvento(tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbLuogo.Text))
+                        {
+                            MessageBox.Show("Inserimento evento " + tbNome.Text + " avvenuto con successo!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            PulisciCampiInserimento();
+                        }
 
-                if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                {
-                    if(Controller.AggiornaEvento(evento.Codice, evento.Id.ToString(), tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbLuogo.Text))
-                    {
-                        MessageBox.Show("Aggiornamento evento " + tbNome.Text + " avvenuto con successo!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        formPadre.Show();
-                        Close();
+                        else
+                            MessageBox.Show("Errore in fase d'inserimento.", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
 
-                    else
-                        MessageBox.Show("Errore in fase di aggiornamento.", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    if ((azione == "Aggiorna") || (azione == "aggiorna"))
+                    {
+                        if (Controller.AggiornaEvento(evento.Codice, evento.Id.ToString(), tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbLuogo.Text))
+                        {
+                            MessageBox.Show("Aggiornamento evento " + tbNome.Text + " avvenuto con successo!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            formPadre.Show();
+                            Close();
+                        }
+
+                        else
+                            MessageBox.Show("Errore in fase di aggiornamento.", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    if (ucPadre != null)
+                        ucPadre.AggiornadgvEventi();
                 }
 
-                if (ucPadre != null)
-                    ucPadre.AggiornadgvEventi();
+                else
+                    lbErrore.Visible = true;
             }
-
-            else
-                lbErrore.Visible = true;
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormEvento: errore click aggiornamento/inserimento dati", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
 
@@ -277,41 +367,50 @@ namespace AgendaAziendale.Forms
         private bool CheckCampi()
         {
             bool check = true; ///True, tutti i campi compilati
-
-            if (tbNome.Text == "")
+            
+            try
             {
-                tbNome.BackColor = Color.Red;
-                check = false;
+                if (tbNome.Text == "")
+                {
+                    tbNome.BackColor = Color.Red;
+                    check = false;
+                }
+
+                if (tbDescrizione.Text == "")
+                {
+                    tbDescrizione.BackColor = Color.Red;
+                    check = false;
+                }
+
+                if (tbDataInizio.Text == "")
+                {
+                    tbDataInizio.BackColor = Color.Red;
+                    check = false;
+                }
+
+                if (tbDataFine.Text == "")
+                {
+                    tbDataFine.BackColor = Color.Red;
+                    check = false;
+                }
+
+                if (DateTime.Parse(tbDataFine.Text) < DateTime.Parse(tbDataInizio.Text)) ///Controllo validità data fine
+                {
+                    lbErroreData.Visible = true;
+                    check = false;
+                }
+
+                if (tbLuogo.Text == "")
+                {
+                    tbLuogo.BackColor = Color.Red;
+                    check = false;
+                }
             }
 
-            if (tbDescrizione.Text == "")
+            catch
             {
-                tbDescrizione.BackColor = Color.Red;
-                check = false;
-            }
-
-            if (tbDataInizio.Text == "")
-            {
-                tbDataInizio.BackColor = Color.Red;
-                check = false;
-            }
-
-            if (tbDataFine.Text == "")
-            {
-                tbDataFine.BackColor = Color.Red;
-                check = false;
-            }
-
-            if(DateTime.Parse(tbDataFine.Text) < DateTime.Parse(tbDataInizio.Text)) ///Controllo validità data fine
-            {
-                lbErroreData.Visible = true;
-                check = false;
-            }
-
-            if (tbLuogo.Text == "")
-            {
-                tbLuogo.BackColor = Color.Red;
-                check = false;
+                MessageBox.Show("ERRORE! FormEvento: errore check campi intput", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
 
             return check;
@@ -322,13 +421,22 @@ namespace AgendaAziendale.Forms
         /// </summary>
         private void PulisciCampiInserimento()
         {
-            tbNome.Text = "";
-            tbDescrizione.Text = "";
-            tbDataInizio.Text = "";
-            tbDataFine.Text = "";
-            tbLuogo.Text = "";
-            lbErrore.Visible = false;
-            lbErroreData.Visible = false;
+            try
+            {
+                tbNome.Text = "";
+                tbDescrizione.Text = "";
+                tbDataInizio.Text = "";
+                tbDataFine.Text = "";
+                tbLuogo.Text = "";
+                lbErrore.Visible = false;
+                lbErroreData.Visible = false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormEvento: errore pulizia campi inseirmento", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion       
     }

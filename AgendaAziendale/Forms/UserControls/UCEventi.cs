@@ -47,12 +47,21 @@ namespace AgendaAziendale.Forms.UserControls
         /// <param name="e"></param>
         private void UCEventi_Load(object sender, EventArgs e)
         {
-            ///Figli del Form
-            panelCentro.Parent = this;
-            ///Figli del panelCentro
-            dgvEventi.Parent = panelCentro;
+            try
+            {
+                ///Figli del Form
+                panelCentro.Parent = this;
+                ///Figli del panelCentro
+                dgvEventi.Parent = panelCentro;
 
-            AggiornadgvEventi();
+                AggiornadgvEventi();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCEventi: errore caricamento interfaccia", "UCEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -62,47 +71,56 @@ namespace AgendaAziendale.Forms.UserControls
         /// <param name="e"></param>
         private void DgvEventi_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Evento evento = new Evento();
-            string codiceEventoSelezionato = dgvEventi.Rows[e.RowIndex].Cells[0].Value.ToString();
-            int idEventoSelezionato = int.Parse(dgvEventi.Rows[e.RowIndex].Cells[5].Value.ToString());
-            evento = ElencoEventi.FirstOrDefault(ev => ev.Codice == codiceEventoSelezionato && ev.Id == idEventoSelezionato);
-
-            //Click sulla colonna con i button di gestione della partecipazione
-            if (e.ColumnIndex == 7)
-            {              
-                FormPartecipanti formPartecipanti = new FormPartecipanti(FormPadre, this, evento, "evento");
-                formPadre.Hide();
-                formPartecipanti.Show();
-            }
-
-            //Click sulla colonna con i button di modifica
-            if (e.ColumnIndex == 8)
+            try
             {
-                FormEvento formModificaEvento = new FormEvento(formPadre, this, evento, "aggiorna");
-                formPadre.Hide();
-                formModificaEvento.Show();
-            }           
+                Evento evento = new Evento();
+                string codiceEventoSelezionato = dgvEventi.Rows[e.RowIndex].Cells[0].Value.ToString();
+                int idEventoSelezionato = int.Parse(dgvEventi.Rows[e.RowIndex].Cells[5].Value.ToString());
+                evento = ElencoEventi.FirstOrDefault(ev => ev.Codice == codiceEventoSelezionato && ev.Id == idEventoSelezionato);
 
-            //Click sulla colonna con i button d'eliminazione
-            if (e.ColumnIndex == 9)
-            {
-                if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione dell'evento selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
-                    "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+                //Click sulla colonna con i button di gestione della partecipazione
+                if (e.ColumnIndex == 7)
                 {
-                    if (Controller.EliminaEvento(codiceEventoSelezionato, idEventoSelezionato.ToString()))
-                    {
-                        MessageBox.Show("Eliminazione evento avvenuta con successo!", "UCEventi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        AggiornadgvEventi();
-                    }
-
-                    else
-                        MessageBox.Show("ERRORE! Impossibile eliminare l'evento dal DB, contattare l'amministrazione.", "UCEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                    FormPartecipanti formPartecipanti = new FormPartecipanti(FormPadre, this, evento, "evento");
+                    formPadre.Hide();
+                    formPartecipanti.Show();
                 }
-            }
 
-            else
-                Console.WriteLine("No action");
+                //Click sulla colonna con i button di modifica
+                if (e.ColumnIndex == 8)
+                {
+                    FormEvento formModificaEvento = new FormEvento(formPadre, this, evento, "aggiorna");
+                    formPadre.Hide();
+                    formModificaEvento.Show();
+                }
+
+                //Click sulla colonna con i button d'eliminazione
+                if (e.ColumnIndex == 9)
+                {
+                    if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione dell'evento selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
+                        "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        if (Controller.EliminaEvento(codiceEventoSelezionato, idEventoSelezionato.ToString()))
+                        {
+                            MessageBox.Show("Eliminazione evento avvenuta con successo!", "UCEventi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            AggiornadgvEventi();
+                        }
+
+                        else
+                            MessageBox.Show("ERRORE! Impossibile eliminare l'evento dal DB, contattare l'amministrazione.", "UCEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }
+                }
+
+                else
+                    Console.WriteLine("No action");
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCEventi: errore cell click", "UCEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
 
@@ -112,27 +130,36 @@ namespace AgendaAziendale.Forms.UserControls
         /// </summary>
         public void AggiornadgvEventi()
         {
-            string result = "";
-
-            if (Filtra)
-                result = Controller.GetElencoEventiLavoratore(Sessione.Lavoratore.Username);
-
-            else
-                result = Controller.GetElencoEventi();
-
-            dgvEventi.Rows.Clear();
-
-            if (result != "")
+            try
             {
-                ElencoEventi = Evento.GeneraElencoEventi(result);
+                string result = "";
 
-                foreach (Evento evento in ElencoEventi)
-                    dgvEventi.Rows.Add(evento.Codice, evento.Nome, evento.Descrizione, evento.DataInizio.ToShortDateString(), evento.DataFine.ToShortDateString(),
-                                       evento.Id, evento.Luogo);
+                if (Filtra)
+                    result = Controller.GetElencoEventiLavoratore(Sessione.Lavoratore.Username);
+
+                else
+                    result = Controller.GetElencoEventi();
+
+                dgvEventi.Rows.Clear();
+
+                if (result != "")
+                {
+                    ElencoEventi = Evento.GeneraElencoEventi(result);
+
+                    foreach (Evento evento in ElencoEventi)
+                        dgvEventi.Rows.Add(evento.Codice, evento.Nome, evento.Descrizione, evento.DataInizio.ToShortDateString(), evento.DataFine.ToShortDateString(),
+                                           evento.Id, evento.Luogo);
+                }
+
+                else
+                    MessageBox.Show("Non sono presenti eventi!", "Aggiorna UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            else
-                MessageBox.Show("Non sono presenti eventi!", "Aggiorna UCLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCEventi: errore aggiornamento dgveventi", "UCEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
     }

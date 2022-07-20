@@ -51,17 +51,26 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void FormObiettivi_Load(object sender, EventArgs e)
         {
-            ///Figli del Form
-            panelTop.Parent = this;
-            panelCentro.Parent = this;
-            ///Figli del pannello top
-            btChiudi.Parent = panelTop;
-            ///Figli del pannello centrale
-            btAggiugniObiettivo.Parent = panelCentro;
-            panelContenitore.Parent = panelCentro;
+            try
+            {
+                ///Figli del Form
+                panelTop.Parent = this;
+                panelCentro.Parent = this;
+                ///Figli del pannello top
+                btChiudi.Parent = panelTop;
+                ///Figli del pannello centrale
+                btAggiugniObiettivo.Parent = panelCentro;
+                panelContenitore.Parent = panelCentro;
 
-            UcObiettivi = new UCObiettivi(this, ProgettoPadre, UcProgettiPadre);
-            panelContenitore.Controls.Add(UcObiettivi);
+                UcObiettivi = new UCObiettivi(this, ProgettoPadre, UcProgettiPadre);
+                panelContenitore.Controls.Add(UcObiettivi);
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormObiettivi: errore caricamento interfaccia", "FormObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -72,8 +81,17 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
-            FormPadre.Show();
-            Close();
+            try
+            {
+                FormPadre.Show();
+                Close();
+            }          
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormObiettivi: errore chiusura interfaccia", "FormObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -84,7 +102,16 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtMinimize_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Minimized;
+            try
+            {
+                WindowState = FormWindowState.Minimized;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormObiettivi: errore minimizzazione interfaccia", "FormObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -94,9 +121,18 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiugniObiettivo_Click(object sender, EventArgs e)
         {
-            FormObiettivo formAggiungiObiettivo = new FormObiettivo(this, UcProgettiPadre, UcObiettivi, ProgettoPadre, null, "aggiungi");
-            Hide();
-            formAggiungiObiettivo.Show();
+            try
+            {
+                FormObiettivo formAggiungiObiettivo = new FormObiettivo(this, UcProgettiPadre, UcObiettivi, ProgettoPadre, null, "aggiungi");
+                Hide();
+                formAggiungiObiettivo.Show();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormObiettivi: errore click bottone aggiunta obiettivo", "FormObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion       
     }

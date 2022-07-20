@@ -32,18 +32,6 @@ namespace AgendaAziendale.Forms
         /// </summary>
         /// <param name="formPadre"></param>
         /// <param name="tipologia"></param>
-        /*public FormGestione(Form formPadre, string tipologia)
-        {
-            InitializeComponent();
-            FormPadre = formPadre;
-            this.tipologia = tipologia;
-        }*/
-
-        /// <summary>
-        /// Metodo costruttore del FormGestione
-        /// </summary>
-        /// <param name="formPadre"></param>
-        /// <param name="tipologia"></param>
         /// <param name="filtra"></param>
         public FormGestione(Form formPadre, string tipologia, bool filtra)
         {
@@ -63,68 +51,86 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void FormGestione_Load(object sender, EventArgs e)
         {
-            ///Figli del form
-            panelCentro.Parent = this;
-            ///Figli del panelCentro
-            btAggiungi.Parent = panelCentro;
-            panelUCcontenitore.Parent = panelCentro;
-
-            if(Filtra)
-                btAggiungi.Visible = false;
-
-            if((tipologia == "Lavoratore") || (tipologia == "lavoratore"))
+            try
             {
-                btAggiungi.Text = "Aggiungi lavoratore";
-                UcContenitore = new UCLavoratori(FormPadre);
+                ///Figli del form
+                panelCentro.Parent = this;
+                ///Figli del panelCentro
+                btAggiungi.Parent = panelCentro;
+                panelUCcontenitore.Parent = panelCentro;
+
+                if (Filtra)
+                    btAggiungi.Visible = false;
+
+                if ((tipologia == "Lavoratore") || (tipologia == "lavoratore"))
+                {
+                    btAggiungi.Text = "Aggiungi lavoratore";
+                    UcContenitore = new UCLavoratori(FormPadre);
+                }
+
+                else if ((tipologia == "Evento") || (tipologia == "evento"))
+                {
+                    btAggiungi.Text = "Aggiungi evento";
+                    UcContenitore = new UCEventi(FormPadre, Filtra);
+                }
+
+                else if ((tipologia == "Progetto") || (tipologia == "progetto"))
+                {
+                    btAggiungi.Text = "Aggiungi progetto";
+                    UcContenitore = new UCProgetti(FormPadre, Filtra);
+                }
+
+                else
+                {
+                    MessageBox.Show("ERRORE! Valore FormGestione:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
+
+                panelUCcontenitore.Controls.Add(UcContenitore); ///Aggiungo l'UC all'interfaccia
             }
 
-            else if ((tipologia == "Evento") || (tipologia == "evento"))
+            catch
             {
-                btAggiungi.Text = "Aggiungi evento";
-                UcContenitore = new UCEventi(FormPadre, Filtra);
-            }
-
-            else if ((tipologia == "Progetto") || (tipologia == "progetto"))
-            {
-                btAggiungi.Text = "Aggiungi progetto";
-                UcContenitore = new UCProgetti(FormPadre, Filtra);
-            }
-
-            else
-            {
-                MessageBox.Show("ERRORE! Valore FormGestione:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ERRORE! FormGestione: errore caricamento interfaccia", "FormGestione", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
-
-            panelUCcontenitore.Controls.Add(UcContenitore); ///Aggiungo l'UC all'interfaccia
         }
 
         private void BtAggiungi_Click(object sender, EventArgs e)
         {
-            if ((tipologia == "Lavoratore") || (tipologia == "lavoratore"))
+            try
             {
-                FormLavoratore formAggiungi = new FormLavoratore(FormPadre, (UCLavoratori)UcContenitore, "aggiungi");
-                FormPadre.Hide();
-                formAggiungi.ShowDialog();
-            }
+                if ((tipologia == "Lavoratore") || (tipologia == "lavoratore"))
+                {
+                    FormLavoratore formAggiungi = new FormLavoratore(FormPadre, (UCLavoratori)UcContenitore, "aggiungi");
+                    FormPadre.Hide();
+                    formAggiungi.ShowDialog();
+                }
 
-            else if ((tipologia == "Evento") || (tipologia == "evento"))
-            {
-                FormEvento formAggiungi = new FormEvento(FormPadre, (UCEventi)UcContenitore, "aggiungi");
-                FormPadre.Hide();
-                formAggiungi.ShowDialog();
-            }
+                else if ((tipologia == "Evento") || (tipologia == "evento"))
+                {
+                    FormEvento formAggiungi = new FormEvento(FormPadre, (UCEventi)UcContenitore, "aggiungi");
+                    FormPadre.Hide();
+                    formAggiungi.ShowDialog();
+                }
 
-            else if ((tipologia == "Progetto") || (tipologia == "progetto"))
-            {
-                FormProgetto formAggiungi = new FormProgetto(FormPadre, (UCProgetti)UcContenitore, "aggiungi");
-                FormPadre.Hide();
-                formAggiungi.ShowDialog();
-            }
+                else if ((tipologia == "Progetto") || (tipologia == "progetto"))
+                {
+                    FormProgetto formAggiungi = new FormProgetto(FormPadre, (UCProgetti)UcContenitore, "aggiungi");
+                    FormPadre.Hide();
+                    formAggiungi.ShowDialog();
+                }
 
-            else
+                else
+                {
+                    MessageBox.Show("ERRORE! Valore FormGestione:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
+            }
+            
+            catch
             {
-                MessageBox.Show("ERRORE! Valore FormGestione:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ERRORE! FormGestione: errore click bottone aggiunta", "FormGestione", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
         }

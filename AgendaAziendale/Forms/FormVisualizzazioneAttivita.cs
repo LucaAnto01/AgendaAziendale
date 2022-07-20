@@ -48,23 +48,32 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void FormVisualizzazioneAttivita_Load(object sender, EventArgs e)
         {
-            ///Figli del form
-            panelTop.Parent = this;
-            panelCentro.Parent = this;
-            ///Figli del panelTop
-            lbEventi.Parent = panelTop;
-            lbProgetti.Parent = panelTop;
-            ///Figli del pannelCentro
-            flpSinistra.Parent = panelCentro;
-            flpDestra.Parent = panelCentro;
-
-            if (Sessione.Lavoratore.Categoria == "Segretario")
+            try
             {
-                flpDestra.Visible = false;
-                lbProgetti.Visible = false;
-            }
+                ///Figli del form
+                panelTop.Parent = this;
+                panelCentro.Parent = this;
+                ///Figli del panelTop
+                lbEventi.Parent = panelTop;
+                lbProgetti.Parent = panelTop;
+                ///Figli del pannelCentro
+                flpSinistra.Parent = panelCentro;
+                flpDestra.Parent = panelCentro;
 
-            AggiornaInterfaccia();
+                if (Sessione.Lavoratore.Categoria == "Segretario")
+                {
+                    flpDestra.Visible = false;
+                    lbProgetti.Visible = false;
+                }
+
+                AggiornaInterfaccia();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormVisualizzazioneAttivita: errore caricamento interfaccia", "FormVisualizzazioneAttivita", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
 
@@ -74,14 +83,23 @@ namespace AgendaAziendale.Forms
         /// </summary>
         private void AggiornaInterfaccia()
         {
-            ///Pulisco le List
-            ElencoAttivita.Clear();
-            ListaUCAttivita.Clear();
+            try
+            {
+                ///Pulisco le List
+                ElencoAttivita.Clear();
+                ListaUCAttivita.Clear();
 
-            CaricaEventi();
+                CaricaEventi();
 
-            if (Sessione.Lavoratore.Categoria != "Segretario")
-                CaricaProgetti();
+                if (Sessione.Lavoratore.Categoria != "Segretario")
+                    CaricaProgetti();
+            }            
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormVisualizzazioneAttivita: errore aggiornamento interfaccia", "FormVisualizzazioneAttivita", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -89,28 +107,37 @@ namespace AgendaAziendale.Forms
         /// </summary>
         private void CaricaEventi()
         {
-            string result_eventi = Controller.GetElencoEventiLavoratore(Sessione.Lavoratore.Username);
-            flpSinistra.Controls.Clear(); ///Mi assicuro che il pannello sia pulito e lo pulisco nel caso ci sia da aggiornare l'interfaccia
-
-            if (result_eventi != "")
+            try
             {
-                List<Evento> elencoEventi = Evento.GeneraElencoEventi(result_eventi);
-                List<UCAttivita> listaUCAttivita = new List<UCAttivita>();
+                string result_eventi = Controller.GetElencoEventiLavoratore(Sessione.Lavoratore.Username);
+                flpSinistra.Controls.Clear(); ///Mi assicuro che il pannello sia pulito e lo pulisco nel caso ci sia da aggiornare l'interfaccia
 
-                elencoEventi.ForEach(evento => listaUCAttivita.Add(new UCAttivita(evento))); ///Genero gli UCAttivita associati ad ogni evento
-
-                foreach(UCAttivita attivita in listaUCAttivita)
+                if (result_eventi != "")
                 {
-                    attivita.Click += UCAttivita_Click; ///Aggiungo l'ascoltatore dell'evento del click sull'UC
-                    flpSinistra.Controls.Add(attivita); ///Inserisco nel flpSinistra l'UC                   
+                    List<Evento> elencoEventi = Evento.GeneraElencoEventi(result_eventi);
+                    List<UCAttivita> listaUCAttivita = new List<UCAttivita>();
+
+                    elencoEventi.ForEach(evento => listaUCAttivita.Add(new UCAttivita(evento))); ///Genero gli UCAttivita associati ad ogni evento
+
+                    foreach (UCAttivita attivita in listaUCAttivita)
+                    {
+                        attivita.Click += UCAttivita_Click; ///Aggiungo l'ascoltatore dell'evento del click sull'UC
+                        flpSinistra.Controls.Add(attivita); ///Inserisco nel flpSinistra l'UC                   
+                    }
+
+                    ElencoAttivita.Concat(elencoEventi); ///Aggiungo l'elenco degli eventi  all'elenco delle attività
+                    ListaUCAttivita.Concat(listaUCAttivita); ///Aggiungo l'elenco delle UCAttività alla lista degli UC attività
                 }
 
-                ElencoAttivita.Concat(elencoEventi); ///Aggiungo l'elenco degli eventi  all'elenco delle attività
-                ListaUCAttivita.Concat(listaUCAttivita); ///Aggiungo l'elenco delle UCAttività alla lista degli UC attività
+                else
+                    MessageBox.Show("Non partecipi ad alcun evento!", "CaricaEventi FormVisualizzazioneAttivita", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            else
-                MessageBox.Show("Non partecipi ad alcun evento!", "CaricaEventi FormVisualizzazioneAttivita", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormVisualizzazioneAttivita: errore cariamento eventi", "FormVisualizzazioneAttivita", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -118,28 +145,37 @@ namespace AgendaAziendale.Forms
         /// </summary>
         private void CaricaProgetti()
         {
-            string result_progetti = Controller.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username);
-            flpDestra.Controls.Clear(); ///Mi assicuro che il pannello sia pulito e lo pulisco nel caso ci sia da aggiornare l'interfaccia
-
-            if (result_progetti != "")
+            try
             {
-                List<Progetto> elencoProgetti = Progetto.GeneraElencoProgetti(result_progetti);
-                List<UCAttivita> listaUCAttivita = new List<UCAttivita>();
+                string result_progetti = Controller.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username);
+                flpDestra.Controls.Clear(); ///Mi assicuro che il pannello sia pulito e lo pulisco nel caso ci sia da aggiornare l'interfaccia
 
-                elencoProgetti.ForEach(progetto => listaUCAttivita.Add(new UCAttivita(progetto))); ///Genero gli UCAttivita associati ad ogni evento
-
-                foreach (UCAttivita attivita in listaUCAttivita)
+                if (result_progetti != "")
                 {
-                    attivita.Click += UCAttivita_Click; ///Aggiungo l'ascoltatore dell'evento del click sull'UC
-                    flpDestra.Controls.Add(attivita); ///Inserisco nel flpSinistra l'UC                   
+                    List<Progetto> elencoProgetti = Progetto.GeneraElencoProgetti(result_progetti);
+                    List<UCAttivita> listaUCAttivita = new List<UCAttivita>();
+
+                    elencoProgetti.ForEach(progetto => listaUCAttivita.Add(new UCAttivita(progetto))); ///Genero gli UCAttivita associati ad ogni evento
+
+                    foreach (UCAttivita attivita in listaUCAttivita)
+                    {
+                        attivita.Click += UCAttivita_Click; ///Aggiungo l'ascoltatore dell'evento del click sull'UC
+                        flpDestra.Controls.Add(attivita); ///Inserisco nel flpSinistra l'UC                   
+                    }
+
+                    ElencoAttivita.Concat(elencoProgetti); ///Aggiungo l'elenco dei progetto  all'elenco delle attività
+                    ListaUCAttivita.Concat(listaUCAttivita); ///Aggiungo l'elenco delle UCAttività alla lista degli UC attività
                 }
 
-                ElencoAttivita.Concat(elencoProgetti); ///Aggiungo l'elenco dei progetto  all'elenco delle attività
-                ListaUCAttivita.Concat(listaUCAttivita); ///Aggiungo l'elenco delle UCAttività alla lista degli UC attività
+                else
+                    MessageBox.Show("Non partecipi ad alcun progetto!", "CaricaProgetti FormVisualizzazioneAttivita", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            else
-                MessageBox.Show("Non partecipi ad alcun progetto!", "CaricaProgetti FormVisualizzazioneAttivita", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormVisualizzazioneAttivita: errore cariamento progetti", "FormVisualizzazioneAttivita", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -152,7 +188,7 @@ namespace AgendaAziendale.Forms
         private void UCAttivita_Click(object sender, EventArgs e)
         {
             UCAttivita ucAttivita = (UCAttivita)sender; ///Ottengo l'elemento cliccato
-            MessageBox.Show("Funzeca");
+            MessageBox.Show("Click avvenuto");
             //Se progetto --> form per segnare le cose fatte
             //Se evento --> form per mostrare le info
         }

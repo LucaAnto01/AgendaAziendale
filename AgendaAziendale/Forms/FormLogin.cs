@@ -33,20 +33,29 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            //Setto le "gerarchie" del form, così da averne una visualizzazione quanto più corretta possibile
-            ///Figli del form
-            panelTop.Parent = this;
-            panelSinistra.Parent = this;
-            panelCentro.Parent = this;
-            ///Figli del pannello top
-            btChiudi.Parent = panelTop;
-            ///Figli del pannello di sinistra
-            lbIntestazioneSinistra.Parent = panelSinistra;
-            ///Figli del pannello centrale
-            tbUsername.Parent = panelCentro;
-            tbPassword.Parent = panelCentro;
-            lbErrore.Parent = panelCentro;
-            btAccedi.Parent = panelCentro;         
+            try
+            {
+                //Setto le "gerarchie" del form, così da averne una visualizzazione quanto più corretta possibile
+                ///Figli del form
+                panelTop.Parent = this;
+                panelSinistra.Parent = this;
+                panelCentro.Parent = this;
+                ///Figli del pannello top
+                btChiudi.Parent = panelTop;
+                ///Figli del pannello di sinistra
+                lbIntestazioneSinistra.Parent = panelSinistra;
+                ///Figli del pannello centrale
+                tbUsername.Parent = panelCentro;
+                tbPassword.Parent = panelCentro;
+                lbErrore.Parent = panelCentro;
+                btAccedi.Parent = panelCentro;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLogin: errore caricamento interfaccia", "FormLogin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -57,7 +66,16 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            try
+            {
+                Application.Exit();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLogin: errore chiusura interfaccia", "FormLogin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -68,7 +86,16 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtMinimize_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Minimized;
+            try
+            {
+                WindowState = FormWindowState.Minimized;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLogin: errore minimizzazione interfaccia", "FormLogin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -79,10 +106,19 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void Tb_TextChanged(object sender, EventArgs e)
         {
-            if ((!Regex.IsMatch(((TextBox)sender).Text, Sessione.Regex)) && (((TextBox)sender).Text != ""))
+            try
             {
-                MessageBox.Show("Non inserire lettere accentate o caratteri speciali!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ((TextBox)sender).Text = "";
+                if ((!Regex.IsMatch(((TextBox)sender).Text, Sessione.Regex)) && (((TextBox)sender).Text != ""))
+                {
+                    MessageBox.Show("Non inserire lettere accentate o caratteri speciali!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ((TextBox)sender).Text = "";
+                }
+            }            
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLogin: errore correzione inserimento testo", "FormLogin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
         }
 
@@ -94,9 +130,18 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void TbUsername_Enter(object sender, EventArgs e)
         {
-            tbUsername.Text = "";
-            tbUsername.ForeColor = Color.Black;
-            tbUsername.BackColor = Color.White;
+            try
+            {
+                tbUsername.Text = "";
+                tbUsername.ForeColor = Color.Black;
+                tbUsername.BackColor = Color.White;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLogin: errore pulizia campo inserimento username", "FormLogin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -107,10 +152,19 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void TbPassword_Enter(object sender, EventArgs e)
         {
-            tbPassword.Text = "";
-            tbPassword.ForeColor = Color.Black;
-            tbPassword.BackColor = Color.White;
-            tbPassword.UseSystemPasswordChar = true;
+            try
+            {
+                tbPassword.Text = "";
+                tbPassword.ForeColor = Color.Black;
+                tbPassword.BackColor = Color.White;
+                tbPassword.UseSystemPasswordChar = true;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLogin: errore pulizia campo inserimento password", "FormLogin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -121,27 +175,36 @@ namespace AgendaAziendale
         /// <param name="e"></param>
         private void BtAccedi_Click(object sender, EventArgs e)
         {
-            if (CheckCampi())
+            try
             {
-                string username = tbUsername.Text;
-                string password = tbPassword.Text;
-
-                if (Controller.EffettuaLogin(username, password)) ///Effettuo il login
+                if (CheckCampi())
                 {
-                    Lavoratore lavoratore = Controller.GetInfoLavoratore(username, username);
+                    string username = tbUsername.Text;
+                    string password = tbPassword.Text;
 
-                    if (lavoratore != null)
-                        Sessione.Lavoratore = lavoratore;
+                    if (Controller.EffettuaLogin(username, password)) ///Effettuo il login
+                    {
+                        Lavoratore lavoratore = Controller.GetInfoLavoratore(username, username);
 
-                    CheckLavoraotre();
+                        if (lavoratore != null)
+                            Sessione.Lavoratore = lavoratore;
+
+                        CheckLavoraotre();
+                    }
+
+                    else
+                        MessageBox.Show("Username o password non validi", "Errore compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 else
-                    MessageBox.Show("Username o password non validi", "Errore compilazione campi",  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lbErrore.Visible = true;
             }
-
-            else
-                lbErrore.Visible = true;
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLogin: errore click bottone accesso", "FormLogin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
 
@@ -154,16 +217,25 @@ namespace AgendaAziendale
         {
             bool check = true; ///True, tutti i campi compilati
 
-            if ((tbUsername.Text == "") || (tbUsername.Text == "Username"))
+            try
             {
-                tbUsername.BackColor = Color.Red;
-                check = false;
-            }
+                if ((tbUsername.Text == "") || (tbUsername.Text == "Username"))
+                {
+                    tbUsername.BackColor = Color.Red;
+                    check = false;
+                }
 
-            if ((tbPassword.Text == "") || (tbPassword.Text == "Password"))
+                if ((tbPassword.Text == "") || (tbPassword.Text == "Password"))
+                {
+                    tbPassword.BackColor = Color.Red;
+                    check = false;
+                }
+            }
+            
+            catch
             {
-                tbPassword.BackColor = Color.Red;
-                check = false;
+                MessageBox.Show("ERRORE! FormLogin: errore check campi intput", "FormLogin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
 
             return check;
