@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AgendaAziendale.Modelli
 {
@@ -71,7 +72,18 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static string GeneraEmail(string username, string cognome)
         {
-            return username.ToLower() + "." + cognome.ToLower() + "@agendaaziendale.it";
+            try
+            {
+                return username.ToLower() + "." + cognome.ToLower() + "@agendaaziendale.it";
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GeneraEmail: errore istanziazione", "Metodo GeneraEmail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+
+            return "";
         }
 
         /// <summary>
@@ -81,25 +93,30 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static string PasswordHashing(string passowrd)
         {
-            ///Effettuo l'hashing in SHA256 della password
-            /*var salt = Encoding.UTF8.GetBytes(Sessione.Salt); 
-            var password = Encoding.UTF8.GetBytes(passowrd); ///Converto la stringa in un array di byte
-
-            HMACMD5 hmacMD5 = new HMACMD5(salt); ///Chiave (+salt) in MD5
-            var saltedHash = hmacMD5.ComputeHash(password); ///Azione di hash sulla password*/
-
-            using (SHA256 sha256Hash = SHA256.Create())
-            {  
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(passowrd)); ///Converto la stringa in un array di byte
-
-                ///Converto l'array di byte nella stringa hashata 
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
+            try
+            {
+                ///Effettuo l'hashing in SHA256 della password
+                using (SHA256 sha256Hash = SHA256.Create())
                 {
-                    builder.Append(bytes[i].ToString("x2")); ///ToString("x2") --> solo caratteri (lettere minuscole + numeri)
+                    byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(passowrd)); ///Converto la stringa in un array di byte
+
+                                                                                             ///Converto l'array di byte nella stringa hashata 
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < bytes.Length; i++)
+                    {
+                        builder.Append(bytes[i].ToString("x2")); ///ToString("x2") --> solo caratteri (lettere minuscole + numeri)
+                    }
+                    return builder.ToString();
                 }
-                return builder.ToString();
             }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo PasswordHashing: errore errore hash password", "Metodo PasswordHashing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+
+            return "";
         }
 
         /// <summary>
@@ -111,16 +128,25 @@ namespace AgendaAziendale.Modelli
         {
             Lavoratore lavoratore = new Lavoratore();
 
-            List<string> informazioni = info.Split('-').ToList();
+            try
+            {
+                List<string> informazioni = info.Split('-').ToList();
 
-            lavoratore.Username = informazioni.ElementAt(0);
-            lavoratore.Password = informazioni.ElementAt(1);
-            lavoratore.Nome = informazioni.ElementAt(2);
-            lavoratore.Cognome = informazioni.ElementAt(3);
-            lavoratore.Residenza = informazioni.ElementAt(4);
-            lavoratore.DataNascita = DateTime.Parse(informazioni.ElementAt(5));
-            lavoratore.Email = informazioni.ElementAt(6);
-            lavoratore.Categoria = informazioni.ElementAt(7);
+                lavoratore.Username = informazioni.ElementAt(0);
+                lavoratore.Password = informazioni.ElementAt(1);
+                lavoratore.Nome = informazioni.ElementAt(2);
+                lavoratore.Cognome = informazioni.ElementAt(3);
+                lavoratore.Residenza = informazioni.ElementAt(4);
+                lavoratore.DataNascita = DateTime.Parse(informazioni.ElementAt(5));
+                lavoratore.Email = informazioni.ElementAt(6);
+                lavoratore.Categoria = informazioni.ElementAt(7);
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GeneraLavoratore: errore errore istanziazione", "Metodo GeneraLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return lavoratore;
         }
@@ -134,13 +160,22 @@ namespace AgendaAziendale.Modelli
         {
             List<Lavoratore> elencoLavoratori = new List<Lavoratore>();
 
-            List<string> lavoratori_info = elenco.Split('\n').ToList(); ///Splitto l'elenco al fine di avere per ogni elemento le informazioni di ogni lavoratore
+            try
+            {
+                List<string> lavoratori_info = elenco.Split('\n').ToList(); ///Splitto l'elenco al fine di avere per ogni elemento le informazioni di ogni lavoratore
 
-            lavoratori_info.RemoveAt((lavoratori_info.Count - 1)); ///A causa dello split l'ultimo elemento rimane vuoto --> ""
+                lavoratori_info.RemoveAt((lavoratori_info.Count - 1)); ///A causa dello split l'ultimo elemento rimane vuoto --> ""
 
-            foreach(string lavoratore_info in lavoratori_info) ///Popolo la lista dei lavoratori
-                elencoLavoratori.Add(GeneraLavoratore(lavoratore_info));
+                foreach (string lavoratore_info in lavoratori_info) ///Popolo la lista dei lavoratori
+                    elencoLavoratori.Add(GeneraLavoratore(lavoratore_info));
+            }
             
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GeneraElencoLavoratori: errore errore istanziazione", "Metodo GeneraElencoLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+
             return elencoLavoratori;
         }
         #endregion
