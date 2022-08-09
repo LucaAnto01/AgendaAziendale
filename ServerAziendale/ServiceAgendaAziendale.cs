@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using ServerAziendale.Modelli;
+using ServerAziendaleDB.Modelli;
 
 namespace ServerAziendale
 {
@@ -84,20 +85,13 @@ namespace ServerAziendale
         /// Servizio adibito all'inserimento di un Lavoratore nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="username_in"></param>
-        /// <param name="password"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="email"></param>
-        /// <param name="categoria"></param>
+        /// <param name="nuovoLavoratore"></param>
         /// <returns></returns>
-        public bool InserisciLavoratore(string username, string username_in, string password, string nome, string cognome, string residenza, DateTime dataNascita, string email, string categoria)
+        public bool InserisciLavoratore(string username, LavoratoreSRV nuovoLavoratore)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.InserisciLavoratore(username, username_in, password, nome, cognome, residenza, dataNascita.ToString("yyyy-MM-dd"), email, categoria))
+                if (Sessione.ServerAziendaleDB.InserisciLavoratore(username, nuovoLavoratore))
                     return true;
             }
 
@@ -119,18 +113,13 @@ namespace ServerAziendale
         /// Servizio adibito all'aggiornamento di un Lavoratore nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="username_in"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="categoria"></param>
+        /// <param name="aggiornaLavoratore"></param>
         /// <returns></returns>
-        public bool AggiornaLavoratore(string username, string username_in, string nome, string cognome, string residenza, DateTime dataNascita, string categoria)
+        public bool AggiornaLavoratore(string username, LavoratoreSRV aggiornaLavoratore)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.AggiornaLavoratore(username, username_in, nome, cognome, residenza, dataNascita.ToString("yyyy-MM-dd"), categoria))
+                if (Sessione.ServerAziendaleDB.AggiornaLavoratore(username, aggiornaLavoratore))
                     return true;
             }
 

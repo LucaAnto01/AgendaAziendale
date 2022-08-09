@@ -275,7 +275,9 @@ namespace AgendaAziendale.Forms
                     if ((azione == "Aggiungi") || (azione == "aggiungi"))
                     {
 
-                        if (Controller.InserisciLavoratore(tbUsername.Text, tbPassword.Text, tbNome.Text, tbCognome.Text, tbResidenza.Text, tbDataNascita.Text, cbCategoria.Text)) ///Inserisco il lavoratore nel db
+                        Lavoratore nuovoLavoratore = new Lavoratore(tbUsername.Text, tbPassword.Text, tbNome.Text, tbCognome.Text, tbResidenza.Text, DateTime.Parse(tbDataNascita.Text), cbCategoria.Text);
+
+                        if (Controller.InserisciLavoratore(nuovoLavoratore)) ///Inserisco il lavoratore nel db
                         {
                             MessageBox.Show("Inserimento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ucPadre.AggiornadgvLavoratori();
@@ -288,7 +290,10 @@ namespace AgendaAziendale.Forms
 
                     if ((azione == "Aggiorna") || (azione == "aggiorna"))
                     {
-                        if (Controller.AggiornaLavoratore(tbUsername.Text, tbNome.Text, tbCognome.Text, tbResidenza.Text, tbDataNascita.Text, cbCategoria.Text)) ///Aggiorno  il lavoratore nel db
+
+                        Lavoratore aggiornaLavoratore = new Lavoratore(tbUsername.Text, "", tbNome.Text, tbCognome.Text, tbResidenza.Text, DateTime.Parse(tbDataNascita.Text), cbCategoria.Text);
+
+                        if (Controller.AggiornaLavoratore(aggiornaLavoratore)) ///Aggiorno  il lavoratore nel db
                         {
                             MessageBox.Show("Aggiornamento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -296,6 +301,7 @@ namespace AgendaAziendale.Forms
                             formPadre.Show();
                             Close();
                         }
+
                         else
                             MessageBox.Show("Aggiornamento lavoratore " + tbUsername.Text + "fallito.", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }

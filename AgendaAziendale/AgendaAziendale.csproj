@@ -255,6 +255,9 @@
     <None Include="Connected Services\SRAgendaAziendale\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\SRAgendaAziendale\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\SRAgendaAziendale\ServiceAgendaAziendale.wsdl" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -293,6 +296,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\SRAgendaAziendale\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServerAziendaleDB\ServerAziendaleDB.csproj">
+      <Project>{dd41ba4e-8a1a-4916-8ae9-abcf66155446}</Project>
+      <Name>ServerAziendaleDB</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

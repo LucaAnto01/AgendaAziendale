@@ -5,7 +5,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using MySql.Data.MySqlClient;
+//using MySql.Data.MySqlClient;
+using ServerAziendaleDB.Modelli;
+using MySqlConnector;
 using ServerAziendaleDB.Modelli;
 
 namespace ServerAziendaleDB
@@ -113,19 +115,13 @@ namespace ServerAziendaleDB
         /// Servizio adibito all'inserimento di un Lavoratore nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="email"></param>
-        /// <param name="categoria"></param>
+        /// <param name="nuovoLavoratore"></param>
         /// <returns></returns>
-        public bool InserisciLavoratore(string username, string username_in, string password, string nome, string cognome, string residenza, string dataNascita, string email, string categoria)
+        public bool InserisciLavoratore(string username, LavoratoreSRV nuovoLavoratore)
         {
             string query = "INSERT INTO lavoratore (username, pswd, nome, cognome, residenza, data_nascita, email, categoria) VALUES " +
-                           "('" + username_in + "','" + password + "','"+ nome +"','"+ cognome + "','" + residenza + "','" + 
-                            dataNascita + "','" + email + "','" + categoria + "');";
+                           "('" + nuovoLavoratore.Username + "','" + nuovoLavoratore.Password + "','"+ nuovoLavoratore.Nome +"','"+ nuovoLavoratore.Cognome +
+                           "','" + nuovoLavoratore.Residenza + "','" + nuovoLavoratore.DataNascita.ToString("yyyy-MM-dd") + "','" + nuovoLavoratore.Email + "','" + nuovoLavoratore.Categoria + "');";
 
             List<string> queries = new List<string>
             {
@@ -159,18 +155,14 @@ namespace ServerAziendaleDB
         /// Servizio adibito all'aggiornamento di un Lavoratore presente nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="username_in"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="categoria"></param>
+        /// <param name="aggiornaLavoratore"></param>
         /// <returns></returns>
-        public bool AggiornaLavoratore(string username, string username_in, string nome, string cognome, string residenza, string dataNascita, string categoria)
+        public bool AggiornaLavoratore(string username, LavoratoreSRV aggiornaLavoratore)
         {
-            string query = "UPDATE lavoratore SET nome = '" + nome + "', cognome = '" +
-                                cognome + "', residenza = '" + residenza + "', data_nascita = '" + dataNascita + "', categoria = '" 
-                                + categoria + "' WHERE username = '" + username_in + "';";
+            string query = "UPDATE lavoratore SET nome = '" + aggiornaLavoratore.Nome + "', cognome = '" +
+                            aggiornaLavoratore.Cognome + "', residenza = '" + aggiornaLavoratore.Residenza + "', data_nascita = '" +
+                            aggiornaLavoratore.DataNascita.ToString("yyyy-MM-dd") + "', categoria = '" 
+                            + aggiornaLavoratore.Categoria + "' WHERE username = '" + aggiornaLavoratore.Username + "';";
 
             List<string> queries = new List<string>
             {

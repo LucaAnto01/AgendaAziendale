@@ -15,12 +15,6 @@ namespace AgendaAziendale.Modelli
         private bool completato;
         #endregion
 
-        #region Getters & Setters
-        public int Id { get => id; set => id = value; }
-        public string Desccrizione { get => desccrizione; set => desccrizione = value; }
-        public bool Completato { get => completato; set => completato = value; }
-        #endregion
-
         #region Metodi costruttori
         /// <summary>
         /// Metodo costruttore della classe Obiettivo
@@ -39,6 +33,12 @@ namespace AgendaAziendale.Modelli
         /// Metodo costruttore vuoto della classe Obiettivo
         /// </summary>
         public Obiettivo() { }
+        #endregion
+
+        #region Getters & Setters
+        public int Id { get => id; set => id = value; }
+        public string Desccrizione { get => desccrizione; set => desccrizione = value; }
+        public bool Completato { get => completato; set => completato = value; }
         #endregion
 
         #region Metodi

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ServerAziendaleDB.Modelli;
 
 namespace AgendaAziendale.Modelli
 {
@@ -75,23 +76,20 @@ namespace AgendaAziendale.Modelli
         /// Metodo adibito all'inserimento di un lavoratore nel DB
         /// --> richiamo del web service InserisciLavoratore() dopo aver controllato che l'utente non esistesse già mediante il web service Login()
         /// </summary>
-        /// <param name="username_in"></param>
-        /// <param name="password"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="categoria"></param>
+        /// <param name="nuovoLavoratore"></param>
         /// <returns></returns>
-        public static bool InserisciLavoratore(string username_in, string password, string nome, string cognome, string residenza, string dataNascita, string categoria)
+        public static bool InserisciLavoratore(Lavoratore nuovoLavoratore)
         {
             try
             {
-                string passwordHash = Lavoratore.PasswordHashing(password);
-                if (Sessione.ServerAziendale.GetInfoLavoratore(Sessione.Lavoratore.Username, username_in) == "") ///Così facendo controllo che il Lavoratore non sia già presente all'interno del DB
-                    if (Sessione.ServerAziendale.InserisciLavoratore(Sessione.Lavoratore.Username, username_in, passwordHash, nome, cognome, residenza, DateTime.Parse(dataNascita), Lavoratore.GeneraEmail(username_in, cognome), categoria)) ///Inserisco il lavoratore nel db
+                string passwordHash = Lavoratore.PasswordHashing(nuovoLavoratore.Password);
+                if (Sessione.ServerAziendale.GetInfoLavoratore(Sessione.Lavoratore.Username, nuovoLavoratore.Username) == "") ///Così facendo controllo che il Lavoratore non sia già presente all'interno del DB
+                {
+                    LavoratoreSRV nuovoLavoratoreSrv = new LavoratoreSRV(nuovoLavoratore.Username, passwordHash, nuovoLavoratore.Nome, nuovoLavoratore.Cognome, nuovoLavoratore.Residenza, nuovoLavoratore.DataNascita, Lavoratore.GeneraEmail(nuovoLavoratore.Username, nuovoLavoratore.Cognome), nuovoLavoratore.Categoria);
+                    if (Sessione.ServerAziendale.InserisciLavoratore(Sessione.Lavoratore.Username, nuovoLavoratoreSrv)) ///Inserisco il lavoratore nel db
                         return true;
-
+                }
+                    
                 return false;
             }
             
@@ -108,18 +106,14 @@ namespace AgendaAziendale.Modelli
         /// Metodo adibito alla modifica di un lavoratore presente nel DB
         /// --> richiamo del web service AggiornaLavoratore()
         /// </summary>
-        /// <param name="username_in"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="categoria"></param>
+        /// <param name="aggiornaLavoratore"></param>
         /// <returns></returns>
-        public static bool AggiornaLavoratore(string username_in, string nome, string cognome, string residenza, string dataNascita, string categoria)
+        public static bool AggiornaLavoratore(Lavoratore aggiornaLavoratore)
         {
             try
             {
-                if (Sessione.ServerAziendale.AggiornaLavoratore(Sessione.Lavoratore.Username, username_in, nome, cognome, residenza, DateTime.Parse(dataNascita), categoria)) ///Aggiorno il lavoratore nel db
+                LavoratoreSRV aggiornaLavoratoreSrv = new LavoratoreSRV(aggiornaLavoratore.Username, "", aggiornaLavoratore.Nome, aggiornaLavoratore.Cognome, aggiornaLavoratore.Residenza, aggiornaLavoratore.DataNascita, aggiornaLavoratore.Email, aggiornaLavoratore.Categoria);
+                if (Sessione.ServerAziendale.AggiornaLavoratore(Sessione.Lavoratore.Username, aggiornaLavoratoreSrv)) ///Aggiorno il lavoratore nel db
                     return true;
 
                 return false;
