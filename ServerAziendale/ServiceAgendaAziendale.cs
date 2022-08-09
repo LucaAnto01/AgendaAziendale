@@ -229,17 +229,13 @@ namespace ServerAziendale
         /// Servizio adibito all'inserimento di un Evento nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="luogo"></param>
-        /// <returns>bool</returns>
-        public bool CreaEvento(string username, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo)
+        /// <param name="nuovoEvento"></param>
+        /// <returns></returns>
+        public bool CreaEvento(string username, EventoSRV nuovoEvento)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.CreaEvento(username, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), luogo))
+                if (Sessione.ServerAziendaleDB.CreaEvento(username, nuovoEvento))
                     return true;
             }
 
@@ -261,19 +257,13 @@ namespace ServerAziendale
         /// Servizio adibito all'aggiornamento di un Evento nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="luogo"></param>
+        /// <param name="aggiornaEvento"></param>
         /// <returns></returns>
-        public bool AggiornaEvento(string username, string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo)
+        public bool AggiornaEvento(string username, EventoSRV aggiornaEvento)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.AggiornaEvento(username, codice, id, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), luogo))
+                if (Sessione.ServerAziendaleDB.AggiornaEvento(username, aggiornaEvento))
                     return true;
             }
 

@@ -89,29 +89,19 @@ namespace ServerAziendale
         /// Servizio adibito all'inserimento di un Evento nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="luogo"></param>
-        /// <returns>bool</returns>
+        /// <param name="nuovoEvento"></param>
+        /// <returns></returns>
         [OperationContract]
-        bool CreaEvento(string username, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo);
+        bool CreaEvento(string username, EventoSRV nuovoEvento);
 
         /// <summary>
         /// Servizio adibito all'aggiornamento di un Evento nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="luogo"></param>
+        /// <param name="aggiornaEvento"></param>
         /// <returns></returns>
         [OperationContract]
-        bool AggiornaEvento(string username, string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo);
+        bool AggiornaEvento(string username, EventoSRV aggiornaEvento);
 
         /// <summary>
         /// Servizio adibito all'eliminazione di un Evento nel DB

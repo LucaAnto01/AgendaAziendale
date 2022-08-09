@@ -64,16 +64,16 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaEvento", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/CreaEventoResponse")]
-        bool CreaEvento(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo);
+        bool CreaEvento(string username, ServerAziendaleDB.Modelli.EventoSRV nuovoEvento);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaEvento", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/CreaEventoResponse")]
-        System.Threading.Tasks.Task<bool> CreaEventoAsync(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo);
+        System.Threading.Tasks.Task<bool> CreaEventoAsync(string username, ServerAziendaleDB.Modelli.EventoSRV nuovoEvento);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaEvento", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaEventoResponse")]
-        bool AggiornaEvento(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string luogo);
+        bool AggiornaEvento(string username, [System.ServiceModel.MessageParameterAttribute(Name="aggiornaEvento")] ServerAziendaleDB.Modelli.EventoSRV aggiornaEvento1);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaEvento", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaEventoResponse")]
-        System.Threading.Tasks.Task<bool> AggiornaEventoAsync(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string luogo);
+        System.Threading.Tasks.Task<bool> AggiornaEventoAsync(string username, ServerAziendaleDB.Modelli.EventoSRV aggiornaEvento);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/EliminaEvento", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/EliminaEventoResponse")]
         bool EliminaEvento(string username, string codice, string id);
@@ -273,20 +273,20 @@ namespace ServerAziendale.SRDBAgendaAziendale {
             return base.Channel.GetElencoLavoratoriAsync(username);
         }
         
-        public bool CreaEvento(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo) {
-            return base.Channel.CreaEvento(username, nome, descrizione, dataInizio, dataFine, luogo);
+        public bool CreaEvento(string username, ServerAziendaleDB.Modelli.EventoSRV nuovoEvento) {
+            return base.Channel.CreaEvento(username, nuovoEvento);
         }
         
-        public System.Threading.Tasks.Task<bool> CreaEventoAsync(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo) {
-            return base.Channel.CreaEventoAsync(username, nome, descrizione, dataInizio, dataFine, luogo);
+        public System.Threading.Tasks.Task<bool> CreaEventoAsync(string username, ServerAziendaleDB.Modelli.EventoSRV nuovoEvento) {
+            return base.Channel.CreaEventoAsync(username, nuovoEvento);
         }
         
-        public bool AggiornaEvento(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string luogo) {
-            return base.Channel.AggiornaEvento(username, codice, id, nome, descrizione, dataInizio, dataFine, luogo);
+        public bool AggiornaEvento(string username, ServerAziendaleDB.Modelli.EventoSRV aggiornaEvento1) {
+            return base.Channel.AggiornaEvento(username, aggiornaEvento1);
         }
         
-        public System.Threading.Tasks.Task<bool> AggiornaEventoAsync(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string luogo) {
-            return base.Channel.AggiornaEventoAsync(username, codice, id, nome, descrizione, dataInizio, dataFine, luogo);
+        public System.Threading.Tasks.Task<bool> AggiornaEventoAsync(string username, ServerAziendaleDB.Modelli.EventoSRV aggiornaEvento) {
+            return base.Channel.AggiornaEventoAsync(username, aggiornaEvento);
         }
         
         public bool EliminaEvento(string username, string codice, string id) {

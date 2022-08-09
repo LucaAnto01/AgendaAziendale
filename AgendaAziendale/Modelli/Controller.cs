@@ -211,19 +211,14 @@ namespace AgendaAziendale.Modelli
         /// <summary>
         /// Metodo adibito all'inserimento di un evento nel DB
         /// </summary>
-        /// <param name="codice"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="id"></param>
-        /// <param name="luogo"></param>
+        /// <param name="nuovoEvento"></param>
         /// <returns></returns>
-        public static bool CreaEvento(string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo)
+        public static bool CreaEvento(Evento nuovoEvento)
         {
             try
             {
-                if (Sessione.ServerAziendale.CreaEvento(Sessione.Lavoratore.Username, nome, descrizione, dataInizio, dataFine, luogo))
+                EventoSRV nuovoEventoSrv = new EventoSRV(nuovoEvento.Codice, nuovoEvento.Nome, nuovoEvento.Descrizione, nuovoEvento.DataInizio, nuovoEvento.DataInizio, nuovoEvento.Id, nuovoEvento.Luogo);
+                if (Sessione.ServerAziendale.CreaEvento(Sessione.Lavoratore.Username, nuovoEventoSrv))
                     return true;
 
                 return false;
@@ -241,19 +236,14 @@ namespace AgendaAziendale.Modelli
         /// <summary>
         /// Metodo adibito all'aggiornamento di un Evento nel DB
         /// </summary>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="luogo"></param>
+        /// <param name="aggiornaEvento"></param>
         /// <returns></returns>
-        public static bool AggiornaEvento(string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo)
+        public static bool AggiornaEvento(Evento aggiornaEvento)
         {
             try
             {
-                if (Sessione.ServerAziendale.AggiornaEvento(Sessione.Lavoratore.Username, codice, id, nome, descrizione, dataInizio, dataFine, luogo))
+                EventoSRV aggiornaEventoSrv = new EventoSRV(aggiornaEvento.Codice, aggiornaEvento.Nome, aggiornaEvento.Descrizione, aggiornaEvento.DataInizio, aggiornaEvento.DataFine, aggiornaEvento.Id, aggiornaEvento.Luogo);
+                if (Sessione.ServerAziendale.AggiornaEvento(Sessione.Lavoratore.Username, aggiornaEventoSrv))
                     return true;
 
                 else

@@ -319,7 +319,8 @@ namespace AgendaAziendale.Forms
                 {
                     if ((azione == "Aggiungi") || (azione == "aggiungi"))
                     {
-                        if (Controller.CreaEvento(tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbLuogo.Text))
+                        Evento nuovoEvento = new Evento("", tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), 0, tbLuogo.Text);
+                        if (Controller.CreaEvento(nuovoEvento))
                         {
                             MessageBox.Show("Inserimento evento " + tbNome.Text + " avvenuto con successo!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             PulisciCampiInserimento();
@@ -332,7 +333,8 @@ namespace AgendaAziendale.Forms
 
                     if ((azione == "Aggiorna") || (azione == "aggiorna"))
                     {
-                        if (Controller.AggiornaEvento(evento.Codice, evento.Id.ToString(), tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbLuogo.Text))
+                        Evento aggiornaEvento = new Evento(evento.Codice, tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), evento.Id, tbLuogo.Text);
+                        if (Controller.AggiornaEvento(aggiornaEvento))
                         {
                             MessageBox.Show("Aggiornamento evento " + tbNome.Text + " avvenuto con successo!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             formPadre.Show();

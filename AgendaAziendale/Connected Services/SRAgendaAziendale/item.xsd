@@ -121,11 +121,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="descrizione" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="dataInizio" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="dataFine" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="luogo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="nuovoEvento" nillable="true" type="q3:EventoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -140,13 +136,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="codice" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="descrizione" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="dataInizio" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="dataFine" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="luogo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="aggiornaEvento" nillable="true" type="q4:EventoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -334,7 +324,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="obiettivi" nillable="true" type="q3:ArrayOfint" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="obiettivi" nillable="true" type="q5:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

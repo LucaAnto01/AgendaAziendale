@@ -6,7 +6,6 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 //using MySql.Data.MySqlClient;
-using ServerAziendaleDB.Modelli;
 using MySqlConnector;
 using ServerAziendaleDB.Modelli;
 
@@ -313,17 +312,14 @@ namespace ServerAziendaleDB
         /// Servizio adibito all'inserimento di un Evento nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="luogo"></param>
-        /// <returns>bool</returns>
-        public bool CreaEvento(string username, string nome, string descrizione, string dataInizio, string dataFine, string luogo)
+        /// <param name="nuovoEvento"></param>
+        /// <returns></returns>
+        public bool CreaEvento(string username, EventoSRV nuovoEvento)
         {
             string query_attivita = "INSERT INTO attivita(nome, descrizione, data_inizio, data_fine) " +
-                                    "VALUES('" + nome + "', '" + descrizione + "', '" + dataInizio + "', '" + dataFine + "');"; ///Creo una nuova attività
-            string query_evento = "INSERT INTO evento(luogo) VALUES ('" + luogo + "');"; ///Creo un nuovo evento
+                                    "VALUES('" + nuovoEvento.Nome + "', '" + nuovoEvento.Descrizione + "', '" + nuovoEvento.DataInizio.ToString("yyyy-MM-dd") +
+                                    "', '" + nuovoEvento.DataFine.ToString("yyyy-MM-dd") + "');"; ///Creo una nuova attività
+            string query_evento = "INSERT INTO evento(luogo) VALUES ('" + nuovoEvento.Luogo + "');"; ///Creo un nuovo evento
 
             List<string> queries = new List<string>
             {
@@ -376,20 +372,15 @@ namespace ServerAziendaleDB
         /// Servizio adibito all'aggiornamento di un Evento nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="luogo"></param>
+        /// <param name="aggiornaEvento"></param>
         /// <returns></returns>
-        public bool AggiornaEvento(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string luogo)
+        public bool AggiornaEvento(string username, EventoSRV aggiornaEvento)
         {
-            string query_attivita = "UPDATE attivita SET nome = '" + nome + "', descrizione = '" + descrizione + "', data_inizio = '" + dataInizio + "', data_fine = '" + dataFine +
-                                    "' WHERE codice = '" + codice + "';"; ///Aggiorno l'attività
+            string query_attivita = "UPDATE attivita SET nome = '" + aggiornaEvento.Nome + "', descrizione = '" + aggiornaEvento.Descrizione + "', data_inizio = '" 
+                                    + aggiornaEvento.DataInizio.ToString("yyyy-MM-dd") + "', data_fine = '" + aggiornaEvento.DataFine.ToString("yyyy-MM-dd") +
+                                    "' WHERE codice = '" + aggiornaEvento.Codice + "';"; ///Aggiorno l'attività
 
-            string query_evento = "UPDATE evento SET luogo = '" + luogo + "' WHERE id = '" + id + "';"; ///Aggiorno l'evento
+            string query_evento = "UPDATE evento SET luogo = '" + aggiornaEvento.Luogo + "' WHERE id = '" + aggiornaEvento.Id + "';"; ///Aggiorno l'evento
 
             List<string> queries = new List<string>
             {
