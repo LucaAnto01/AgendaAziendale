@@ -405,17 +405,13 @@ namespace ServerAziendale
         /// Servizio adibito all'inserimento di un Progetto nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="nuovoProgetto"></param>
         /// <returns></returns>
-        public bool CreaProgetto(string username, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente)
+        public bool CreaProgetto(string username, ProgettoSRV nuovoProgetto)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.CreaProgetto(username, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), cliente))
+                if (Sessione.ServerAziendaleDB.CreaProgetto(username, nuovoProgetto))
                     return true;
             }
 
@@ -437,19 +433,13 @@ namespace ServerAziendale
         /// Servizio adibito all'aggiornamento di un Progetto nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="aggiornaProgetto"></param>
         /// <returns></returns>
-        public bool AggiornaProgetto(string username, string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente)
+        public bool AggiornaProgetto(string username, ProgettoSRV aggiornaProgetto)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.AggiornaProgetto(username, codice, id, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), cliente))
+                if (Sessione.ServerAziendaleDB.AggiornaProgetto(username, aggiornaProgetto))
                     return true;
             }
 

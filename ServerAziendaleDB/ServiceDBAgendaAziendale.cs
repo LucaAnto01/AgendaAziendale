@@ -572,17 +572,14 @@ namespace ServerAziendaleDB
         /// Servizio adibito all'inserimento di un Progetto nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="nuovoProgetto"></param>
         /// <returns></returns>
-        public bool CreaProgetto(string username, string nome, string descrizione, string dataInizio, string dataFine, string cliente)
+        public bool CreaProgetto(string username, ProgettoSRV nuovoProgetto)
         {
             string query_attivita = "INSERT INTO attivita(nome, descrizione, data_inizio, data_fine) " +
-                                    "VALUES('" + nome + "', '" + descrizione + "', '" + dataInizio + "', '" + dataFine + "');"; ///Creo una nuova attività
-            string query_progetto = "INSERT INTO progetto(cliente) VALUES ('" + cliente + "');"; ///Creo un nuovo progetto
+                                    "VALUES('" + nuovoProgetto.Nome + "', '" + nuovoProgetto.Descrizione + "', '" +
+                                    nuovoProgetto.DataInizio.ToString("yyyy-MM-dd") + "', '" + nuovoProgetto.DataFine.ToString("yyyy-MM-dd") + "');"; ///Creo una nuova attività
+            string query_progetto = "INSERT INTO progetto(cliente) VALUES ('" + nuovoProgetto.Cliente + "');"; ///Creo un nuovo progetto
 
             List<string> queries = new List<string>
             {
@@ -636,20 +633,16 @@ namespace ServerAziendaleDB
         /// Servizio adibito all'aggiornamento di un Progetto nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="aggiornaProgetto"></param>
         /// <returns></returns>
-        public bool AggiornaProgetto(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string cliente)
+        public bool AggiornaProgetto(string username, ProgettoSRV aggiornaProgetto)
         {
-            string query_attivita = "UPDATE attivita SET nome = '" + nome + "', descrizione = '" + descrizione + "', data_inizio = '" + dataInizio + "', data_fine = '" + dataFine +
-                                    "' WHERE codice = '" + codice + "';"; ///Aggiorno l'attività
+            string query_attivita = "UPDATE attivita SET nome = '" + aggiornaProgetto.Nome + "', descrizione = '" + aggiornaProgetto.Descrizione + 
+                                    "', data_inizio = '" + aggiornaProgetto.DataInizio.ToString("yyyy-MM-dd") + "', data_fine = '" +
+                                    aggiornaProgetto.DataFine.ToString("yyyy-MM-dd") +
+                                    "' WHERE codice = '" + aggiornaProgetto.Codice + "';"; ///Aggiorno l'attività
 
-            string query_progetto = "UPDATE progetto SET cliente = '" + cliente + "' WHERE id = '" + id + "';"; ///Aggiorno il progetto
+            string query_progetto = "UPDATE progetto SET cliente = '" + aggiornaProgetto.Cliente + "' WHERE id = '" + aggiornaProgetto.Id + "';"; ///Aggiorno il progetto
 
             List<string> queries = new List<string>
             {

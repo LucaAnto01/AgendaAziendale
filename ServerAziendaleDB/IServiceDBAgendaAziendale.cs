@@ -145,29 +145,19 @@ namespace ServerAziendaleDB
         /// Servizio adibito all'inserimento di un Progetto nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="nuovoProgetto"></param>
         /// <returns></returns>
         [OperationContract]
-        bool CreaProgetto(string username, string nome, string descrizione, string dataInizio, string dataFine, string cliente);
+        bool CreaProgetto(string username, ProgettoSRV nuovoProgetto);
 
         /// <summary>
         /// Servizio adibito all'aggiornamento di un Progetto nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="aggiornaProgetto"></param>
         /// <returns></returns>
         [OperationContract]
-        bool AggiornaProgetto(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string cliente);
+        bool AggiornaProgetto(string username, ProgettoSRV aggiornaProgetto);
 
         /// <summary>
         /// Servizio adibito all'eliminazione di un Progetto dal DB

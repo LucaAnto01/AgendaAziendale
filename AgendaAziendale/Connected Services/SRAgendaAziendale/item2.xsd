@@ -34,4 +34,30 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AttivitaSRV" nillable="true" type="tns:AttivitaSRV" />
+  <xs:complexType name="ProgettoSRV">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:AttivitaSRV">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Cliente" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Id" type="xs:int" />
+          <xs:element minOccurs="0" name="Obiettivi" nillable="true" type="tns:ArrayOfObiettivoSRV" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ProgettoSRV" nillable="true" type="tns:ProgettoSRV" />
+  <xs:complexType name="ArrayOfObiettivoSRV">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ObiettivoSRV" nillable="true" type="tns:ObiettivoSRV" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfObiettivoSRV" nillable="true" type="tns:ArrayOfObiettivoSRV" />
+  <xs:complexType name="ObiettivoSRV">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Completato" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Desccrizione" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ObiettivoSRV" nillable="true" type="tns:ObiettivoSRV" />
 </xs:schema>

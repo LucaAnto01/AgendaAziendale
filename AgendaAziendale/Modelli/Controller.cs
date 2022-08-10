@@ -366,17 +366,14 @@ namespace AgendaAziendale.Modelli
         /// <summary>
         /// Metodo adibito all'inserimento di un progetto nel DB
         /// </summary>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="nuovoProgetto"></param>
         /// <returns></returns>
-        public static bool CreaProgetto(string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente)
+        public static bool CreaProgetto(Progetto nuovoProgetto)
         {
             try
             {
-                if (Sessione.ServerAziendale.CreaProgetto(Sessione.Lavoratore.Username, nome, descrizione, dataInizio, dataFine, cliente))
+                ProgettoSRV nuovoProgettoSrv = new ProgettoSRV("", nuovoProgetto.Nome, nuovoProgetto.Descrizione, nuovoProgetto.DataInizio, nuovoProgetto.DataInizio, 0, nuovoProgetto.Cliente, null);
+                if (Sessione.ServerAziendale.CreaProgetto(Sessione.Lavoratore.Username, nuovoProgettoSrv))
                     return true;
 
                 return false;
@@ -394,19 +391,14 @@ namespace AgendaAziendale.Modelli
         /// <summary>
         /// Metodo adibito all'aggiornamento di un Progetto nel DB
         /// </summary>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="aggiornaProgetto"></param>
         /// <returns></returns>
-        public static bool AggiornaProgetto(string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente)
+        public static bool AggiornaProgetto(Progetto aggiornaProgetto)
         {
             try
             {
-                if (Sessione.ServerAziendale.AggiornaProgetto(Sessione.Lavoratore.Username, codice, id, nome, descrizione, dataInizio, dataFine, cliente))
+                ProgettoSRV aggiornaProgettoSrv = new ProgettoSRV(aggiornaProgetto.Codice, aggiornaProgetto.Nome, aggiornaProgetto.Descrizione, aggiornaProgetto.DataInizio, aggiornaProgetto.DataFine, aggiornaProgetto.Id, aggiornaProgetto.Cliente, null);
+                if (Sessione.ServerAziendale.AggiornaProgetto(Sessione.Lavoratore.Username, aggiornaProgettoSrv))
                     return true;
 
                 return false;

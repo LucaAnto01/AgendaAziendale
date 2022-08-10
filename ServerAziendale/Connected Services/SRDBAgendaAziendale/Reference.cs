@@ -100,16 +100,16 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         System.Threading.Tasks.Task<string> GetStoricoEventiAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgetto", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgettoResponse")]
-        bool CreaProgetto(string username, string nome, string descrizione, string dataInizio, string dataFine, string cliente);
+        bool CreaProgetto(string username, ServerAziendaleDB.Modelli.ProgettoSRV nuovoProgetto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgetto", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgettoResponse")]
-        System.Threading.Tasks.Task<bool> CreaProgettoAsync(string username, string nome, string descrizione, string dataInizio, string dataFine, string cliente);
+        System.Threading.Tasks.Task<bool> CreaProgettoAsync(string username, ServerAziendaleDB.Modelli.ProgettoSRV nuovoProgetto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaProgetto", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaProgettoResponse")]
-        bool AggiornaProgetto(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string cliente);
+        bool AggiornaProgetto(string username, [System.ServiceModel.MessageParameterAttribute(Name="aggiornaProgetto")] ServerAziendaleDB.Modelli.ProgettoSRV aggiornaProgetto1);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaProgetto", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/AggiornaProgettoResponse")]
-        System.Threading.Tasks.Task<bool> AggiornaProgettoAsync(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string cliente);
+        System.Threading.Tasks.Task<bool> AggiornaProgettoAsync(string username, ServerAziendaleDB.Modelli.ProgettoSRV aggiornaProgetto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/EliminaProgetto", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/EliminaProgettoResponse")]
         bool EliminaProgetto(string username, string codice, string id);
@@ -321,20 +321,20 @@ namespace ServerAziendale.SRDBAgendaAziendale {
             return base.Channel.GetStoricoEventiAsync(username);
         }
         
-        public bool CreaProgetto(string username, string nome, string descrizione, string dataInizio, string dataFine, string cliente) {
-            return base.Channel.CreaProgetto(username, nome, descrizione, dataInizio, dataFine, cliente);
+        public bool CreaProgetto(string username, ServerAziendaleDB.Modelli.ProgettoSRV nuovoProgetto) {
+            return base.Channel.CreaProgetto(username, nuovoProgetto);
         }
         
-        public System.Threading.Tasks.Task<bool> CreaProgettoAsync(string username, string nome, string descrizione, string dataInizio, string dataFine, string cliente) {
-            return base.Channel.CreaProgettoAsync(username, nome, descrizione, dataInizio, dataFine, cliente);
+        public System.Threading.Tasks.Task<bool> CreaProgettoAsync(string username, ServerAziendaleDB.Modelli.ProgettoSRV nuovoProgetto) {
+            return base.Channel.CreaProgettoAsync(username, nuovoProgetto);
         }
         
-        public bool AggiornaProgetto(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string cliente) {
-            return base.Channel.AggiornaProgetto(username, codice, id, nome, descrizione, dataInizio, dataFine, cliente);
+        public bool AggiornaProgetto(string username, ServerAziendaleDB.Modelli.ProgettoSRV aggiornaProgetto1) {
+            return base.Channel.AggiornaProgetto(username, aggiornaProgetto1);
         }
         
-        public System.Threading.Tasks.Task<bool> AggiornaProgettoAsync(string username, string codice, string id, string nome, string descrizione, string dataInizio, string dataFine, string cliente) {
-            return base.Channel.AggiornaProgettoAsync(username, codice, id, nome, descrizione, dataInizio, dataFine, cliente);
+        public System.Threading.Tasks.Task<bool> AggiornaProgettoAsync(string username, ServerAziendaleDB.Modelli.ProgettoSRV aggiornaProgetto) {
+            return base.Channel.AggiornaProgettoAsync(username, aggiornaProgetto);
         }
         
         public bool EliminaProgetto(string username, string codice, string id) {

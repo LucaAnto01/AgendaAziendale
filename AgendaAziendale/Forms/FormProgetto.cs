@@ -324,7 +324,8 @@ namespace AgendaAziendale.Forms
                 {
                     if ((azione == "Aggiungi") || (azione == "aggiungi"))
                     {
-                        if (Controller.CreaProgetto(tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbCliente.Text))
+                        Progetto nuovoProgetto = new Progetto("", tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), 0, tbCliente.Text);
+                        if (Controller.CreaProgetto(nuovoProgetto))
                         {
                             PulisciCampiInserimento();
                             MessageBox.Show("Inserimento progetto " + tbNome.Text + " avvenuto con successo!", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -337,7 +338,8 @@ namespace AgendaAziendale.Forms
 
                     if ((azione == "Aggiorna") || (azione == "aggiorna"))
                     {
-                        if (Controller.AggiornaProgetto(progetto.Codice, progetto.Id.ToString(), tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbCliente.Text))
+                        Progetto aggiornaProgetto = new Progetto(progetto.Codice, tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), progetto.Id, tbCliente.Text);
+                        if (Controller.AggiornaProgetto(aggiornaProgetto))
                         {
                             MessageBox.Show("Aggiornamento progetto " + tbNome.Text + " avvenuto con successo!", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             formPadre.Show();
