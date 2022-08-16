@@ -645,15 +645,13 @@ namespace ServerAziendale
         /// Servizio adibito all'inserimento di un nuovo Obiettivo ad un determinato Progetto
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="id"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="completato"></param>
+        /// <param name="nuovoObiettivo"></param>
         /// <returns></returns>
-        public bool AggiungiObiettivo(string username, string id, string descrizione, bool completato)
+        public bool AggiungiObiettivo(string username, ObiettivoSRV nuovoObiettivo)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.AggiungiObiettivo(username, id, descrizione, completato))
+                if (Sessione.ServerAziendaleDB.AggiungiObiettivo(username, nuovoObiettivo))
                     return true;
             }
 
@@ -675,15 +673,13 @@ namespace ServerAziendale
         /// Servizio adibito alla modifica di un determinato obiettivo
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="id"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="completato"></param>
+        /// <param name="aggiornaObiettivo"></param>
         /// <returns></returns>
-        public bool ModificaObiettivo(string username, string id, string descrizione, bool completato)
+        public bool ModificaObiettivo(string username, ObiettivoSRV aggiornaObiettivo)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.ModificaObiettivo(username, id, descrizione, completato))
+                if (Sessione.ServerAziendaleDB.ModificaObiettivo(username, aggiornaObiettivo))
                     return true;
             }
 

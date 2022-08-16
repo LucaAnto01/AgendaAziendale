@@ -212,7 +212,8 @@ namespace AgendaAziendale.Forms
                 {
                     if ((azione == "Aggiungi") || (azione == "aggiungi"))
                     {
-                        if (Controller.AggiungiObiettivo(progetto.Id.ToString(), tbDescrizione.Text, ckCompletato.Checked))
+                        Obiettivo nuovoObiettivo = new Obiettivo(progetto.Id, tbDescrizione.Text, ckCompletato.Checked);
+                        if (Controller.AggiungiObiettivo(nuovoObiettivo))
                         {
                             MessageBox.Show("Inserimento obiettivo " + tbDescrizione.Text + " avvenuto con successo!", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             tbDescrizione.Text = "";
@@ -225,7 +226,8 @@ namespace AgendaAziendale.Forms
 
                     if ((azione == "Aggiorna") || (azione == "aggiorna"))
                     {
-                        if (Controller.ModificaObiettivo(obiettivo.Id.ToString(), tbDescrizione.Text, ckCompletato.Checked)) ///Aggiorno l'obiettivo nel db
+                        Obiettivo aggiornaObiettivo = new Obiettivo(obiettivo.Id, tbDescrizione.Text, ckCompletato.Checked);
+                        if (Controller.ModificaObiettivo(aggiornaObiettivo)) ///Aggiorno l'obiettivo nel db
                         {
                             MessageBox.Show("Aggiornamento obiettivo avvenuto con successo!", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

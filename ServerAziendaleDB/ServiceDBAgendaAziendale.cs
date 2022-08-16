@@ -5,8 +5,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-//using MySql.Data.MySqlClient;
-using MySqlConnector;
+using MySql.Data.MySqlClient;
+//using MySqlConnector;
 using ServerAziendaleDB.Modelli;
 
 namespace ServerAziendaleDB
@@ -380,7 +380,7 @@ namespace ServerAziendaleDB
                                     + aggiornaEvento.DataInizio.ToString("yyyy-MM-dd") + "', data_fine = '" + aggiornaEvento.DataFine.ToString("yyyy-MM-dd") +
                                     "' WHERE codice = '" + aggiornaEvento.Codice + "';"; ///Aggiorno l'attività
 
-            string query_evento = "UPDATE evento SET luogo = '" + aggiornaEvento.Luogo + "' WHERE id = '" + aggiornaEvento.Id + "';"; ///Aggiorno l'evento
+            string query_evento = "UPDATE evento SET luogo = '" + aggiornaEvento.Luogo + "' WHERE id = '" + aggiornaEvento.Id.ToString() + "';"; ///Aggiorno l'evento
 
             List<string> queries = new List<string>
             {
@@ -642,7 +642,7 @@ namespace ServerAziendaleDB
                                     aggiornaProgetto.DataFine.ToString("yyyy-MM-dd") +
                                     "' WHERE codice = '" + aggiornaProgetto.Codice + "';"; ///Aggiorno l'attività
 
-            string query_progetto = "UPDATE progetto SET cliente = '" + aggiornaProgetto.Cliente + "' WHERE id = '" + aggiornaProgetto.Id + "';"; ///Aggiorno il progetto
+            string query_progetto = "UPDATE progetto SET cliente = '" + aggiornaProgetto.Cliente + "' WHERE id = '" + aggiornaProgetto.Id.ToString() + "';"; ///Aggiorno il progetto
 
             List<string> queries = new List<string>
             {
@@ -871,14 +871,12 @@ namespace ServerAziendaleDB
         /// Servizio adibito all'inserimento di un nuovo Obiettivo ad un determinato Progetto
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="id"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="completato"></param>
+        /// <param name="nuovoObiettivo"></param>
         /// <returns></returns>
-        public bool AggiungiObiettivo(string username, string id, string descrizione, bool completato)
+        public bool AggiungiObiettivo(string username, ObiettivoSRV nuovoObiettivo)
         {
             string query = "INSERT INTO obiettivo(fk_progetto, descrizione, completato) " +
-                           " VALUES ('" + id + "','" + descrizione + "','" + (completato ? 1.ToString() : 0.ToString()) + "');";
+                           " VALUES ('" + nuovoObiettivo.Id.ToString() + "','" + nuovoObiettivo.Desccrizione + "','" + (nuovoObiettivo.Completato ? 1.ToString() : 0.ToString()) + "');";
 
             List<string> queries = new List<string>
             {
@@ -912,14 +910,12 @@ namespace ServerAziendaleDB
         /// Servizio adibito alla modifica di un determinato obiettivo
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="id"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="completato"></param>
+        /// <param name="aggiornaObiettivo"></param>
         /// <returns></returns>
-        public bool ModificaObiettivo(string username, string id, string descrizione, bool completato)
+        public bool ModificaObiettivo(string username, ObiettivoSRV aggiornaObiettivo)
         {
-            string query = "UPDATE obiettivo SET descrizione = '" + descrizione + "',completato = '" + (completato ? 1.ToString() : 0.ToString()) + "' " +
-                           " WHERE obiettivo.id = '" + id + "';";
+            string query = "UPDATE obiettivo SET descrizione = '" + aggiornaObiettivo.Desccrizione + "',completato = '" + (aggiornaObiettivo.Completato ? 1.ToString() : 0.ToString()) + "' " +
+                           " WHERE obiettivo.id = '" + aggiornaObiettivo.Id.ToString() + "';";
 
             List<string> queries = new List<string>
             {

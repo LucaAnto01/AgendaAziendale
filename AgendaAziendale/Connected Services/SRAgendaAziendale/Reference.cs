@@ -148,16 +148,16 @@ namespace AgendaAziendale.SRAgendaAziendale {
         System.Threading.Tasks.Task<int> CalcolaAvanzamentoAsync(string username, int[] obiettivi);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/AggiungiObiettivo", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/AggiungiObiettivoResponse")]
-        bool AggiungiObiettivo(string username, string id, string descrizione, bool completato);
+        bool AggiungiObiettivo(string username, ServerAziendaleDB.Modelli.ObiettivoSRV nuovoObiettivo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/AggiungiObiettivo", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/AggiungiObiettivoResponse")]
-        System.Threading.Tasks.Task<bool> AggiungiObiettivoAsync(string username, string id, string descrizione, bool completato);
+        System.Threading.Tasks.Task<bool> AggiungiObiettivoAsync(string username, ServerAziendaleDB.Modelli.ObiettivoSRV nuovoObiettivo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/ModificaObiettivo", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/ModificaObiettivoResponse")]
-        bool ModificaObiettivo(string username, string id, string descrizione, bool completato);
+        bool ModificaObiettivo(string username, ServerAziendaleDB.Modelli.ObiettivoSRV aggiornaObiettivo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/ModificaObiettivo", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/ModificaObiettivoResponse")]
-        System.Threading.Tasks.Task<bool> ModificaObiettivoAsync(string username, string id, string descrizione, bool completato);
+        System.Threading.Tasks.Task<bool> ModificaObiettivoAsync(string username, ServerAziendaleDB.Modelli.ObiettivoSRV aggiornaObiettivo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/EliminaObiettivo", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/EliminaObiettivoResponse")]
         bool EliminaObiettivo(string username, string id);
@@ -393,20 +393,20 @@ namespace AgendaAziendale.SRAgendaAziendale {
             return base.Channel.CalcolaAvanzamentoAsync(username, obiettivi);
         }
         
-        public bool AggiungiObiettivo(string username, string id, string descrizione, bool completato) {
-            return base.Channel.AggiungiObiettivo(username, id, descrizione, completato);
+        public bool AggiungiObiettivo(string username, ServerAziendaleDB.Modelli.ObiettivoSRV nuovoObiettivo) {
+            return base.Channel.AggiungiObiettivo(username, nuovoObiettivo);
         }
         
-        public System.Threading.Tasks.Task<bool> AggiungiObiettivoAsync(string username, string id, string descrizione, bool completato) {
-            return base.Channel.AggiungiObiettivoAsync(username, id, descrizione, completato);
+        public System.Threading.Tasks.Task<bool> AggiungiObiettivoAsync(string username, ServerAziendaleDB.Modelli.ObiettivoSRV nuovoObiettivo) {
+            return base.Channel.AggiungiObiettivoAsync(username, nuovoObiettivo);
         }
         
-        public bool ModificaObiettivo(string username, string id, string descrizione, bool completato) {
-            return base.Channel.ModificaObiettivo(username, id, descrizione, completato);
+        public bool ModificaObiettivo(string username, ServerAziendaleDB.Modelli.ObiettivoSRV aggiornaObiettivo) {
+            return base.Channel.ModificaObiettivo(username, aggiornaObiettivo);
         }
         
-        public System.Threading.Tasks.Task<bool> ModificaObiettivoAsync(string username, string id, string descrizione, bool completato) {
-            return base.Channel.ModificaObiettivoAsync(username, id, descrizione, completato);
+        public System.Threading.Tasks.Task<bool> ModificaObiettivoAsync(string username, ServerAziendaleDB.Modelli.ObiettivoSRV aggiornaObiettivo) {
+            return base.Channel.ModificaObiettivoAsync(username, aggiornaObiettivo);
         }
         
         public bool EliminaObiettivo(string username, string id) {

@@ -209,23 +209,19 @@ namespace ServerAziendaleDB
         /// Servizio adibito all'inserimento di un nuovo Obiettivo ad un determinato Progetto
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="id"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="completato"></param>
+        /// <param name="nuovoObiettivo"></param>
         /// <returns></returns>
         [OperationContract]
-        bool AggiungiObiettivo(string username, string id, string descrizione, bool completato);
+        bool AggiungiObiettivo(string username, ObiettivoSRV nuovoObiettivo);
 
         /// <summary>
         /// Servizio adibito alla modifica di un determinato obiettivo
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="id"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="completato"></param>
+        /// <param name="aggiornaObiettivo"></param>
         /// <returns></returns>
         [OperationContract]
-        bool ModificaObiettivo(string username, string id, string descrizione, bool completato);
+        bool ModificaObiettivo(string username, ObiettivoSRV aggiornaObiettivo);
 
         /// <summary>
         /// Servizio adibito all'eliminazione di un determinato obiettivo

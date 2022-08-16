@@ -581,11 +581,12 @@ namespace AgendaAziendale.Modelli
         /// <param name="descrizione"></param>
         /// <param name="completato"></param>
         /// <returns></returns>
-        public static bool AggiungiObiettivo(string id, string descrizione, bool completato)
+        public static bool AggiungiObiettivo(Obiettivo nuovoObiettivo)
         {
             try
             {
-                if (Sessione.ServerAziendale.AggiungiObiettivo(Sessione.Lavoratore.Username, id, descrizione, completato))
+                ObiettivoSRV nuovoObiettivoSrv = new ObiettivoSRV(nuovoObiettivo.Id, nuovoObiettivo.Desccrizione, nuovoObiettivo.Completato);
+                if (Sessione.ServerAziendale.AggiungiObiettivo(Sessione.Lavoratore.Username, nuovoObiettivoSrv))
                     return true;
 
                 return false;
@@ -607,11 +608,12 @@ namespace AgendaAziendale.Modelli
         /// <param name="descrizione"></param>
         /// <param name="completato"></param>
         /// <returns></returns>
-        public static bool ModificaObiettivo(string id, string descrizione, bool completato)
+        public static bool ModificaObiettivo(Obiettivo aggiornaObiettivo)
         {
             try
             {
-                if (Sessione.ServerAziendale.ModificaObiettivo(Sessione.Lavoratore.Username, id, descrizione, completato))
+                ObiettivoSRV aggiornaObiettivoSrv = new ObiettivoSRV(aggiornaObiettivo.Id, aggiornaObiettivo.Desccrizione, aggiornaObiettivo.Completato);
+                if (Sessione.ServerAziendale.ModificaObiettivo(Sessione.Lavoratore.Username, aggiornaObiettivoSrv))
                     return true;
 
                 return false;

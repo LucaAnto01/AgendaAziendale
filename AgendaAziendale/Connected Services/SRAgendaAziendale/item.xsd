@@ -329,9 +329,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="descrizione" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="completato" type="xs:boolean" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="nuovoObiettivo" nillable="true" type="q8:ObiettivoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -346,9 +344,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="descrizione" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="completato" type="xs:boolean" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="aggiornaObiettivo" nillable="true" type="q9:ObiettivoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
