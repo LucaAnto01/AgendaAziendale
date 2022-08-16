@@ -103,6 +103,7 @@ namespace AgendaAziendale.Forms
                     cbCategoria.Text = lavoratore.Categoria;
 
                     tbUsername.Enabled = false; //Impedisco la modifica dell'username in quanto chiave primaria dei lavoratori --> garantisco l'integrità del DB
+                    lbInfoPassword.Visible = true;
                     btAggiornaPassowrd.Visible = true;
                 }
 
