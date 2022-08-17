@@ -339,6 +339,7 @@
             this.lbInfoPassword.Text = "Al fine di aggiornare la password\r\ne\' necesario cliccare l\'apposito bottone\r\ndopo" +
     " aver compilato il campo con la \r\nnuova password";
             this.lbInfoPassword.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lbInfoPassword.Visible = false;
             // 
             // lbErrore
             // 

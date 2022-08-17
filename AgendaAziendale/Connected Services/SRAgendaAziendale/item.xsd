@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/ServerAziendale/ServiceAgendaAziendale/?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/ServerAziendale/ServiceAgendaAziendale/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" />
+  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/ServerAziendale/ServiceAgendaAziendale/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="TestConnessione">
     <xs:complexType>
       <xs:sequence />
@@ -45,14 +46,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="username_in" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="cognome" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="residenza" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="dataNascita" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="categoria" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="nuovoLavoratore" nillable="true" type="q1:LavoratoreSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -67,12 +61,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="username_in" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="cognome" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="residenza" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="dataNascita" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="categoria" nillable="true" type="xs:string" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="aggiornaLavoratore" nillable="true" type="q2:LavoratoreSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -132,11 +121,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="descrizione" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="dataInizio" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="dataFine" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="luogo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="nuovoEvento" nillable="true" type="q3:EventoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -151,13 +136,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="codice" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="descrizione" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="dataInizio" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="dataFine" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="luogo" nillable="true" type="xs:string" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="aggiornaEvento" nillable="true" type="q4:EventoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -231,11 +210,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="descrizione" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="dataInizio" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="dataFine" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="cliente" nillable="true" type="xs:string" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="nuovoProgetto" nillable="true" type="q5:ProgettoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -250,13 +225,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="codice" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="nome" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="descrizione" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="dataInizio" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="dataFine" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="cliente" nillable="true" type="xs:string" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="aggiornaProgetto" nillable="true" type="q6:ProgettoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -345,7 +314,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="obiettivi" nillable="true" type="q1:ArrayOfint" />
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="obiettivi" nillable="true" type="q7:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -360,9 +329,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="descrizione" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="completato" type="xs:boolean" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="nuovoObiettivo" nillable="true" type="q8:ObiettivoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -377,9 +344,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="descrizione" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="completato" type="xs:boolean" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="aggiornaObiettivo" nillable="true" type="q9:ObiettivoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

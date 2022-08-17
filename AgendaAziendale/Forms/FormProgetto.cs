@@ -65,55 +65,64 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void FormProgetto_Load(object sender, EventArgs e)
         {
-            ///Figli del Form
-            panelTop.Parent = this;
-            panelCentro.Parent = this;
-            ///Figli del pannello top
-            btChiudi.Parent = panelTop;
-            ///Figli del pannello centrale
-            lbNome.Parent = panelCentro;
-            lbDescrizione.Parent = panelCentro;
-            lbDataInizio.Parent = panelCentro;
-            lbDataFine.Parent = panelCentro;
-            lbCliente.Parent = panelCentro;
-            tbNome.Parent = panelCentro;
-            tbDescrizione.Parent = panelCentro;
-            tbDataInizio.Parent = panelCentro;
-            tbDataFine.Parent = panelCentro;
-            tbCliente.Parent = panelCentro;
-            mcDataInizio.Parent = panelCentro;
-            mcDataFine.Parent = panelCentro;
-            lbErrore.Parent = panelCentro;
-            lbErroreData.Parent = panelCentro;
-            btAggiungiAggiorna.Parent = panelCentro;
-            btGestioneObiettivi.Parent = panelCentro;
-
-            ///Setto un minimo valido per il settaggio delle date di un nuovo Progetto
-            mcDataInizio.MinDate = DateTime.Now;
-            mcDataFine.MinDate = DateTime.Now.AddDays(1);
-
-            if (progetto != null) ///Se ho un evento da modificare
+            try
             {
-                tbNome.Text = progetto.Nome;
-                tbDescrizione.Text = progetto.Descrizione;
-                tbDataInizio.Text = progetto.DataInizio.ToShortDateString();
-                tbDataFine.Text = progetto.DataFine.ToShortDateString();
-                tbCliente.Text = progetto.Cliente;
+                ///Figli del Form
+                panelTop.Parent = this;
+                panelCentro.Parent = this;
+                ///Figli del pannello top
+                btChiudi.Parent = panelTop;
+                ///Figli del pannello centrale
+                lbNome.Parent = panelCentro;
+                lbDescrizione.Parent = panelCentro;
+                lbDataInizio.Parent = panelCentro;
+                lbDataFine.Parent = panelCentro;
+                lbCliente.Parent = panelCentro;
+                tbNome.Parent = panelCentro;
+                tbDescrizione.Parent = panelCentro;
+                tbDataInizio.Parent = panelCentro;
+                tbDataFine.Parent = panelCentro;
+                tbCliente.Parent = panelCentro;
+                mcDataInizio.Parent = panelCentro;
+                mcDataFine.Parent = panelCentro;
+                lbErrore.Parent = panelCentro;
+                lbErroreData.Parent = panelCentro;
+                btAggiungiAggiorna.Parent = panelCentro;
+                btGestioneObiettivi.Parent = panelCentro;
+
+                ///Setto un minimo valido per il settaggio delle date di un nuovo Progetto
+                mcDataInizio.MinDate = DateTime.Now;
+                mcDataFine.MinDate = DateTime.Now.AddDays(1);
+
+                if (progetto != null) ///Se ho un evento da modificare
+                {
+                    tbNome.Text = progetto.Nome;
+                    tbDescrizione.Text = progetto.Descrizione;
+                    tbDataInizio.Text = progetto.DataInizio.ToShortDateString();
+                    tbDataFine.Text = progetto.DataFine.ToShortDateString();
+                    tbCliente.Text = progetto.Cliente;
+                }
+
+                if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                    btAggiungiAggiorna.Text = "Aggiungi";
+
+                else if ((azione == "Aggiorna") || (azione == "aggiorna"))
+                {
+                    btAggiungiAggiorna.Text = "Aggiorna";
+                    btGestioneObiettivi.Visible = true;
+                }
+
+
+                else
+                {
+                    MessageBox.Show("ERRORE! Valore FormProgetto:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
             }
-
-            if ((azione == "Aggiungi") || (azione == "aggiungi"))
-                btAggiungiAggiorna.Text = "Aggiungi";
-
-            else if ((azione == "Aggiorna") || (azione == "aggiorna"))
+            
+            catch
             {
-                btAggiungiAggiorna.Text = "Aggiorna";
-                btGestioneObiettivi.Visible = true;
-            }
-                
-
-            else
-            {
-                MessageBox.Show("ERRORE! Valore FormProgetto:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ERRORE! FormProgetto: errore caricamento interfaccia", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
         }
@@ -126,8 +135,17 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
-            formPadre.Show();
-            Close();
+            try
+            {
+                formPadre.Show();
+                Close();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormProgetto: errore chiusura interfaccia", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -138,7 +156,16 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtMinimize_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Minimized;
+            try
+            {
+                WindowState = FormWindowState.Minimized;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormProgetto: errore minimizzazione interfaccia", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -149,10 +176,19 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void Tb_TextChanged(object sender, EventArgs e)
         {
-            if ((!Regex.IsMatch(((TextBox)sender).Text, Sessione.Regex)) && (((TextBox)sender).Text != ""))
+            try
             {
-                MessageBox.Show("Non inserire lettere accentate o caratteri speciali!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ((TextBox)sender).Text = "";
+                if ((!Regex.IsMatch(((TextBox)sender).Text, Sessione.Regex)) && (((TextBox)sender).Text != ""))
+                {
+                    MessageBox.Show("Non inserire lettere accentate o caratteri speciali!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ((TextBox)sender).Text = "";
+                }
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormProgetto: errore controllo inserimento testo per caratteri speciale", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
         }
 
@@ -165,10 +201,19 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbDataInizio_Enter(object sender, EventArgs e)
         {
-            ((TextBox)sender).BackColor = Color.White;
-            mcDataInizio.Show();
-            tbDataInizio.Enabled = false;
-            tbDataFine.Enabled = false;
+            try
+            {
+                ((TextBox)sender).BackColor = Color.White;
+                mcDataInizio.Show();
+                tbDataInizio.Enabled = false;
+                tbDataFine.Enabled = false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormProgetto: errore visualizzazione calendario per input data inizio", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -180,10 +225,19 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void McDataInizio_DateSelected(object sender, DateRangeEventArgs e)
         {
-            mcDataInizio.Hide();
-            tbDataInizio.Enabled = true;
-            tbDataFine.Enabled = true;
-            tbDataInizio.Text = mcDataInizio.SelectionRange.Start.ToShortDateString();
+            try
+            {
+                mcDataInizio.Hide();
+                tbDataInizio.Enabled = true;
+                tbDataFine.Enabled = true;
+                tbDataInizio.Text = mcDataInizio.SelectionRange.Start.ToShortDateString();
+            }          
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormProgetto: errore chiusura calendario per input data inizio", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -195,11 +249,20 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbDataFine_Enter(object sender, EventArgs e)
         {
-            ((TextBox)sender).BackColor = Color.White;
-            lbErroreData.Visible = false;
-            mcDataFine.Show();
-            tbDataFine.Enabled = false;
-            tbDataInizio.Enabled = false;
+            try
+            {
+                ((TextBox)sender).BackColor = Color.White;
+                lbErroreData.Visible = false;
+                mcDataFine.Show();
+                tbDataFine.Enabled = false;
+                tbDataInizio.Enabled = false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormProgetto: errore visualizzazione calendario per input data fine", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -211,10 +274,19 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void McDataFine_DateSelected(object sender, DateRangeEventArgs e)
         {
-            mcDataFine.Hide();
-            tbDataFine.Enabled = true;
-            tbDataInizio.Enabled = true;
-            tbDataFine.Text = mcDataFine.SelectionRange.Start.ToShortDateString();
+            try
+            {
+                mcDataFine.Hide();
+                tbDataFine.Enabled = true;
+                tbDataInizio.Enabled = true;
+                tbDataFine.Text = mcDataFine.SelectionRange.Start.ToShortDateString();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormProgetto: errore chiusura calendario per input data fine", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -225,7 +297,16 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbEnter_Click(object sender, EventArgs e)
         {
-            ((TextBox)sender).BackColor = Color.White;
+            try
+            {
+                ((TextBox)sender).BackColor = Color.White;
+            }
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormProgetto: errore pulizia campo input", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -237,40 +318,51 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiungiAggiorna_Click(object sender, EventArgs e)
         {
-            if (CheckCampi())
+            try
             {
-                if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                if (CheckCampi())
                 {
-                    if (Controller.CreaProgetto(tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbCliente.Text))
+                    if ((azione == "Aggiungi") || (azione == "aggiungi"))
                     {
-                        PulisciCampiInserimento();
-                        MessageBox.Show("Inserimento progetto " + tbNome.Text + " avvenuto con successo!", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                        
+                        Progetto nuovoProgetto = new Progetto("", tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), 0, tbCliente.Text);
+                        if (Controller.CreaProgetto(nuovoProgetto))
+                        {
+                            PulisciCampiInserimento();
+                            MessageBox.Show("Inserimento progetto " + tbNome.Text + " avvenuto con successo!", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
 
-                    else
-                        MessageBox.Show("Errore in fase d'inserimento.", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
 
-                if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                {
-                    if (Controller.AggiornaProgetto(progetto.Codice, progetto.Id.ToString(), tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), tbCliente.Text))
-                    {
-                        MessageBox.Show("Aggiornamento progetto " + tbNome.Text + " avvenuto con successo!", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        formPadre.Show();
-                        Close();
+                        else
+                            MessageBox.Show("Errore in fase d'inserimento.", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
 
-                    else
-                        MessageBox.Show("Errore in fase di aggiornamento.", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if ((azione == "Aggiorna") || (azione == "aggiorna"))
+                    {
+                        Progetto aggiornaProgetto = new Progetto(progetto.Codice, tbNome.Text, tbDescrizione.Text, DateTime.Parse(tbDataInizio.Text), DateTime.Parse(tbDataFine.Text), progetto.Id, tbCliente.Text);
+                        if (Controller.AggiornaProgetto(aggiornaProgetto))
+                        {
+                            MessageBox.Show("Aggiornamento progetto " + tbNome.Text + " avvenuto con successo!", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            formPadre.Show();
+                            Close();
+                        }
+
+                        else
+                            MessageBox.Show("Errore in fase di aggiornamento.", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    if (ucPadre != null)
+                        ucPadre.AggiornadgvProgetti();
                 }
 
-                if (ucPadre != null)
-                    ucPadre.AggiornadgvProgetti();
+                else
+                    lbErrore.Visible = true;
             }
-
-            else
-                lbErrore.Visible = true;
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormProgetto: errore click aggiornamento/inserimento dati", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -280,9 +372,18 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtGestioneObiettivi_Click(object sender, EventArgs e)
         {
-            FormObiettivi formObiettivi = new FormObiettivi(this, ucPadre, progetto);
-            formObiettivi.Show();
-            Hide();
+            try
+            {
+                FormObiettivi formObiettivi = new FormObiettivi(this, ucPadre, progetto);
+                formObiettivi.Show();
+                Hide();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormProgetto: errore click gestione obiettivi", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         #endregion
@@ -296,40 +397,49 @@ namespace AgendaAziendale.Forms
         {
             bool check = true; ///True, tutti i campi compilati
 
-            if (tbNome.Text == "")
+            try
             {
-                tbNome.BackColor = Color.Red;
-                check = false;
-            }
+                if (tbNome.Text == "")
+                {
+                    tbNome.BackColor = Color.Red;
+                    check = false;
+                }
 
-            if (tbDescrizione.Text == "")
-            {
-                tbDescrizione.BackColor = Color.Red;
-                check = false;
-            }
+                if (tbDescrizione.Text == "")
+                {
+                    tbDescrizione.BackColor = Color.Red;
+                    check = false;
+                }
 
-            if (tbDataInizio.Text == "")
-            {
-                tbDataInizio.BackColor = Color.Red;
-                check = false;
-            }
+                if (tbDataInizio.Text == "")
+                {
+                    tbDataInizio.BackColor = Color.Red;
+                    check = false;
+                }
 
-            if (tbDataFine.Text == "")
-            {
-                tbDataFine.BackColor = Color.Red;
-                check = false;
-            }
+                if (tbDataFine.Text == "")
+                {
+                    tbDataFine.BackColor = Color.Red;
+                    check = false;
+                }
 
-            if (DateTime.Parse(tbDataFine.Text) < DateTime.Parse(tbDataInizio.Text)) ///Controllo validità data fine
-            {
-                lbErroreData.Visible = true;
-                check = false;
-            }
+                if (DateTime.Parse(tbDataFine.Text) < DateTime.Parse(tbDataInizio.Text)) ///Controllo validità data fine
+                {
+                    lbErroreData.Visible = true;
+                    check = false;
+                }
 
-            if (tbCliente.Text == "")
+                if (tbCliente.Text == "")
+                {
+                    tbCliente.BackColor = Color.Red;
+                    check = false;
+                }
+            }
+            
+            catch
             {
-                tbCliente.BackColor = Color.Red;
-                check = false;
+                MessageBox.Show("ERRORE! FormProgetto: errore check campi intput", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
 
             return check;
@@ -340,13 +450,22 @@ namespace AgendaAziendale.Forms
         /// </summary>
         private void PulisciCampiInserimento()
         {
-            tbNome.Text = "";
-            tbDescrizione.Text = "";
-            tbDataInizio.Text = "";
-            tbDataFine.Text = "";
-            tbCliente.Text = "";
-            lbErrore.Visible = false;
-            lbErroreData.Visible = false;
+            try
+            {
+                tbNome.Text = "";
+                tbDescrizione.Text = "";
+                tbDataInizio.Text = "";
+                tbDataFine.Text = "";
+                tbCliente.Text = "";
+                lbErrore.Visible = false;
+                lbErroreData.Visible = false;
+            }            
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormProgetto: errore pulizia campi inseirmento", "FormProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
     }

@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using ServerAziendale.Modelli;
+using ServerAziendaleDB.Modelli;
 
 namespace ServerAziendale
 {
@@ -84,20 +85,13 @@ namespace ServerAziendale
         /// Servizio adibito all'inserimento di un Lavoratore nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="username_in"></param>
-        /// <param name="password"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="email"></param>
-        /// <param name="categoria"></param>
+        /// <param name="nuovoLavoratore"></param>
         /// <returns></returns>
-        public bool InserisciLavoratore(string username, string username_in, string password, string nome, string cognome, string residenza, DateTime dataNascita, string email, string categoria)
+        public bool InserisciLavoratore(string username, LavoratoreSRV nuovoLavoratore)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.InserisciLavoratore(username, username_in, password, nome, cognome, residenza, dataNascita.ToString("yyyy-MM-dd"), email, categoria))
+                if (Sessione.ServerAziendaleDB.InserisciLavoratore(username, nuovoLavoratore))
                     return true;
             }
 
@@ -119,18 +113,13 @@ namespace ServerAziendale
         /// Servizio adibito all'aggiornamento di un Lavoratore nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="username_in"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="categoria"></param>
+        /// <param name="aggiornaLavoratore"></param>
         /// <returns></returns>
-        public bool AggiornaLavoratore(string username, string username_in, string nome, string cognome, string residenza, DateTime dataNascita, string categoria)
+        public bool AggiornaLavoratore(string username, LavoratoreSRV aggiornaLavoratore)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.AggiornaLavoratore(username, username_in, nome, cognome, residenza, dataNascita.ToString("yyyy-MM-dd"), categoria))
+                if (Sessione.ServerAziendaleDB.AggiornaLavoratore(username, aggiornaLavoratore))
                     return true;
             }
 
@@ -240,17 +229,13 @@ namespace ServerAziendale
         /// Servizio adibito all'inserimento di un Evento nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="luogo"></param>
-        /// <returns>bool</returns>
-        public bool CreaEvento(string username, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo)
+        /// <param name="nuovoEvento"></param>
+        /// <returns></returns>
+        public bool CreaEvento(string username, EventoSRV nuovoEvento)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.CreaEvento(username, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), luogo))
+                if (Sessione.ServerAziendaleDB.CreaEvento(username, nuovoEvento))
                     return true;
             }
 
@@ -272,19 +257,13 @@ namespace ServerAziendale
         /// Servizio adibito all'aggiornamento di un Evento nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="luogo"></param>
+        /// <param name="aggiornaEvento"></param>
         /// <returns></returns>
-        public bool AggiornaEvento(string username, string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo)
+        public bool AggiornaEvento(string username, EventoSRV aggiornaEvento)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.AggiornaEvento(username, codice, id, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), luogo))
+                if (Sessione.ServerAziendaleDB.AggiornaEvento(username, aggiornaEvento))
                     return true;
             }
 
@@ -426,17 +405,13 @@ namespace ServerAziendale
         /// Servizio adibito all'inserimento di un Progetto nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="nuovoProgetto"></param>
         /// <returns></returns>
-        public bool CreaProgetto(string username, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente)
+        public bool CreaProgetto(string username, ProgettoSRV nuovoProgetto)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.CreaProgetto(username, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), cliente))
+                if (Sessione.ServerAziendaleDB.CreaProgetto(username, nuovoProgetto))
                     return true;
             }
 
@@ -458,19 +433,13 @@ namespace ServerAziendale
         /// Servizio adibito all'aggiornamento di un Progetto nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="aggiornaProgetto"></param>
         /// <returns></returns>
-        public bool AggiornaProgetto(string username, string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente)
+        public bool AggiornaProgetto(string username, ProgettoSRV aggiornaProgetto)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.AggiornaProgetto(username, codice, id, nome, descrizione, dataInizio.ToString("yyyy-MM-dd"), dataFine.ToString("yyyy-MM-dd"), cliente))
+                if (Sessione.ServerAziendaleDB.AggiornaProgetto(username, aggiornaProgetto))
                     return true;
             }
 
@@ -676,15 +645,13 @@ namespace ServerAziendale
         /// Servizio adibito all'inserimento di un nuovo Obiettivo ad un determinato Progetto
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="id"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="completato"></param>
+        /// <param name="nuovoObiettivo"></param>
         /// <returns></returns>
-        public bool AggiungiObiettivo(string username, string id, string descrizione, bool completato)
+        public bool AggiungiObiettivo(string username, ObiettivoSRV nuovoObiettivo)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.AggiungiObiettivo(username, id, descrizione, completato))
+                if (Sessione.ServerAziendaleDB.AggiungiObiettivo(username, nuovoObiettivo))
                     return true;
             }
 
@@ -706,15 +673,13 @@ namespace ServerAziendale
         /// Servizio adibito alla modifica di un determinato obiettivo
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="id"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="completato"></param>
+        /// <param name="aggiornaObiettivo"></param>
         /// <returns></returns>
-        public bool ModificaObiettivo(string username, string id, string descrizione, bool completato)
+        public bool ModificaObiettivo(string username, ObiettivoSRV aggiornaObiettivo)
         {
             try
             {
-                if (Sessione.ServerAziendaleDB.ModificaObiettivo(username, id, descrizione, completato))
+                if (Sessione.ServerAziendaleDB.ModificaObiettivo(username, aggiornaObiettivo))
                     return true;
             }
 

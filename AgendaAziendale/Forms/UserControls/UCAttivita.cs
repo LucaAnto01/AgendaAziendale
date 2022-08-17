@@ -42,18 +42,27 @@ namespace AgendaAziendale.Forms.UserControls
         /// <param name="e"></param>
         private void UCAttivita_Load(object sender, EventArgs e)
         {
-            ///Figli del form
-            panelCentro.Parent = this;
-            ///Figli del panelCentro
-            lbTitolo.Parent = panelCentro;
-            lbClienteLuogoInt.Parent = panelCentro;
-            lbClienteLuogo.Parent = panelCentro;  
-            lbDataInizioFineInt.Parent = panelCentro;
-            lbDataInizioFine.Parent = panelCentro;
-            btInfo.Parent = panelCentro;
-            pbProgetto.Parent = panelCentro;
+            try
+            {
+                ///Figli del form
+                panelCentro.Parent = this;
+                ///Figli del panelCentro
+                lbTitolo.Parent = panelCentro;
+                lbClienteLuogoInt.Parent = panelCentro;
+                lbClienteLuogo.Parent = panelCentro;
+                lbDataInizioFineInt.Parent = panelCentro;
+                lbDataInizioFine.Parent = panelCentro;
+                btInfo.Parent = panelCentro;
+                pbProgetto.Parent = panelCentro;
 
-            SetTesti();
+                SetTesti();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCAttivita: errore caricamento interfaccia", "UCAttivita", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -64,7 +73,16 @@ namespace AgendaAziendale.Forms.UserControls
         /// <param name="e"></param>
         private void UCAttivita_MouseEnter(object sender, EventArgs e)
         {
-            panelCentro.BackColor = Color.Gainsboro;
+            try
+            {
+                panelCentro.BackColor = Color.Gainsboro;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCAttivita: errore settaggio colore mouse enter", "UCAttivita", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -75,7 +93,16 @@ namespace AgendaAziendale.Forms.UserControls
         /// <param name="e"></param>
         private void UCAttivita_MouseLeave(object sender, EventArgs e)
         {
-            panelCentro.BackColor = Color.WhiteSmoke;
+            try
+            {
+                panelCentro.BackColor = Color.WhiteSmoke;
+            }        
+
+            catch
+            {
+                MessageBox.Show("ERRORE! UCAttivita: errore settaggio colore mouse enter", "UCAttivita", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -85,7 +112,16 @@ namespace AgendaAziendale.Forms.UserControls
         /// <param name="e"></param>
         private void BtInfo_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Nome: " + Attivita.Nome + "\nDescrizione: " + Attivita.Descrizione + ".", Attivita.Nome, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                MessageBox.Show("Nome: " + Attivita.Nome + "\nDescrizione: " + Attivita.Descrizione + ".", Attivita.Nome, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCAttivita: errore click btinfo", "UCAttivita", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
 
@@ -96,40 +132,49 @@ namespace AgendaAziendale.Forms.UserControls
         /// </summary>
         private void SetTesti()
         {
-            lbTitolo.Text = Attivita.Nome;
-            
-            if(Attivita is Evento)
+            try
             {
-                Evento evento = (Evento)Attivita;
-                lbClienteLuogoInt.Text = "Luogo";
-                lbClienteLuogo.Text = evento.Luogo;
-                lbDataInizioFineInt.Text = "Inizio - Fine";
-                lbDataInizioFine.Text = evento.DataInizio.ToString("dd-MM-yyyy") + " - " + evento.DataFine.ToString("dd-MM-yyyy");
-                Size = new Size(325, 100);
+                lbTitolo.Text = Attivita.Nome;
+
+                if (Attivita is Evento)
+                {
+                    Evento evento = (Evento)Attivita;
+                    lbClienteLuogoInt.Text = "Luogo";
+                    lbClienteLuogo.Text = evento.Luogo;
+                    lbDataInizioFineInt.Text = "Inizio - Fine";
+                    lbDataInizioFine.Text = evento.DataInizio.ToString("dd-MM-yyyy") + " - " + evento.DataFine.ToString("dd-MM-yyyy");
+                    Size = new Size(325, 100);
+                }
+
+                else if (Attivita is Progetto)
+                {
+                    Progetto progetto = (Progetto)Attivita;
+                    lbClienteLuogoInt.Text = "Cliente";
+                    lbClienteLuogo.Text = progetto.Cliente;
+                    lbDataInizioFineInt.Text = "Consegna";
+                    lbDataInizioFine.Text = progetto.DataFine.ToString("dd-MM-yyyy");
+                    pbProgetto.Visible = true;
+
+                    pbProgetto.Maximum = 100;
+                    int avanzamento = Controller.CalcolaAvanzamentoProgetto(progetto);
+                    pbProgetto.Value = avanzamento; ///Calcolo l'avanzamento del progetto e lo mostro mostrando l'avanzamento della progress bar
+
+                                                    ///A seconda della percentuale di avanzamento setto il colore della barra
+                    if (avanzamento <= 30)
+                        ProgressBarColor.SetState(pbProgetto, 2);
+
+                    else if ((avanzamento > 30) && (avanzamento <= 85))
+                        ProgressBarColor.SetState(pbProgetto, 3);
+
+                    else if (avanzamento > 85)
+                        ProgressBarColor.SetState(pbProgetto, 1);
+                }
             }
-
-            else if(Attivita is Progetto)
+            
+            catch
             {
-                Progetto progetto = (Progetto)Attivita;
-                lbClienteLuogoInt.Text = "Cliente";
-                lbClienteLuogo.Text = progetto.Cliente;
-                lbDataInizioFineInt.Text = "Consegna";
-                lbDataInizioFine.Text = progetto.DataFine.ToString("dd-MM-yyyy");
-                pbProgetto.Visible = true;
-
-                pbProgetto.Maximum = 100;
-                int avanzamento = Controller.CalcolaAvanzamentoProgetto(progetto);
-                pbProgetto.Value = avanzamento; ///Calcolo l'avanzamento del progetto e lo mostro mostrando l'avanzamento della progress bar
-
-                ///A seconda della percentuale di avanzamento setto il colore della barra
-                if (avanzamento <= 30)
-                    ProgressBarColor.SetState(pbProgetto, 2);
-
-                else if ((avanzamento > 30) && (avanzamento <= 85))
-                    ProgressBarColor.SetState(pbProgetto, 3);
-
-                else if (avanzamento > 85)
-                    ProgressBarColor.SetState(pbProgetto, 1);
+                MessageBox.Show("ERRORE! UCAttivita: errore settaggio testi", "UCAttivita", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
         }
         #endregion        

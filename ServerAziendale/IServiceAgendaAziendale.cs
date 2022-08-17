@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using ServerAziendaleDB.Modelli;
 
 namespace ServerAziendale
 {
@@ -41,31 +42,19 @@ namespace ServerAziendale
         /// Servizio adibito all'inserimento di un Lavoratore nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="username_in"></param>
-        /// <param name="password"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="email"></param>
-        /// <param name="categoria"></param>
+        /// <param name="nuovoLavoratore"></param>
         /// <returns></returns>
         [OperationContract]
-        bool InserisciLavoratore(string username, string username_in, string password, string nome, string cognome, string residenza, DateTime dataNascita, string email, string categoria);
+        bool InserisciLavoratore(string username, LavoratoreSRV nuovoLavoratore);
 
         /// <summary>
         /// Servizio adibito all'aggiornamento di un Lavoratore nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="username_in"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="categoria"></param>
+        /// <param name="aggiornaLavoratore"></param>
         /// <returns></returns>
         [OperationContract]
-        bool AggiornaLavoratore(string username, string username_in, string nome, string cognome, string residenza, DateTime dataNascita, string categoria);
+        bool AggiornaLavoratore(string username, LavoratoreSRV aggiornaLavoratore);
 
         /// <summary>
         /// Servizio adibito all'aggiornamento della password di un Lavoratore presente nel DB
@@ -100,29 +89,19 @@ namespace ServerAziendale
         /// Servizio adibito all'inserimento di un Evento nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="luogo"></param>
-        /// <returns>bool</returns>
+        /// <param name="nuovoEvento"></param>
+        /// <returns></returns>
         [OperationContract]
-        bool CreaEvento(string username, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo);
+        bool CreaEvento(string username, EventoSRV nuovoEvento);
 
         /// <summary>
         /// Servizio adibito all'aggiornamento di un Evento nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="luogo"></param>
+        /// <param name="aggiornaEvento"></param>
         /// <returns></returns>
         [OperationContract]
-        bool AggiornaEvento(string username, string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo);
+        bool AggiornaEvento(string username, EventoSRV aggiornaEvento);
 
         /// <summary>
         /// Servizio adibito all'eliminazione di un Evento nel DB
@@ -166,29 +145,19 @@ namespace ServerAziendale
         /// Servizio adibito all'inserimento di un Progetto nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="nuovoProgetto"></param>
         /// <returns></returns>
         [OperationContract]
-        bool CreaProgetto(string username, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente);
+        bool CreaProgetto(string username, ProgettoSRV nuovoProgetto);
 
         /// <summary>
         /// Servizio adibito all'aggiornamento di un Progetto nel DB
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="aggiornaProgetto"></param>
         /// <returns></returns>
         [OperationContract]
-        bool AggiornaProgetto(string username, string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente);
+        bool AggiornaProgetto(string username, ProgettoSRV aggiornaProgetto);
 
         /// <summary>
         /// Servizio adibito all'eliminazione di un Progetto dal DB
@@ -249,23 +218,19 @@ namespace ServerAziendale
         /// Servizio adibito all'inserimento di un nuovo Obiettivo ad un determinato Progetto
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="id"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="completato"></param>
+        /// <param name="nuovoObiettivo"></param>
         /// <returns></returns>
         [OperationContract]
-        bool AggiungiObiettivo(string username, string id, string descrizione, bool completato);
+        bool AggiungiObiettivo(string username, ObiettivoSRV nuovoObiettivo);
 
         /// <summary>
         /// Servizio adibito alla modifica di un determinato obiettivo
         /// </summary>
         /// <param name="username"></param>
-        /// <param name="id"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="completato"></param>
+        /// <param name="aggiornaObiettivo"></param>
         /// <returns></returns>
         [OperationContract]
-        bool ModificaObiettivo(string username, string id, string descrizione, bool completato);
+        bool ModificaObiettivo(string username, ObiettivoSRV aggiornaObiettivo);
 
         /// <summary>
         /// Servizio adibito all'eliminazione di un determinato obiettivo

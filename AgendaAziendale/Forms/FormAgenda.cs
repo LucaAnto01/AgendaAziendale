@@ -31,21 +31,30 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void FormAgenda_Load(object sender, EventArgs e)
         {
-            ///Figli del form
-            panelTop.Parent = this;
-            panelSinistra.Parent = this;
-            panelCentro.Parent = this;
-            ///Figli del pannello top
-            btChiudi.Parent = panelTop;
-            ///Figli del pannello di sinistra
-            btVisualizzaAgenda.Parent = panelSinistra;
-            btProgettiEventi.Parent = panelSinistra;
-            btGestione.Parent = panelSinistra;
-            btStoricoProgetti.Parent = panelSinistra;
-            btProgettiEventi.Parent= panelSinistra;
-            btLogout.Parent = panelSinistra;
+            try
+            {
+                ///Figli del form
+                panelTop.Parent = this;
+                panelSinistra.Parent = this;
+                panelCentro.Parent = this;
+                ///Figli del pannello top
+                btChiudi.Parent = panelTop;
+                ///Figli del pannello di sinistra
+                btVisualizzaAgenda.Parent = panelSinistra;
+                btProgettiEventi.Parent = panelSinistra;
+                btGestione.Parent = panelSinistra;
+                btStoricoProgetti.Parent = panelSinistra;
+                btProgettiEventi.Parent = panelSinistra;
+                btLogout.Parent = panelSinistra;
 
-            SettaggioInterfaccia();
+                SettaggioInterfaccia();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormAgenda: caricamento form", "FormAgenda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -56,7 +65,16 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            try
+            {
+                Application.Exit();
+            }
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormAgenda: impossibile chiudere il form", "FormAgenda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -67,7 +85,16 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtMinimize_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Minimized;
+            try
+            {
+                WindowState = FormWindowState.Minimized;
+            }
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormAgenda: impossibile ridurre il form", "FormAgenda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -78,7 +105,16 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtVisualizzaAgenda_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormVisualizzazioneAttivita(this));
+            try
+            {
+                CaricaForm(new FormVisualizzazioneAttivita(this));
+            }
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormAgenda: impossibile aprire form visualizzazioneAttivita", "FormAgenda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -89,8 +125,17 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtProgettiEventi_Click(object sender, EventArgs e)
         {
-            if ((Sessione.Lavoratore.Categoria == "Project Manager") || (Sessione.Lavoratore.Categoria == "Sviluppatore"))
-                CaricaForm(new FormGestione(this, "Progetto", true));
+            try
+            {
+                if ((Sessione.Lavoratore.Categoria == "Project Manager") || (Sessione.Lavoratore.Categoria == "Sviluppatore"))
+                    CaricaForm(new FormGestione(this, "Progetto", true));
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormAgenda: impossibile aprire form progetti", "FormAgenda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -101,11 +146,20 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtGestione_Click(object sender, EventArgs e)
         {
-            if (Sessione.Lavoratore.Categoria == "Project Manager")
-                CaricaForm(new FormGestione(this, "Progetto", false));
+            try
+            {
+                if (Sessione.Lavoratore.Categoria == "Project Manager")
+                    CaricaForm(new FormGestione(this, "Progetto", false));
 
-            else if (Sessione.Lavoratore.Categoria == "Segretario")
-                CaricaForm(new FormGestione(this, "Evento", false));
+                else if (Sessione.Lavoratore.Categoria == "Segretario")
+                    CaricaForm(new FormGestione(this, "Evento", false));
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormAgenda: impossibile aprire form progetti o eventi", "FormAgenda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -115,7 +169,16 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtVisualizzaStoricoEvento_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormStorico(this, "eventi"));
+            try
+            {
+                CaricaForm(new FormStorico(this, "eventi"));
+            }
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormAgenda: impossibile aprire form storico eventi", "FormAgenda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -125,7 +188,16 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtStoricoProgetti_Click(object sender, EventArgs e)
         {
-            CaricaForm(new FormStorico(this, "progetti"));
+            try
+            {
+                CaricaForm(new FormStorico(this, "progetti"));
+            }
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormAgenda: impossibile aprire form storico progetti", "FormAgenda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -136,9 +208,18 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtLogout_Click(object sender, EventArgs e)
         {
-            FormLogin formLogin = new FormLogin();
-            formLogin.ShowDialog();
-            Close(); //Chiudo questo form
+            try
+            {
+                FormLogin formLogin = new FormLogin();
+                formLogin.ShowDialog();
+                Close(); //Chiudo questo form
+            }
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormAgenda: impossibile effettuare il logout", "FormAgenda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
 
@@ -150,16 +231,24 @@ namespace AgendaAziendale.Forms
         /// <param name="formIn"></param>
         public void CaricaForm(object formIn)
         {
+            try
+            {
+                if (panelCentro.Controls.Count > 0) //Controllo che non ci siano altri form già all'interno dell'interfaccia
+                    panelCentro.Controls.RemoveAt(0); //Elimino i controlli relativi al form precedentemente inserito nell'interfaccia
 
-            if (panelCentro.Controls.Count > 0) //Controllo che non ci siano altri form già all'interno dell'interfaccia
-                panelCentro.Controls.RemoveAt(0); //Elimino i controlli relativi al form precedentemente inserito nell'interfaccia
+                Form f = formIn as Form;
+                f.TopLevel = false;
+                f.Dock = DockStyle.Fill; //Mi assicuro che occupi tutto lo spazio disponibile, se fosse troppo grande lo ridimensionerebbe
+                panelCentro.Controls.Add(f); //Asssegno i controlli al form "dinamico" creato
+                panelCentro.Tag = f;
+                f.Show();
+            }
 
-            Form f = formIn as Form;
-            f.TopLevel = false;
-            f.Dock = DockStyle.Fill; //Mi assicuro che occupi tutto lo spazio disponibile, se fosse troppo grande lo ridimensionerebbe
-            panelCentro.Controls.Add(f); //Asssegno i controlli al form "dinamico" creato
-            panelCentro.Tag = f;
-            f.Show();
+            catch
+            {
+                MessageBox.Show("ERRORE! FormAgenda: impossibile effettuare il caricamento del form", "FormAgenda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -167,34 +256,43 @@ namespace AgendaAziendale.Forms
         /// </summary>
         private void SettaggioInterfaccia()
         {
-            if(Sessione.Lavoratore.Categoria == "Project Manager")
+            try
             {
-                btGestione.Visible = true;
-                btStoricoProgetti.Visible = true;
-                btVisualizzaStoricoEvento.Visible = false;
-                btGestione.Text = "Gestione progetti";
-                btGestione.Image = Properties.Resources.Progetti; ///Settaggio dell'icona
-                btProgettiEventi.Text = "Progetti";
-                btProgettiEventi.Image = Properties.Resources.Progetti;
-            }
+                if (Sessione.Lavoratore.Categoria == "Project Manager")
+                {
+                    btGestione.Visible = true;
+                    btStoricoProgetti.Visible = true;
+                    btVisualizzaStoricoEvento.Visible = false;
+                    btGestione.Text = "Gestione progetti";
+                    btGestione.Image = Properties.Resources.Progetti; ///Settaggio dell'icona
+                    btProgettiEventi.Text = "Progetti";
+                    btProgettiEventi.Image = Properties.Resources.Progetti;
+                }
 
-            else if(Sessione.Lavoratore.Categoria == "Segretario")
-            {
-                btGestione.Visible = true;
-                btGestione.Location = new Point(33, 205);
-                btProgettiEventi.Visible = false;
-                btVisualizzaStoricoEvento.Visible = true;
-                btStoricoProgetti.Visible = false;
-                btGestione.Text = "Gestione eventi";
-                btGestione.Image = Properties.Resources.Eventi;
-                btProgettiEventi.Text = "Eventi";
-                btProgettiEventi.Image = Properties.Resources.Eventi;
-            }
+                else if (Sessione.Lavoratore.Categoria == "Segretario")
+                {
+                    btGestione.Visible = true;
+                    btGestione.Location = new Point(33, 205);
+                    btProgettiEventi.Visible = false;
+                    btVisualizzaStoricoEvento.Visible = true;
+                    btStoricoProgetti.Visible = false;
+                    btGestione.Text = "Gestione eventi";
+                    btGestione.Image = Properties.Resources.Eventi;
+                    btProgettiEventi.Text = "Eventi";
+                    btProgettiEventi.Image = Properties.Resources.Eventi;
+                }
 
-            else if (Sessione.Lavoratore.Categoria == "Sviluppatore")
+                else if (Sessione.Lavoratore.Categoria == "Sviluppatore")
+                {
+                    btProgettiEventi.Text = "Progetti";
+                    btProgettiEventi.Image = Properties.Resources.Progetti;
+                }
+            }
+            
+            catch
             {
-                btProgettiEventi.Text = "Progetti";
-                btProgettiEventi.Image = Properties.Resources.Progetti;
+                MessageBox.Show("ERRORE! FormAgenda: impossibile settare il testo del'interfaccia", "FormAgenda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
         }
         #endregion

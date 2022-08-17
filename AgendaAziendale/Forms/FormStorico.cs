@@ -45,29 +45,38 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void FormStorico_Load(object sender, EventArgs e)
         {
-            ///Figli del form
-            panelCentro.Parent = this;
-            ///Figli del panelCentro
-            panelUCcontenitore.Parent = panelCentro;
-
-            if ((tipologia == "Eventi") || (tipologia == "eventi"))
+            try
             {
-                UcContenitore = new UCStoricoEventi(FormPadre);
+                ///Figli del form
+                panelCentro.Parent = this;
+                ///Figli del panelCentro
+                panelUCcontenitore.Parent = panelCentro;
+
+                if ((tipologia == "Eventi") || (tipologia == "eventi"))
+                {
+                    UcContenitore = new UCStoricoEventi(FormPadre);
+                }
+
+                else if ((tipologia == "Progetti") || (tipologia == "progetti"))
+                {
+                    UcContenitore = new UCStoricoProgetti(FormPadre);
+                }
+
+                else
+                {
+                    MessageBox.Show("ERRORE! Valore FormStorico:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
+
+                panelUCcontenitore.Controls.Add(UcContenitore); ///Aggiungo l'UC all'interfaccia
             }
 
-            else if ((tipologia == "Progetti") || (tipologia == "progetti"))
+            catch
             {
-                UcContenitore = new UCStoricoProgetti(FormPadre);
-            }
-
-            else
-            {
-                MessageBox.Show("ERRORE! Valore FormStorico:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ERRORE! FormStorico: errore caricamento interfaccia", "FormStorico", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
-
-            panelUCcontenitore.Controls.Add(UcContenitore); ///Aggiungo l'UC all'interfaccia
-        }
-        #endregion
-    }
+        }        
+    #endregion
+}
 }

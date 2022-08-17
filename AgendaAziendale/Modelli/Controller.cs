@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using ServerAziendaleDB.Modelli;
 
 namespace AgendaAziendale.Modelli
 {
@@ -20,13 +22,24 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static bool EffettuaLogin(string username, string password)
         {
-            string passwordHash = Lavoratore.PasswordHashing(password);
+            try
+            {
+                string passwordHash = Lavoratore.PasswordHashing(password);
 
-            if (Sessione.ServerAziendale.Login(username, passwordHash)) ///Effettuo il login
+                if (Sessione.ServerAziendale.Login(username, passwordHash)) ///Effettuo il login
                     return true;
 
-            else
-                return false;
+                else
+                    return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo EffettuaLogin: errore richiamo web service", "Metodo EffettuaLogin", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+
+            return false;
         }
 
         #region Lavoratori
@@ -39,10 +52,22 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static Lavoratore GetInfoLavoratore(string username, string username_info)
         {
-            string result = Sessione.ServerAziendale.GetInfoLavoratore(username, username_info);
+            try
+            {
+                string result = Sessione.ServerAziendale.GetInfoLavoratore(username, username_info);
 
-            if (result != "")
-                return Lavoratore.GeneraLavoratore(result);
+                if (result != "")
+                    return Lavoratore.GeneraLavoratore(result);
+
+                return null;
+            }
+            
+
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GetInfoLavoratore: errore richiamo web service", "Metodo GetInfoLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return null;
         }
@@ -51,21 +76,29 @@ namespace AgendaAziendale.Modelli
         /// Metodo adibito all'inserimento di un lavoratore nel DB
         /// --> richiamo del web service InserisciLavoratore() dopo aver controllato che l'utente non esistesse già mediante il web service Login()
         /// </summary>
-        /// <param name="username_in"></param>
-        /// <param name="password"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="categoria"></param>
+        /// <param name="nuovoLavoratore"></param>
         /// <returns></returns>
-        public static bool InserisciLavoratore(string username_in, string password, string nome, string cognome, string residenza, string dataNascita, string categoria)
+        public static bool InserisciLavoratore(Lavoratore nuovoLavoratore)
         {
-            string passwordHash = Lavoratore.PasswordHashing(password);
-            if(Sessione.ServerAziendale.GetInfoLavoratore(Sessione.Lavoratore.Username, username_in) == "") ///Così facendo controllo che il Lavoratore non sia già presente all'interno del DB
-                if (Sessione.ServerAziendale.InserisciLavoratore(Sessione.Lavoratore.Username, username_in, passwordHash, nome, cognome, residenza, DateTime.Parse(dataNascita), Lavoratore.GeneraEmail(username_in, cognome), categoria)) ///Inserisco il lavoratore nel db
-                    return true;
+            try
+            {
+                string passwordHash = Lavoratore.PasswordHashing(nuovoLavoratore.Password);
+                if (Sessione.ServerAziendale.GetInfoLavoratore(Sessione.Lavoratore.Username, nuovoLavoratore.Username) == "") ///Così facendo controllo che il Lavoratore non sia già presente all'interno del DB
+                {
+                    LavoratoreSRV nuovoLavoratoreSrv = new LavoratoreSRV(nuovoLavoratore.Username, passwordHash, nuovoLavoratore.Nome, nuovoLavoratore.Cognome, nuovoLavoratore.Residenza, nuovoLavoratore.DataNascita, Lavoratore.GeneraEmail(nuovoLavoratore.Username, nuovoLavoratore.Cognome), nuovoLavoratore.Categoria);
+                    if (Sessione.ServerAziendale.InserisciLavoratore(Sessione.Lavoratore.Username, nuovoLavoratoreSrv)) ///Inserisco il lavoratore nel db
+                        return true;
+                }
+                    
+                return false;
+            }
             
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo InserisciLavoratore: errore richiamo web service", "Metodo InserisciLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+
             return false;
         }
 
@@ -73,17 +106,24 @@ namespace AgendaAziendale.Modelli
         /// Metodo adibito alla modifica di un lavoratore presente nel DB
         /// --> richiamo del web service AggiornaLavoratore()
         /// </summary>
-        /// <param name="username_in"></param>
-        /// <param name="nome"></param>
-        /// <param name="cognome"></param>
-        /// <param name="residenza"></param>
-        /// <param name="dataNascita"></param>
-        /// <param name="categoria"></param>
+        /// <param name="aggiornaLavoratore"></param>
         /// <returns></returns>
-        public static bool AggiornaLavoratore(string username_in, string nome, string cognome, string residenza, string dataNascita, string categoria)
+        public static bool AggiornaLavoratore(Lavoratore aggiornaLavoratore)
         {
-            if (Sessione.ServerAziendale.AggiornaLavoratore(Sessione.Lavoratore.Username, username_in, nome, cognome, residenza, DateTime.Parse(dataNascita), categoria)) ///Aggiorno il lavoratore nel db
-                return true;
+            try
+            {
+                LavoratoreSRV aggiornaLavoratoreSrv = new LavoratoreSRV(aggiornaLavoratore.Username, "", aggiornaLavoratore.Nome, aggiornaLavoratore.Cognome, aggiornaLavoratore.Residenza, aggiornaLavoratore.DataNascita, aggiornaLavoratore.Email, aggiornaLavoratore.Categoria);
+                if (Sessione.ServerAziendale.AggiornaLavoratore(Sessione.Lavoratore.Username, aggiornaLavoratoreSrv)) ///Aggiorno il lavoratore nel db
+                    return true;
+
+                return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo AggiornaLavoratore: errore richiamo web service", "Metodo AggiornaLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return false;
         }
@@ -97,9 +137,20 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static bool AggiornaPassword(string username_in, string password)
         {
-            string passwordHash = Lavoratore.PasswordHashing(password);
-            if (Sessione.ServerAziendale.AggiornaPassword(Sessione.Lavoratore.Username, username_in, passwordHash))
-                return true;
+            try
+            {
+                string passwordHash = Lavoratore.PasswordHashing(password);
+                if (Sessione.ServerAziendale.AggiornaPassword(Sessione.Lavoratore.Username, username_in, passwordHash))
+                    return true;
+
+                return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo AggiornaPassword: errore richiamo web service", "Metodo AggiornaPassword", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return false;
         }
@@ -112,8 +163,19 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static bool EliminaLavoratore(string username_in)
         {
-            if (Sessione.ServerAziendale.EliminaLavoratore(Sessione.Lavoratore.Username, username_in))
-                return true;
+            try
+            {
+                if (Sessione.ServerAziendale.EliminaLavoratore(Sessione.Lavoratore.Username, username_in))
+                    return true;
+
+                return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo EliminaLavoratore: errore richiamo web service", "Metodo EliminaLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return false;
         }
@@ -124,10 +186,22 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static string GetElencoLavoratori()
         {
-            string result = Sessione.ServerAziendale.GetElencoLavoratori(Sessione.Lavoratore.Username);
+            try
+            {
+                string result = Sessione.ServerAziendale.GetElencoLavoratori(Sessione.Lavoratore.Username);
 
-            if (result != "")
-                return result;
+                if (result != "")
+                    return result;
+
+                return "";
+            }
+            
+
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GetElencoLavoratori: errore richiamo web service", "Metodo GetElencoLavoratori", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return "";
         }
@@ -137,18 +211,24 @@ namespace AgendaAziendale.Modelli
         /// <summary>
         /// Metodo adibito all'inserimento di un evento nel DB
         /// </summary>
-        /// <param name="codice"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="id"></param>
-        /// <param name="luogo"></param>
+        /// <param name="nuovoEvento"></param>
         /// <returns></returns>
-        public static bool CreaEvento(string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo)
+        public static bool CreaEvento(Evento nuovoEvento)
         {
-            if (Sessione.ServerAziendale.CreaEvento(Sessione.Lavoratore.Username, nome, descrizione, dataInizio, dataFine, luogo))
-                return true;
+            try
+            {
+                EventoSRV nuovoEventoSrv = new EventoSRV(nuovoEvento.Codice, nuovoEvento.Nome, nuovoEvento.Descrizione, nuovoEvento.DataInizio, nuovoEvento.DataInizio, nuovoEvento.Id, nuovoEvento.Luogo);
+                if (Sessione.ServerAziendale.CreaEvento(Sessione.Lavoratore.Username, nuovoEventoSrv))
+                    return true;
+
+                return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo CreaEvento: errore richiamo web service", "Metodo CreaEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return false;
         }
@@ -156,21 +236,27 @@ namespace AgendaAziendale.Modelli
         /// <summary>
         /// Metodo adibito all'aggiornamento di un Evento nel DB
         /// </summary>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="luogo"></param>
+        /// <param name="aggiornaEvento"></param>
         /// <returns></returns>
-        public static bool AggiornaEvento(string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string luogo)
+        public static bool AggiornaEvento(Evento aggiornaEvento)
         {
-            if (Sessione.ServerAziendale.AggiornaEvento(Sessione.Lavoratore.Username, codice, id, nome, descrizione, dataInizio, dataFine, luogo))
-                return true;
+            try
+            {
+                EventoSRV aggiornaEventoSrv = new EventoSRV(aggiornaEvento.Codice, aggiornaEvento.Nome, aggiornaEvento.Descrizione, aggiornaEvento.DataInizio, aggiornaEvento.DataFine, aggiornaEvento.Id, aggiornaEvento.Luogo);
+                if (Sessione.ServerAziendale.AggiornaEvento(Sessione.Lavoratore.Username, aggiornaEventoSrv))
+                    return true;
 
-            else
-                return false;
+                else
+                    return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo AggiornaEvento: errore richiamo web service", "Metodo AggiornaEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -181,8 +267,19 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static bool EliminaEvento(string codice, string id)
         {
-            if (Sessione.ServerAziendale.EliminaEvento(Sessione.Lavoratore.Username, codice, id))
-                return true;
+            try
+            {
+                if (Sessione.ServerAziendale.EliminaEvento(Sessione.Lavoratore.Username, codice, id))
+                    return true;
+
+                return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo EliminaEvento: errore richiamo web service", "Metodo EliminaEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return false;
         }
@@ -193,10 +290,21 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static string GetElencoEventi()
         {
-            string result = Sessione.ServerAziendale.GetElencoEventi(Sessione.Lavoratore.Username);
+            try
+            {
+                string result = Sessione.ServerAziendale.GetElencoEventi(Sessione.Lavoratore.Username);
 
-            if (result != "")
-                return result;
+                if (result != "")
+                    return result;
+
+                return "";
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GetElencoEventi: errore richiamo web service", "Metodo GetElencoEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return "";
         }
@@ -209,10 +317,21 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static string GetElencoEventiLavoratore(string username_in)
         {
-            string result = Sessione.ServerAziendale.GetElencoEventiLavoratore(Sessione.Lavoratore.Username, username_in);
+            try
+            {
+                string result = Sessione.ServerAziendale.GetElencoEventiLavoratore(Sessione.Lavoratore.Username, username_in);
 
-            if (result != "")
-                return result;
+                if (result != "")
+                    return result;
+
+                return "";
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GetElencoEventiLavoratore: errore richiamo web service", "Metodo GetElencoEventiLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return "";
         }
@@ -223,10 +342,21 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static string GetStoricoEventi()
         {
-            string result = Sessione.ServerAziendale.GetStoricoEventi(Sessione.Lavoratore.Username);
+            try
+            {
+                string result = Sessione.ServerAziendale.GetStoricoEventi(Sessione.Lavoratore.Username);
 
-            if (result != "")
-                return result;
+                if (result != "")
+                    return result;
+
+                return "";
+            }        
+
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GetStoricoEventi: errore richiamo web service", "Metodo GetStoricoEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return "";
         }
@@ -236,16 +366,24 @@ namespace AgendaAziendale.Modelli
         /// <summary>
         /// Metodo adibito all'inserimento di un progetto nel DB
         /// </summary>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="nuovoProgetto"></param>
         /// <returns></returns>
-        public static bool CreaProgetto(string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente)
+        public static bool CreaProgetto(Progetto nuovoProgetto)
         {
-            if(Sessione.ServerAziendale.CreaProgetto(Sessione.Lavoratore.Username, nome, descrizione, dataInizio, dataFine, cliente))
-                return true;
+            try
+            {
+                ProgettoSRV nuovoProgettoSrv = new ProgettoSRV("", nuovoProgetto.Nome, nuovoProgetto.Descrizione, nuovoProgetto.DataInizio, nuovoProgetto.DataInizio, 0, nuovoProgetto.Cliente, null);
+                if (Sessione.ServerAziendale.CreaProgetto(Sessione.Lavoratore.Username, nuovoProgettoSrv))
+                    return true;
+
+                return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo CreaProgetto: errore richiamo web service", "Metodo CreaProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return false;
         }
@@ -253,18 +391,24 @@ namespace AgendaAziendale.Modelli
         /// <summary>
         /// Metodo adibito all'aggiornamento di un Progetto nel DB
         /// </summary>
-        /// <param name="codice"></param>
-        /// <param name="id"></param>
-        /// <param name="nome"></param>
-        /// <param name="descrizione"></param>
-        /// <param name="dataInizio"></param>
-        /// <param name="dataFine"></param>
-        /// <param name="cliente"></param>
+        /// <param name="aggiornaProgetto"></param>
         /// <returns></returns>
-        public static bool AggiornaProgetto(string codice, string id, string nome, string descrizione, DateTime dataInizio, DateTime dataFine, string cliente)
+        public static bool AggiornaProgetto(Progetto aggiornaProgetto)
         {
-            if (Sessione.ServerAziendale.AggiornaProgetto(Sessione.Lavoratore.Username, codice, id, nome, descrizione, dataInizio, dataFine, cliente))
-                return true;
+            try
+            {
+                ProgettoSRV aggiornaProgettoSrv = new ProgettoSRV(aggiornaProgetto.Codice, aggiornaProgetto.Nome, aggiornaProgetto.Descrizione, aggiornaProgetto.DataInizio, aggiornaProgetto.DataFine, aggiornaProgetto.Id, aggiornaProgetto.Cliente, null);
+                if (Sessione.ServerAziendale.AggiornaProgetto(Sessione.Lavoratore.Username, aggiornaProgettoSrv))
+                    return true;
+
+                return false;
+            }         
+
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo AggiornaProgetto: errore richiamo web service", "Metodo AggiornaProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return false;
         }
@@ -277,8 +421,19 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static bool EliminaProgetto(string codice, string id)
         {
-            if (Sessione.ServerAziendale.EliminaProgetto(Sessione.Lavoratore.Username, codice, id))
-                return true;
+            try
+            {
+                if (Sessione.ServerAziendale.EliminaProgetto(Sessione.Lavoratore.Username, codice, id))
+                    return true;
+
+                return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo EliminaProgetto: errore richiamo web service", "Metodo EliminaProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return false;
         }
@@ -289,10 +444,21 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static string GetElencoProgetti()
         {
-            string result = Sessione.ServerAziendale.GetElencoProgetti(Sessione.Lavoratore.Username);
+            try
+            {
+                string result = Sessione.ServerAziendale.GetElencoProgetti(Sessione.Lavoratore.Username);
 
-            if (result != "")
-                return result;
+                if (result != "")
+                    return result;
+
+                return "";
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GetElencoProgetti: errore richiamo web service", "Metodo GetElencoProgetti", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return "";
         }
@@ -305,10 +471,21 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static string GetElencoProgettiLavoratore(string username_in)
         {
-            string result = Sessione.ServerAziendale.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username, username_in);
+            try
+            {
+                string result = Sessione.ServerAziendale.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username, username_in);
 
-            if (result != "")
-                return result;
+                if (result != "")
+                    return result;
+
+                return "";
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GetElencoProgettiLavoratore: errore richiamo web service", "Metodo GetElencoProgettiLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return "";
         }
@@ -319,10 +496,21 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static string GetStoricoProgetti()
         {
-            string result = Sessione.ServerAziendale.GetStoricoProgetti(Sessione.Lavoratore.Username);
+            try
+            {
+                string result = Sessione.ServerAziendale.GetStoricoProgetti(Sessione.Lavoratore.Username);
 
-            if (result != "")
-                return result;
+                if (result != "")
+                    return result;
+
+                return "";
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GetStoricoProgetti: errore richiamo web service", "Metodo GetStoricoProgetti", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return "";
         }
@@ -335,10 +523,21 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static string GetElencoObiettivi(string id)
         {
-            string result = Sessione.ServerAziendale.GetElencoObiettivi(Sessione.Lavoratore.Username, id);
+            try
+            {
+                string result = Sessione.ServerAziendale.GetElencoObiettivi(Sessione.Lavoratore.Username, id);
 
-            if (result != "")
-                return result;
+                if (result != "")
+                    return result;
+
+                return "";
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GetElencoObiettivi: errore richiamo web service", "Metodo GetElencoObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return "";
         }
@@ -350,18 +549,29 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static int CalcolaAvanzamentoProgetto(Progetto progetto)
         {
-            int[] obiettivi = new int[progetto.Obiettivi.Count];
-
-            int i = 0;
-            foreach(Obiettivo obiettivo in progetto.Obiettivi)
+            try
             {
-                obiettivi[i] = obiettivo.Completato ? 1 : 0;
-                i++;
+                int[] obiettivi = new int[progetto.Obiettivi.Count];
+
+                int i = 0;
+                foreach (Obiettivo obiettivo in progetto.Obiettivi)
+                {
+                    obiettivi[i] = obiettivo.Completato ? 1 : 0;
+                    i++;
+                }
+
+                int result = Sessione.ServerAziendale.CalcolaAvanzamento(Sessione.Lavoratore.Username, obiettivi);
+
+                return result;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo CalcolaAvanzamentoProgetto: errore richiamo web service", "Metodo CalcolaAvanzamentoProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
 
-            int result = Sessione.ServerAziendale.CalcolaAvanzamento(Sessione.Lavoratore.Username, obiettivi);
-
-            return result;
+            return 0;
         }
 
         /// <summary>
@@ -371,10 +581,22 @@ namespace AgendaAziendale.Modelli
         /// <param name="descrizione"></param>
         /// <param name="completato"></param>
         /// <returns></returns>
-        public static bool AggiungiObiettivo(string id, string descrizione, bool completato)
+        public static bool AggiungiObiettivo(Obiettivo nuovoObiettivo)
         {
-            if (Sessione.ServerAziendale.AggiungiObiettivo(Sessione.Lavoratore.Username, id, descrizione, completato))
-                return true;
+            try
+            {
+                ObiettivoSRV nuovoObiettivoSrv = new ObiettivoSRV(nuovoObiettivo.Id, nuovoObiettivo.Desccrizione, nuovoObiettivo.Completato);
+                if (Sessione.ServerAziendale.AggiungiObiettivo(Sessione.Lavoratore.Username, nuovoObiettivoSrv))
+                    return true;
+
+                return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo AggiungiObiettivo: errore richiamo web service", "Metodo AggiungiObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return false;
         }
@@ -386,10 +608,22 @@ namespace AgendaAziendale.Modelli
         /// <param name="descrizione"></param>
         /// <param name="completato"></param>
         /// <returns></returns>
-        public static bool ModificaObiettivo(string id, string descrizione, bool completato)
+        public static bool ModificaObiettivo(Obiettivo aggiornaObiettivo)
         {
-            if (Sessione.ServerAziendale.ModificaObiettivo(Sessione.Lavoratore.Username, id, descrizione, completato))
-                return true;
+            try
+            {
+                ObiettivoSRV aggiornaObiettivoSrv = new ObiettivoSRV(aggiornaObiettivo.Id, aggiornaObiettivo.Desccrizione, aggiornaObiettivo.Completato);
+                if (Sessione.ServerAziendale.ModificaObiettivo(Sessione.Lavoratore.Username, aggiornaObiettivoSrv))
+                    return true;
+
+                return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo ModificaObiettivo: errore richiamo web service", "Metodo ModificaObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return false;
         }
@@ -401,8 +635,19 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static bool EliminaObiettivo(string id)
         {
-            if (Sessione.ServerAziendale.EliminaObiettivo(Sessione.Lavoratore.Username, id))
-                return true;
+            try
+            {
+                if (Sessione.ServerAziendale.EliminaObiettivo(Sessione.Lavoratore.Username, id))
+                    return true;
+
+                return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo EliminaObiettivo: errore richiamo web service", "Metodo EliminaObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return false;
         }
@@ -418,8 +663,19 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static bool AggiugniPartecipanteAttivita(string username_in, string codice, string ruolo)
         {
-            if (Sessione.ServerAziendale.AggiungiPartecipanteAttivita(Sessione.Lavoratore.Username, username_in, codice, ruolo))
-                return true;
+            try
+            {
+                if (Sessione.ServerAziendale.AggiungiPartecipanteAttivita(Sessione.Lavoratore.Username, username_in, codice, ruolo))
+                    return true;
+
+                return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo AggiugniPartecipanteAttivita: errore richiamo web service", "Metodo AggiugniPartecipanteAttivita", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return false;
         }
@@ -431,10 +687,21 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static string GetElencoPartecipantiAttivita(string codice)
         {
-            string result = Sessione.ServerAziendale.GetElencoPartecipantiAttivita(Sessione.Lavoratore.Username, codice);
+            try
+            {
+                string result = Sessione.ServerAziendale.GetElencoPartecipantiAttivita(Sessione.Lavoratore.Username, codice);
 
-            if (result != "")
-                return result;
+                if (result != "")
+                    return result;
+
+                return "";
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GetElencoPartecipantiAttivita: errore richiamo web service", "Metodo GetElencoPartecipantiAttivita", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return "";
         }
@@ -447,10 +714,21 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static string GetElencoLavoratoriAttivita(string codice)
         {
-            string result = Sessione.ServerAziendale.GetElencoLavoratoriAttivita(Sessione.Lavoratore.Username, codice);
+            try
+            {
+                string result = Sessione.ServerAziendale.GetElencoLavoratoriAttivita(Sessione.Lavoratore.Username, codice);
 
-            if (result != "")
-                return result;
+                if (result != "")
+                    return result;
+
+                return "";
+            }          
+
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo GetElencoLavoratoriAttivita: errore richiamo web service", "Metodo GetElencoLavoratoriAttivita", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return "";
         }
@@ -463,8 +741,19 @@ namespace AgendaAziendale.Modelli
         /// <returns></returns>
         public static bool EliminaPartecipazioneAttivita(string username, string codice)
         {
-            if (Sessione.ServerAziendale.RimuoviPartecipanteAttivita(Sessione.Lavoratore.Username, username, codice))
-                return true;
+            try
+            {
+                if (Sessione.ServerAziendale.RimuoviPartecipanteAttivita(Sessione.Lavoratore.Username, username, codice))
+                    return true;
+
+                return false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! Metodo EliminaPartecipazioneAttivita: errore richiamo web service", "Metodo EliminaPartecipazioneAttivita", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return false;
         }

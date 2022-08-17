@@ -49,12 +49,21 @@ namespace AgendaAziendale.Forms.UserControls
         /// <param name="e"></param>
         private void UCObiettivi_Load(object sender, EventArgs e)
         {
-            ///Figli del Form
-            panelCentro.Parent = this;
-            ///Figli del panelCentro
-            dgvObiettivi.Parent = panelCentro;
+            try
+            {
+                ///Figli del Form
+                panelCentro.Parent = this;
+                ///Figli del panelCentro
+                dgvObiettivi.Parent = panelCentro;
 
-            AggiornadgvObiettivi();
+                AggiornadgvObiettivi();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCObiettivi: errore caricamento interfaccia", "UCObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -64,37 +73,46 @@ namespace AgendaAziendale.Forms.UserControls
         /// <param name="e"></param>
         private void DgvObiettivi_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Obiettivo obiettivo = new Obiettivo();
-            string idObiettivoSelezionato = dgvObiettivi.Rows[e.RowIndex].Cells[0].Value.ToString();
-            obiettivo = ProgettoPadre.Obiettivi.FirstOrDefault(ob => ob.Id.ToString() == idObiettivoSelezionato);
-
-            //Click sulla colonna con i button di modifica dell'obiettivo
-            if (e.ColumnIndex == 3)
+            try
             {
-                FormObiettivo formObiettivo = new FormObiettivo(FormPadre, UcProgettiPadre, this, ProgettoPadre, obiettivo, "aggiorna");
-                FormPadre.Hide();
-                formObiettivo.Show();
-            }
+                Obiettivo obiettivo = new Obiettivo();
+                string idObiettivoSelezionato = dgvObiettivi.Rows[e.RowIndex].Cells[0].Value.ToString();
+                obiettivo = ProgettoPadre.Obiettivi.FirstOrDefault(ob => ob.Id.ToString() == idObiettivoSelezionato);
 
-            //Click sulla colonna con i button d'eliminazione dell'obiettivo
-            if (e.ColumnIndex == 4)
-            {
-                if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione del'obiettivo selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
-                    "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+                //Click sulla colonna con i button di modifica dell'obiettivo
+                if (e.ColumnIndex == 3)
                 {
-                    if (Controller.EliminaObiettivo(idObiettivoSelezionato))
-                    {
-                        MessageBox.Show("Eliminazione progetto avvenuta con successo!", "UCObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        AggiornadgvObiettivi();
-                    }
-
-                    else
-                        MessageBox.Show("ERRORE! Impossibile eliminare l'obiettivo dal DB, contattare l'amministrazione.", "UCObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    FormObiettivo formObiettivo = new FormObiettivo(FormPadre, UcProgettiPadre, this, ProgettoPadre, obiettivo, "aggiorna");
+                    FormPadre.Hide();
+                    formObiettivo.Show();
                 }
-            }
 
-            else
-                Console.WriteLine("No action");
+                //Click sulla colonna con i button d'eliminazione dell'obiettivo
+                if (e.ColumnIndex == 4)
+                {
+                    if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione del'obiettivo selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
+                        "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        if (Controller.EliminaObiettivo(idObiettivoSelezionato))
+                        {
+                            MessageBox.Show("Eliminazione progetto avvenuta con successo!", "UCObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            AggiornadgvObiettivi();
+                        }
+
+                        else
+                            MessageBox.Show("ERRORE! Impossibile eliminare l'obiettivo dal DB, contattare l'amministrazione.", "UCObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                else
+                    Console.WriteLine("No action");
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCObiettivi: errore cell click", "UCObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
 
@@ -104,20 +122,29 @@ namespace AgendaAziendale.Forms.UserControls
         /// </summary>
         public void AggiornadgvObiettivi()
         {
-            string result = Controller.GetElencoObiettivi(ProgettoPadre.Id.ToString());
-
-            dgvObiettivi.Rows.Clear();
-
-            if (result != "")
+            try
             {
-                ProgettoPadre.Obiettivi = Obiettivo.GeneraElencoObiettivi(result);
+                string result = Controller.GetElencoObiettivi(ProgettoPadre.Id.ToString());
 
-                foreach(Obiettivo obiettivo in ProgettoPadre.Obiettivi)
-                    dgvObiettivi.Rows.Add(obiettivo.Id, obiettivo.Desccrizione, (obiettivo.Completato ? 1.ToString() : 0.ToString()));
+                dgvObiettivi.Rows.Clear();
+
+                if (result != "")
+                {
+                    ProgettoPadre.Obiettivi = Obiettivo.GeneraElencoObiettivi(result);
+
+                    foreach (Obiettivo obiettivo in ProgettoPadre.Obiettivi)
+                        dgvObiettivi.Rows.Add(obiettivo.Id, obiettivo.Desccrizione, (obiettivo.Completato ? 1.ToString() : 0.ToString()));
+                }
+
+                else
+                    MessageBox.Show("Non sono presenti obiettivi!", "Aggiorna UCObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            else
-                MessageBox.Show("Non sono presenti obiettivi!", "Aggiorna UCObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCObiettivi: errore aggiornamento dgv obiettivi", "UCObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion       
     }

@@ -88,39 +88,48 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void FormObiettivo_Load(object sender, EventArgs e)
         {
-            ///Figli del Form
-            panelTop.Parent = this;
-            panelCentro.Parent = this;
-            ///Figli del pannello top
-            btChiudi.Parent = panelTop;
-            ///Figli del pannello centrale
-            lbDescrizione.Parent = panelCentro;
-            lbCompletato.Parent = panelCentro;
-            tbDescrizione.Parent = panelCentro;
-            ckCompletato.Parent = panelCentro;
-            btAggiungiAggiorna.Parent = panelCentro;
-
-            if(obiettivo != null) //Se ho un obiettivo da modificare
+            try
             {
-                tbDescrizione.Text = obiettivo.Desccrizione;
+                ///Figli del Form
+                panelTop.Parent = this;
+                panelCentro.Parent = this;
+                ///Figli del pannello top
+                btChiudi.Parent = panelTop;
+                ///Figli del pannello centrale
+                lbDescrizione.Parent = panelCentro;
+                lbCompletato.Parent = panelCentro;
+                tbDescrizione.Parent = panelCentro;
+                ckCompletato.Parent = panelCentro;
+                btAggiungiAggiorna.Parent = panelCentro;
 
-                if(obiettivo.Completato)
-                    ckCompletato.Checked = true;
+                if (obiettivo != null) //Se ho un obiettivo da modificare
+                {
+                    tbDescrizione.Text = obiettivo.Desccrizione;
+
+                    if (obiettivo.Completato)
+                        ckCompletato.Checked = true;
+                }
+
+                if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                    btAggiungiAggiorna.Text = "Aggiungi";
+
+                else if ((azione == "Aggiorna") || (azione == "aggiorna"))
+                    btAggiungiAggiorna.Text = "Aggiorna";
+
+                else
+                {
+                    MessageBox.Show("ERRORE! Valore FormObiettivo:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
+
+                FormPadre.Hide(); //Nascondo il FormPadre
             }
-
-            if ((azione == "Aggiungi") || (azione == "aggiungi"))
-                btAggiungiAggiorna.Text = "Aggiungi";
-
-            else if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                btAggiungiAggiorna.Text = "Aggiorna";
-
-            else
+            
+            catch
             {
-                MessageBox.Show("ERRORE! Valore FormObiettivo:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ERRORE! FormObiettivo: errore caricamento interfaccia", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
-
-            FormPadre.Hide(); //Nascondo il FormPadre
         }
 
         /// <summary>
@@ -131,8 +140,17 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
-            FormPadre.Show();          
-            Close();
+            try
+            {
+                FormPadre.Show();
+                Close();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormObiettivo: errore chiusura interfaccia", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -143,7 +161,16 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtMinimize_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Minimized;
+            try
+            {
+                WindowState = FormWindowState.Minimized;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormObiettivo: errore minimizzazione interfaccia", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -154,10 +181,19 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void Tb_TextChanged(object sender, EventArgs e)
         {
-            if ((!Regex.IsMatch(((TextBox)sender).Text, Sessione.Regex)) && (((TextBox)sender).Text != ""))
+            try
             {
-                MessageBox.Show("Non inserire lettere accentate o caratteri speciali!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ((TextBox)sender).Text = "";
+                if ((!Regex.IsMatch(((TextBox)sender).Text, Sessione.Regex)) && (((TextBox)sender).Text != ""))
+                {
+                    MessageBox.Show("Non inserire lettere accentate o caratteri speciali!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ((TextBox)sender).Text = "";
+                }
+            }           
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormObiettivo: errore controllo testo campo inserimento per caratteri speciali", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
         }
 
@@ -170,46 +206,57 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiungiAggiorna_Click(object sender, EventArgs e)
         {
-            if (tbDescrizione.Text != "")
+            try
             {
-                if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                if (tbDescrizione.Text != "")
                 {
-                    if (Controller.AggiungiObiettivo(progetto.Id.ToString(), tbDescrizione.Text, ckCompletato.Checked))
+                    if ((azione == "Aggiungi") || (azione == "aggiungi"))
                     {
-                        MessageBox.Show("Inserimento obiettivo " + tbDescrizione.Text + " avvenuto con successo!", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        tbDescrizione.Text = "";
+                        Obiettivo nuovoObiettivo = new Obiettivo(progetto.Id, tbDescrizione.Text, ckCompletato.Checked);
+                        if (Controller.AggiungiObiettivo(nuovoObiettivo))
+                        {
+                            MessageBox.Show("Inserimento obiettivo " + tbDescrizione.Text + " avvenuto con successo!", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            tbDescrizione.Text = "";
+                        }
+
+                        else
+                            MessageBox.Show("Errore in fase d'inserimento.", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                     }
-                        
-                    else
-                        MessageBox.Show("Errore in fase d'inserimento.", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                }
-
-                if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                {
-                    if (Controller.ModificaObiettivo(obiettivo.Id.ToString(), tbDescrizione.Text, ckCompletato.Checked)) ///Aggiorno l'obiettivo nel db
+                    if ((azione == "Aggiorna") || (azione == "aggiorna"))
                     {
-                        MessageBox.Show("Aggiornamento obiettivo avvenuto con successo!", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Obiettivo aggiornaObiettivo = new Obiettivo(obiettivo.Id, tbDescrizione.Text, ckCompletato.Checked);
+                        if (Controller.ModificaObiettivo(aggiornaObiettivo)) ///Aggiorno l'obiettivo nel db
+                        {
+                            MessageBox.Show("Aggiornamento obiettivo avvenuto con successo!", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                            ucPadre.AggiornadgvProgetti();
+                            formPadre.Show();
+                            Close();
+                        }
+                        else
+                            MessageBox.Show("Aggiornamento obiettivo fallito.", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    if (ucPadre != null)
                         ucPadre.AggiornadgvProgetti();
-                        formPadre.Show();
-                        Close();
-                    }
-                    else
-                        MessageBox.Show("Aggiornamento obiettivo fallito.", "FormObiettivo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    if (ucObiettivi != null)
+                        ucObiettivi.AggiornadgvObiettivi();
+
+                    lbErrore.Visible = false;
                 }
 
-                if (ucPadre != null)
-                    ucPadre.AggiornadgvProgetti();
-
-                if (ucObiettivi != null)
-                    ucObiettivi.AggiornadgvObiettivi();
-
-                lbErrore.Visible = false;
+                else
+                    lbErrore.Visible = true;
             }
-
-            else
-                lbErrore.Visible = true;
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormObiettivi: errore click bottone aggiunta/aggiornamento obiettivo", "FormObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
     }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
+//using MySqlConnector;
 
 namespace ServerAziendaleDB.Modelli
 {

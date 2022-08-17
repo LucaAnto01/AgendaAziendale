@@ -43,12 +43,21 @@ namespace AgendaAziendale.Forms.UserControls
         /// <param name="e"></param>
         private void UCStoricoProgetti_Load(object sender, EventArgs e)
         {
-            ///Figli del Form
-            panelCentro.Parent = this;
-            ///Figli del panelCentro
-            dgvStoricoProgetti.Parent = panelCentro;
+            try
+            {
+                ///Figli del Form
+                panelCentro.Parent = this;
+                ///Figli del panelCentro
+                dgvStoricoProgetti.Parent = panelCentro;
 
-            AggiornadgvStoricoProgetti();
+                AggiornadgvStoricoProgetti();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCStoricoProgetti: errore caricamento interfaccia", "UCStoricoProgetti", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -58,30 +67,39 @@ namespace AgendaAziendale.Forms.UserControls
         /// <param name="e"></param>
         private void DgvProgetti_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Progetto progetto = new Progetto();
-            string codiceProgettoSelezionato = dgvStoricoProgetti.Rows[e.RowIndex].Cells[0].Value.ToString();
-            int idProgettoSelezionato = int.Parse(dgvStoricoProgetti.Rows[e.RowIndex].Cells[5].Value.ToString());
-            progetto = ElencoProgetti.FirstOrDefault(ev => ev.Codice == codiceProgettoSelezionato && ev.Id == idProgettoSelezionato);
-
-            //Click sulla colonna con i button d'eliminazione
-            if (e.ColumnIndex == 8)
+            try
             {
-                if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione del progetto selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
-                    "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+                Progetto progetto = new Progetto();
+                string codiceProgettoSelezionato = dgvStoricoProgetti.Rows[e.RowIndex].Cells[0].Value.ToString();
+                int idProgettoSelezionato = int.Parse(dgvStoricoProgetti.Rows[e.RowIndex].Cells[5].Value.ToString());
+                progetto = ElencoProgetti.FirstOrDefault(ev => ev.Codice == codiceProgettoSelezionato && ev.Id == idProgettoSelezionato);
+
+                //Click sulla colonna con i button d'eliminazione
+                if (e.ColumnIndex == 8)
                 {
-                    if (Controller.EliminaProgetto(codiceProgettoSelezionato, idProgettoSelezionato.ToString()))
+                    if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione del progetto selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
+                        "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        MessageBox.Show("Eliminazione progetto avvenuta con successo!", "UCStoricoProgetti", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        AggiornadgvStoricoProgetti();
+                        if (Controller.EliminaProgetto(codiceProgettoSelezionato, idProgettoSelezionato.ToString()))
+                        {
+                            MessageBox.Show("Eliminazione progetto avvenuta con successo!", "UCStoricoProgetti", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            AggiornadgvStoricoProgetti();
+                        }
+
+                        else
+                            MessageBox.Show("ERRORE! Impossibile eliminare il progetto dal DB, contattare l'amministrazione.", "UCStoricoProgetti", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
-                    else
-                        MessageBox.Show("ERRORE! Impossibile eliminare il progetto dal DB, contattare l'amministrazione.", "UCStoricoProgetti", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
 
-            else
-                Console.WriteLine("No action");
+                else
+                    Console.WriteLine("No action");
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCStoricoProgetti: errore cell click", "UCStoricoProgetti", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
 
@@ -91,38 +109,47 @@ namespace AgendaAziendale.Forms.UserControls
         /// </summary>
         public void AggiornadgvStoricoProgetti()
         {
-            string result_progetti = Controller.GetElencoProgetti();
-
-            dgvStoricoProgetti.Rows.Clear();
-
-            if (result_progetti != "")
+            try
             {
-                ElencoProgetti = Progetto.GeneraElencoProgetti(result_progetti);
+                string result_progetti = Controller.GetElencoProgetti();
 
-                foreach (Progetto progetto in ElencoProgetti)
+                dgvStoricoProgetti.Rows.Clear();
+
+                if (result_progetti != "")
                 {
+                    ElencoProgetti = Progetto.GeneraElencoProgetti(result_progetti);
 
-                    int indice_riga = dgvStoricoProgetti.Rows.Add(progetto.Codice, progetto.Nome, progetto.Descrizione, progetto.DataInizio.ToShortDateString(), progetto.DataFine.ToShortDateString(),
-                                       progetto.Id, progetto.Cliente);
-
-                    /*string result_obiettivi = Controller.GetElencoObiettivi(progetto.Id.ToString()); ///Aggiungo gli obiettivi al progetto
-                    if (result_obiettivi != "")
+                    foreach (Progetto progetto in ElencoProgetti)
                     {
-                        progetto.Obiettivi = Obiettivo.GeneraElencoObiettivi(result_obiettivi);
 
-                        dgvStoricoProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
-                    }*/
+                        int indice_riga = dgvStoricoProgetti.Rows.Add(progetto.Codice, progetto.Nome, progetto.Descrizione, progetto.DataInizio.ToShortDateString(), progetto.DataFine.ToShortDateString(),
+                                           progetto.Id, progetto.Cliente);
 
-                if (Controller.GetElencoObiettivi(progetto.Id.ToString()) != "")
-                        dgvStoricoProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
+                        /*string result_obiettivi = Controller.GetElencoObiettivi(progetto.Id.ToString()); ///Aggiungo gli obiettivi al progetto
+                        if (result_obiettivi != "")
+                        {
+                            progetto.Obiettivi = Obiettivo.GeneraElencoObiettivi(result_obiettivi);
 
-                    else
-                        dgvStoricoProgetti.Rows[indice_riga].Cells[7].Value = "/";
+                            dgvStoricoProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
+                        }*/
+
+                        if (Controller.GetElencoObiettivi(progetto.Id.ToString()) != "")
+                            dgvStoricoProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
+
+                        else
+                            dgvStoricoProgetti.Rows[indice_riga].Cells[7].Value = "/";
+                    }
                 }
-            }
 
-            else
-                MessageBox.Show("Non sono presenti progetti!", "Aggiorna UCStoricoProgetti", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("Non sono presenti progetti!", "Aggiorna UCStoricoProgetti", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCStoricoProgetti: errore aggiornamento dgv storico progetti", "UCStoricoProgetti", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
     }

@@ -43,12 +43,21 @@ namespace AgendaAziendale.Forms.UserControls
         /// <param name="e"></param>
         private void UCStoricoEventi_Load(object sender, EventArgs e)
         {
-            ///Figli del Form
-            panelCentro.Parent = this;
-            ///Figli del panelCentro
-            dgvStoricoEventi.Parent = panelCentro;
+            try
+            {
+                ///Figli del Form
+                panelCentro.Parent = this;
+                ///Figli del panelCentro
+                dgvStoricoEventi.Parent = panelCentro;
 
-            AggiornadgvStoricoEventi();
+                AggiornadgvStoricoEventi();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCStoricoEventi: errore caricamento interfaccia", "UCStoricoEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -58,31 +67,40 @@ namespace AgendaAziendale.Forms.UserControls
         /// <param name="e"></param>
         private void DgvStoricoEventi_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Evento evento = new Evento();
-            string codiceEventoSelezionato = dgvStoricoEventi.Rows[e.RowIndex].Cells[0].Value.ToString();
-            int idEventoSelezionato = int.Parse(dgvStoricoEventi.Rows[e.RowIndex].Cells[5].Value.ToString());
-            evento = ElencoEventi.FirstOrDefault(ev => ev.Codice == codiceEventoSelezionato && ev.Id == idEventoSelezionato);
-
-            //Click sulla colonna con i button d'eliminazione
-            if (e.ColumnIndex == 7)
+            try
             {
-                if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione dell'evento selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
-                    "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+                Evento evento = new Evento();
+                string codiceEventoSelezionato = dgvStoricoEventi.Rows[e.RowIndex].Cells[0].Value.ToString();
+                int idEventoSelezionato = int.Parse(dgvStoricoEventi.Rows[e.RowIndex].Cells[5].Value.ToString());
+                evento = ElencoEventi.FirstOrDefault(ev => ev.Codice == codiceEventoSelezionato && ev.Id == idEventoSelezionato);
+
+                //Click sulla colonna con i button d'eliminazione
+                if (e.ColumnIndex == 7)
                 {
-                    if (Controller.EliminaEvento(codiceEventoSelezionato, idEventoSelezionato.ToString()))
+                    if (MessageBox.Show("Sei sicuro di voler procedere con l'eliminazione dell'evento selezionato? Tutte le informazioni ad esso collegato verranno eliminate.",
+                        "Eliminazione", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        MessageBox.Show("Eliminazione evento avvenuta con successo!", "UCStoricoEventi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        AggiornadgvStoricoEventi();
+                        if (Controller.EliminaEvento(codiceEventoSelezionato, idEventoSelezionato.ToString()))
+                        {
+                            MessageBox.Show("Eliminazione evento avvenuta con successo!", "UCStoricoEventi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            AggiornadgvStoricoEventi();
+                        }
+
+                        else
+                            MessageBox.Show("ERRORE! Impossibile eliminare l'evento dal DB, contattare l'amministrazione.", "UCStoricoEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                     }
-
-                    else
-                        MessageBox.Show("ERRORE! Impossibile eliminare l'evento dal DB, contattare l'amministrazione.", "UCStoricoEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                 }
-            }
 
-            else
-                Console.WriteLine("No action");
+                else
+                    Console.WriteLine("No action");
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCStoricoEventi: errore cell click", "UCStoricoEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
 
@@ -93,21 +111,30 @@ namespace AgendaAziendale.Forms.UserControls
         /// </summary>
         public void AggiornadgvStoricoEventi()
         {
-            string result = Controller.GetStoricoEventi();
-
-            dgvStoricoEventi.Rows.Clear();
-
-            if (result != "")
+            try
             {
-                ElencoEventi = Evento.GeneraElencoEventi(result);
+                string result = Controller.GetStoricoEventi();
 
-                foreach (Evento evento in ElencoEventi)
-                    dgvStoricoEventi.Rows.Add(evento.Codice, evento.Nome, evento.Descrizione, evento.DataInizio.ToShortDateString(), evento.DataFine.ToShortDateString(),
-                                       evento.Id, evento.Luogo);
+                dgvStoricoEventi.Rows.Clear();
+
+                if (result != "")
+                {
+                    ElencoEventi = Evento.GeneraElencoEventi(result);
+
+                    foreach (Evento evento in ElencoEventi)
+                        dgvStoricoEventi.Rows.Add(evento.Codice, evento.Nome, evento.Descrizione, evento.DataInizio.ToShortDateString(), evento.DataFine.ToShortDateString(),
+                                           evento.Id, evento.Luogo);
+                }
+
+                else
+                    MessageBox.Show("Non sono presenti eventi!", "Aggiorna UCStoricoEventi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            else
-                MessageBox.Show("Non sono presenti eventi!", "Aggiorna UCStoricoEventi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! UCStoricoEventi: errore aggiornamento dgv storico eventi", "UCStoricoEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion
     }

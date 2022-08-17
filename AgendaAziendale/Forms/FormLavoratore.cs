@@ -63,58 +63,68 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void FormModificaLavoratore_Load(object sender, EventArgs e)
         {
-            ///Figli del form
-            panelTop.Parent = this;
-            panelCentro.Parent = this;
-            ///Figli del pannello top
-            btChiudi.Parent = panelTop;
-            ///Figli del pannello centrale
-            lbUsername.Parent = panelCentro;
-            lbPassword.Parent = panelCentro;
-            lbNome.Parent = panelCentro;
-            lbCognome.Parent = panelCentro;
-            lbResidenza.Parent = panelCentro;
-            lbDataNascita.Parent = panelCentro;
-            lbCategoria.Parent = panelCentro;
-            tbUsername.Parent = panelCentro;
-            tbPassword.Parent = panelCentro;
-            tbNome.Parent = panelCentro;
-            tbCognome.Parent = panelCentro;
-            tbResidenza.Parent = panelCentro;
-            tbDataNascita.Parent = panelCentro;
-            cbCategoria.Parent = panelCentro;
-            mcDataNascita.Parent = panelCentro;
-            btAAggiornaAggiungi.Parent = panelCentro;
-            lbErrore.Parent = panelCentro;
-            lbInfoPassword.Parent = panelCentro;
-
-            cbCategoria.SelectedIndex = 0;
-
-            if(lavoratore != null) ///Se ho un lavoratore da modificare
+            try
             {
-                tbNome.Text = lavoratore.Nome;
-                tbCognome.Text = lavoratore.Cognome;
-                tbResidenza.Text = lavoratore.Residenza;
-                tbDataNascita.Text = lavoratore.DataNascita.ToShortDateString();
-                tbUsername.Text = lavoratore.Username;
-                tbPassword.Text = lavoratore.Password;
-                cbCategoria.Text = lavoratore.Categoria;
+                ///Figli del form
+                panelTop.Parent = this;
+                panelCentro.Parent = this;
+                ///Figli del pannello top
+                btChiudi.Parent = panelTop;
+                ///Figli del pannello centrale
+                lbUsername.Parent = panelCentro;
+                lbPassword.Parent = panelCentro;
+                lbNome.Parent = panelCentro;
+                lbCognome.Parent = panelCentro;
+                lbResidenza.Parent = panelCentro;
+                lbDataNascita.Parent = panelCentro;
+                lbCategoria.Parent = panelCentro;
+                tbUsername.Parent = panelCentro;
+                tbPassword.Parent = panelCentro;
+                tbNome.Parent = panelCentro;
+                tbCognome.Parent = panelCentro;
+                tbResidenza.Parent = panelCentro;
+                tbDataNascita.Parent = panelCentro;
+                cbCategoria.Parent = panelCentro;
+                mcDataNascita.Parent = panelCentro;
+                btAAggiornaAggiungi.Parent = panelCentro;
+                lbErrore.Parent = panelCentro;
+                lbInfoPassword.Parent = panelCentro;
 
-                tbUsername.Enabled = false; //Impedisco la modifica dell'username in quanto chiave primaria dei lavoratori --> garantisco l'integrità del DB
-                btAggiornaPassowrd.Visible = true;
+                cbCategoria.SelectedIndex = 0;
+
+                if (lavoratore != null) ///Se ho un lavoratore da modificare
+                {
+                    tbNome.Text = lavoratore.Nome;
+                    tbCognome.Text = lavoratore.Cognome;
+                    tbResidenza.Text = lavoratore.Residenza;
+                    tbDataNascita.Text = lavoratore.DataNascita.ToShortDateString();
+                    tbUsername.Text = lavoratore.Username;
+                    tbPassword.Text = lavoratore.Password;
+                    cbCategoria.Text = lavoratore.Categoria;
+
+                    tbUsername.Enabled = false; //Impedisco la modifica dell'username in quanto chiave primaria dei lavoratori --> garantisco l'integrità del DB
+                    lbInfoPassword.Visible = true;
+                    btAggiornaPassowrd.Visible = true;
+                }
+
+                if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                    btAAggiornaAggiungi.Text = "Aggiungi";
+
+                else if ((azione == "Aggiorna") || (azione == "aggiorna"))
+                    btAAggiornaAggiungi.Text = "Aggiorna";
+
+                else
+                {
+                    MessageBox.Show("ERRORE! Valore FormLavoratore:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
             }
             
-            if ((azione == "Aggiungi") || (azione == "aggiungi"))
-                btAAggiornaAggiungi.Text = "Aggiungi";
-
-            else if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                btAAggiornaAggiungi.Text = "Aggiorna";
-
-            else
+            catch
             {
-                MessageBox.Show("ERRORE! Valore FormLavoratore:tipologia --> controllare stack chiamate!", "Compilazione campi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("ERRORE! FormLavoratore: errore caricamento interfaccia", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
-            }        
+            }
         }
 
         /// <summary>
@@ -125,8 +135,17 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtChiudi_Click(object sender, EventArgs e)
         {
-            formPadre.Show(); ///Mostro il form padre
-            Close();
+            try
+            {
+                formPadre.Show(); ///Mostro il form padre
+                Close();
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLavoratore: errore chiusura interfaccia", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -137,7 +156,16 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtMinimize_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Minimized;
+            try
+            {
+                WindowState = FormWindowState.Minimized;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLavoratore: errore minimizzazione interfaccia", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -148,10 +176,19 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void Tb_TextChanged(object sender, EventArgs e)
         {
-            if ((!Regex.IsMatch(((TextBox)sender).Text, Sessione.Regex)) && (((TextBox)sender).Text != ""))
+            try
             {
-                MessageBox.Show("Non inserire lettere accentate o caratteri speciali!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ((TextBox)sender).Text = "";
+                if ((!Regex.IsMatch(((TextBox)sender).Text, Sessione.Regex)) && (((TextBox)sender).Text != ""))
+                {
+                    MessageBox.Show("Non inserire lettere accentate o caratteri speciali!", "FormEvento", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ((TextBox)sender).Text = "";
+                }
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLavoratore: errore controllo inserimento caratteri speciali", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
         }
 
@@ -164,9 +201,18 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void McDataNascita_DateSelected(object sender, DateRangeEventArgs e)
         {
-            mcDataNascita.Hide();
-            tbDataNascita.Enabled = true;
-            tbDataNascita.Text = mcDataNascita.SelectionRange.Start.ToShortDateString();
+            try
+            {
+                mcDataNascita.Hide();
+                tbDataNascita.Enabled = true;
+                tbDataNascita.Text = mcDataNascita.SelectionRange.Start.ToShortDateString();
+            }
+
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLavoratore: errore chiusura calendario per input data nascita", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -178,9 +224,18 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbDataNascita_Enter(object sender, EventArgs e)
         {
-            ((TextBox)sender).BackColor = Color.White;
-            mcDataNascita.Show();
-            tbDataNascita.Enabled = false;
+            try
+            {
+                ((TextBox)sender).BackColor = Color.White;
+                mcDataNascita.Show();
+                tbDataNascita.Enabled = false;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLavoratore: errore visualizzazione calendario per input data nascita", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -191,7 +246,16 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void TbEnter_Click(object sender, EventArgs e)
         {
-            ((TextBox)sender).BackColor = Color.White;
+            try
+            {
+                ((TextBox)sender).BackColor = Color.White;
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLavoratore: errore pulizia campo input", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -203,42 +267,57 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAAggiornaAggiungi_Click(object sender, EventArgs e)
         {
-            if (CheckCampi())
+            try
             {
-                lbErrore.Visible = false;
-
-                if ((azione == "Aggiungi") || (azione == "aggiungi"))
+                if (CheckCampi())
                 {
+                    lbErrore.Visible = false;
 
-                    if (Controller.InserisciLavoratore(tbUsername.Text, tbPassword.Text, tbNome.Text, tbCognome.Text, tbResidenza.Text, tbDataNascita.Text, cbCategoria.Text)) ///Inserisco il lavoratore nel db
+                    if ((azione == "Aggiungi") || (azione == "aggiungi"))
                     {
-                        MessageBox.Show("Inserimento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        ucPadre.AggiornadgvLavoratori();
-                        PulisciCampiInserimento();
+
+                        Lavoratore nuovoLavoratore = new Lavoratore(tbUsername.Text, tbPassword.Text, tbNome.Text, tbCognome.Text, tbResidenza.Text, DateTime.Parse(tbDataNascita.Text), cbCategoria.Text);
+
+                        if (Controller.InserisciLavoratore(nuovoLavoratore)) ///Inserisco il lavoratore nel db
+                        {
+                            MessageBox.Show("Inserimento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ucPadre.AggiornadgvLavoratori();
+                            PulisciCampiInserimento();
+                        }
+
+                        else
+                            MessageBox.Show("Lavoratore " + tbUsername.Text + " già presente! Inserimento impossibile.", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
-                        
-                    else
-                        MessageBox.Show("Lavoratore " + tbUsername.Text + " già presente! Inserimento impossibile.", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    if ((azione == "Aggiorna") || (azione == "aggiorna"))
+                    {
+
+                        Lavoratore aggiornaLavoratore = new Lavoratore(tbUsername.Text, "", tbNome.Text, tbCognome.Text, tbResidenza.Text, DateTime.Parse(tbDataNascita.Text), cbCategoria.Text);
+
+                        if (Controller.AggiornaLavoratore(aggiornaLavoratore)) ///Aggiorno  il lavoratore nel db
+                        {
+                            MessageBox.Show("Aggiornamento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            ucPadre.AggiornadgvLavoratori();
+                            formPadre.Show();
+                            Close();
+                        }
+
+                        else
+                            MessageBox.Show("Aggiornamento lavoratore " + tbUsername.Text + "fallito.", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
                 }
 
-                if ((azione == "Aggiorna") || (azione == "aggiorna"))
-                {
-                    if(Controller.AggiornaLavoratore(tbUsername.Text,tbNome.Text, tbCognome.Text, tbResidenza.Text, tbDataNascita.Text, cbCategoria.Text)) ///Aggiorno  il lavoratore nel db
-                    {
-                        MessageBox.Show("Aggiornamento lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    lbErrore.Visible = true;
+            }           
 
-                        ucPadre.AggiornadgvLavoratori();
-                        formPadre.Show();
-                        Close();
-                    }
-                    else
-                        MessageBox.Show("Aggiornamento lavoratore " + tbUsername.Text + "fallito.", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLavoratore: errore click aggiornamento/inserimento dati", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
-
-            else
-                lbErrore.Visible = true;
         }
 
         /// <summary>
@@ -248,24 +327,32 @@ namespace AgendaAziendale.Forms
         /// <param name="e"></param>
         private void BtAggiornaPassowrd_Click(object sender, EventArgs e)
         {
-            if(tbPassword.Text != "")
+            try
             {
-                if (Controller.AggiornaPassword(tbUsername.Text, tbPassword.Text)) ///Inserisco il lavoratore nel db
+                if (tbPassword.Text != "")
                 {
-                    MessageBox.Show("Aggiornamento passowrd lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ucPadre.AggiornadgvLavoratori();
+                    if (Controller.AggiornaPassword(tbUsername.Text, tbPassword.Text)) ///Inserisco il lavoratore nel db
+                    {
+                        MessageBox.Show("Aggiornamento passowrd lavoratore " + tbUsername.Text + " avvenuto con successo!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ucPadre.AggiornadgvLavoratori();
+                    }
+
+                    else
+                        MessageBox.Show("Errore in fase di aggiornamento!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 else
-                    MessageBox.Show("Errore in fase di aggiornamento!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+                {
+                    tbPassword.BackColor = Color.Red;
+                    MessageBox.Show("Compila il campo di input relativo alla passowrd!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }            
 
-            else
+            catch
             {
-                tbPassword.BackColor = Color.Red;
-                MessageBox.Show("Compila il campo di input relativo alla passowrd!", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Warning);               
+                MessageBox.Show("ERRORE! FormLavoratore: errore click aggiornamento password", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
-                
         }
         #endregion
 
@@ -278,47 +365,50 @@ namespace AgendaAziendale.Forms
         {
             bool check = true; ///True, tutti i campi compilati
 
-            if(tbNome.Text == "")
+            try
             {
-                tbNome.BackColor = Color.Red;
-                check = false;
-            }
+                if (tbNome.Text == "")
+                {
+                    tbNome.BackColor = Color.Red;
+                    check = false;
+                }
 
-            if (tbCognome.Text == "")
-            {
-                tbCognome.BackColor = Color.Red;
-                check = false;
-            }
+                if (tbCognome.Text == "")
+                {
+                    tbCognome.BackColor = Color.Red;
+                    check = false;
+                }
 
-            if (tbResidenza.Text == "")
-            {
-                tbResidenza.BackColor = Color.Red;
-                check = false;
-            }
+                if (tbResidenza.Text == "")
+                {
+                    tbResidenza.BackColor = Color.Red;
+                    check = false;
+                }
 
-            if (tbDataNascita.Text == "")
-            {
-                tbDataNascita.BackColor = Color.Red;
-                check = false;
-            }
+                if (tbDataNascita.Text == "")
+                {
+                    tbDataNascita.BackColor = Color.Red;
+                    check = false;
+                }
 
-            if (tbUsername.Text == "")
-            {
-                tbUsername.BackColor = Color.Red;
-                check = false;
-            }
+                if (tbUsername.Text == "")
+                {
+                    tbUsername.BackColor = Color.Red;
+                    check = false;
+                }
 
-            if (tbPassword.Text == "")
-            {
-                tbPassword.BackColor = Color.Red;
-                check = false;
+                if (tbPassword.Text == "")
+                {
+                    tbPassword.BackColor = Color.Red;
+                    check = false;
+                }
             }
-
-            /*if (cbCategoria.Text == "")
+            
+            catch
             {
-                cbCategoria.BackColor = Color.Red;
-                check = false;
-            }*/
+                MessageBox.Show("ERRORE! FormLavoratore: errore check campi intput", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
 
             return check;
         }
@@ -328,13 +418,22 @@ namespace AgendaAziendale.Forms
         /// </summary>
         private void PulisciCampiInserimento()
         {
-            tbNome.Text = "";
-            tbCognome.Text = "";
-            tbResidenza.Text = "";
-            tbDataNascita.Text = "";
-            tbUsername.Text = "";
-            tbPassword.Text = "";
-            cbCategoria.Text = "";
+            try
+            {
+                tbNome.Text = "";
+                tbCognome.Text = "";
+                tbResidenza.Text = "";
+                tbDataNascita.Text = "";
+                tbUsername.Text = "";
+                tbPassword.Text = "";
+                cbCategoria.Text = "";
+            }
+            
+            catch
+            {
+                MessageBox.Show("ERRORE! FormLavoratore: errore pulizia campi inseirmento", "FormLavoratore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
         #endregion      
     }
