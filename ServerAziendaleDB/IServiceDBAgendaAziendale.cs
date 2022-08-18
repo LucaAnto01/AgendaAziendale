@@ -36,7 +36,7 @@ namespace ServerAziendaleDB
         /// <param name="username_cercato"></param>
         /// <returns></returns>
         [OperationContract]
-        string GetInfoLavoratore(string username, string username_cercato);
+        LavoratoreSRV GetInfoLavoratore(string username, string username_cercato);
 
         /// <summary>
         /// Servizio adibito all'inserimento di un Lavoratore nel DB
@@ -81,7 +81,15 @@ namespace ServerAziendaleDB
         /// <param name="username"></param>
         /// <returns></returns>
         [OperationContract]
-        string GetElencoLavoratori(string username);
+        List<LavoratoreSRV> GetElencoLavoratori(string username);
+
+        /// <summary>
+        /// Servizio che restituisce l'elenco dei lavoratori presenti nel DB sotto formato di stringa
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        [OperationContract]
+        string GetElencoLavoratoriToString(string username);
         #endregion
 
         #region Eventi

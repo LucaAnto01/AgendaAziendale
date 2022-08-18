@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServerAziendaleDB.Modelli;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -117,6 +118,33 @@ namespace AgendaAziendale.Modelli
             }
 
             return "";
+        }
+
+        /// <summary>
+        /// Metodo per convertire un lavotatoreSRV a Lavoratore
+        /// </summary>
+        /// <param name="lavoratoreSrv"></param>
+        /// <returns></returns>
+        public static Lavoratore FromLavoratoreSRVToLavoratore(LavoratoreSRV lavoratoreSrv)
+        {
+            return new Lavoratore(lavoratoreSrv.Username, lavoratoreSrv.Password, lavoratoreSrv.Nome, lavoratoreSrv.Cognome, lavoratoreSrv.Residenza, lavoratoreSrv.DataNascita, lavoratoreSrv.Categoria);
+        }
+
+        /// <summary>
+        /// Metodo per convertire una lista di lavotatoreSRV in una lista di Lavoratore
+        /// </summary>
+        /// <param name="lavoratoreSrv"></param>
+        /// <returns></returns>
+        public static List<Lavoratore> FromLavoratoreSRVToLavoratore(List<LavoratoreSRV> lavoratoriSrv)
+        {
+            List<Lavoratore> elencoLavoratori = new List<Lavoratore>();
+
+            foreach(LavoratoreSRV lavoratoreSrv in lavoratoriSrv)
+            {
+                elencoLavoratori.Add(new Lavoratore(lavoratoreSrv.Username, lavoratoreSrv.Password, lavoratoreSrv.Nome, lavoratoreSrv.Cognome, lavoratoreSrv.Residenza, lavoratoreSrv.DataNascita, lavoratoreSrv.Categoria));
+            }
+
+            return elencoLavoratori;
         }
 
         /// <summary>

@@ -57,14 +57,15 @@ namespace ServerAziendale
         /// <param name="username"></param>
         /// <param name="username_cercato"></param>
         /// <returns></returns>
-        public string GetInfoLavoratore(string username, string username_cercato)
+        public LavoratoreSRV GetInfoLavoratore(string username, string username_cercato)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetInfoLavoratore(username, username_cercato);
+                LavoratoreSRV lavoratoreSrvInfo = new LavoratoreSRV();
+                lavoratoreSrvInfo = Sessione.ServerAziendaleDB.GetInfoLavoratore(username, username_cercato);
 
-                if (result != "")
-                    return result;
+                if (lavoratoreSrvInfo.Username != "")
+                    return lavoratoreSrvInfo;
             }
 
             catch (Exception ex)
@@ -78,7 +79,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetInfoLavoratore()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -199,14 +200,14 @@ namespace ServerAziendale
         /// </summary>
         /// <param name="username"></param>
         /// <returns>string</returns>
-        public string GetElencoLavoratori(string username)
+        public List<LavoratoreSRV> GetElencoLavoratori(string username)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetElencoLavoratori(username);
+                List<LavoratoreSRV> elencoLavoratori = Sessione.ServerAziendaleDB.GetElencoLavoratori(username).ToList();
 
-                if (result != "")
-                    return result;
+                if (elencoLavoratori != null)
+                    return elencoLavoratori;
             }
 
             catch (Exception ex)
@@ -220,7 +221,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetElencoLavoratori()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
         #endregion
 
@@ -770,7 +771,7 @@ namespace ServerAziendale
             try
             {
                 string result_partecipanti = Sessione.ServerAziendaleDB.GetElencoPartecipantiAttivita(username, codice);
-                string result_lavoratori = Sessione.ServerAziendaleDB.GetElencoLavoratori(username);
+                string result_lavoratori = Sessione.ServerAziendaleDB.GetElencoLavoratoriToString(username);
 
                 if ((result_partecipanti != "") && (result_lavoratori != ""))
                 {

@@ -28,10 +28,10 @@ namespace AgendaAziendale.SRAgendaAziendale {
         System.Threading.Tasks.Task<bool> LoginAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetInfoLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetInfoLavoratoreResponse")]
-        string GetInfoLavoratore(string username, string username_cercato);
+        ServerAziendaleDB.Modelli.LavoratoreSRV GetInfoLavoratore(string username, string username_cercato);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetInfoLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetInfoLavoratoreResponse")]
-        System.Threading.Tasks.Task<string> GetInfoLavoratoreAsync(string username, string username_cercato);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.LavoratoreSRV> GetInfoLavoratoreAsync(string username, string username_cercato);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/InserisciLavoratore", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/InserisciLavoratoreResponse")]
         bool InserisciLavoratore(string username, ServerAziendaleDB.Modelli.LavoratoreSRV nuovoLavoratore);
@@ -58,10 +58,10 @@ namespace AgendaAziendale.SRAgendaAziendale {
         System.Threading.Tasks.Task<bool> EliminaLavoratoreAsync(string username, string username_in);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratori", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratoriResponse")]
-        string GetElencoLavoratori(string username);
+        ServerAziendaleDB.Modelli.LavoratoreSRV[] GetElencoLavoratori(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratori", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/GetElencoLavoratoriResponse")]
-        System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.LavoratoreSRV[]> GetElencoLavoratoriAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceAgendaAziendale/CreaEvento", ReplyAction="http://tempuri.org/IServiceAgendaAziendale/CreaEventoResponse")]
         bool CreaEvento(string username, ServerAziendaleDB.Modelli.EventoSRV nuovoEvento);
@@ -233,11 +233,11 @@ namespace AgendaAziendale.SRAgendaAziendale {
             return base.Channel.LoginAsync(username, password);
         }
         
-        public string GetInfoLavoratore(string username, string username_cercato) {
+        public ServerAziendaleDB.Modelli.LavoratoreSRV GetInfoLavoratore(string username, string username_cercato) {
             return base.Channel.GetInfoLavoratore(username, username_cercato);
         }
         
-        public System.Threading.Tasks.Task<string> GetInfoLavoratoreAsync(string username, string username_cercato) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.LavoratoreSRV> GetInfoLavoratoreAsync(string username, string username_cercato) {
             return base.Channel.GetInfoLavoratoreAsync(username, username_cercato);
         }
         
@@ -273,11 +273,11 @@ namespace AgendaAziendale.SRAgendaAziendale {
             return base.Channel.EliminaLavoratoreAsync(username, username_in);
         }
         
-        public string GetElencoLavoratori(string username) {
+        public ServerAziendaleDB.Modelli.LavoratoreSRV[] GetElencoLavoratori(string username) {
             return base.Channel.GetElencoLavoratori(username);
         }
         
-        public System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.LavoratoreSRV[]> GetElencoLavoratoriAsync(string username) {
             return base.Channel.GetElencoLavoratoriAsync(username);
         }
         

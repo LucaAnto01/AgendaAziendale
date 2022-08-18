@@ -54,10 +54,10 @@ namespace AgendaAziendale.Modelli
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetInfoLavoratore(username, username_info);
+                Lavoratore lavoratore = Lavoratore.FromLavoratoreSRVToLavoratore(Sessione.ServerAziendale.GetInfoLavoratore(username, username_info));
 
-                if (result != "")
-                    return Lavoratore.GeneraLavoratore(result);
+                if (lavoratore.Username != "")
+                    return lavoratore;
 
                 return null;
             }
@@ -83,7 +83,7 @@ namespace AgendaAziendale.Modelli
             try
             {
                 string passwordHash = Lavoratore.PasswordHashing(nuovoLavoratore.Password);
-                if (Sessione.ServerAziendale.GetInfoLavoratore(Sessione.Lavoratore.Username, nuovoLavoratore.Username) == "") ///Così facendo controllo che il Lavoratore non sia già presente all'interno del DB
+                if (Sessione.ServerAziendale.GetInfoLavoratore(Sessione.Lavoratore.Username, nuovoLavoratore.Username).Username == "") ///Così facendo controllo che il Lavoratore non sia già presente all'interno del DB
                 {
                     LavoratoreSRV nuovoLavoratoreSrv = new LavoratoreSRV(nuovoLavoratore.Username, passwordHash, nuovoLavoratore.Nome, nuovoLavoratore.Cognome, nuovoLavoratore.Residenza, nuovoLavoratore.DataNascita, Lavoratore.GeneraEmail(nuovoLavoratore.Username, nuovoLavoratore.Cognome), nuovoLavoratore.Categoria);
                     if (Sessione.ServerAziendale.InserisciLavoratore(Sessione.Lavoratore.Username, nuovoLavoratoreSrv)) ///Inserisco il lavoratore nel db
@@ -184,16 +184,16 @@ namespace AgendaAziendale.Modelli
         /// Funzione adibita all'ottenimento dell'elenco di tutti i lavoratori presenti nel DB
         /// </summary>
         /// <returns></returns>
-        public static string GetElencoLavoratori()
+        public static List<Lavoratore> GetElencoLavoratori()
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetElencoLavoratori(Sessione.Lavoratore.Username);
+                List<Lavoratore> elencoLavoratori = Lavoratore.FromLavoratoreSRVToLavoratore(Sessione.ServerAziendale.GetElencoLavoratori(Sessione.Lavoratore.Username).ToList());
 
-                if (result != "")
-                    return result;
+                if (elencoLavoratori != null)
+                    return elencoLavoratori;
 
-                return "";
+                return null;
             }
             
 
@@ -203,7 +203,7 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
         #endregion
 

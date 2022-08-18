@@ -13,6 +13,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LavoratoreSRV" nillable="true" type="tns:LavoratoreSRV" />
+  <xs:complexType name="ArrayOfLavoratoreSRV">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LavoratoreSRV" nillable="true" type="tns:LavoratoreSRV" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLavoratoreSRV" nillable="true" type="tns:ArrayOfLavoratoreSRV" />
   <xs:complexType name="EventoSRV">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:AttivitaSRV">
