@@ -127,7 +127,7 @@ namespace ServerAziendaleDB
         /// <param name="username"></param>
         /// <returns></returns>
         [OperationContract]
-        string GetElencoEventi(string username);
+        List<EventoSRV> GetElencoEventi(string username);
 
         /// <summary>
         /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB con una data maggiore o uguale all'odierna
@@ -137,7 +137,7 @@ namespace ServerAziendaleDB
         /// <param name="username_in"></param>
         /// <returns></returns>
         [OperationContract]
-        string GetElencoEventiLavoratore(string username, string username_in);
+        List<EventoSRV> GetElencoEventiLavoratore(string username, string username_in);
 
         /// <summary>
         /// Servizio adibito all'ottenimento dell'Elenco di tutti gli eventi presenti nel DB
@@ -145,7 +145,7 @@ namespace ServerAziendaleDB
         /// <param name="username"></param>
         /// <returns></returns>
         [OperationContract]
-        string GetStoricoEventi(string username);
+        List<EventoSRV> GetStoricoEventi(string username);
         #endregion
 
         #region Progetti

@@ -71,6 +71,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\SRDBAgendaAziendale\ServiceDBAgendaAziendale.wsdl" />
+    <None Include="Properties\DataSources\ServerAziendaleDB.Modelli.EventoSRV.datasource" />
     <None Include="Properties\DataSources\ServerAziendaleDB.Modelli.LavoratoreSRV.datasource" />
   </ItemGroup>
   <ItemGroup>

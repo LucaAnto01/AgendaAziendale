@@ -186,7 +186,7 @@
   <xs:element name="GetElencoEventiResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GetElencoEventiResult" nillable="true" type="xs:string" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="GetElencoEventiResult" nillable="true" type="q7:ArrayOfEventoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -201,7 +201,7 @@
   <xs:element name="GetElencoEventiLavoratoreResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GetElencoEventiLavoratoreResult" nillable="true" type="xs:string" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="GetElencoEventiLavoratoreResult" nillable="true" type="q8:ArrayOfEventoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -215,7 +215,7 @@
   <xs:element name="GetStoricoEventiResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="GetStoricoEventiResult" nillable="true" type="xs:string" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="GetStoricoEventiResult" nillable="true" type="q9:ArrayOfEventoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -223,7 +223,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="nuovoProgetto" nillable="true" type="q7:ProgettoSRV" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="nuovoProgetto" nillable="true" type="q10:ProgettoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -238,7 +238,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="aggiornaProgetto" nillable="true" type="q8:ProgettoSRV" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="aggiornaProgetto" nillable="true" type="q11:ProgettoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -327,7 +327,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="nuovoObiettivo" nillable="true" type="q9:ObiettivoSRV" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="nuovoObiettivo" nillable="true" type="q12:ObiettivoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -342,7 +342,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="aggiornaObiettivo" nillable="true" type="q10:ObiettivoSRV" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/ServerAziendaleDB.Modelli" minOccurs="0" name="aggiornaObiettivo" nillable="true" type="q13:ObiettivoSRV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

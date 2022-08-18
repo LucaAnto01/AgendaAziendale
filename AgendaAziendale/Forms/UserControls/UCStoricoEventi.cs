@@ -113,13 +113,13 @@ namespace AgendaAziendale.Forms.UserControls
         {
             try
             {
-                string result = Controller.GetStoricoEventi();
+                List<Evento> storicoEventi = Controller.GetStoricoEventi();
 
                 dgvStoricoEventi.Rows.Clear();
 
-                if (result != "")
+                if (storicoEventi != null)
                 {
-                    ElencoEventi = Evento.GeneraElencoEventi(result);
+                    ElencoEventi = storicoEventi;
 
                     foreach (Evento evento in ElencoEventi)
                         dgvStoricoEventi.Rows.Add(evento.Codice, evento.Nome, evento.Descrizione, evento.DataInizio.ToShortDateString(), evento.DataFine.ToShortDateString(),

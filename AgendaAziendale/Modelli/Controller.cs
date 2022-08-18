@@ -288,16 +288,14 @@ namespace AgendaAziendale.Modelli
         /// Funzione adibita all'ottenimento dell'elenco di tutti gli eventi presenti nel DB con una data maggiore o uguale all'odierna
         /// </summary>
         /// <returns></returns>
-        public static string GetElencoEventi()
+        public static List<Evento> GetElencoEventi()
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetElencoEventi(Sessione.Lavoratore.Username);
+                List<Evento> elencoEventi = Evento.FromEventoSRVToEvento(Sessione.ServerAziendale.GetElencoEventi(Sessione.Lavoratore.Username).ToList());
 
-                if (result != "")
-                    return result;
-
-                return "";
+                if (elencoEventi != null)
+                    return elencoEventi;
             }
             
             catch
@@ -306,7 +304,7 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -315,16 +313,14 @@ namespace AgendaAziendale.Modelli
         /// </summary>
         /// <param name="username_in"></param>
         /// <returns></returns>
-        public static string GetElencoEventiLavoratore(string username_in)
+        public static List<Evento> GetElencoEventiLavoratore(string username_in)
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetElencoEventiLavoratore(Sessione.Lavoratore.Username, username_in);
+                List<Evento> elencoEventiLavoratore = Evento.FromEventoSRVToEvento(Sessione.ServerAziendale.GetElencoEventiLavoratore(Sessione.Lavoratore.Username, username_in).ToList());
 
-                if (result != "")
-                    return result;
-
-                return "";
+                if (elencoEventiLavoratore != null)
+                    return elencoEventiLavoratore;
             }
             
             catch
@@ -333,23 +329,21 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
         /// Funzione adibita all'ottenimento dell'elenco di tutti gli eventi presenti nel DB
         /// </summary>
         /// <returns></returns>
-        public static string GetStoricoEventi()
+        public static List<Evento> GetStoricoEventi()
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetStoricoEventi(Sessione.Lavoratore.Username);
+                List<Evento> storicoEventi = Evento.FromEventoSRVToEvento(Sessione.ServerAziendale.GetStoricoEventi(Sessione.Lavoratore.Username).ToList());
 
-                if (result != "")
-                    return result;
-
-                return "";
+                if (storicoEventi != null)
+                    return storicoEventi;
             }        
 
             catch
@@ -358,7 +352,7 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
         #endregion
 

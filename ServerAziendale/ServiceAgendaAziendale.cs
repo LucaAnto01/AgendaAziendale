@@ -316,14 +316,14 @@ namespace ServerAziendale
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public string GetElencoEventi(string username)
+        public List<EventoSRV> GetElencoEventi(string username)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetElencoEventi(username);
+                List<EventoSRV> elencoEventi = Sessione.ServerAziendaleDB.GetElencoEventi(username).ToList();
 
-                if (result != "")
-                    return result;
+                if (elencoEventi != null)
+                    return elencoEventi;
             }
 
             catch (Exception ex)
@@ -337,7 +337,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetElencoEventi()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -347,14 +347,14 @@ namespace ServerAziendale
         /// <param name="username"></param>
         /// <param name="username_in"></param>
         /// <returns></returns>
-        public string GetElencoEventiLavoratore(string username, string username_in)
+        public List<EventoSRV> GetElencoEventiLavoratore(string username, string username_in)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetElencoEventiLavoratore(username, username_in);
+                List<EventoSRV> elencoEventiLavoratore = Sessione.ServerAziendaleDB.GetElencoEventiLavoratore(username, username_in).ToList();
 
-                if (result != "")
-                    return result;
+                if (elencoEventiLavoratore != null)
+                    return elencoEventiLavoratore;
             }
 
             catch (Exception ex)
@@ -368,7 +368,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetElencoEventiLavoratore()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -376,14 +376,14 @@ namespace ServerAziendale
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public string GetStoricoEventi(string username)
+        public List<EventoSRV> GetStoricoEventi(string username)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetStoricoEventi(username);
+                List<EventoSRV> storicoEventi = Sessione.ServerAziendaleDB.GetStoricoEventi(username).ToList();
 
-                if (result != "")
-                    return result;
+                if (storicoEventi != null)
+                    return storicoEventi;
             }
 
             catch (Exception ex)
@@ -397,7 +397,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetStoricoEventi()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
         #endregion
 

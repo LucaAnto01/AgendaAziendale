@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServerAziendaleDB.Modelli;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -89,6 +90,33 @@ namespace AgendaAziendale.Modelli
         }
 
         /// <summary>
+        /// Metodo per convertire un EventoSRV in un Evento
+        /// </summary>
+        /// <param name="eventoSrv"></param>
+        /// <returns></returns>
+        public static Evento FromEventoSRVToEvento(EventoSRV eventoSrv)
+        {
+            return new Evento(eventoSrv.Codice, eventoSrv.Nome, eventoSrv.Descrizione, eventoSrv.DataInizio, eventoSrv.DataFine, eventoSrv.Id, eventoSrv.Luogo);
+        }
+
+        /// <summary>
+        /// Metodo per convertire una lista di EventoSRV in una lista di Evento
+        /// </summary>
+        /// <param name="eventiSrv"></param>
+        /// <returns></returns>
+        public static List<Evento> FromEventoSRVToEvento(List<EventoSRV> eventiSrv)
+        {
+            List<Evento> elencoEventi = new List<Evento>();
+
+            foreach(EventoSRV eventoSrv in eventiSrv)
+            {
+                elencoEventi.Add(new Evento(eventoSrv.Codice, eventoSrv.Nome, eventoSrv.Descrizione, eventoSrv.DataInizio, eventoSrv.DataFine, eventoSrv.Id, eventoSrv.Luogo));
+            }
+
+            return elencoEventi;
+        }
+
+        /*/// <summary>
         /// Metodo adibito alla creazione di un Evento sulla base di una stringa formattata dato-dato-...
         /// </summary>
         /// <param name="info"></param>
@@ -145,7 +173,7 @@ namespace AgendaAziendale.Modelli
             }
 
             return elencoEventi;
-        }
+        }*/
         #endregion
     }
 }
