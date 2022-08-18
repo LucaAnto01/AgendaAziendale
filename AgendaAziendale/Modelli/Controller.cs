@@ -54,10 +54,10 @@ namespace AgendaAziendale.Modelli
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetInfoLavoratore(username, username_info);
+                Lavoratore lavoratore = Lavoratore.FromLavoratoreSRVToLavoratore(Sessione.ServerAziendale.GetInfoLavoratore(username, username_info));
 
-                if (result != "")
-                    return Lavoratore.GeneraLavoratore(result);
+                if (lavoratore.Username != "")
+                    return lavoratore;
 
                 return null;
             }
@@ -83,7 +83,7 @@ namespace AgendaAziendale.Modelli
             try
             {
                 string passwordHash = Lavoratore.PasswordHashing(nuovoLavoratore.Password);
-                if (Sessione.ServerAziendale.GetInfoLavoratore(Sessione.Lavoratore.Username, nuovoLavoratore.Username) == "") ///Così facendo controllo che il Lavoratore non sia già presente all'interno del DB
+                if (Sessione.ServerAziendale.GetInfoLavoratore(Sessione.Lavoratore.Username, nuovoLavoratore.Username).Username == "") ///Così facendo controllo che il Lavoratore non sia già presente all'interno del DB
                 {
                     LavoratoreSRV nuovoLavoratoreSrv = new LavoratoreSRV(nuovoLavoratore.Username, passwordHash, nuovoLavoratore.Nome, nuovoLavoratore.Cognome, nuovoLavoratore.Residenza, nuovoLavoratore.DataNascita, Lavoratore.GeneraEmail(nuovoLavoratore.Username, nuovoLavoratore.Cognome), nuovoLavoratore.Categoria);
                     if (Sessione.ServerAziendale.InserisciLavoratore(Sessione.Lavoratore.Username, nuovoLavoratoreSrv)) ///Inserisco il lavoratore nel db
@@ -184,16 +184,16 @@ namespace AgendaAziendale.Modelli
         /// Funzione adibita all'ottenimento dell'elenco di tutti i lavoratori presenti nel DB
         /// </summary>
         /// <returns></returns>
-        public static string GetElencoLavoratori()
+        public static List<Lavoratore> GetElencoLavoratori()
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetElencoLavoratori(Sessione.Lavoratore.Username);
+                List<Lavoratore> elencoLavoratori = Lavoratore.FromLavoratoreSRVToLavoratore(Sessione.ServerAziendale.GetElencoLavoratori(Sessione.Lavoratore.Username).ToList());
 
-                if (result != "")
-                    return result;
+                if (elencoLavoratori != null)
+                    return elencoLavoratori;
 
-                return "";
+                return null;
             }
             
 
@@ -203,7 +203,7 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
         #endregion
 
@@ -288,16 +288,14 @@ namespace AgendaAziendale.Modelli
         /// Funzione adibita all'ottenimento dell'elenco di tutti gli eventi presenti nel DB con una data maggiore o uguale all'odierna
         /// </summary>
         /// <returns></returns>
-        public static string GetElencoEventi()
+        public static List<Evento> GetElencoEventi()
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetElencoEventi(Sessione.Lavoratore.Username);
+                List<Evento> elencoEventi = Evento.FromEventoSRVToEvento(Sessione.ServerAziendale.GetElencoEventi(Sessione.Lavoratore.Username).ToList());
 
-                if (result != "")
-                    return result;
-
-                return "";
+                if (elencoEventi != null)
+                    return elencoEventi;
             }
             
             catch
@@ -306,7 +304,7 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -315,16 +313,14 @@ namespace AgendaAziendale.Modelli
         /// </summary>
         /// <param name="username_in"></param>
         /// <returns></returns>
-        public static string GetElencoEventiLavoratore(string username_in)
+        public static List<Evento> GetElencoEventiLavoratore(string username_in)
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetElencoEventiLavoratore(Sessione.Lavoratore.Username, username_in);
+                List<Evento> elencoEventiLavoratore = Evento.FromEventoSRVToEvento(Sessione.ServerAziendale.GetElencoEventiLavoratore(Sessione.Lavoratore.Username, username_in).ToList());
 
-                if (result != "")
-                    return result;
-
-                return "";
+                if (elencoEventiLavoratore != null)
+                    return elencoEventiLavoratore;
             }
             
             catch
@@ -333,23 +329,21 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
         /// Funzione adibita all'ottenimento dell'elenco di tutti gli eventi presenti nel DB
         /// </summary>
         /// <returns></returns>
-        public static string GetStoricoEventi()
+        public static List<Evento> GetStoricoEventi()
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetStoricoEventi(Sessione.Lavoratore.Username);
+                List<Evento> storicoEventi = Evento.FromEventoSRVToEvento(Sessione.ServerAziendale.GetStoricoEventi(Sessione.Lavoratore.Username).ToList());
 
-                if (result != "")
-                    return result;
-
-                return "";
+                if (storicoEventi != null)
+                    return storicoEventi;
             }        
 
             catch
@@ -358,7 +352,7 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
         #endregion
 
@@ -442,16 +436,14 @@ namespace AgendaAziendale.Modelli
         /// Funzione adibita all'ottenimento dell'elenco di tutti i progetti presenti nel DB con una data maggiore o uguale all'odierna
         /// </summary>
         /// <returns></returns>
-        public static string GetElencoProgetti()
+        public static List<Progetto> GetElencoProgetti()
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetElencoProgetti(Sessione.Lavoratore.Username);
+                List<Progetto> elencoProgetti = Progetto.FromProgettoSRVToProgetto(Sessione.ServerAziendale.GetElencoProgetti(Sessione.Lavoratore.Username).ToList());
 
-                if (result != "")
-                    return result;
-
-                return "";
+                if (elencoProgetti != null)
+                    return elencoProgetti;
             }
             
             catch
@@ -460,7 +452,7 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -469,16 +461,15 @@ namespace AgendaAziendale.Modelli
         /// </summary>
         /// <param name="username_in"></param>
         /// <returns></returns>
-        public static string GetElencoProgettiLavoratore(string username_in)
+        public static List<Progetto> GetElencoProgettiLavoratore(string username_in)
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username, username_in);
+                List<Progetto> elencoProgettiLavoratore = Progetto.FromProgettoSRVToProgetto(Sessione.ServerAziendale.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username, username_in).ToList());
 
-                if (result != "")
-                    return result;
+                if (elencoProgettiLavoratore != null)
+                    return elencoProgettiLavoratore;
 
-                return "";
             }
             
             catch
@@ -487,23 +478,22 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
         /// Funzione adibita all'ottenimento dell'elenco di tutti i progetti presenti nel DB
         /// </summary>
         /// <returns></returns>
-        public static string GetStoricoProgetti()
+        public static List<Progetto> GetStoricoProgetti()
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetStoricoProgetti(Sessione.Lavoratore.Username);
+                List<Progetto> storicoProgetti = Progetto.FromProgettoSRVToProgetto(Sessione.ServerAziendale.GetStoricoProgetti(Sessione.Lavoratore.Username).ToList());
 
-                if (result != "")
-                    return result;
+                if (storicoProgetti != null)
+                    return storicoProgetti;
 
-                return "";
             }
             
             catch
@@ -512,7 +502,7 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
 
         #region Obiettivi
@@ -521,16 +511,14 @@ namespace AgendaAziendale.Modelli
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static string GetElencoObiettivi(string id)
+        public static List<Obiettivo> GetElencoObiettivi(string id)
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetElencoObiettivi(Sessione.Lavoratore.Username, id);
+                List<Obiettivo> elencoObiettivi = Obiettivo.FromObiettivoSRVToObiettivo(Sessione.ServerAziendale.GetElencoObiettivi(Sessione.Lavoratore.Username, id).ToList());
 
-                if (result != "")
-                    return result;
-
-                return "";
+                if (elencoObiettivi != null)
+                    return elencoObiettivi;
             }
             
             catch
@@ -539,7 +527,7 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>

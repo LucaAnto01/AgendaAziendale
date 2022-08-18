@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServerAziendaleDB.Modelli;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,9 +50,11 @@ namespace AgendaAziendale.Modelli
             Id = id;
             Cliente = cliente;
 
-            string result_obiettivi = Controller.GetElencoObiettivi(Id.ToString()); ///Aggiungo gli obiettivi al progetto
-            if (result_obiettivi != "")
-               Obiettivi = Obiettivo.GeneraElencoObiettivi(result_obiettivi);
+            List<Obiettivo> result_obiettivi = new List<Obiettivo>();
+            result_obiettivi = Controller.GetElencoObiettivi(Id.ToString()); ///Aggiungo gli obiettivi al progetto
+
+            if (result_obiettivi != null)
+               Obiettivi = result_obiettivi;
 
             else
                 Obiettivi = new List<Obiettivo>();
@@ -98,60 +101,27 @@ namespace AgendaAziendale.Modelli
         }
 
         /// <summary>
-        /// Metodo adibito alla creazione di un Progetto sulla base di una stringa formattata dato-dato-...
+        /// Metodo per convertire un ProgettoSRV in un Progetto
         /// </summary>
-        /// <param name="info"></param>
-        /// <returns>Progetto</returns>
-        public static Progetto GeneraProgetto(string info)
-        {   
-            try
-            {
-                List<string> informazioni = info.Split('-').ToList();
-
-                string codice = informazioni.ElementAt(0);
-                string nome = informazioni.ElementAt(1);
-                string descrizione = informazioni.ElementAt(2);
-                DateTime dataInizio = DateTime.Parse(informazioni.ElementAt(3));
-                DateTime dataFine = DateTime.Parse(informazioni.ElementAt(4));
-                int id = int.Parse(informazioni.ElementAt(5));
-                string cliente = informazioni.ElementAt(6);
-
-                Progetto progetto = new Progetto(codice, nome, descrizione, dataInizio, dataFine, id, cliente);
-                return progetto;
-            }
-            
-            catch
-            {
-                MessageBox.Show("ERRORE! Metodo GeneraProgetto: errore istanziazione", "Metodo GeneraProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
-            }
-
-            return null;
+        /// <param name="progettoSrv"></param>
+        /// <returns></returns>
+        public static Progetto FromProgettoSRVToProgetto(ProgettoSRV progettoSrv)
+        {
+            return new Progetto(progettoSrv.Codice, progettoSrv.Nome, progettoSrv.Descrizione, progettoSrv.DataInizio, progettoSrv.DataFine, progettoSrv.Id, progettoSrv.Cliente);
         }
 
         /// <summary>
-        /// Metodo adibito alla creazione di una lista di Progetto sulla base di una stringa formattata dato-dato-...\n...
+        /// Metodo per convertire una lista di ProgettoSRV in una lista di Progetto
         /// </summary>
-        /// <param name="elenco"></param>
+        /// <param name="progettiSrv"></param>
         /// <returns></returns>
-        public static List<Progetto> GeneraElencoProgetti(string elenco)
+        public static List<Progetto> FromProgettoSRVToProgetto(List<ProgettoSRV> progettiSrv)
         {
             List<Progetto> elencoProgetti = new List<Progetto>();
 
-            try
+            foreach(ProgettoSRV progettoSrv in progettiSrv)
             {
-                List<string> progetti_info = elenco.Split('\n').ToList(); ///Splitto l'elenco al fine di avere per ogni elemento le informazioni di ogni progetto
-
-                progetti_info.RemoveAt((progetti_info.Count - 1)); ///A causa dello split l'ultimo elemento rimane vuoto --> ""
-
-                foreach (string progetto_info in progetti_info) ///Popolo la lista dei progetti
-                    elencoProgetti.Add(GeneraProgetto(progetto_info));
-            }
-            
-            catch
-            {
-                MessageBox.Show("ERRORE! Metodo GeneraElencoProgetti: errore istanziazione", "Metodo GeneraElencoProgetti", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
+                elencoProgetti.Add(new Progetto(progettoSrv.Codice, progettoSrv.Nome, progettoSrv.Descrizione, progettoSrv.DataInizio, progettoSrv.DataFine, progettoSrv.Id, progettoSrv.Cliente));
             }
 
             return elencoProgetti;

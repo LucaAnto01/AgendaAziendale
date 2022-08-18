@@ -80,7 +80,7 @@ namespace ServerAziendaleDB
         /// <param name="username"></param>
         /// <param name="username_cercato"></param>
         /// <returns></returns>
-        public string GetInfoLavoratore(string username, string username_cercato)
+        public LavoratoreSRV GetInfoLavoratore(string username, string username_cercato)
         {
             string query = "SELECT * FROM lavoratore l WHERE l.username = '" + username_cercato + "';";
 
@@ -89,7 +89,7 @@ namespace ServerAziendaleDB
                 string result = InterazioneDB.EseguiQuery_GetInfo(query);
 
                 if (result != "")
-                    return result;
+                    return LavoratoreSRV.GeneraLavoratore(result);
             }
 
             catch (Exception ex)
@@ -107,7 +107,7 @@ namespace ServerAziendaleDB
                 WriteLog(username, "GetInfoLavoratore()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace ServerAziendaleDB
             string query = "DELETE FROM lavoratore WHERE username = '" + username_in + "';";
 
             ///Al fine di garantire l'integrità del database si verifica che non siano presenti partecipazioni ad eventi o progetti da parte del lavoratore
-            if ((GetElencoEventiLavoratore(username, username_in) != "") || (GetElencoProgettiLavoratore(username, username_in) != ""))
+            if ((GetElencoEventiLavoratore(username, username_in) != null) || (GetElencoProgettiLavoratore(username, username_in) != null))
                 return false;
 
             List<string> queries = new List<string>
@@ -277,7 +277,41 @@ namespace ServerAziendaleDB
         /// </summary>
         /// <param name="username"></param>
         /// <returns>string</returns>
-        public string GetElencoLavoratori(string username)
+        public List<LavoratoreSRV> GetElencoLavoratori(string username)
+        {
+            string query = "SELECT * FROM lavoratore";
+
+            try
+            {
+                string result = InterazioneDB.EseguiQuery_GetInfo(query);
+
+                if (result != "")
+                    return LavoratoreSRV.GeneraElencoLavoratori(result);
+            }
+
+            catch (Exception ex)
+            {
+                if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
+                    InterazioneDB.Connessione.Close(); //Chiudo la connessione
+
+                Console.WriteLine("ERRORE!!! Esecuzione query GetElencoLavoratori() in ServerAziendaleDB: " + ex.ToString());
+                Console.ReadLine();
+            }
+
+            finally
+            {               
+                WriteLog(username, "GetElencoLavoratori()"); ///Scrittura log
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Servizio che restituisce l'elenco dei lavoratori presenti nel DB sotto formato di stringa
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string GetElencoLavoratoriToString(string username)
         {
             string query = "SELECT * FROM lavoratore";
 
@@ -294,12 +328,12 @@ namespace ServerAziendaleDB
                 if (InterazioneDB.Connessione != null) //Controllo che la connessione sia stata aperta
                     InterazioneDB.Connessione.Close(); //Chiudo la connessione
 
-                Console.WriteLine("ERRORE!!! Esecuzione query GetElencoLavoratori() in ServerAziendaleDB: " + ex.ToString());
+                Console.WriteLine("ERRORE!!! Esecuzione query GetElencoLavoratoriToString() in ServerAziendaleDB: " + ex.ToString());
                 Console.ReadLine();
             }
 
             finally
-            {               
+            {
                 WriteLog(username, "GetElencoLavoratori()"); ///Scrittura log
             }
 
@@ -459,7 +493,7 @@ namespace ServerAziendaleDB
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public string GetElencoEventi(string username)
+        public List<EventoSRV> GetElencoEventi(string username)
         {
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, e.id, e.luogo " +
                            "FROM attivita a, evento e, specifica_evento se " +
@@ -471,7 +505,7 @@ namespace ServerAziendaleDB
                 string result = InterazioneDB.EseguiQuery_GetInfo(query);
 
                 if (result != "")
-                    return result;
+                    return EventoSRV.GeneraElencoEventi(result);
             }
 
             catch (Exception ex)
@@ -488,7 +522,7 @@ namespace ServerAziendaleDB
                 WriteLog(username, "GetElencoEventi()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -498,7 +532,7 @@ namespace ServerAziendaleDB
         /// <param name="username"></param>
         /// <param name="username_in"></param>
         /// <returns></returns>
-        public string GetElencoEventiLavoratore(string username, string username_in)
+        public List<EventoSRV> GetElencoEventiLavoratore(string username, string username_in)
         {
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, e.id, e.luogo" +
                            " FROM attivita a, evento e, specifica_evento se, partecipazione pa" +
@@ -510,7 +544,7 @@ namespace ServerAziendaleDB
                 string result = InterazioneDB.EseguiQuery_GetInfo(query);
 
                 if (result != "")
-                    return result;
+                    return EventoSRV.GeneraElencoEventi(result);
             }
 
             catch (Exception ex)
@@ -527,7 +561,7 @@ namespace ServerAziendaleDB
                 WriteLog(username, "GetElencoEventiLavoratore()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -535,7 +569,7 @@ namespace ServerAziendaleDB
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public string GetStoricoEventi(string username)
+        public List<EventoSRV> GetStoricoEventi(string username)
         {
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, e.id, e.luogo " +
                "FROM attivita a, evento e, specifica_evento se " +
@@ -546,7 +580,7 @@ namespace ServerAziendaleDB
                 string result = InterazioneDB.EseguiQuery_GetInfo(query);
 
                 if (result != "")
-                    return result;
+                    return EventoSRV.GeneraElencoEventi(result); ;
             }
 
             catch (Exception ex)
@@ -563,7 +597,7 @@ namespace ServerAziendaleDB
                 WriteLog(username, "GetStoricoEventi()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
         #endregion
 
@@ -721,7 +755,7 @@ namespace ServerAziendaleDB
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public string GetElencoProgetti(string username)
+        public List<ProgettoSRV> GetElencoProgetti(string username)
         {
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, p.id, p.cliente" +
                            " FROM attivita a, progetto p, specifica_progetto sp" +
@@ -733,7 +767,7 @@ namespace ServerAziendaleDB
                 string result = InterazioneDB.EseguiQuery_GetInfo(query);
 
                 if (result != "")
-                    return result;
+                    return ProgettoSRV.GeneraElencoProgetti(result);
             }
 
             catch (Exception ex)
@@ -750,7 +784,7 @@ namespace ServerAziendaleDB
                 WriteLog(username, "GetElencoProgetti()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -760,7 +794,7 @@ namespace ServerAziendaleDB
         /// <param name="username"></param>
         /// <param name="username_in"></param>
         /// <returns></returns>
-        public string GetElencoProgettiLavoratore(string username, string username_in)
+        public List<ProgettoSRV> GetElencoProgettiLavoratore(string username, string username_in)
         {
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, p.id, p.cliente" +
                            " FROM attivita a, progetto p, specifica_progetto sp, partecipazione pa" +
@@ -773,7 +807,7 @@ namespace ServerAziendaleDB
                 string result = InterazioneDB.EseguiQuery_GetInfo(query);
 
                 if (result != "")
-                    return result;
+                    return ProgettoSRV.GeneraElencoProgetti(result);
             }
 
             catch (Exception ex)
@@ -790,7 +824,7 @@ namespace ServerAziendaleDB
                 WriteLog(username, "GetElencoProgettiLavoratore()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -798,7 +832,7 @@ namespace ServerAziendaleDB
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public string GetStoricoProgetti(string username)
+        public List<ProgettoSRV> GetStoricoProgetti(string username)
         {
             string query = "SELECT a.codice, a.nome, a.descrizione, a.data_inizio, a.data_fine, p.id, p.cliente" +
                " FROM attivita a, progetto p, specifica_progetto sp" +
@@ -809,7 +843,7 @@ namespace ServerAziendaleDB
                 string result = InterazioneDB.EseguiQuery_GetInfo(query);
 
                 if (result != "")
-                    return result;
+                    return ProgettoSRV.GeneraElencoProgetti(result);
             }
 
             catch (Exception ex)
@@ -826,7 +860,7 @@ namespace ServerAziendaleDB
                 WriteLog(username, "GetStoricoProgetti()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         #region Obiettivi
@@ -836,7 +870,7 @@ namespace ServerAziendaleDB
         /// <param name="username"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public string GetElencoObiettivi(string username, string id)
+        public List<ObiettivoSRV> GetElencoObiettivi(string username, string id)
         {
             string query = "SELECT * " +
                            " FROM obiettivo " +
@@ -847,7 +881,7 @@ namespace ServerAziendaleDB
                 string result = InterazioneDB.EseguiQuery_GetInfo(query);
 
                 if (result != "")
-                    return result;
+                    return ObiettivoSRV.GeneraElencoObiettivi(result);
             }
 
             catch (Exception ex)
@@ -864,7 +898,7 @@ namespace ServerAziendaleDB
                 WriteLog(username, "GetElencoObiettivi()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>

@@ -132,7 +132,7 @@ namespace AgendaAziendale.Forms.UserControls
         {
             try
             {
-                string result = "";
+                List<Evento> result = new List<Evento>();
 
                 if (Filtra)
                     result = Controller.GetElencoEventiLavoratore(Sessione.Lavoratore.Username);
@@ -142,9 +142,9 @@ namespace AgendaAziendale.Forms.UserControls
 
                 dgvEventi.Rows.Clear();
 
-                if (result != "")
+                if (result != null)
                 {
-                    ElencoEventi = Evento.GeneraElencoEventi(result);
+                    ElencoEventi = result;
 
                     foreach (Evento evento in ElencoEventi)
                         dgvEventi.Rows.Add(evento.Codice, evento.Nome, evento.Descrizione, evento.DataInizio.ToShortDateString(), evento.DataFine.ToShortDateString(),

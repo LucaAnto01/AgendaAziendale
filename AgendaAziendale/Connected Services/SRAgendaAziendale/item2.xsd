@@ -13,6 +13,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LavoratoreSRV" nillable="true" type="tns:LavoratoreSRV" />
+  <xs:complexType name="ArrayOfLavoratoreSRV">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LavoratoreSRV" nillable="true" type="tns:LavoratoreSRV" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLavoratoreSRV" nillable="true" type="tns:ArrayOfLavoratoreSRV" />
   <xs:complexType name="EventoSRV">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:AttivitaSRV">
@@ -34,6 +40,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="AttivitaSRV" nillable="true" type="tns:AttivitaSRV" />
+  <xs:complexType name="ArrayOfEventoSRV">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EventoSRV" nillable="true" type="tns:EventoSRV" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEventoSRV" nillable="true" type="tns:ArrayOfEventoSRV" />
   <xs:complexType name="ProgettoSRV">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:AttivitaSRV">
@@ -60,4 +72,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ObiettivoSRV" nillable="true" type="tns:ObiettivoSRV" />
+  <xs:complexType name="ArrayOfProgettoSRV">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProgettoSRV" nillable="true" type="tns:ProgettoSRV" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProgettoSRV" nillable="true" type="tns:ArrayOfProgettoSRV" />
 </xs:schema>

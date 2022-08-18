@@ -131,13 +131,13 @@ namespace AgendaAziendale.Forms.UserControls
         {
             try
             {
-                string result = Controller.GetElencoLavoratori();
+                List<Lavoratore> elencoLavoratori =Controller.GetElencoLavoratori();
 
                 dgvLavoratori.Rows.Clear();
 
-                if (result != "")
+                if (elencoLavoratori != null)
                 {
-                    ElencoLavoratori = Lavoratore.GeneraElencoLavoratori(result);
+                    ElencoLavoratori = elencoLavoratori;
 
                     foreach (Lavoratore lavoratore in ElencoLavoratori)
                         dgvLavoratori.Rows.Add(lavoratore.Username, lavoratore.Nome, lavoratore.Cognome, lavoratore.Residenza,

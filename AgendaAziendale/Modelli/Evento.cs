@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServerAziendaleDB.Modelli;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -89,59 +90,27 @@ namespace AgendaAziendale.Modelli
         }
 
         /// <summary>
-        /// Metodo adibito alla creazione di un Evento sulla base di una stringa formattata dato-dato-...
+        /// Metodo per convertire un EventoSRV in un Evento
         /// </summary>
-        /// <param name="info"></param>
-        /// <returns>Evento</returns>
-        public static Evento GeneraEvento(string info)
+        /// <param name="eventoSrv"></param>
+        /// <returns></returns>
+        public static Evento FromEventoSRVToEvento(EventoSRV eventoSrv)
         {
-            Evento evento = new Evento();
-
-            try
-            {
-                List<string> informazioni = info.Split('-').ToList();
-
-                evento.Codice = informazioni.ElementAt(0);
-                evento.Nome = informazioni.ElementAt(1);
-                evento.Descrizione = informazioni.ElementAt(2);
-                evento.DataInizio = DateTime.Parse(informazioni.ElementAt(3));
-                evento.DataFine = DateTime.Parse(informazioni.ElementAt(4));
-                evento.Id = int.Parse(informazioni.ElementAt(5));
-                evento.Luogo = informazioni.ElementAt(6);
-            }
-            
-            catch
-            {
-                MessageBox.Show("ERRORE! Metodo GeneraEvento: errore istanziazionee", "Metodo GeneraEvento", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
-            }
-
-            return evento;
+            return new Evento(eventoSrv.Codice, eventoSrv.Nome, eventoSrv.Descrizione, eventoSrv.DataInizio, eventoSrv.DataFine, eventoSrv.Id, eventoSrv.Luogo);
         }
 
         /// <summary>
-        /// Metodo adibito alla creazione di una lista di Evento sulla base di una stringa formattata dato-dato-...\n...
+        /// Metodo per convertire una lista di EventoSRV in una lista di Evento
         /// </summary>
-        /// <param name="elenco"></param>
+        /// <param name="eventiSrv"></param>
         /// <returns></returns>
-        public static List<Evento> GeneraElencoEventi(string elenco)
+        public static List<Evento> FromEventoSRVToEvento(List<EventoSRV> eventiSrv)
         {
             List<Evento> elencoEventi = new List<Evento>();
 
-            try
+            foreach(EventoSRV eventoSrv in eventiSrv)
             {
-                List<string> eventi_info = elenco.Split('\n').ToList(); ///Splitto l'elenco al fine di avere per ogni elemento le informazioni di ogni evento
-
-                eventi_info.RemoveAt((eventi_info.Count - 1)); ///A causa dello split l'ultimo elemento rimane vuoto --> ""
-
-                foreach (string evento_info in eventi_info) ///Popolo la lista degli eventi
-                    elencoEventi.Add(GeneraEvento(evento_info));
-            }
-         
-            catch
-            {
-                MessageBox.Show("ERRORE! Metodo GeneraElencoEventi: errore istanziazionee", "Metodo GeneraElencoEventi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
+                elencoEventi.Add(new Evento(eventoSrv.Codice, eventoSrv.Nome, eventoSrv.Descrizione, eventoSrv.DataInizio, eventoSrv.DataFine, eventoSrv.Id, eventoSrv.Luogo));
             }
 
             return elencoEventi;

@@ -109,19 +109,18 @@ namespace AgendaAziendale.Forms
         {
             try
             {
-                string result_eventi = Controller.GetElencoEventiLavoratore(Sessione.Lavoratore.Username);
+                List<Evento> elencoEventi = Controller.GetElencoEventiLavoratore(Sessione.Lavoratore.Username);
                 flpSinistra.Controls.Clear(); ///Mi assicuro che il pannello sia pulito e lo pulisco nel caso ci sia da aggiornare l'interfaccia
 
-                if (result_eventi != "")
+                if (elencoEventi != null)
                 {
-                    List<Evento> elencoEventi = Evento.GeneraElencoEventi(result_eventi);
                     List<UCAttivita> listaUCAttivita = new List<UCAttivita>();
 
                     elencoEventi.ForEach(evento => listaUCAttivita.Add(new UCAttivita(evento))); ///Genero gli UCAttivita associati ad ogni evento
 
                     foreach (UCAttivita attivita in listaUCAttivita)
                     {
-                        attivita.Click += UCAttivita_Click; ///Aggiungo l'ascoltatore dell'evento del click sull'UC
+                        //attivita.Click += UCAttivita_Click; ///Aggiungo l'ascoltatore dell'evento del click sull'UC
                         flpSinistra.Controls.Add(attivita); ///Inserisco nel flpSinistra l'UC                   
                     }
 
@@ -147,19 +146,19 @@ namespace AgendaAziendale.Forms
         {
             try
             {
-                string result_progetti = Controller.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username);
+                List<Progetto> result_elencoProgetti = Controller.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username);
                 flpDestra.Controls.Clear(); ///Mi assicuro che il pannello sia pulito e lo pulisco nel caso ci sia da aggiornare l'interfaccia
 
-                if (result_progetti != "")
+                if (result_elencoProgetti != null)
                 {
-                    List<Progetto> elencoProgetti = Progetto.GeneraElencoProgetti(result_progetti);
+                    List<Progetto> elencoProgetti = result_elencoProgetti;
                     List<UCAttivita> listaUCAttivita = new List<UCAttivita>();
 
                     elencoProgetti.ForEach(progetto => listaUCAttivita.Add(new UCAttivita(progetto))); ///Genero gli UCAttivita associati ad ogni evento
 
                     foreach (UCAttivita attivita in listaUCAttivita)
                     {
-                        attivita.Click += UCAttivita_Click; ///Aggiungo l'ascoltatore dell'evento del click sull'UC
+                        //attivita.Click += UCAttivita_Click; ///Aggiungo l'ascoltatore dell'evento del click sull'UC
                         flpDestra.Controls.Add(attivita); ///Inserisco nel flpSinistra l'UC                   
                     }
 
@@ -178,7 +177,7 @@ namespace AgendaAziendale.Forms
             }
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Ascoltatore click sugli UCAttività creati
         /// --> se viene cliccato un progetto permette di segnare gli obbiettivi portati a termine
         /// --> se viene cliccato un evento mostra le informazioni relative ad esso
@@ -191,7 +190,7 @@ namespace AgendaAziendale.Forms
             MessageBox.Show("Click avvenuto");
             //Se progetto --> form per segnare le cose fatte
             //Se evento --> form per mostrare le info
-        }
+        }*/
         #endregion
     }
 }

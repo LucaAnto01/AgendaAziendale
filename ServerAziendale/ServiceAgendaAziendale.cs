@@ -57,14 +57,15 @@ namespace ServerAziendale
         /// <param name="username"></param>
         /// <param name="username_cercato"></param>
         /// <returns></returns>
-        public string GetInfoLavoratore(string username, string username_cercato)
+        public LavoratoreSRV GetInfoLavoratore(string username, string username_cercato)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetInfoLavoratore(username, username_cercato);
+                LavoratoreSRV lavoratoreSrvInfo = new LavoratoreSRV();
+                lavoratoreSrvInfo = Sessione.ServerAziendaleDB.GetInfoLavoratore(username, username_cercato);
 
-                if (result != "")
-                    return result;
+                if (lavoratoreSrvInfo.Username != "")
+                    return lavoratoreSrvInfo;
             }
 
             catch (Exception ex)
@@ -78,7 +79,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetInfoLavoratore()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -199,14 +200,14 @@ namespace ServerAziendale
         /// </summary>
         /// <param name="username"></param>
         /// <returns>string</returns>
-        public string GetElencoLavoratori(string username)
+        public List<LavoratoreSRV> GetElencoLavoratori(string username)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetElencoLavoratori(username);
+                List<LavoratoreSRV> elencoLavoratori = Sessione.ServerAziendaleDB.GetElencoLavoratori(username).ToList();
 
-                if (result != "")
-                    return result;
+                if (elencoLavoratori != null)
+                    return elencoLavoratori;
             }
 
             catch (Exception ex)
@@ -220,7 +221,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetElencoLavoratori()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
         #endregion
 
@@ -315,14 +316,14 @@ namespace ServerAziendale
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public string GetElencoEventi(string username)
+        public List<EventoSRV> GetElencoEventi(string username)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetElencoEventi(username);
+                List<EventoSRV> elencoEventi = Sessione.ServerAziendaleDB.GetElencoEventi(username).ToList();
 
-                if (result != "")
-                    return result;
+                if (elencoEventi != null)
+                    return elencoEventi;
             }
 
             catch (Exception ex)
@@ -336,7 +337,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetElencoEventi()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -346,14 +347,14 @@ namespace ServerAziendale
         /// <param name="username"></param>
         /// <param name="username_in"></param>
         /// <returns></returns>
-        public string GetElencoEventiLavoratore(string username, string username_in)
+        public List<EventoSRV> GetElencoEventiLavoratore(string username, string username_in)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetElencoEventiLavoratore(username, username_in);
+                List<EventoSRV> elencoEventiLavoratore = Sessione.ServerAziendaleDB.GetElencoEventiLavoratore(username, username_in).ToList();
 
-                if (result != "")
-                    return result;
+                if (elencoEventiLavoratore != null)
+                    return elencoEventiLavoratore;
             }
 
             catch (Exception ex)
@@ -367,7 +368,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetElencoEventiLavoratore()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -375,14 +376,14 @@ namespace ServerAziendale
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public string GetStoricoEventi(string username)
+        public List<EventoSRV> GetStoricoEventi(string username)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetStoricoEventi(username);
+                List<EventoSRV> storicoEventi = Sessione.ServerAziendaleDB.GetStoricoEventi(username).ToList();
 
-                if (result != "")
-                    return result;
+                if (storicoEventi != null)
+                    return storicoEventi;
             }
 
             catch (Exception ex)
@@ -396,7 +397,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetStoricoEventi()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
         #endregion
 
@@ -491,14 +492,14 @@ namespace ServerAziendale
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public string GetElencoProgetti(string username)
+        public List<ProgettoSRV> GetElencoProgetti(string username)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetElencoProgetti(username);
+                List<ProgettoSRV> elencoProgetti = Sessione.ServerAziendaleDB.GetElencoProgetti(username).ToList();
 
-                if (result != "")
-                    return result;
+                if (elencoProgetti != null)
+                    return elencoProgetti;
             }
 
             catch (Exception ex)
@@ -512,7 +513,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetElencoProgetti()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -522,14 +523,14 @@ namespace ServerAziendale
         /// <param name="username"></param>
         /// <param name="username_in"></param>
         /// <returns></returns>
-        public string GetElencoProgettiLavoratore(string username, string username_in)
+        public List<ProgettoSRV> GetElencoProgettiLavoratore(string username, string username_in)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetElencoProgettiLavoratore(username, username_in);
+                List<ProgettoSRV> elencoProgettiLavoratore = Sessione.ServerAziendaleDB.GetElencoProgettiLavoratore(username, username_in).ToList();
 
-                if (result != "")
-                    return result;
+                if (elencoProgettiLavoratore != null)
+                    return elencoProgettiLavoratore;
             }
 
             catch (Exception ex)
@@ -543,7 +544,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetElencoProgettiLavoratore()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -551,14 +552,14 @@ namespace ServerAziendale
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public string GetStoricoProgetti(string username)
+        public List<ProgettoSRV> GetStoricoProgetti(string username)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetStoricoProgetti(username);
+                List<ProgettoSRV> storicoProgetti = Sessione.ServerAziendaleDB.GetStoricoProgetti(username).ToList();
 
-                if (result != "")
-                    return result;
+                if (storicoProgetti != null)
+                    return storicoProgetti;
             }
 
             catch (Exception ex)
@@ -572,7 +573,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetStoricoProgetti()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         #region Obiettivi
@@ -582,14 +583,14 @@ namespace ServerAziendale
         /// <param name="username"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public string GetElencoObiettivi(string username, string id)
+        public List<ObiettivoSRV> GetElencoObiettivi(string username, string id)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetElencoObiettivi(username, id);
+                List<ObiettivoSRV> elencoObiettivi = Sessione.ServerAziendaleDB.GetElencoObiettivi(username, id).ToList();
 
-                if (result != "")
-                    return result;
+                if (elencoObiettivi != null)
+                    return elencoObiettivi;
             }
 
             catch (Exception ex)
@@ -603,7 +604,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetElencoObiettivi()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -770,7 +771,7 @@ namespace ServerAziendale
             try
             {
                 string result_partecipanti = Sessione.ServerAziendaleDB.GetElencoPartecipantiAttivita(username, codice);
-                string result_lavoratori = Sessione.ServerAziendaleDB.GetElencoLavoratori(username);
+                string result_lavoratori = Sessione.ServerAziendaleDB.GetElencoLavoratoriToString(username);
 
                 if ((result_partecipanti != "") && (result_lavoratori != ""))
                 {

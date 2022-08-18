@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServerAziendaleDB.Modelli;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,56 +44,27 @@ namespace AgendaAziendale.Modelli
 
         #region Metodi
         /// <summary>
-        /// Metodo adibito alla creazione di un Obiettivo sulla base di una stringa formattata dato-dato-...
+        /// Metodo per convertire un ObiettivoSRV in un Obiettivo
         /// </summary>
-        /// <param name="info"></param>
+        /// <param name="obiettivoSrv"></param>
         /// <returns></returns>
-        public static Obiettivo GeneraProgetto(string info)
+        public static Obiettivo FromObiettivoSRVToObiettivo(ObiettivoSRV obiettivoSrv)
         {
-            Obiettivo obiettivo = new Obiettivo();
-
-            try
-            {
-                List<string> informazioni = info.Split('-').ToList();
-
-                obiettivo.Id = int.Parse(informazioni.ElementAt(0));
-                //All'indice 1 ho l'fk del progetto di riferimento
-                obiettivo.Desccrizione = informazioni.ElementAt(2);
-                obiettivo.Completato = bool.Parse(informazioni.ElementAt(3));
-            }
-            
-            catch
-            {
-                MessageBox.Show("ERRORE! Metodo GeneraProgetto: errore errore istanziazione", "Metodo GeneraProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
-            }
-
-            return obiettivo;
+            return new Obiettivo(obiettivoSrv.Id, obiettivoSrv.Desccrizione, obiettivoSrv.Completato);
         }
 
         /// <summary>
-        /// Metodo adibito alla creazione di una lista di Obiettivo sulla base di una stringa formattata dato-dato-...\n...
+        /// Metodo per convertire una lista di ObiettivoSRV in una lista di Obiettivo
         /// </summary>
-        /// <param name="elenco"></param>
+        /// <param name="obiettiviSrv"></param>
         /// <returns></returns>
-        public static List<Obiettivo> GeneraElencoObiettivi(string elenco)
+        public static List<Obiettivo> FromObiettivoSRVToObiettivo(List<ObiettivoSRV> obiettiviSrv)
         {
             List<Obiettivo> elencoObiettivi = new List<Obiettivo>();
 
-            try
+            foreach(ObiettivoSRV obiettivoSrv in obiettiviSrv)
             {
-                List<string> obiettivi_info = elenco.Split('\n').ToList(); ///Splitto l'elenco al fine di avere per ogni elemento le informazioni di ogni obiettivo
-
-                obiettivi_info.RemoveAt((obiettivi_info.Count - 1)); ///A causa dello split l'ultimo elemento rimane vuoto --> ""
-
-                foreach (string obiettivo_info in obiettivi_info) ///Popolo la lista degli obiettivi
-                    elencoObiettivi.Add(GeneraProgetto(obiettivo_info));
-            }
-            
-            catch
-            {
-                MessageBox.Show("ERRORE! Metodo GeneraElencoObiettivi: errore errore istanziazione", "Metodo GeneraElencoObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
+                elencoObiettivi.Add(new Obiettivo(obiettivoSrv.Id, obiettivoSrv.Desccrizione, obiettivoSrv.Completato));
             }
 
             return elencoObiettivi;

@@ -28,10 +28,10 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         System.Threading.Tasks.Task<bool> LoginAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetInfoLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetInfoLavoratoreResponse")]
-        string GetInfoLavoratore(string username, string username_cercato);
+        ServerAziendaleDB.Modelli.LavoratoreSRV GetInfoLavoratore(string username, string username_cercato);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetInfoLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetInfoLavoratoreResponse")]
-        System.Threading.Tasks.Task<string> GetInfoLavoratoreAsync(string username, string username_cercato);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.LavoratoreSRV> GetInfoLavoratoreAsync(string username, string username_cercato);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/InserisciLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/InserisciLavoratoreResponse")]
         bool InserisciLavoratore(string username, ServerAziendaleDB.Modelli.LavoratoreSRV nuovoLavoratore);
@@ -58,10 +58,16 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         System.Threading.Tasks.Task<bool> EliminaLavoratoreAsync(string username, string username_in);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoLavoratori", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoLavoratoriResponse")]
-        string GetElencoLavoratori(string username);
+        ServerAziendaleDB.Modelli.LavoratoreSRV[] GetElencoLavoratori(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoLavoratori", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoLavoratoriResponse")]
-        System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.LavoratoreSRV[]> GetElencoLavoratoriAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoLavoratoriToString", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoLavoratoriToStringResponse")]
+        string GetElencoLavoratoriToString(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoLavoratoriToString", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoLavoratoriToStringResponse")]
+        System.Threading.Tasks.Task<string> GetElencoLavoratoriToStringAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaEvento", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/CreaEventoResponse")]
         bool CreaEvento(string username, ServerAziendaleDB.Modelli.EventoSRV nuovoEvento);
@@ -82,22 +88,22 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         System.Threading.Tasks.Task<bool> EliminaEventoAsync(string username, string codice, string id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventi", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventiResponse")]
-        string GetElencoEventi(string username);
+        ServerAziendaleDB.Modelli.EventoSRV[] GetElencoEventi(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventi", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventiResponse")]
-        System.Threading.Tasks.Task<string> GetElencoEventiAsync(string username);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.EventoSRV[]> GetElencoEventiAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventiLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventiLavoratoreResponse")]
-        string GetElencoEventiLavoratore(string username, string username_in);
+        ServerAziendaleDB.Modelli.EventoSRV[] GetElencoEventiLavoratore(string username, string username_in);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventiLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoEventiLavoratoreResponse")]
-        System.Threading.Tasks.Task<string> GetElencoEventiLavoratoreAsync(string username, string username_in);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.EventoSRV[]> GetElencoEventiLavoratoreAsync(string username, string username_in);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoEventi", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoEventiResponse")]
-        string GetStoricoEventi(string username);
+        ServerAziendaleDB.Modelli.EventoSRV[] GetStoricoEventi(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoEventi", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoEventiResponse")]
-        System.Threading.Tasks.Task<string> GetStoricoEventiAsync(string username);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.EventoSRV[]> GetStoricoEventiAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgetto", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/CreaProgettoResponse")]
         bool CreaProgetto(string username, ServerAziendaleDB.Modelli.ProgettoSRV nuovoProgetto);
@@ -118,28 +124,28 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         System.Threading.Tasks.Task<bool> EliminaProgettoAsync(string username, string codice, string id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgetti", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiResponse")]
-        string GetElencoProgetti(string username);
+        ServerAziendaleDB.Modelli.ProgettoSRV[] GetElencoProgetti(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgetti", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiResponse")]
-        System.Threading.Tasks.Task<string> GetElencoProgettiAsync(string username);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ProgettoSRV[]> GetElencoProgettiAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiLavoratoreResponse")]
-        string GetElencoProgettiLavoratore(string username, string username_in);
+        ServerAziendaleDB.Modelli.ProgettoSRV[] GetElencoProgettiLavoratore(string username, string username_in);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiLavoratoreResponse")]
-        System.Threading.Tasks.Task<string> GetElencoProgettiLavoratoreAsync(string username, string username_in);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ProgettoSRV[]> GetElencoProgettiLavoratoreAsync(string username, string username_in);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoProgetti", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoProgettiResponse")]
-        string GetStoricoProgetti(string username);
+        ServerAziendaleDB.Modelli.ProgettoSRV[] GetStoricoProgetti(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoProgetti", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoProgettiResponse")]
-        System.Threading.Tasks.Task<string> GetStoricoProgettiAsync(string username);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ProgettoSRV[]> GetStoricoProgettiAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoObiettivi", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoObiettiviResponse")]
-        string GetElencoObiettivi(string username, string id);
+        ServerAziendaleDB.Modelli.ObiettivoSRV[] GetElencoObiettivi(string username, string id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoObiettivi", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoObiettiviResponse")]
-        System.Threading.Tasks.Task<string> GetElencoObiettiviAsync(string username, string id);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ObiettivoSRV[]> GetElencoObiettiviAsync(string username, string id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiungiObiettivo", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/AggiungiObiettivoResponse")]
         bool AggiungiObiettivo(string username, ServerAziendaleDB.Modelli.ObiettivoSRV nuovoObiettivo);
@@ -225,11 +231,11 @@ namespace ServerAziendale.SRDBAgendaAziendale {
             return base.Channel.LoginAsync(username, password);
         }
         
-        public string GetInfoLavoratore(string username, string username_cercato) {
+        public ServerAziendaleDB.Modelli.LavoratoreSRV GetInfoLavoratore(string username, string username_cercato) {
             return base.Channel.GetInfoLavoratore(username, username_cercato);
         }
         
-        public System.Threading.Tasks.Task<string> GetInfoLavoratoreAsync(string username, string username_cercato) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.LavoratoreSRV> GetInfoLavoratoreAsync(string username, string username_cercato) {
             return base.Channel.GetInfoLavoratoreAsync(username, username_cercato);
         }
         
@@ -265,12 +271,20 @@ namespace ServerAziendale.SRDBAgendaAziendale {
             return base.Channel.EliminaLavoratoreAsync(username, username_in);
         }
         
-        public string GetElencoLavoratori(string username) {
+        public ServerAziendaleDB.Modelli.LavoratoreSRV[] GetElencoLavoratori(string username) {
             return base.Channel.GetElencoLavoratori(username);
         }
         
-        public System.Threading.Tasks.Task<string> GetElencoLavoratoriAsync(string username) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.LavoratoreSRV[]> GetElencoLavoratoriAsync(string username) {
             return base.Channel.GetElencoLavoratoriAsync(username);
+        }
+        
+        public string GetElencoLavoratoriToString(string username) {
+            return base.Channel.GetElencoLavoratoriToString(username);
+        }
+        
+        public System.Threading.Tasks.Task<string> GetElencoLavoratoriToStringAsync(string username) {
+            return base.Channel.GetElencoLavoratoriToStringAsync(username);
         }
         
         public bool CreaEvento(string username, ServerAziendaleDB.Modelli.EventoSRV nuovoEvento) {
@@ -297,27 +311,27 @@ namespace ServerAziendale.SRDBAgendaAziendale {
             return base.Channel.EliminaEventoAsync(username, codice, id);
         }
         
-        public string GetElencoEventi(string username) {
+        public ServerAziendaleDB.Modelli.EventoSRV[] GetElencoEventi(string username) {
             return base.Channel.GetElencoEventi(username);
         }
         
-        public System.Threading.Tasks.Task<string> GetElencoEventiAsync(string username) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.EventoSRV[]> GetElencoEventiAsync(string username) {
             return base.Channel.GetElencoEventiAsync(username);
         }
         
-        public string GetElencoEventiLavoratore(string username, string username_in) {
+        public ServerAziendaleDB.Modelli.EventoSRV[] GetElencoEventiLavoratore(string username, string username_in) {
             return base.Channel.GetElencoEventiLavoratore(username, username_in);
         }
         
-        public System.Threading.Tasks.Task<string> GetElencoEventiLavoratoreAsync(string username, string username_in) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.EventoSRV[]> GetElencoEventiLavoratoreAsync(string username, string username_in) {
             return base.Channel.GetElencoEventiLavoratoreAsync(username, username_in);
         }
         
-        public string GetStoricoEventi(string username) {
+        public ServerAziendaleDB.Modelli.EventoSRV[] GetStoricoEventi(string username) {
             return base.Channel.GetStoricoEventi(username);
         }
         
-        public System.Threading.Tasks.Task<string> GetStoricoEventiAsync(string username) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.EventoSRV[]> GetStoricoEventiAsync(string username) {
             return base.Channel.GetStoricoEventiAsync(username);
         }
         
@@ -345,35 +359,35 @@ namespace ServerAziendale.SRDBAgendaAziendale {
             return base.Channel.EliminaProgettoAsync(username, codice, id);
         }
         
-        public string GetElencoProgetti(string username) {
+        public ServerAziendaleDB.Modelli.ProgettoSRV[] GetElencoProgetti(string username) {
             return base.Channel.GetElencoProgetti(username);
         }
         
-        public System.Threading.Tasks.Task<string> GetElencoProgettiAsync(string username) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ProgettoSRV[]> GetElencoProgettiAsync(string username) {
             return base.Channel.GetElencoProgettiAsync(username);
         }
         
-        public string GetElencoProgettiLavoratore(string username, string username_in) {
+        public ServerAziendaleDB.Modelli.ProgettoSRV[] GetElencoProgettiLavoratore(string username, string username_in) {
             return base.Channel.GetElencoProgettiLavoratore(username, username_in);
         }
         
-        public System.Threading.Tasks.Task<string> GetElencoProgettiLavoratoreAsync(string username, string username_in) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ProgettoSRV[]> GetElencoProgettiLavoratoreAsync(string username, string username_in) {
             return base.Channel.GetElencoProgettiLavoratoreAsync(username, username_in);
         }
         
-        public string GetStoricoProgetti(string username) {
+        public ServerAziendaleDB.Modelli.ProgettoSRV[] GetStoricoProgetti(string username) {
             return base.Channel.GetStoricoProgetti(username);
         }
         
-        public System.Threading.Tasks.Task<string> GetStoricoProgettiAsync(string username) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ProgettoSRV[]> GetStoricoProgettiAsync(string username) {
             return base.Channel.GetStoricoProgettiAsync(username);
         }
         
-        public string GetElencoObiettivi(string username, string id) {
+        public ServerAziendaleDB.Modelli.ObiettivoSRV[] GetElencoObiettivi(string username, string id) {
             return base.Channel.GetElencoObiettivi(username, id);
         }
         
-        public System.Threading.Tasks.Task<string> GetElencoObiettiviAsync(string username, string id) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ObiettivoSRV[]> GetElencoObiettiviAsync(string username, string id) {
             return base.Channel.GetElencoObiettiviAsync(username, id);
         }
         
