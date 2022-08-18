@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServerAziendaleDB.Modelli;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,6 +44,32 @@ namespace AgendaAziendale.Modelli
 
         #region Metodi
         /// <summary>
+        /// Metodo per convertire un ObiettivoSRV in un Obiettivo
+        /// </summary>
+        /// <param name="obiettivoSrv"></param>
+        /// <returns></returns>
+        public static Obiettivo FromObiettivoSRVToObiettivo(ObiettivoSRV obiettivoSrv)
+        {
+            return new Obiettivo(obiettivoSrv.Id, obiettivoSrv.Desccrizione, obiettivoSrv.Completato);
+        }
+
+        /// <summary>
+        /// Metodo per convertire una lista di ObiettivoSRV in una lista di Obiettivo
+        /// </summary>
+        /// <param name="obiettiviSrv"></param>
+        /// <returns></returns>
+        public static List<Obiettivo> FromObiettivoSRVToObiettivo(List<ObiettivoSRV> obiettiviSrv)
+        {
+            List<Obiettivo> elencoObiettivi = new List<Obiettivo>();
+
+            foreach(ObiettivoSRV obiettivoSrv in obiettiviSrv)
+            {
+                elencoObiettivi.Add(new Obiettivo(obiettivoSrv.Id, obiettivoSrv.Desccrizione, obiettivoSrv.Completato));
+            }
+
+            return elencoObiettivi;
+        }
+        /*/// <summary>
         /// Metodo adibito alla creazione di un Obiettivo sulla base di una stringa formattata dato-dato-...
         /// </summary>
         /// <param name="info"></param>
@@ -96,7 +123,7 @@ namespace AgendaAziendale.Modelli
             }
 
             return elencoObiettivi;
-        }
+        }*/
         #endregion
     }
 }

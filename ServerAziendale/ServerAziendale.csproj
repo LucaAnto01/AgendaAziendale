@@ -73,6 +73,8 @@
     <None Include="Connected Services\SRDBAgendaAziendale\ServiceDBAgendaAziendale.wsdl" />
     <None Include="Properties\DataSources\ServerAziendaleDB.Modelli.EventoSRV.datasource" />
     <None Include="Properties\DataSources\ServerAziendaleDB.Modelli.LavoratoreSRV.datasource" />
+    <None Include="Properties\DataSources\ServerAziendaleDB.Modelli.ObiettivoSRV.datasource" />
+    <None Include="Properties\DataSources\ServerAziendaleDB.Modelli.ProgettoSRV.datasource" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\SRDBAgendaAziendale\item.disco" />

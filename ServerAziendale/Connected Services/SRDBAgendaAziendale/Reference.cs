@@ -124,28 +124,28 @@ namespace ServerAziendale.SRDBAgendaAziendale {
         System.Threading.Tasks.Task<bool> EliminaProgettoAsync(string username, string codice, string id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgetti", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiResponse")]
-        string GetElencoProgetti(string username);
+        ServerAziendaleDB.Modelli.ProgettoSRV[] GetElencoProgetti(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgetti", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiResponse")]
-        System.Threading.Tasks.Task<string> GetElencoProgettiAsync(string username);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ProgettoSRV[]> GetElencoProgettiAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiLavoratoreResponse")]
-        string GetElencoProgettiLavoratore(string username, string username_in);
+        ServerAziendaleDB.Modelli.ProgettoSRV[] GetElencoProgettiLavoratore(string username, string username_in);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiLavoratore", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoProgettiLavoratoreResponse")]
-        System.Threading.Tasks.Task<string> GetElencoProgettiLavoratoreAsync(string username, string username_in);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ProgettoSRV[]> GetElencoProgettiLavoratoreAsync(string username, string username_in);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoProgetti", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoProgettiResponse")]
-        string GetStoricoProgetti(string username);
+        ServerAziendaleDB.Modelli.ProgettoSRV[] GetStoricoProgetti(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoProgetti", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetStoricoProgettiResponse")]
-        System.Threading.Tasks.Task<string> GetStoricoProgettiAsync(string username);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ProgettoSRV[]> GetStoricoProgettiAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoObiettivi", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoObiettiviResponse")]
-        string GetElencoObiettivi(string username, string id);
+        ServerAziendaleDB.Modelli.ObiettivoSRV[] GetElencoObiettivi(string username, string id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoObiettivi", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/GetElencoObiettiviResponse")]
-        System.Threading.Tasks.Task<string> GetElencoObiettiviAsync(string username, string id);
+        System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ObiettivoSRV[]> GetElencoObiettiviAsync(string username, string id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceDBAgendaAziendale/AggiungiObiettivo", ReplyAction="http://tempuri.org/IServiceDBAgendaAziendale/AggiungiObiettivoResponse")]
         bool AggiungiObiettivo(string username, ServerAziendaleDB.Modelli.ObiettivoSRV nuovoObiettivo);
@@ -359,35 +359,35 @@ namespace ServerAziendale.SRDBAgendaAziendale {
             return base.Channel.EliminaProgettoAsync(username, codice, id);
         }
         
-        public string GetElencoProgetti(string username) {
+        public ServerAziendaleDB.Modelli.ProgettoSRV[] GetElencoProgetti(string username) {
             return base.Channel.GetElencoProgetti(username);
         }
         
-        public System.Threading.Tasks.Task<string> GetElencoProgettiAsync(string username) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ProgettoSRV[]> GetElencoProgettiAsync(string username) {
             return base.Channel.GetElencoProgettiAsync(username);
         }
         
-        public string GetElencoProgettiLavoratore(string username, string username_in) {
+        public ServerAziendaleDB.Modelli.ProgettoSRV[] GetElencoProgettiLavoratore(string username, string username_in) {
             return base.Channel.GetElencoProgettiLavoratore(username, username_in);
         }
         
-        public System.Threading.Tasks.Task<string> GetElencoProgettiLavoratoreAsync(string username, string username_in) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ProgettoSRV[]> GetElencoProgettiLavoratoreAsync(string username, string username_in) {
             return base.Channel.GetElencoProgettiLavoratoreAsync(username, username_in);
         }
         
-        public string GetStoricoProgetti(string username) {
+        public ServerAziendaleDB.Modelli.ProgettoSRV[] GetStoricoProgetti(string username) {
             return base.Channel.GetStoricoProgetti(username);
         }
         
-        public System.Threading.Tasks.Task<string> GetStoricoProgettiAsync(string username) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ProgettoSRV[]> GetStoricoProgettiAsync(string username) {
             return base.Channel.GetStoricoProgettiAsync(username);
         }
         
-        public string GetElencoObiettivi(string username, string id) {
+        public ServerAziendaleDB.Modelli.ObiettivoSRV[] GetElencoObiettivi(string username, string id) {
             return base.Channel.GetElencoObiettivi(username, id);
         }
         
-        public System.Threading.Tasks.Task<string> GetElencoObiettiviAsync(string username, string id) {
+        public System.Threading.Tasks.Task<ServerAziendaleDB.Modelli.ObiettivoSRV[]> GetElencoObiettiviAsync(string username, string id) {
             return base.Channel.GetElencoObiettiviAsync(username, id);
         }
         

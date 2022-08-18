@@ -148,7 +148,7 @@ namespace AgendaAziendale.Forms.UserControls
         {
             try
             {
-                string result_progetti = "";
+                List<Progetto> result_progetti = new List<Progetto>();
 
                 if (Filtra)
                     result_progetti = Controller.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username);
@@ -158,9 +158,9 @@ namespace AgendaAziendale.Forms.UserControls
 
                 dgvProgetti.Rows.Clear();
 
-                if (result_progetti != "")
+                if (result_progetti != null)
                 {
-                    ElencoProgetti = Progetto.GeneraElencoProgetti(result_progetti);
+                    ElencoProgetti = result_progetti;
 
                     foreach (Progetto progetto in ElencoProgetti)
                     {
@@ -176,7 +176,7 @@ namespace AgendaAziendale.Forms.UserControls
                             dgvProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
                         }*/
 
-                        if (Controller.GetElencoObiettivi(progetto.Id.ToString()) != "")
+                        if (Controller.GetElencoObiettivi(progetto.Id.ToString()) != null)
                             dgvProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
 
                         else

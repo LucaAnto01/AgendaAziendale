@@ -146,12 +146,12 @@ namespace AgendaAziendale.Forms
         {
             try
             {
-                string result_progetti = Controller.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username);
+                List<Progetto> result_elencoProgetti = Controller.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username);
                 flpDestra.Controls.Clear(); ///Mi assicuro che il pannello sia pulito e lo pulisco nel caso ci sia da aggiornare l'interfaccia
 
-                if (result_progetti != "")
+                if (result_elencoProgetti != null)
                 {
-                    List<Progetto> elencoProgetti = Progetto.GeneraElencoProgetti(result_progetti);
+                    List<Progetto> elencoProgetti = result_elencoProgetti;
                     List<UCAttivita> listaUCAttivita = new List<UCAttivita>();
 
                     elencoProgetti.ForEach(progetto => listaUCAttivita.Add(new UCAttivita(progetto))); ///Genero gli UCAttivita associati ad ogni evento

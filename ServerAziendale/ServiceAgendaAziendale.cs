@@ -492,14 +492,14 @@ namespace ServerAziendale
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public string GetElencoProgetti(string username)
+        public List<ProgettoSRV> GetElencoProgetti(string username)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetElencoProgetti(username);
+                List<ProgettoSRV> elencoProgetti = Sessione.ServerAziendaleDB.GetElencoProgetti(username).ToList();
 
-                if (result != "")
-                    return result;
+                if (elencoProgetti != null)
+                    return elencoProgetti;
             }
 
             catch (Exception ex)
@@ -513,7 +513,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetElencoProgetti()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -523,14 +523,14 @@ namespace ServerAziendale
         /// <param name="username"></param>
         /// <param name="username_in"></param>
         /// <returns></returns>
-        public string GetElencoProgettiLavoratore(string username, string username_in)
+        public List<ProgettoSRV> GetElencoProgettiLavoratore(string username, string username_in)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetElencoProgettiLavoratore(username, username_in);
+                List<ProgettoSRV> elencoProgettiLavoratore = Sessione.ServerAziendaleDB.GetElencoProgettiLavoratore(username, username_in).ToList();
 
-                if (result != "")
-                    return result;
+                if (elencoProgettiLavoratore != null)
+                    return elencoProgettiLavoratore;
             }
 
             catch (Exception ex)
@@ -544,7 +544,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetElencoProgettiLavoratore()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -552,14 +552,14 @@ namespace ServerAziendale
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public string GetStoricoProgetti(string username)
+        public List<ProgettoSRV> GetStoricoProgetti(string username)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetStoricoProgetti(username);
+                List<ProgettoSRV> storicoProgetti = Sessione.ServerAziendaleDB.GetStoricoProgetti(username).ToList();
 
-                if (result != "")
-                    return result;
+                if (storicoProgetti != null)
+                    return storicoProgetti;
             }
 
             catch (Exception ex)
@@ -573,7 +573,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetStoricoProgetti()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         #region Obiettivi
@@ -583,14 +583,14 @@ namespace ServerAziendale
         /// <param name="username"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public string GetElencoObiettivi(string username, string id)
+        public List<ObiettivoSRV> GetElencoObiettivi(string username, string id)
         {
             try
             {
-                string result = Sessione.ServerAziendaleDB.GetElencoObiettivi(username, id);
+                List<ObiettivoSRV> elencoObiettivi = Sessione.ServerAziendaleDB.GetElencoObiettivi(username, id).ToList();
 
-                if (result != "")
-                    return result;
+                if (elencoObiettivi != null)
+                    return elencoObiettivi;
             }
 
             catch (Exception ex)
@@ -604,7 +604,7 @@ namespace ServerAziendale
                 WriteLog(username, "GetElencoObiettivi()"); ///Scrittura log
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>

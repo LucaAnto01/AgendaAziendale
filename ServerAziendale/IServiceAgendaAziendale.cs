@@ -175,7 +175,7 @@ namespace ServerAziendale
         /// <param name="username"></param>
         /// <returns></returns>
         [OperationContract]
-        string GetElencoProgetti(string username);
+        List<ProgettoSRV> GetElencoProgetti(string username);
 
         /// <summary>
         /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB  con una data maggiore o uguale all'odierna
@@ -185,7 +185,7 @@ namespace ServerAziendale
         /// <param name="username_in"></param>
         /// <returns></returns>
         [OperationContract]
-        string GetElencoProgettiLavoratore(string username, string username_in);
+        List<ProgettoSRV> GetElencoProgettiLavoratore(string username, string username_in);
 
         /// <summary>
         /// Servizio adibito all'ottenimento dell'Elenco di tutti i Progetti presenti nel DB
@@ -193,7 +193,7 @@ namespace ServerAziendale
         /// <param name="username"></param>
         /// <returns></returns>
         [OperationContract]
-        string GetStoricoProgetti(string username);
+        List<ProgettoSRV> GetStoricoProgetti(string username);
 
         #region Obiettivi
         /// <summary>
@@ -203,7 +203,7 @@ namespace ServerAziendale
         /// <param name="id"></param>
         /// <returns></returns>
         [OperationContract]
-        string GetElencoObiettivi(string username, string id);
+        List<ObiettivoSRV> GetElencoObiettivi(string username, string id);
 
         /// <summary>
         /// Servizio adibito al calcolo dell'avanzamento percentuale di un determinato progetto sulla base del completamento degli Obiettivi

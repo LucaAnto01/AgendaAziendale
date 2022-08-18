@@ -111,13 +111,13 @@ namespace AgendaAziendale.Forms.UserControls
         {
             try
             {
-                string result_progetti = Controller.GetElencoProgetti();
+                List<Progetto> result_progetti = Controller.GetElencoProgetti();
 
                 dgvStoricoProgetti.Rows.Clear();
 
-                if (result_progetti != "")
+                if (result_progetti != null)
                 {
-                    ElencoProgetti = Progetto.GeneraElencoProgetti(result_progetti);
+                    ElencoProgetti = result_progetti;
 
                     foreach (Progetto progetto in ElencoProgetti)
                     {
@@ -133,7 +133,7 @@ namespace AgendaAziendale.Forms.UserControls
                             dgvStoricoProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
                         }*/
 
-                        if (Controller.GetElencoObiettivi(progetto.Id.ToString()) != "")
+                        if (Controller.GetElencoObiettivi(progetto.Id.ToString()) != null)
                             dgvStoricoProgetti.Rows[indice_riga].Cells[7].Value = Controller.CalcolaAvanzamentoProgetto(progetto).ToString() + "%"; ///Calcolo l'avanzamento del progetto
 
                         else

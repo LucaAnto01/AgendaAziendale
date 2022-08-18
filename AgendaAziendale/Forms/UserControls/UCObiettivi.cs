@@ -124,13 +124,13 @@ namespace AgendaAziendale.Forms.UserControls
         {
             try
             {
-                string result = Controller.GetElencoObiettivi(ProgettoPadre.Id.ToString());
+                List<Obiettivo> elencoObiettivi = Controller.GetElencoObiettivi(ProgettoPadre.Id.ToString());
 
                 dgvObiettivi.Rows.Clear();
 
-                if (result != "")
+                if (elencoObiettivi != null)
                 {
-                    ProgettoPadre.Obiettivi = Obiettivo.GeneraElencoObiettivi(result);
+                    ProgettoPadre.Obiettivi = elencoObiettivi;
 
                     foreach (Obiettivo obiettivo in ProgettoPadre.Obiettivi)
                         dgvObiettivi.Rows.Add(obiettivo.Id, obiettivo.Desccrizione, (obiettivo.Completato ? 1.ToString() : 0.ToString()));

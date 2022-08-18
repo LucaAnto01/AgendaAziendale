@@ -436,16 +436,14 @@ namespace AgendaAziendale.Modelli
         /// Funzione adibita all'ottenimento dell'elenco di tutti i progetti presenti nel DB con una data maggiore o uguale all'odierna
         /// </summary>
         /// <returns></returns>
-        public static string GetElencoProgetti()
+        public static List<Progetto> GetElencoProgetti()
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetElencoProgetti(Sessione.Lavoratore.Username);
+                List<Progetto> elencoProgetti = Progetto.FromProgettoSRVToProgetto(Sessione.ServerAziendale.GetElencoProgetti(Sessione.Lavoratore.Username).ToList());
 
-                if (result != "")
-                    return result;
-
-                return "";
+                if (elencoProgetti != null)
+                    return elencoProgetti;
             }
             
             catch
@@ -454,7 +452,7 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
@@ -463,16 +461,15 @@ namespace AgendaAziendale.Modelli
         /// </summary>
         /// <param name="username_in"></param>
         /// <returns></returns>
-        public static string GetElencoProgettiLavoratore(string username_in)
+        public static List<Progetto> GetElencoProgettiLavoratore(string username_in)
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username, username_in);
+                List<Progetto> elencoProgettiLavoratore = Progetto.FromProgettoSRVToProgetto(Sessione.ServerAziendale.GetElencoProgettiLavoratore(Sessione.Lavoratore.Username, username_in).ToList());
 
-                if (result != "")
-                    return result;
+                if (elencoProgettiLavoratore != null)
+                    return elencoProgettiLavoratore;
 
-                return "";
             }
             
             catch
@@ -481,23 +478,22 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
         /// Funzione adibita all'ottenimento dell'elenco di tutti i progetti presenti nel DB
         /// </summary>
         /// <returns></returns>
-        public static string GetStoricoProgetti()
+        public static List<Progetto> GetStoricoProgetti()
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetStoricoProgetti(Sessione.Lavoratore.Username);
+                List<Progetto> storicoProgetti = Progetto.FromProgettoSRVToProgetto(Sessione.ServerAziendale.GetStoricoProgetti(Sessione.Lavoratore.Username).ToList());
 
-                if (result != "")
-                    return result;
+                if (storicoProgetti != null)
+                    return storicoProgetti;
 
-                return "";
             }
             
             catch
@@ -506,7 +502,7 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
 
         #region Obiettivi
@@ -515,16 +511,14 @@ namespace AgendaAziendale.Modelli
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static string GetElencoObiettivi(string id)
+        public static List<Obiettivo> GetElencoObiettivi(string id)
         {
             try
             {
-                string result = Sessione.ServerAziendale.GetElencoObiettivi(Sessione.Lavoratore.Username, id);
+                List<Obiettivo> elencoObiettivi = Obiettivo.FromObiettivoSRVToObiettivo(Sessione.ServerAziendale.GetElencoObiettivi(Sessione.Lavoratore.Username, id).ToList());
 
-                if (result != "")
-                    return result;
-
-                return "";
+                if (elencoObiettivi != null)
+                    return elencoObiettivi;
             }
             
             catch
@@ -533,7 +527,7 @@ namespace AgendaAziendale.Modelli
                 Application.Exit();
             }
 
-            return "";
+            return null;
         }
 
         /// <summary>
