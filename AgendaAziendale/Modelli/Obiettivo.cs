@@ -69,61 +69,6 @@ namespace AgendaAziendale.Modelli
 
             return elencoObiettivi;
         }
-        /*/// <summary>
-        /// Metodo adibito alla creazione di un Obiettivo sulla base di una stringa formattata dato-dato-...
-        /// </summary>
-        /// <param name="info"></param>
-        /// <returns></returns>
-        public static Obiettivo GeneraProgetto(string info)
-        {
-            Obiettivo obiettivo = new Obiettivo();
-
-            try
-            {
-                List<string> informazioni = info.Split('-').ToList();
-
-                obiettivo.Id = int.Parse(informazioni.ElementAt(0));
-                //All'indice 1 ho l'fk del progetto di riferimento
-                obiettivo.Desccrizione = informazioni.ElementAt(2);
-                obiettivo.Completato = bool.Parse(informazioni.ElementAt(3));
-            }
-            
-            catch
-            {
-                MessageBox.Show("ERRORE! Metodo GeneraProgetto: errore errore istanziazione", "Metodo GeneraProgetto", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
-            }
-
-            return obiettivo;
-        }
-
-        /// <summary>
-        /// Metodo adibito alla creazione di una lista di Obiettivo sulla base di una stringa formattata dato-dato-...\n...
-        /// </summary>
-        /// <param name="elenco"></param>
-        /// <returns></returns>
-        public static List<Obiettivo> GeneraElencoObiettivi(string elenco)
-        {
-            List<Obiettivo> elencoObiettivi = new List<Obiettivo>();
-
-            try
-            {
-                List<string> obiettivi_info = elenco.Split('\n').ToList(); ///Splitto l'elenco al fine di avere per ogni elemento le informazioni di ogni obiettivo
-
-                obiettivi_info.RemoveAt((obiettivi_info.Count - 1)); ///A causa dello split l'ultimo elemento rimane vuoto --> ""
-
-                foreach (string obiettivo_info in obiettivi_info) ///Popolo la lista degli obiettivi
-                    elencoObiettivi.Add(GeneraProgetto(obiettivo_info));
-            }
-            
-            catch
-            {
-                MessageBox.Show("ERRORE! Metodo GeneraElencoObiettivi: errore errore istanziazione", "Metodo GeneraElencoObiettivi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
-            }
-
-            return elencoObiettivi;
-        }*/
         #endregion
     }
 }
